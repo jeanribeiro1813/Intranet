@@ -1,0 +1,17 @@
+{
+    "type": "mysql",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "username": "root",
+    "password": "132887",
+    "database": "pml3",
+    "entities": [
+        "./src/typeorm/entities/*.ts"
+    ],
+    "migrations": [
+        "./src/database/migrations/*.ts"
+    ],
+    "cli": {
+        "migrationsDir":"./src/database/migrations"
+    }
+}
