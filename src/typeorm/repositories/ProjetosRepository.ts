@@ -1,9 +1,9 @@
 import { Repository, EntityRepository } from 'typeorm';
 
-import Cargo from '../entities/Cargo';
+import Project from '../entities/Projetos';
 
-@EntityRepository(Cargo)
-class CargoRepository extends Repository<Cargo> {
+@EntityRepository(Project)
+class CargoRepository extends Repository<Project> {
     findById(id: string) {
         throw new Error('Method not implemented.');
     }

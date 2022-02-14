@@ -4,30 +4,29 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
-    PrimaryColumn
 } from "typeorm";
     
     
-@Entity('user')
-class Cargo{
-
-    // @PrimaryGeneratedColumn('uuid')
-    // cod_cargo!: number;
-    
-    // @Column('varchar')
-    // desc_cargo!:string ;
+@Entity('Teste')
+class Projeto{
 
     @PrimaryGeneratedColumn('uuid')
-    id!: number;
+    testeId!: number;
     
     @Column('varchar')
-    name!:string ;
+    testeOne!:string ;
 
     @Column('varchar')
-    email!:string ;
+    testeTwo!:string ;
 
     @Column('varchar')
-    password!:string ;
+    testeFour!:string ;
+
+    @Column('varchar')
+    testeFive!:string ;
+
+    @Column('varchar')
+    testeSix!:string ;
 
     @CreateDateColumn()
     created_at: Date;
@@ -35,6 +34,9 @@ class Cargo{
     @UpdateDateColumn()
     updated_at: Date;
 
+
+
+
 }
     
-export default Cargo;
+export default Projeto;

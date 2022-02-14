@@ -3,7 +3,9 @@ import {
     Column,
     PrimaryGeneratedColumn,
     BeforeInsert,
-    BeforeUpdate
+    BeforeUpdate,
+    CreateDateColumn,
+    UpdateDateColumn,
 } from "typeorm";
 import bcrypt from 'bcryptjs';
 
@@ -39,7 +41,14 @@ class Usuario{
     @BeforeUpdate()
     hashPassword(){
         this.contrasena = bcrypt.hashSync(this.contrasena,8)
+
     }
+
+    @CreateDateColumn()
+    created_at: Date;
+
+    @UpdateDateColumn()
+    updated_at: Date;
 }
 
 export default Usuario;
