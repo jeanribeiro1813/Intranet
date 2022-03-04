@@ -12,6 +12,9 @@ cargoRouter.post('/create',cargoController.create);
 //Loading
 cargoRouter.get('/load',cargoController.loading);
 
+//update
+cargoRouter.put('/update',cargoController.update);
+
 
 
 

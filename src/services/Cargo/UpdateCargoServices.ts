@@ -20,7 +20,7 @@ interface IRequestDTO {
       const cargo = await usersRepository.findOne(id);
   
       if (!cargo) {
-        throw new AppErrors('Cargo não existe');
+        throw new AppErrors('Cargo não existe',401);
       }
 
       cargo.name = name ? name : cargo.name;
