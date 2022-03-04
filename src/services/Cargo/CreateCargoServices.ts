@@ -1,6 +1,8 @@
 import { getCustomRepository } from 'typeorm'
 import Cargo from '../../typeorm/entities/Cargo';
 import CargoRepository from '../../typeorm/repositories/CargoRepository'
+import AppErrors from '../../errors/AppErrors';
+import BCryptHashProvider from '../../providers/CryptHashB';
 
 
 interface IRequestDTO {
@@ -14,20 +16,25 @@ interface IRequestDTO {
     public async execute({ name, email, password}: IRequestDTO): Promise<Cargo | Error> {
       
       const usersRepository = getCustomRepository(CargoRepository);
+
+      const hashProvider = new BCryptHashProvider();
         
-      const checkUserExists = await usersRepository.findOne({name});
+      const checkUserExists = await usersRepository.findOne({email});
   
       if (checkUserExists) {
-        return new Error('Nome already used.');
+        throw new AppErrors('Nome já existe.');
+
       }
+
+      const hashPassword = await hashProvider.generateHash(password);
   
       const user =  usersRepository.create({
         name,
         email,
-        password,
+        password : hashPassword,
    
       });
-
+      
       await usersRepository.save(user);
   
       return user;
