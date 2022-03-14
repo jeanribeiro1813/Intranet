@@ -1,4 +1,4 @@
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository, getRepository } from "typeorm";
 import FaturamentoRepository from '../../typeorm/repositories/FaturamentoRepository';
 import Faturamento from '../../typeorm/entities/Faturamento';
 import AppError from "../../../shared/errors/AppErrors";
