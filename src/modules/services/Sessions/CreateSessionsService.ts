@@ -3,8 +3,10 @@ import AppError from '../../../shared/errors/AppErrors';
 import Users from '../../../modules/typeorm/entities/Users';
 import UsersRepository from '../../../modules/typeorm/repositories/UsersRepository'
 import { compare, hash } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
+import authConfig from "@config/auth";
 
-
+// Tela de Sessão e criando autenticação
 
 
 interface IRequestDTO {
@@ -14,16 +16,17 @@ interface IRequestDTO {
 
   }
 
-// interface IResponseDTO{
-//     user:Users;
-// }
+interface IResponseDTO{
+    user:Users;
+    token:string;
+}
 
   class CreateSessionsService {
 
     public async execute({ 
         login,   
         senha,
-    }: IRequestDTO): Promise<Users> {
+    }: IRequestDTO): Promise<IResponseDTO> {
 
       const usersRepository = getCustomRepository(UsersRepository);
 
@@ -41,7 +44,15 @@ interface IRequestDTO {
 
       }
 
-      return user;
+      //1 ° Parametro Payload , 2° Parametro Hash, 3° Configuração = ID e Validade do token 
+      const token = sign({},authConfig.jwt.secret,{
+        subject: user.cod_usuario_uuid,
+        expiresIn: authConfig.jwt.expireIn,
+      })
+
+      return {
+        user,token
+      };
 
     }
   }

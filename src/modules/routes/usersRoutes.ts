@@ -2,11 +2,13 @@ import { Router } from 'express';
 
 import UsersControllers from '../controllers/UsuersControllers/UsersControllers';
 import {celebrate, Joi, Segments} from 'celebrate'
+import isAutenticacion from '../services/middlewares/isAutenticacion';
 
 const useRouter = Router()
 const userControllers = new UsersControllers();
 
-useRouter.get('/load',userControllers.loading);
+//Colocando Autenticação na rota
+useRouter.get('/load',isAutenticacion,userControllers.loading);
 
 useRouter.post('/create',celebrate({
     [Segments.BODY] :{

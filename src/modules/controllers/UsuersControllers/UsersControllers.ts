@@ -64,6 +64,8 @@ export default class UsersControllers {
 
         const loadingService = new LoadUsersService();
 
+        console.log(request.user.cod_usuario_uuid);
+
         const result = await loadingService.load();
 
         return response.json(result);
