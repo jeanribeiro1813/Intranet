@@ -14,7 +14,7 @@ interface IRequestDTO {
 
 
 class LoadIndexServices{
-  public async execute ({cod_fat}: IRequestDTO): Promise<Faturamento> {
+  public async execute ({cod_fat}: IRequestDTO): Promise<Faturamento | undefined> {
 
       const projetosRepository = getCustomRepository(FaturamentoRepository);
 

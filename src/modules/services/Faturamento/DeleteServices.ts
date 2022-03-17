@@ -1,20 +1,26 @@
+import AppError from '@shared/errors/AppErrors';
 import { getCustomRepository,getRepository } from 'typeorm'
 import Faturamento from '../../../modules/typeorm/entities/Faturamento';
 import FatRepository from '../../../modules/typeorm/repositories/FaturamentoRepository'
 
+interface IRequestDTO{
 
-export default class DeleteService {
+  cod_fat:string;
 
-     async execute( cod_fat: string) {
+}
+ class DeleteFaturamentoService {
 
-      const usersRepository = getRepository(Faturamento);
+     public async execute( {cod_fat}: IRequestDTO) : Promise<void> {
+
+      const usersRepository = getCustomRepository(FatRepository);
 
       const service = await usersRepository.findOne(cod_fat);
 
       if (!service) {
-        return new Error('Não Existe');
+        throw new AppError('Não Existe ',402);
       }
-      await usersRepository.delete(cod_fat);
+      await usersRepository.remove(service);
       }
   }
 
+export default DeleteFaturamentoService;

@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 import CreateSessionsService from '../../services/Sessions/CreateSessionsService';
 import Users from '../../typeorm/entities/Users';
 

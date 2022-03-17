@@ -44,7 +44,7 @@ interface IResponseDTO{
 
       }
 
-      //1 ° Parametro Payload , 2° Parametro Hash, 3° Configuração = ID e Validade do token 
+      //1 ° Parametro Payload , 2° Parametro Hash Posso pegar dentro do site MD5, 3° Configuração = ID e Validade do token 
       const token = sign({},authConfig.jwt.secret,{
         subject: user.cod_usuario_uuid,
         expiresIn: authConfig.jwt.expireIn,

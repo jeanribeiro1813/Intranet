@@ -3,7 +3,8 @@ import LoadFaturamentoService from '../../services/Faturamento/LoadFaturamentoSe
 import CreateFaturamentoServicer from '../../services/Faturamento/CreateFaturamentoServices';
 import UpdateFaturamentoServes from '../../services/Faturamento/UpdateFaturamentoServices';
 import LoadSummyService  from '../../services/Faturamento/LoadSummyService';
-import LoadIndexServices from '../../services/Faturamento/LoadIndexServices'
+import LoadIndexServices from '../../services/Faturamento/LoadIndexServices';
+import DeleteFaturamentoService from '@modules/services/Faturamento/DeleteServices';
 
 
 
@@ -22,7 +23,7 @@ export default class FaturamentoController {
       //Criação Faturamento
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const {cod_fat,usuario, departamento, cod_proj, contrato, atividade, data_,inicio,fim} = request.body;
+        const {cod_fat,usuario, departamento, cod_proj,nome_proj, contrato, atividade, data_,inicio,fim} = request.body;
 
         const service = new CreateFaturamentoServicer();
 
@@ -32,11 +33,13 @@ export default class FaturamentoController {
             usuario,
              departamento,
               cod_proj,
+              nome_proj,
                contrato,
                 atividade,
                 data_,
                 inicio,
                 fim
+                
 
           }
         );
@@ -52,6 +55,7 @@ export default class FaturamentoController {
 
       public async loading (request: Request , response: Response): Promise<Response>{
 
+
         const loadingService = new LoadFaturamentoService();
 
         const result = await loadingService.load();
@@ -66,14 +70,14 @@ export default class FaturamentoController {
 
         const {cod_fat} = request.params
 
-        const {usuario, departamento, cod_proj,contrato,atividade,data_,inicio,fim} = request.body
+        const {usuario, departamento, cod_proj, nome_proj ,contrato,atividade,data_,inicio,fim} = request.body
 
         const updateFatu = new UpdateFaturamentoServes();
 
         const fatura = await updateFatu.update(
 
           {
-            cod_fat,usuario,departamento, cod_proj, contrato, atividade,data_, inicio, fim
+            cod_fat,usuario,departamento, cod_proj, nome_proj , contrato, atividade,data_, inicio, fim
           }
 
         )
@@ -95,6 +99,17 @@ export default class FaturamentoController {
         return response.json(showPerIndex);
 
 
+      }
+
+      public async delete(request:Request, response:Response):Promise<Response>{
+
+        const {cod_fat} = request.params;
+
+        const deleteFaturamento = new DeleteFaturamentoService();
+
+        const deletePorIndex = deleteFaturamento.execute({cod_fat});
+
+        return response.json('Delete realizado com sucesso');
       }
   }
 

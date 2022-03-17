@@ -24,6 +24,9 @@ class Faturamento{
     cod_proj!:number ;
 
     @Column()
+    nome_proj!:string;
+
+    @Column()
     contrato!:string ;
 
     @Column()
@@ -43,6 +46,8 @@ class Faturamento{
 
     @UpdateDateColumn()
     updated_at!: Date;
+
+   
 
     constructor(){
         if (!this.cod_fat){

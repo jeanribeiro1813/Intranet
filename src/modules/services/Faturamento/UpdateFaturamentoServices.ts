@@ -14,13 +14,14 @@ interface IRequestDTO {
   data_:string;
   inicio:string;
   fim:string;
+  nome_proj:string;
   }
 
   class CreatefaturaService {
 
-    public async update({cod_fat,usuario, departamento, cod_proj, contrato, atividade, data_, inicio, fim}: IRequestDTO): Promise<Faturamento | Error> {
+    public async update({cod_fat,usuario, departamento, cod_proj, contrato, atividade, data_, inicio, fim , nome_proj}: IRequestDTO): Promise<Faturamento | Error> {
 
-      const usersRepository = getRepository(Faturamento);
+      const usersRepository = getCustomRepository(FaturamentoRepository);
 
       const fatura = await usersRepository.findOne(cod_fat);
 
@@ -37,6 +38,7 @@ interface IRequestDTO {
       fatura.data_ = data_ ? data_ : fatura.data_;
       fatura.inicio = inicio ? inicio : fatura.inicio;
       fatura.fim = fim ? fim : fatura.fim;
+      fatura.nome_proj = nome_proj ? nome_proj: fatura.nome_proj;
 
 
 

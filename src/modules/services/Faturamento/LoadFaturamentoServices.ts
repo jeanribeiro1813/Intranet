@@ -9,7 +9,10 @@ class LoadCargoService {
 
         const loadService = getCustomRepository(FatRepository);
 
-        const cargoRepo = await loadService.find();
+        const cargoRepo = await loadService.find({
+            order: {
+                data_: "ASC"            },
+        });
 
         return cargoRepo;
     }
