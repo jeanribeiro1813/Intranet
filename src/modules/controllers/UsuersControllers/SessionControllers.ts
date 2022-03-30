@@ -4,6 +4,8 @@ import Users from '../../typeorm/entities/Users';
 
 export default class SessionController {
     public async create (request: Request, response: Response):Promise <Response>{
+        
+        //Criação de Sessão de usuario no caso quando o usuario for fazer o login
         const{login, senha} = request.body;
         
 

@@ -16,6 +16,9 @@ interface IDescItemOfSummary {
     data_:string;
     inicio:string;
     fim:string;
+    nome_proj:string;
+    status:string;
+    obs:string;
 
 }
 
@@ -41,6 +44,11 @@ class LoadFatSummaryService{
                 data_:use.data_,
                 inicio:use.inicio,
                 fim:use.fim,
+                nome_proj:use.nome_proj,
+                status:use.status,
+                obs:use.obs,
+
+
 
             }
             return DescItemOfSummary;

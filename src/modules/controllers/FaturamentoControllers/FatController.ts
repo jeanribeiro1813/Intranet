@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
-import LoadFaturamentoService from '../../services/Faturamento/LoadFaturamentoServices';
 import CreateFaturamentoServicer from '../../services/Faturamento/CreateFaturamentoServices';
 import UpdateFaturamentoServes from '../../services/Faturamento/UpdateFaturamentoServices';
 import LoadSummyService  from '../../services/Faturamento/LoadSummyService';
 import LoadIndexServices from '../../services/Faturamento/LoadIndexServices';
 import DeleteFaturamentoService from '@modules/services/Faturamento/DeleteServices';
-
+import LoadPorUsersServices from '../../services/Faturamento/LoadPorUsuario';
 
 
 
@@ -23,7 +22,7 @@ export default class FaturamentoController {
       //Criação Faturamento
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const {cod_fat,usuario, departamento, cod_proj,nome_proj, contrato, atividade, data_,inicio,fim} = request.body;
+        const {cod_fat,usuario, departamento, cod_proj,nome_proj, contrato, atividade, data_,inicio,fim,status,obs} = request.body;
 
         const service = new CreateFaturamentoServicer();
 
@@ -38,7 +37,9 @@ export default class FaturamentoController {
                 atividade,
                 data_,
                 inicio,
-                fim
+                fim,
+                status,
+                obs
                 
 
           }
@@ -51,33 +52,20 @@ export default class FaturamentoController {
         return response.json(result);
       }
 
-      //Loading
-
-      public async loading (request: Request , response: Response): Promise<Response>{
-
-
-        const loadingService = new LoadFaturamentoService();
-
-        const result = await loadingService.load();
-
-        return response.json(result);
-
-      }
-
       // Upgrade
 
       public async update (request :Request, response:Response): Promise<Response>{
 
         const {cod_fat} = request.params
 
-        const {usuario, departamento, cod_proj, nome_proj ,contrato,atividade,data_,inicio,fim} = request.body
+        const {usuario, departamento, cod_proj, nome_proj ,contrato,atividade,data_,inicio,fim,status,obs} = request.body
 
         const updateFatu = new UpdateFaturamentoServes();
 
         const fatura = await updateFatu.update(
 
           {
-            cod_fat,usuario,departamento, cod_proj, nome_proj , contrato, atividade,data_, inicio, fim
+            cod_fat,usuario,departamento, cod_proj, nome_proj , contrato, atividade,data_, inicio, fim,status,obs
           }
 
         )
@@ -94,7 +82,7 @@ export default class FaturamentoController {
 
         const indexFat = new LoadIndexServices();
 
-        const showPerIndex = indexFat.execute({cod_fat});
+        const showPerIndex = await indexFat.execute({cod_fat});
 
         return response.json(showPerIndex);
 
@@ -111,6 +99,20 @@ export default class FaturamentoController {
 
         return response.json('Delete realizado com sucesso');
       }
+
+
+      public async execuUsers(request: Request, response: Response): Promise< Response > {
+        const {usuario,mes} = request.body;
+
+        const indexFat = new LoadPorUsersServices();
+
+        const showPorIndex = await indexFat.execute({usuario,mes});
+
+        console.log(showPorIndex)
+
+        return response.json(showPorIndex);
+      }
+    
   }
 
 

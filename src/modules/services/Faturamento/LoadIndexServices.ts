@@ -7,6 +7,7 @@ import AppError from "../../../shared/errors/AppErrors";
 
 interface IRequestDTO {
   cod_fat:string;
+
 }
 
 
@@ -18,7 +19,7 @@ class LoadIndexServices{
 
       const projetosRepository = getCustomRepository(FaturamentoRepository);
 
-      const index_Prod = await projetosRepository.findOne(cod_fat);
+      const index_Prod = await projetosRepository.findByCode(cod_fat);
 
       if(!index_Prod){
         throw new AppError ('Não Existe',404);

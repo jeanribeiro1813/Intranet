@@ -1,3 +1,4 @@
+import { add } from 'date-fns';
 import { Repository, EntityRepository } from 'typeorm';
 
 import Faturamento from '../entities/Faturamento';
@@ -14,5 +15,14 @@ export default class FaturamentoRepository extends Repository<Faturamento> {
 
       });
       return faturamento;
+}
+
+public async findUsers(usuario: string,data_:string): Promise< Faturamento [] | undefined > {
+
+  const faturamento = this.find({
+    where : [{usuario},{data_}]
+
+  });
+  return faturamento;
 }
 }

@@ -15,7 +15,7 @@ class Faturamento{
     cod_fat!: string;
 
     @Column()
-    usuario!:number ;
+    usuario!:string ;
 
     @Column()
     departamento!:string ;
@@ -47,7 +47,14 @@ class Faturamento{
     @UpdateDateColumn()
     updated_at!: Date;
 
-   
+    @Column()
+    mes!:string;
+
+    @Column()
+    status!:string;
+
+    @Column()
+    obs!:string;
 
     constructor(){
         if (!this.cod_fat){

@@ -15,4 +15,6 @@ export default class ProjetosRepository extends Repository<Projetos> {
       });
       return projeto;
 }
+
+
 }

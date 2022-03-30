@@ -54,7 +54,7 @@ export default class UsersControllers {
        }
   
 
-        return response.json(funcao);
+        return response.json('Usuario Cadastrado');
 
   }
 

@@ -57,10 +57,18 @@ interface IRequestDTO {
 
       const usersRepository = getCustomRepository(UsersRepository);
 
+      const loginUserExists = await usersRepository.findByLogin(login);
+
+      if (loginUserExists) {
+        throw new AppError('Login já cadastrado.',409);
+
+      }
+
       const checkUserExists = await usersRepository.findByEmail(email);
 
+
       if (checkUserExists) {
-        throw new AppError('Email já existe.',404);
+        throw new AppError('Email já cadastrado.',409);
 
       }
 
@@ -88,6 +96,7 @@ interface IRequestDTO {
         avatar
 
       });
+
 
       await usersRepository.save(user);
 

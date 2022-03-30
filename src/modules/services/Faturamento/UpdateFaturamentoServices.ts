@@ -6,7 +6,7 @@ import FaturamentoRepository from '../../../modules/typeorm/repositories/Faturam
 
 interface IRequestDTO {
   cod_fat:string;
-  usuario:number;
+  usuario:string;
   departamento:string;
   cod_proj:number;
   contrato:string;
@@ -15,11 +15,13 @@ interface IRequestDTO {
   inicio:string;
   fim:string;
   nome_proj:string;
+  status:string;
+  obs:string;
   }
 
   class CreatefaturaService {
 
-    public async update({cod_fat,usuario, departamento, cod_proj, contrato, atividade, data_, inicio, fim , nome_proj}: IRequestDTO): Promise<Faturamento | Error> {
+    public async update({cod_fat,usuario, departamento, cod_proj, contrato, atividade, data_, inicio, fim , nome_proj,status,obs}: IRequestDTO): Promise<Faturamento | Error> {
 
       const usersRepository = getCustomRepository(FaturamentoRepository);
 
@@ -39,6 +41,8 @@ interface IRequestDTO {
       fatura.inicio = inicio ? inicio : fatura.inicio;
       fatura.fim = fim ? fim : fatura.fim;
       fatura.nome_proj = nome_proj ? nome_proj: fatura.nome_proj;
+      fatura.status = status ? status: fatura.status;
+      fatura.obs = obs ? obs: fatura.obs;
 
 
 

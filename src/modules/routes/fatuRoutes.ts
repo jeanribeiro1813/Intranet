@@ -12,17 +12,12 @@ const fatController = new FatController();
 
 //Create
 fatRouter.post(
-    '/create',    
+    '/create',isAutenticacion, 
     fatController.create);
-
-
-//Loading
-fatRouter.get('/load',fatController.loading);
-
 
 //update
 fatRouter.post('/update/:cod_fat'
-,
+,isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
         cod_fat: Joi.string().uuid().required(),
@@ -31,7 +26,7 @@ celebrate({
 
 
 //Delete
-fatRouter.delete('/delete/:cod_fat',
+fatRouter.delete('/delete/:cod_fat',isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
         cod_fat: Joi.string().uuid().required(),
@@ -40,7 +35,7 @@ celebrate({
 
 
 //Summary Objeto
-fatRouter.get('/summary',fatController.execute);
+fatRouter.get('/summary',isAutenticacion,fatController.execute);
 
 
 //Return Por Index
@@ -49,6 +44,16 @@ celebrate({
     [Segments.PARAMS]:{
         cod_fat: Joi.string().uuid().required(),}
     }),fatController.exibir);
+
+//Return Por Usuario
+fatRouter.post('/load',
+celebrate({
+    [Segments.BODY]:{
+        usuario: Joi.string().required(),
+        mes: Joi.string().required(),
+    }
+    }),fatController.execuUsers);
+
 
 
 
