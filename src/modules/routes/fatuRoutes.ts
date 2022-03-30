@@ -55,6 +55,21 @@ celebrate({
     }),fatController.execuUsers);
 
 
+fatRouter.post('/updateStatus',
+celebrate({
+    [Segments.BODY]:{
+
+        usuario:Joi.string().required(),
+        mes: Joi.string().required(),
+        departamento:Joi.string().required(),
+        cod_proj:Joi.string().required(),
+        contrato:Joi.string().required(),
+        status:Joi.string().required(),
+        
+    }
+    }),fatController.updateStatus);
+
+
 
 
 

@@ -5,6 +5,7 @@ import LoadSummyService  from '../../services/Faturamento/LoadSummyService';
 import LoadIndexServices from '../../services/Faturamento/LoadIndexServices';
 import DeleteFaturamentoService from '@modules/services/Faturamento/DeleteServices';
 import LoadPorUsersServices from '../../services/Faturamento/LoadPorUsuario';
+import UpdateFaturamentoStatus  from '@modules/services/Faturamento/UpdateFaturamentoStatus'
 
 
 
@@ -108,8 +109,20 @@ export default class FaturamentoController {
 
         const showPorIndex = await indexFat.execute({usuario,mes});
 
-        console.log(showPorIndex)
+ 
 
+        return response.json(showPorIndex);
+      }
+
+      public async updateStatus(request: Request, response: Response): Promise< Response > {
+
+        const { usuario,departamento,cod_proj,contrato,mes,status} = request.body;
+
+        const indexFat = new UpdateFaturamentoStatus();
+
+        const showPorIndex = await indexFat.executeStatus({usuario,departamento,cod_proj,contrato,mes,status});
+
+      
         return response.json(showPorIndex);
       }
     
