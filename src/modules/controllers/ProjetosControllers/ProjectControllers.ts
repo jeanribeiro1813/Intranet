@@ -1,6 +1,9 @@
+import CreateProjetosServices from '@modules/services/Projetos/CreateProjetosServices';
+import LoadProjetoContrato from '@modules/services/Projetos/LoadProjetoContrato';
 import { Request, Response } from 'express';
 import LoadProjetosService from '../../services/Projetos/LoadProjetosServices';
 import LoadProjetoSummaryService  from '../../services/Projetos/LoadySummaryProjeServices';
+import UpdateProjetoServicets from '../../services/Projetos/UpdateProjetoService'
 
 
 
@@ -20,13 +23,127 @@ export default class ProjetosControllers {
 
       public async loading (request: Request , response: Response){
 
+        const {status} = request.body;
+
         const loadingService = new LoadProjetosService();
 
-        const result = await loadingService.load();
+        const result = await loadingService.load({status});
 
         return response.json(result);
 
       }
+
+      
+      //Update
+
+      public async update (request: Request , response: Response): Promise<Response>{
+
+        const {cod_proj_uuid} = request.params
+
+        const {contrato,data,co,projeto,cliente,cliente2, 
+          numero,
+          gerente,
+          coordenador,
+          equipe,
+          status,
+          proposta,
+          departamento,
+          previsao,
+          nproc_origem,
+          valor,
+          memoalt,
+          dt_fim,
+          cod_proj} = request.body
+
+
+
+        const updateService = new UpdateProjetoServicets();
+
+        const result = await updateService.updateProj(
+          
+          {
+          cod_proj_uuid,
+          contrato,
+          data,
+          departamento,
+          co,
+          projeto,
+          cliente,
+          cliente2, 
+          numero,
+          gerente,
+          coordenador,
+          equipe,
+          status,
+          proposta,
+          previsao,
+          nproc_origem,
+          valor,
+          memoalt,
+          dt_fim,
+          cod_proj
+        }
+          
+          );
+
+        return response.json(result);
+
+      }
+
+
+      //Load por Contrato , CO e Status
+      public async loadProjetos(request: Request, response: Response): Promise< Response > {
+        const {contrato,co,status} = request.body;
+
+        const indexFat = new LoadProjetoContrato();
+
+        const showPorIndex = await indexFat.loadProjetos({contrato,co,status});
+
+ 
+
+        return response.json(showPorIndex);
+      }
+
+      //Crate
+
+      public async create (request: Request, response: Response): Promise< Response > {
+        const {cod_proj_uuid,data,contrato,co,projeto,cliente,cliente2, 
+          numero,
+          gerente,
+          coordenador,
+          equipe,
+          status,
+          proposta,
+          departamento,
+          previsao,
+          nproc_origem,
+          valor,
+          memoalt,
+          dt_fim,
+          cod_proj} = request.body;
+
+        const indexProj = new CreateProjetosServices();
+
+        const showPorIndex = await indexProj.execute({cod_proj_uuid,data,contrato,co,projeto,cliente,cliente2, 
+          numero,
+          gerente,
+          coordenador,
+          equipe,
+          status,
+          proposta,
+          departamento,
+          previsao,
+          nproc_origem,
+          valor,
+          memoalt,
+          dt_fim,
+          cod_proj});
+
+ 
+
+        return response.json(showPorIndex);
+      }
+
 
 
   }

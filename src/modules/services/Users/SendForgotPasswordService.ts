@@ -36,7 +36,8 @@ for mudar a senha e essa tabela acossia uma novo token ligando com o id do usuar
 
       // console.log(token);
 
-      //Passando a função do EtherelMail com o email que deve receber e o que vai apresentar no corpo do email
+      //Passando a função do EtherelMail com o email que deve receber e o que vai apresentar no corpo do email no caso pegando a Class EtherelMail e o seu modulo sendMail
+      //Passando da mesma forma que esta no modulo
       await EtherelMail.sendMail({
   
         to:{

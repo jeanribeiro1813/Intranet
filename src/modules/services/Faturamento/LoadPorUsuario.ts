@@ -1,6 +1,6 @@
 import { getCustomRepository, getRepository } from "typeorm";
-import FaturamentoRepository from '../../../modules/typeorm/repositories/FaturamentoRepository';
-import Faturamento from '../../../modules/typeorm/entities/Faturamento';
+import FaturamentoRepository from '../../typeorm/repositories/FaturamentoRepository';
+import Faturamento from '../../typeorm/entities/Faturamento';
 import AppError from "../../../shared/errors/AppErrors";
 
 
@@ -16,7 +16,7 @@ interface IRequestDTO {
 
 
 class LoadPorUsersServices{
-  public async execute ({usuario,mes}: IRequestDTO): Promise<Faturamento[] | undefined> {
+  public async execute ({usuario,mes}: IRequestDTO): Promise<Faturamento[] | Error> {
 
       const projetosRepository = getCustomRepository(FaturamentoRepository);
 
@@ -30,7 +30,6 @@ class LoadPorUsersServices{
         throw new AppError ('Não Existe',40);
       }
 
-      console.log(index_Prod);
       return index_Prod;
   }
 }

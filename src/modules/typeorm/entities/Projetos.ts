@@ -17,8 +17,8 @@ class Projetos{
   @Column('date')
   data!:string ;
 
-  @Column('int')
-  contrato!:number ;
+  @Column('text')
+  contrato!:string ;
 
   @Column()
   co!:string ;

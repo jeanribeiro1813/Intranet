@@ -22,6 +22,7 @@ interface IResponseDTO{
     name:any;
     token:string;
     cargo :string;
+    departamento:string
 }
 
   class CreateSessionsService {
@@ -60,8 +61,9 @@ interface IResponseDTO{
 
       return {
         cargo : user.cargo,
-        name :user.nome_usuario
-        ,token
+        name :user.nome_usuario,
+        departamento:user.departamento,
+        token
       };
       
 
