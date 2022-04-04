@@ -3,6 +3,7 @@ import AppError from '../../../shared/errors/AppErrors';
 import UsersRepository from '../../typeorm/repositories/UsersRepository';
 import UserTokenRepository from '../../typeorm/repositories/UserTokenRepository'
 import EtherelMail from '@config/mail/etherelMail'
+import path from 'path';
 
 //Aqui só vou precisar do email justamente para envio do link de recuperação de senha 
 interface IRequestDTO {
@@ -34,7 +35,8 @@ for mudar a senha e essa tabela acossia uma novo token ligando com o id do usuar
       //Gerando um token , pegando pelo custom de generate do Repositorio de Token
       const {token}  = await userTokenRepository.generate(user.cod_usuario_uuid);
 
-      // console.log(token);
+      //Pegando o caminho do arquivo que criei 
+      const forgotPasswordTemplate = path.resolve(__dirname, '..', 'Users','views','forgot_password.hbs')
 
       //Passando a função do EtherelMail com o email que deve receber e o que vai apresentar no corpo do email no caso pegando a Class EtherelMail e o seu modulo sendMail
       //Passando da mesma forma que esta no modulo
@@ -53,11 +55,12 @@ for mudar a senha e essa tabela acossia uma novo token ligando com o id do usuar
 
       templateData:{
 
-        template : `Redefinir a senha por favor: ${token}`,
+        //Estou passando a variavel que conta o arquivo HTML
+        file : forgotPasswordTemplate,
+        //Aqui estou passando o nome do usuario e qual url vai o token para o usuario fazer o reset da senha 
         variables :{
           name:   user.nome_usuario,
-          token : token,
-
+          link : `http://localhost:3333/reset_password?token=${token}`,
         },
 
     } ,

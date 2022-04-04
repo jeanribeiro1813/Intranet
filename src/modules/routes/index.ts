@@ -7,6 +7,10 @@ import sessionRoutes from './Usuario/sessionRoutes';
 import passwordRouter from './Usuario/passwordRoutes'
 import cargoRouter from './Cargo/CargoRoutes';
 import carrosRouter from './Carros/CarrosRoutes';
+import clientes from './Clientes/ClientesRoutes';
+import chamados from './Chamados/ChamadosRoutes';
+import profile  from './Profiles/profileRoutes';
+
 
 
 
@@ -19,7 +23,8 @@ routes.use('/session',sessionRoutes);
 routes.use('/password',passwordRouter);
 routes.use('/cargo',cargoRouter);
 routes.use('/carros',carrosRouter);
-
-
+routes.use('/clientes',clientes);
+routes.use('/chamados',chamados);
+routes.use('/profile',profile)
 
 export default routes;

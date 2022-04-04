@@ -16,7 +16,8 @@ interface ITemplatesVariables{
 
 interface IParserEmailTemplate {
 
-    template:string;
+    //Como teve a mudança no HANDRLEBARS EMAIL tenho que fazer a mudança aqui também
+    file:string;
     variables:ITemplatesVariables
 }
 
