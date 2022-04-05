@@ -33,7 +33,7 @@ for mudar a senha e essa tabela acossia uma novo token ligando com o id do usuar
       }
 
       //Gerando um token , pegando pelo custom de generate do Repositorio de Token
-      const {token}  = await userTokenRepository.generate(user.cod_usuario_uuid);
+      const {token}  = await userTokenRepository.generate(user.codusuario);
 
       //Pegando o caminho do arquivo que criei 
       const forgotPasswordTemplate = path.resolve(__dirname, '..', 'Users','views','forgot_password.hbs')

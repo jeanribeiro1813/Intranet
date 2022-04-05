@@ -4,6 +4,7 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
+    Generated,
 } from "typeorm";
 
 import  {v4 as uuid} from 'uuid';
@@ -12,44 +13,38 @@ import  {v4 as uuid} from 'uuid';
 class Faturamento{
 
     @PrimaryGeneratedColumn()
-    cod_fat!: string;
+    codfat!: string;
 
-    @Column()
-    usuario!:string ;
+    @Column('uuid')
+    codusuario!: string
 
-    @Column()
-    departamento!:string ;
+    @Column('uuid')
+    //@Generated('uuid')
+    coddeparta!: string
 
-    @Column()
-    cod_proj!:number ;
-
-    @Column()
-    nome_proj!:string;
+    @Column('uuid')
+    codprojeto!: string
 
     @Column()
     contrato!:string ;
 
-    @Column()
-    atividade!:string ;
+    @Column('uuid')
+    codativida!:string ;
 
-    @Column()
-    data_!:string ;
+    @Column('date')
+    data!:string ;
 
     @Column()
     inicio!:string ;
 
     @Column()
     fim!:string ;
-
+    
     @CreateDateColumn()
     created_at!: Date;
 
     @UpdateDateColumn()
     updated_at!: Date;
-
-    @Column()
-    mes!:string;
-
     @Column()
     status!:string;
 
@@ -57,8 +52,8 @@ class Faturamento{
     obs!:string;
 
     constructor(){
-        if (!this.cod_fat){
-            this.cod_fat = uuid();
+        if (!this.codfat){
+            this.codfat = uuid();
         }
     }
 }

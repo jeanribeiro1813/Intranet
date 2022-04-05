@@ -3,7 +3,7 @@ import Users from '../../../modules/typeorm/entities/Users';
 import UsersRepository from '../../../modules/typeorm/repositories/UsersRepository'
 
 interface IDadosUsers{
-    cod_usuario_uuid : string,
+    codusuario : string,
     nome_usuario : string,
     email: string,
     contato:string,

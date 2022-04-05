@@ -37,7 +37,7 @@ class UpdateShowProfileService {
 
         //Se existir um email e esse é o codigo do email for igual
 
-        if(userEmail && userEmail.cod_usuario_uuid !== user_id){
+        if(userEmail && userEmail.codusuario !== user_id){
             throw new AppError('Já existe usuario com esse email',409)
         }
 

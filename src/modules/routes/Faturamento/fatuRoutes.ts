@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import FatController from '../../controllers/FaturamentoControllers/FatController';
+import FatController from '../../controllers/FaturamentoControllers/FaturamentoController';
 import {celebrate, Joi, Segments} from 'celebrate';
 import isAutenticacion from '@modules/services/middlewares/isAutenticacion';
 
@@ -9,61 +9,41 @@ const fatRouter = Router();
 const fatController = new FatController();
 
 
+fatRouter.use(isAutenticacion)
 
 //Create
 fatRouter.post(
-    '/create',isAutenticacion, 
+    '/create', 
     fatController.create);
 
 //update
-fatRouter.post('/update/:cod_fat'
-,isAutenticacion,
-celebrate({
+fatRouter.put('/update/:codfat'
+,celebrate({
     [Segments.PARAMS]:{
-        cod_fat: Joi.string().uuid().required(),
+        codfat: Joi.string().uuid().required(),
     }
 }),fatController.update);
 
 
 //Delete
-fatRouter.delete('/delete/:cod_fat',isAutenticacion,
+fatRouter.delete('/delete/:codfat',
 celebrate({
     [Segments.PARAMS]:{
-        cod_fat: Joi.string().uuid().required(),
+        codfat: Joi.string().uuid().required(),
     }
 }), fatController.delete);
 
 
-//Summary Objeto
-fatRouter.get('/summary',isAutenticacion,fatController.execute);
 
-
-//Return Por Index
-fatRouter.get('/exibir/:cod_fat',
-celebrate({
-    [Segments.PARAMS]:{
-        cod_fat: Joi.string().uuid().required(),}
-    }),fatController.exibir);
-
-//Return Por Usuario
-fatRouter.post('/load',
-celebrate({
-    [Segments.BODY]:{
-        usuario: Joi.string().required(),
-        mes: Joi.string().required(),
-    }
-    }),fatController.execuUsers);
-
-
-fatRouter.post('/updateStatus',
+fatRouter.post('/update',
 celebrate({
     [Segments.BODY]:{
 
-        usuario:Joi.string().required(),
-        mes: Joi.string().required(),
-        departamento:Joi.string().required(),
-        cod_proj:Joi.string().required(),
-        contrato:Joi.string().required(),
+        codusuario: Joi.string().required(),
+        coddeparta:Joi.string().required(),
+        codprojeto:Joi.string().required(),
+        contrato: Joi.string().required(),
+        data:Joi.string().required(),
         status:Joi.string().required(),
         
     }

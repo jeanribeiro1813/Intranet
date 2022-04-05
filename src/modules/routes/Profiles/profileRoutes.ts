@@ -15,7 +15,7 @@ profileRouter.get('/show',profileControllers.show);
 
 
 //No Create como obrigação tem que colocar os campos abaixo para a criação dos usuarios
-profileRouter.put('/updateProfile',celebrate({
+profileRouter.put('/update',celebrate({
         [Segments.BODY] :{
            
             //Aqui coloquei a opção nome_usuario mais posso colocar login

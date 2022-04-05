@@ -10,6 +10,9 @@ import carrosRouter from './Carros/CarrosRoutes';
 import clientes from './Clientes/ClientesRoutes';
 import chamados from './Chamados/ChamadosRoutes';
 import profile  from './Profiles/profileRoutes';
+import fatview from './Faturamento/fatu.View.Routes';
+import depart from './Departamento/DepartamentoRoutes';
+import atividade from './Atividade/AtividadeRoutes';
 
 
 
@@ -17,6 +20,7 @@ import profile  from './Profiles/profileRoutes';
 const routes = Router();
 
 routes.use('/fat',fatuRouter);
+routes.use('/fatview',fatview);
 routes.use('/project',projectRoutes);
 routes.use('/users',usersRoutes);
 routes.use('/session',sessionRoutes);
@@ -25,6 +29,9 @@ routes.use('/cargo',cargoRouter);
 routes.use('/carros',carrosRouter);
 routes.use('/clientes',clientes);
 routes.use('/chamados',chamados);
-routes.use('/profile',profile)
+routes.use('/profile',profile);
+routes.use('/depart',depart);
+routes.use('/ativ',atividade);
+
 
 export default routes;
