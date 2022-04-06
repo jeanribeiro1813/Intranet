@@ -39,7 +39,11 @@ interface IRequestDTO {
 
       const fat =  fatRepository.create({
         
-        uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente
+        uuidfat,uuidusuario, uuidcliente, uuidprojeto, uuidcontrato, uuidativida,data,inicio,fim,status,obs,empresa,uuiddeparta
+       
+        /*
+        uuidcliente
+        uuiddeparta Fazer update para verificar pela a tabela departamento*/
 
 
       });
