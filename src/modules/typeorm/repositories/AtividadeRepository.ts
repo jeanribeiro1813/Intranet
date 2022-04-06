@@ -6,11 +6,11 @@ import Atividades from '../entities/Atividades';
 @EntityRepository(Atividades)
 export default class CarrosRepository extends Repository<Atividades> {
 
-    public async findById(codativida: string): Promise< Atividades | undefined > {
+    public async findById(uuidativida: string): Promise< Atividades | undefined > {
 
       const faturamento = this.findOne({
         where : {
-          codativida
+          uuidativida
         },
 
       });

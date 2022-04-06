@@ -10,7 +10,7 @@ export default class UsersControllers {
   public async create(request: Request, response: Response): Promise<Response> {
 
     const {login,senha,
-        nome_usuario,
+       usuario,
         n_cnh,
         dt_validade,
         email,
@@ -31,7 +31,7 @@ export default class UsersControllers {
     const createFuncao = new CreateUsersService();
 
     const funcao = await createFuncao.execute({login,senha,
-        nome_usuario,
+       usuario,
         n_cnh,
         dt_validade,
         email,

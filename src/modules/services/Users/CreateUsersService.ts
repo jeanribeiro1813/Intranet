@@ -10,7 +10,7 @@ import { hash } from 'bcryptjs';
 interface IRequestDTO {
     login:string ,   
     senha:string ,
-    nome_usuario:string ,
+    usuario:string ,
     n_cnh:number ,
     dt_validade:string ,
     email:string ,
@@ -36,7 +36,7 @@ interface IRequestDTO {
     public async execute({ 
         login,   
         senha,
-        nome_usuario,
+        usuario,
         n_cnh,
         dt_validade,
         email,
@@ -77,7 +77,7 @@ interface IRequestDTO {
       const user =  usersRepository.create({
         login,   
         senha: hashedPassword,
-        nome_usuario,
+        usuario,
         n_cnh,
         dt_validade,
         email,

@@ -23,6 +23,8 @@ interface IResponseDTO{
     token:string;
     cargo :string;
     departamento:string
+    uuidusuario:string,
+    
 }
 
   class CreateSessionsService {
@@ -51,7 +53,7 @@ interface IResponseDTO{
       //1 ° Parametro Payload , 2° Parametro Hash Posso pegar dentro do site MD5, 3° Configuração = ID e Validade do token 
       const token = sign({},authConfig.jwt.secret,{
 
-        subject: user.codusuario,
+        subject: user.uuidusuario,
         expiresIn: authConfig.jwt.expireIn,
   
       })
@@ -60,8 +62,9 @@ interface IResponseDTO{
       
 
       return {
+        uuidusuario:user.uuidusuario,
         cargo : user.cargo,
-        name :user.nome_usuario,
+        name :user.usuario,
         departamento:user.departamento,
         token
       };

@@ -27,7 +27,7 @@ celebrate({
 fatViewRouter.post('/show',
 celebrate({
     [Segments.BODY]:{
-        nome_usuario: Joi.string().required(),
+        usuario: Joi.string().required(),
         data: Joi.string().required(),
     }
     }),fatViewController.execuUsers);

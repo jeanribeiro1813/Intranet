@@ -12,16 +12,16 @@ import  {v4 as uuid} from 'uuid';
 class Projetos{
 
   @PrimaryGeneratedColumn('uuid')
-  cod_proj_uuid!: string;
+  uuidprojeto!: string;
 
   @Column('date')
   data!:string ;
 
+  @Column()
+  nprojeto!: string;
+
   @Column('text')
   contrato!:string ;
-
-  @Column()
-  co!:string ;
 
   @Column()
   projeto!:string ;
@@ -78,8 +78,8 @@ class Projetos{
   cod_proj!:number ;
 
   constructor(){
-      if (!this.cod_proj_uuid){
-          this.cod_proj_uuid = uuid();
+      if (!this.uuidprojeto){
+          this.uuidprojeto = uuid();
       }
   }
 }

@@ -1,44 +1,65 @@
 import {
-    Entity,
     Column,
     PrimaryGeneratedColumn,
-    CreateDateColumn,
-    UpdateDateColumn,
-    Generated,
     ViewEntity,
 } from "typeorm";
-
-import  {v4 as uuid} from 'uuid';
 
 @ViewEntity('vw_tb_fat')
 class FaturamentoView{
 
-    @PrimaryGeneratedColumn()
-    codfat!: string;
+    @PrimaryGeneratedColumn('uuid')
+    uuidfat!: string;
 
     @Column()
-    nome_usuario!: string
+    empresa!: string;
+
+    @Column('uuid')
+    uuidusuario!: string;
+
+    @Column()
+    usuario!: string;
+
+    @Column('uuid')
+    uuiddeparta!: string;
 
     @Column()
     departamento!: string
 
+    @Column('uuid')
+    uuidprojeto!: string;
+
     @Column()
-    projeto!: string
+    nprojeto!: string;
+
+    @Column()
+    projeto!: string;
+
+    @Column('uuid')
+    uuidcontrato!:string ;
+
+    @Column()
+    contrato!:string ;
+
+    @Column('uuid')
+    uuidcliente!:string ;
 
     @Column()
     cliente!:string ;
 
+    @Column('uuid')
+    uuidativida!:string ;
+
     @Column()
-    atividade!:string ;
+    atividade!:string;
 
     @Column('date')
-    data!:string ;
+    data!:string;
 
     @Column()
-    inicio!:string ;
+    inicio!:string;
 
     @Column()
-    fim!:string ;
+    fim!:string;
 
     @Column()
     status!:string;
@@ -46,11 +67,6 @@ class FaturamentoView{
     @Column()
     obs!:string;
 
-    constructor(){
-        if (!this.codfat){
-            this.codfat = uuid();
-        }
-    }
 }
 
 export default FaturamentoView;

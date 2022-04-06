@@ -17,9 +17,8 @@ export default class ProfileController {
         const result = await showProfiles.showProfile({user_id});
 
         const usuario = [{
-            cod_usuario_uuid:result.cod_usuario_uuid,
-            cod_usuario: result.cod_usuario,
-            nome_usuario:result.nome_usuario,
+            uuidusuario:result.uuidusuario,
+            usuario:result.usuario,
             login : result.login,
             email: result.email,
             cargo: result.cargo,
@@ -36,12 +35,12 @@ export default class ProfileController {
 
     const user_id = request.user.cod_usuario_uuid;
     
-    const {nome_usuario,email,senha,old_senha} = request.body;
+    const {usuario,email,senha,old_senha} = request.body;
 
     const updateFuncao = new UpdateShowProfileService();
 
     const user = await updateFuncao.updateProfile({
-        user_id,nome_usuario,email,senha,old_senha});
+        user_id,usuario,email,senha,old_senha});
 
         
 

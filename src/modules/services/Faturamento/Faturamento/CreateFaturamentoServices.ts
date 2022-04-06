@@ -7,28 +7,30 @@ import FaturamentoRepository from '../../../typeorm/repositories/FaturamentoRepo
 
 
 interface IRequestDTO {
-    codfat:string,
-    codusuario:string;
-    coddeparta:string;
-    codprojeto:string;
-    contrato:string;
-    codativida:string;
-    data:string;
-    inicio:string;
-    fim:string;
-    status:string;
-    obs:string;
+  uuidfat:string,
+  uuidusuario:string;
+  uuiddeparta:string;
+  uuidprojeto:string;
+  uuidcontrato:string;
+  uuidativida:string;
+  data:string;
+  inicio:string;
+  fim:string;
+  status:string;
+  obs:string;
+  empresa:string;
+  uuidcliente:string
 
 
   }
 
   class CreateFatService {
 
-    public async execute({ codfat,codusuario, coddeparta, codprojeto,contrato,codativida,data,inicio,fim,status,obs}: IRequestDTO): Promise<Faturamento | Error> {
+    public async execute({ uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente}: IRequestDTO): Promise<Faturamento | Error> {
 
       const fatRepository = getCustomRepository(FaturamentoRepository);
 
-      const checkUserExists = await fatRepository.findByCode(codfat);
+      const checkUserExists = await fatRepository.findByCode(uuidfat);
 
       if (checkUserExists) {
         throw new AppError('Nome já existe.',404);
@@ -36,7 +38,8 @@ interface IRequestDTO {
       }
 
       const fat =  fatRepository.create({
-        codfat,codusuario, coddeparta, codprojeto,contrato,codativida,data,inicio,fim,status,obs
+        
+        uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente
 
 
       });

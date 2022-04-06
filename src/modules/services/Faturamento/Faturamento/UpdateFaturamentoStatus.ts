@@ -9,17 +9,19 @@ import CreatefaturaService from "./UpdateFaturamentoServices";
 
 interface IRequestDTO {
    
-  codfat:string;
-  codusuario:string;
-  coddeparta:string;
-  codprojeto:string;
-  codativida:string;
-  contrato: string;
-  data: string;
-  inicio: string;
-  fim: string;
-  status: string;
-  obs: string;
+  uuidfat:string,
+  uuidusuario:string;
+  uuiddeparta:string;
+  uuidprojeto:string;
+  uuidcontrato:string;
+  uuidativida:string;
+  data:string;
+  inicio:string;
+  fim:string;
+  status:string;
+  obs:string;
+  empresa:string;
+  uuidcliente:string
 
 }
 
@@ -28,21 +30,21 @@ interface IRequestDTO {
 
 
 class LoadPorUsersServices{
-  public async executeStatus ({codfat,codusuario,coddeparta,codprojeto,codativida,contrato,data,inicio,fim,status,obs}: IRequestDTO): Promise<Faturamento[]| Error> {
+  public async executeStatus ({uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,data,status}: IRequestDTO): Promise<Faturamento[]| Error> {
 
       const projetosRepository = getCustomRepository(FaturamentoRepository);
 
       //Criando um Select personalizado como filtrando 2 colunas
       const faturaUpdate = await projetosRepository.createQueryBuilder().select()
-      .where("codusuario ILIKE :codusuario and\
-        coddeparta ILIKE :coddeparta and\
-        codprojeto ILIKE :codprojeto  and\
-        contrato ILIKE :contrato and\
+      .where("uuidusuario ILIKE :uuidusuario and\
+      uuiddeparta ILIKE :uuiddeparta and\
+      uuidprojeto ILIKE :uuidprojeto  and\
+      uuidcontrato ILIKE :uuidcontrato and\
         cast(split_part(cast(data as text), '-' ,2) as text) ILIKE :data\ ", 
-      {codusuario:`%${codusuario}%`
-      ,coddeparta: `%${coddeparta}`
-      ,codprojeto:`%${codprojeto}%`
-      ,contrato:`%${contrato}%`
+      {uuidusuario:`%${uuidusuario}%`
+      ,uuiddeparta: `%${uuiddeparta}`
+      ,uuidprojeto:`%${uuidprojeto}%`
+      ,uuidcontrato:`%${uuidcontrato}%`
       ,data:`%${data}%`}).getMany();
 
       if(!faturaUpdate){

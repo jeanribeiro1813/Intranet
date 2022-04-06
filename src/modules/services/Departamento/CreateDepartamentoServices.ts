@@ -7,7 +7,7 @@ import DepartamentoRepository from '../../typeorm/repositories/DepartamentoRepos
 
 
 interface IRequestDTO {
-  coddeparta: string;
+  uuiddeparta: string;
   departamento:string;
 
 
@@ -15,11 +15,11 @@ interface IRequestDTO {
 
   class CreateClientesService {
 
-    public async execute({ coddeparta,departamento}: IRequestDTO): Promise<Departamento | Error> {
+    public async execute({ uuiddeparta,departamento}: IRequestDTO): Promise<Departamento | Error> {
 
       const clientesRepository = getCustomRepository(DepartamentoRepository);
 
-      const checkUserExists = await clientesRepository.findById(coddeparta);
+      const checkUserExists = await clientesRepository.findById(uuiddeparta);
 
       if (checkUserExists) {
         throw new AppError('Nome já existe.',404);
@@ -28,7 +28,7 @@ interface IRequestDTO {
 
       const cliet =  clientesRepository.create({
 
-        coddeparta,departamento
+        uuiddeparta,departamento
 
       });
 

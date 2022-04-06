@@ -10,17 +10,19 @@ interface IResponseDTO {
 
 interface IDescItemOfSummary {
 
-    codfat:string;
-    nome_usuario:string;
-    departamento:string;
-    projeto:string;
-    cliente:string;
-    atividade:string;
-    data:string;
-    inicio:string;
-    fim:string;
-    status:string;
-    obs:string;
+    uuidfat: string,
+    cliente: string,
+    empresa: string,
+    departamento: string,
+    nprojeto: string,
+    uuidprojeto: string,
+    projeto: string,
+    atividade: string,
+    data: string,
+    inicio:string,
+    fim: string,
+    obs: string,
+    status:string,
 
 }
 
@@ -37,17 +39,19 @@ class LoadFatSummaryService{
         const summary = user.map((use) =>{
             const DescItemOfSummary = {
 
-                codfat:use.codfat,
-                nome_usuario:use.nome_usuario,
-                departamento:use.departamento,
-                projeto:use.projeto,
-                cliente:use.cliente,
-                atividade:use.atividade,
-                data:use.data,
-                inicio:use.inicio,
-                fim:use.fim,
-                status:use.status,
-                obs:use.obs,
+                uuidfat: use?.uuidfat,
+                cliente: use?.cliente,
+                empresa: use?.empresa,
+                departamento: use?.departamento,
+                nprojeto: use?.nprojeto,
+                uuidprojeto: use?.uuidprojeto,
+                projeto: use?.projeto,
+                atividade: use?.atividade,
+                data: use?.data,
+                inicio: use?.inicio,
+                fim: use?.fim,
+                obs: use?.obs,
+                status:use?.status
 
 
 

@@ -8,8 +8,9 @@ import AppError from "../../../../shared/errors/AppErrors";
 
 
 interface IRequestDTO {
-  nome_usuario:string;
+  usuario:string;
   data:string
+  summary: [] | any
 }
 
 
@@ -17,24 +18,57 @@ interface IRequestDTO {
 
 
 class LoadPorUsersServices{
-  public async execute ({nome_usuario ,data}: IRequestDTO): Promise<FaturamentoView[] | Error> {
+  public async execute ({usuario ,data}: IRequestDTO): Promise<FaturamentoView[] | AppError> {
 
       const projetosRepository = getCustomRepository(FaturamentoViewsRepository);
 
       //Criando um Select personalizado como filtrando 2 colunas
       const index_Prod = await projetosRepository.createQueryBuilder().select()
-      .where("nome_usuario ILIKE :nome_usuario and cast(split_part(cast(data as text), '-' ,2) as text) ILIKE :data ", 
+      .where("usuario ILIKE :usuario and cast(split_part(cast(data as text), '-' ,2) as text) ILIKE :data ", 
 
-      {nome_usuario: `%${nome_usuario}%`,data:`%${data}%`}).getMany();
+      {usuario: `%${usuario}%`,data:`%${data}%`}).getMany();
 
       console.log(index_Prod)
 
       if(!index_Prod){
         throw new AppError ('Não Existe',40);
       }
+      
+      const summary = index_Prod.map((use) =>{
 
-      return index_Prod;
-  }
+        const DescItemOfSummary = {
+
+            uuidfat: use?.uuidfat,
+            cliente: use?.cliente,
+            departamento: use?.departamento,
+            nprojeto: use?.nprojeto,
+            projeto: use?.projeto,
+            contrato :use?.contrato,
+            atividade: use?.atividade,
+            data: use?.data,
+            inicio: use?.inicio,
+            fim: use?.fim,
+            obs: use?.obs,
+            status:use?.status
+
+
+
+        }
+
+        return DescItemOfSummary;
+        
+        }
+
+
+    )
+
+    const responseDTO = {
+        summary,
+    };
+
+    return responseDTO.summary;
 }
+  }
+
 
 export default LoadPorUsersServices;

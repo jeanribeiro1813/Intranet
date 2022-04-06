@@ -35,7 +35,7 @@ celebrate({
 
 
 //Summary Objeto
-cargoRouter.get('/summary',isAutenticacion,cargoController.execute);
+cargoRouter.get('/summary',cargoController.execute);
 
 
 

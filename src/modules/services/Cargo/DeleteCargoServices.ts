@@ -5,16 +5,16 @@ import CargoRepository from '../../typeorm/repositories/CargoRepository'
 
 interface IRequestDTO{
 
-  cod_cargo_uuid:string;
+  uuidcargo:string;
 
 }
  class DeleteCargoService {
 
-     public async execute( {cod_cargo_uuid}: IRequestDTO) : Promise<void> {
+     public async execute( {uuidcargo}: IRequestDTO) : Promise<void> {
 
       const usersRepository = getCustomRepository(CargoRepository);
 
-      const service = await usersRepository.findOne(cod_cargo_uuid);
+      const service = await usersRepository.findOne(uuidcargo);
 
       if (!service) {
         throw new AppError('Não Existe ',402);

@@ -11,13 +11,13 @@ export default class FaturamentoController {
       //Criação Faturamento
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const {codfat,codusuario, coddeparta, codprojeto,contrato,codativida,data,inicio,fim,status,obs} = request.body;
+        const {uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente} = request.body;
 
         const service = new CreateFaturamentoServicer();
 
         const result = await service.execute(
           {
-            codfat,codusuario, coddeparta, codprojeto,contrato,codativida,data,inicio,fim,status,obs
+            uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente
 
           }
         );
@@ -33,16 +33,16 @@ export default class FaturamentoController {
 
       public async update (request :Request, response:Response): Promise<Response>{
 
-        const {codfat} = request.params
+        const {uuidfat} = request.params
 
-        const {codusuario, coddeparta, codprojeto,contrato,codativida,data,inicio,fim,status,obs} = request.body
+        const {uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente} = request.body
 
         const updateFatu = new UpdateFaturamentoServes();
 
         const fatura = await updateFatu.update(
 
           {
-            codfat,codusuario, coddeparta, codprojeto,contrato,codativida,data,inicio,fim,status,obs
+            uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente
           }
 
         )
@@ -55,11 +55,11 @@ export default class FaturamentoController {
 
       public async delete(request:Request, response:Response):Promise<Response>{
 
-        const {codfat} = request.params;
+        const {uuidfat} = request.params;
 
         const deleteFaturamento = new DeleteFaturamentoService();
 
-        const deletePorIndex = deleteFaturamento.execute({codfat});
+        const deletePorIndex = deleteFaturamento.execute({uuidfat});
 
         return response.json('Delete realizado com sucesso');
       }
@@ -67,12 +67,14 @@ export default class FaturamentoController {
 
       public async updateStatus(request: Request, response: Response): Promise< Response > {
 
-        const { codfat,codusuario,coddeparta,codprojeto,codativida,contrato,data,inicio,fim,status,obs} = request.body;
+        const {uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente} = request.body;
 
         const indexFat = new UpdateFaturamentoStatus();
 
-        const showPorIndex = await indexFat.executeStatus({codfat,codusuario,coddeparta,codprojeto,codativida,contrato,data,inicio,fim,status,obs});
+        const showPorIndex = await indexFat.executeStatus({uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente
+        });
 
+        
       
         return response.json(showPorIndex);
       }

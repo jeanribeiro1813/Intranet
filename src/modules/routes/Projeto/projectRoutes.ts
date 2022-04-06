@@ -9,8 +9,10 @@ const projectRouter = Router();
 
 const projetoController = new ProjetoController();
 
+// projectRouter.use(isAutenticacion);
+
 //Loading
-projectRouter.post('/load',isAutenticacion,celebrate({
+projectRouter.post('/load',celebrate({
     [Segments.BODY]:{
         status:Joi.string().required()
     }
@@ -18,10 +20,10 @@ projectRouter.post('/load',isAutenticacion,celebrate({
 
 
 //Summary Objeto
-projectRouter.get('/summary',isAutenticacion,projetoController.execute);
+projectRouter.get('/summary',projetoController.execute);
 
 //update
-projectRouter.put('/update/:cod_proj_uuid',isAutenticacion,celebrate({
+projectRouter.put('/update/:cod_proj_uuid',celebrate({
     [Segments.PARAMS]:{
         cod_proj_uuid:Joi.string().required()
     }
@@ -29,7 +31,7 @@ projectRouter.put('/update/:cod_proj_uuid',isAutenticacion,celebrate({
 
 
 
-projectRouter.post('/loadProj',isAutenticacion,celebrate({
+projectRouter.post('/loadProj',celebrate({
     [Segments.BODY]:{
         contrato: Joi.string().required(),
         co:Joi.string().required(),
@@ -41,7 +43,7 @@ projectRouter.post('/loadProj',isAutenticacion,celebrate({
 
 
 projectRouter.post(
-    '/create',isAutenticacion, 
+    '/create', 
     projetoController.create);
 
 

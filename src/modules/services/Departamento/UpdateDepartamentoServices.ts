@@ -7,18 +7,18 @@ import DepartamentoRepository from '../../typeorm/repositories/DepartamentoRepos
 
 interface IRequestDTO {
 
-  coddeparta: string;
+  uuiddeparta: string;
   departamento:string;
 
   }
 
   class UpdateClientService {
 
-    public async update({coddeparta,departamento}: IRequestDTO): Promise<Departamento | Error> {
+    public async update({uuiddeparta,departamento}: IRequestDTO): Promise<Departamento | Error> {
 
       const usersRepository = getCustomRepository(DepartamentoRepository);
 
-      const client = await usersRepository.findOne(coddeparta);
+      const client = await usersRepository.findOne(uuiddeparta);
 
       if (!client) {
         throw new AppError ('client não existe',404);

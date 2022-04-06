@@ -1,5 +1,5 @@
 import CreateProjetosServices from '@modules/services/Projetos/CreateProjetosServices';
-import LoadProjetoContrato from '@modules/services/Projetos/LoadProjetoContrato';
+import LoadProjetoContrato from '@modules/services/Projetos/LoadProjetoContratoParado';
 import { Request, Response } from 'express';
 import LoadProjetosService from '../../services/Projetos/LoadProjetosServices';
 import LoadProjetoSummaryService  from '../../services/Projetos/LoadySummaryProjeServices';
@@ -38,9 +38,9 @@ export default class ProjetosControllers {
 
       public async update (request: Request , response: Response): Promise<Response>{
 
-        const {cod_proj_uuid} = request.params
+        const {uuidprojeto} = request.params
 
-        const {contrato,data,co,projeto,cliente,cliente2, 
+        const {contrato,data,nprojeto,projeto,cliente,cliente2, 
           numero,
           gerente,
           coordenador,
@@ -62,11 +62,11 @@ export default class ProjetosControllers {
         const result = await updateService.updateProj(
           
           {
-          cod_proj_uuid,
+            uuidprojeto,
           contrato,
           data,
           departamento,
-          co,
+          nprojeto,
           projeto,
           cliente,
           cliente2, 
@@ -107,7 +107,7 @@ export default class ProjetosControllers {
       //Crate
 
       public async create (request: Request, response: Response): Promise< Response > {
-        const {cod_proj_uuid,data,contrato,co,projeto,cliente,cliente2, 
+        const {uuidprojeto,data,contrato,nprojeto,projeto,cliente,cliente2, 
           numero,
           gerente,
           coordenador,
@@ -124,7 +124,7 @@ export default class ProjetosControllers {
 
         const indexProj = new CreateProjetosServices();
 
-        const showPorIndex = await indexProj.execute({cod_proj_uuid,data,contrato,co,projeto,cliente,cliente2, 
+        const showPorIndex = await indexProj.execute({uuidprojeto,data,contrato,nprojeto,projeto,cliente,cliente2, 
           numero,
           gerente,
           coordenador,

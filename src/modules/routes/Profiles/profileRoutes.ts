@@ -19,7 +19,7 @@ profileRouter.put('/update',celebrate({
         [Segments.BODY] :{
            
             //Aqui coloquei a opção nome_usuario mais posso colocar login
-            nome_usuario: Joi.string().required(),
+            usuario: Joi.string().required(),
             email : Joi.string().required(),
 
             //Colocando a senha como opicional e assim colocando a senha sou obrigado a colocar o old_senha

@@ -7,10 +7,10 @@ interface IResponseDTO {
 
 interface IDescItemOfSummary {
 
-  cod_proj_uuid: string,
+    uuidprojeto: string,
   data:string ;
-  contrato:number ;
-  co:string
+  contrato:string ;
+  nprojeto:string
   projeto:string ;
   cliente:string ;
   cliente2:string ;
@@ -45,10 +45,10 @@ class LoadProjetoSummaryService{
         const summary = user.map((use) =>{
             const DescItemOfSummary = {
 
-              cod_proj_uuid: use.cod_proj_uuid,
+              uuidprojeto: use.uuidprojeto,
               data:use.data,
               contrato:use.contrato,
-              co:use.co,
+              nprojeto:use.nprojeto,
               projeto:use.projeto,
               cliente:use.cliente,
               cliente2:use.cliente2,

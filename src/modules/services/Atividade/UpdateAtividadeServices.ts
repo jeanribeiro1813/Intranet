@@ -7,18 +7,19 @@ import AtividadeRepository from '../../typeorm/repositories/AtividadeRepository'
 
 interface IRequestDTO {
 
-  codativida: string;
+  uuidativida: string;
   atividade:string;
+  cod_atv:string;
 
   }
 
   class UpdateClientService {
 
-    public async update({codativida,atividade}: IRequestDTO): Promise<Atividades | Error> {
+    public async update({uuidativida,atividade,cod_atv}: IRequestDTO): Promise<Atividades | Error> {
 
       const usersRepository = getCustomRepository(AtividadeRepository);
 
-      const client = await usersRepository.findOne(codativida);
+      const client = await usersRepository.findOne(uuidativida);
 
       if (!client) {
         throw new AppError ('client não existe',404);
@@ -26,6 +27,7 @@ interface IRequestDTO {
 
 
       client.atividade = atividade ? atividade : client.atividade;
+      client.cod_atv = cod_atv ? cod_atv : client.cod_atv;
 
       await usersRepository.save(client);
 

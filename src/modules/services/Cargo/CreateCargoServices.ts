@@ -7,7 +7,7 @@ import CargoRepository from '../../typeorm/repositories/CargoRepository'
 
 
 interface IRequestDTO {
-  cod_cargo_uuid: string;
+  uuidcargo: string;
   desc_cargo:string;
   cod_cargo:number;
 
@@ -16,11 +16,11 @@ interface IRequestDTO {
 
   class CreateCargoService {
 
-    public async execute({ cod_cargo_uuid,desc_cargo, cod_cargo}: IRequestDTO): Promise<Cargo | Error> {
+    public async execute({ uuidcargo,desc_cargo, cod_cargo}: IRequestDTO): Promise<Cargo | Error> {
 
       const cargoRepository = getCustomRepository(CargoRepository);
 
-      const checkUserExists = await cargoRepository.findByCod(cod_cargo_uuid);
+      const checkUserExists = await cargoRepository.findByCod(uuidcargo);
 
       if (checkUserExists) {
         throw new AppError('Nome já existe.',404);

@@ -14,7 +14,7 @@ export default class CargoController {
 
     const funcao = await loadFuncao.executeDes();
 
-    return response.json(funcao);
+    return response.json(funcao.summary);
 
   }
 

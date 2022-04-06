@@ -5,16 +5,16 @@ import Faturamento from '../../../typeorm/entities/Faturamento'
 
 interface IRequestDTO{
 
-  codfat:string;
+  uuidfat:string;
 
 }
  class DeleteFaturamentoService {
 
-     public async execute( {codfat}: IRequestDTO) : Promise<void> {
+     public async execute( {uuidfat}: IRequestDTO) : Promise<void> {
 
       const usersRepository = getCustomRepository(FaturamentoRepository);
 
-      const service = await usersRepository.findOne(codfat);
+      const service = await usersRepository.findOne(uuidfat);
 
       if (!service) {
         throw new AppError('Não Existe ',402);

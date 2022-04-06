@@ -12,7 +12,7 @@ export default class FaturamentoViewController {
 
     const funcao = await loadFuncao.executeDes();
 
-    return response.json(funcao);
+    return response.json(funcao.summary);
 
   }
 
@@ -24,20 +24,38 @@ export default class FaturamentoViewController {
 
         const showPerIndex = await indexFat.execute({codfat});
 
+        const result = {
+                        
+          uuidfat: showPerIndex?.uuidfat,
+          cliente: showPerIndex?.cliente,
+          empresa: showPerIndex?.empresa,
+          departamento: showPerIndex?.departamento,
+          nprojeto: showPerIndex?.nprojeto,
+          uuidprojeto: showPerIndex?.uuidprojeto,
+          projeto: showPerIndex?.projeto,
+          atividade: showPerIndex?.atividade,
+          data: showPerIndex?.data,
+          inicio: showPerIndex?.inicio,
+          fim: showPerIndex?.fim,
+          obs: showPerIndex?.obs,
+          status:showPerIndex?.status
+      }
+
         return response.json(showPerIndex);
 
 
       }
 
       public async execuUsers(request: Request, response: Response): Promise< Response > {
-        const {nome_usuario,data} = request.body;
+
+        const {usuario,data} = request.body;
 
         const indexFat = new LoadPorUsersServices();
 
-        const showPorIndex = await indexFat.execute({nome_usuario,data});
-
- 
-
+    
+        const showPorIndex = await indexFat.execute({usuario, data});
+        
+        
         return response.json(showPorIndex);
       }
     

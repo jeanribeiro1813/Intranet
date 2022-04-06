@@ -14,20 +14,20 @@ export default class CargoController {
 
     const funcao = await loadFuncao.executeDes();
 
-    return response.json(funcao);
+    return response.json(funcao.summary);
 
   }
 
       //Criação Cargo
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const { cod_cargo_uuid,desc_cargo,cod_cargo} = request.body;
+        const { uuidcargo,desc_cargo,cod_cargo} = request.body;
 
         const service = new CreateCargoServicer();
 
         const result = await service.execute(
           {
-            cod_cargo_uuid,desc_cargo,cod_cargo
+            uuidcargo,desc_cargo,cod_cargo
                 
 
           }
@@ -44,7 +44,7 @@ export default class CargoController {
 
       public async update (request :Request, response:Response): Promise<Response>{
 
-        const {cod_cargo_uuid} = request.params
+        const {uuidcargo} = request.params
 
         const {desc_cargo,cod_cargo} = request.body
 
@@ -53,7 +53,7 @@ export default class CargoController {
         const fatura = await updateFatu.update(
 
           {
-            cod_cargo_uuid,desc_cargo,cod_cargo
+            uuidcargo,desc_cargo,cod_cargo
           }
 
         )
@@ -67,11 +67,11 @@ export default class CargoController {
     
       public async delete(request:Request, response:Response):Promise<Response>{
 
-        const {cod_cargo_uuid} = request.params;
+        const {uuidcargo} = request.params;
 
         const deleteCargo = new DeleteCargoService();
 
-       deleteCargo.execute({cod_cargo_uuid});
+       deleteCargo.execute({uuidcargo});
 
         return response.json('Delete realizado com sucesso');
       }

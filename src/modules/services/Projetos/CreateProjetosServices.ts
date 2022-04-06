@@ -7,10 +7,10 @@ import ProjetosRepository from '../../typeorm/repositories/ProjetosRepository'
 
 
 interface IRequestDTO {
-  cod_proj_uuid:string;
+  uuidprojeto:string;
   data:string;
+  nprojeto:string;
   contrato:string;
-  co:string;
   projeto:string;
   cliente:string;
   cliente2:string;
@@ -34,7 +34,7 @@ interface IRequestDTO {
 
   class CreateFatService {
 
-    public async execute({cod_proj_uuid,data,contrato,co,projeto,cliente,cliente2, 
+    public async execute({uuidprojeto,nprojeto,data,contrato,projeto,cliente,cliente2, 
       numero,
       gerente,
       coordenador,
@@ -51,7 +51,7 @@ interface IRequestDTO {
 
       const projRepository = getCustomRepository(ProjetosRepository);
 
-      const checkUserExists = await projRepository.findByCode(cod_proj_uuid);
+      const checkUserExists = await projRepository.findByCode(uuidprojeto);
 
       if (checkUserExists) {
         throw new AppError('Nome já existe.',404);
@@ -59,8 +59,8 @@ interface IRequestDTO {
       }
 
       const project =  projRepository.create({
-        
-      data,contrato,co,projeto,cliente,cliente2, 
+        nprojeto,
+      data,contrato,projeto,cliente,cliente2, 
       numero,
       gerente,
       coordenador,

@@ -9,17 +9,17 @@ const departamentoRouter = Router();
 const departamentoController = new DepartamentoController();
 
 
-departamentoRouter.use(isAutenticacion);
+// departamentoRouter.use(isAutenticacion);
 
 
 //Create
 departamentoRouter.post(
-    '/create',
+    '/create',isAutenticacion,
     departamentoController.create);
 
 //update
 departamentoRouter.put('/update/:coddeparta'
-,
+,isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
         coddeparta: Joi.string().uuid().required(),
@@ -28,7 +28,7 @@ celebrate({
 
 
 //Delete
-departamentoRouter.delete('/delete/:coddeparta',
+departamentoRouter.delete('/delete/:coddeparta',isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
         coddeparta: Joi.string().uuid().required(),

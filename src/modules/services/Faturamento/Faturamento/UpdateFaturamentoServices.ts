@@ -5,41 +5,50 @@ import Faturamento from '../../../typeorm/entities/Faturamento'
 
 
 interface IRequestDTO {
-  codfat:string,
-  codusuario:any;
-  coddeparta:string;
-  codprojeto:any;
-  contrato:string;
-  codativida:string;
+
+  uuidfat:string,
+  uuidusuario:string;
+  uuiddeparta:string;
+  uuidprojeto:string;
+  uuidcontrato:string;
+  uuidativida:string;
   data:string;
   inicio:string;
   fim:string;
   status:string;
   obs:string;
+  empresa:string;
+  uuidcliente:string
+
   }
 
   class CreatefaturaService {
 
-    public async update({codfat,codusuario, coddeparta, codprojeto,codativida,data,inicio,fim,status,obs}: IRequestDTO): Promise<Faturamento | Error> {
+    public async update({uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente}: IRequestDTO): Promise<Faturamento | Error> {
 
       const usersRepository = getCustomRepository(FaturamentoRepository);
 
-      const fatura = await usersRepository.findOne(codfat);
+      const fatura = await usersRepository.findOne(uuidfat);
 
       if (!fatura) {
         throw new AppError ('fatura não existe',404);
       }
 
 
-      fatura.codusuario = codusuario ? codusuario : fatura.codusuario;
-      fatura.coddeparta = coddeparta ? coddeparta : fatura.coddeparta;
-      fatura.codprojeto = codprojeto ? codprojeto : fatura.codprojeto;
-      fatura.codativida = codativida ? codativida : fatura.codativida;
+      fatura.uuidfat = uuidfat ? uuidfat : fatura.uuidfat;
+      fatura.uuidusuario = uuidusuario ? uuidusuario : fatura.uuidusuario;
+      fatura.uuiddeparta = uuiddeparta ? uuiddeparta : fatura.uuiddeparta;
+      fatura.uuidprojeto = uuidprojeto ? uuidprojeto : fatura.uuidprojeto;
+      fatura.uuidcontrato = uuidcontrato ? uuidcontrato : fatura.uuidcontrato;
+      fatura.uuidativida = uuidativida ? uuidativida : fatura.uuidativida;
       fatura.data = data ? data : fatura.data;
       fatura.inicio = inicio ? inicio : fatura.inicio;
       fatura.fim = fim ? fim : fatura.fim;
       fatura.status = status ? status: fatura.status;
       fatura.obs = obs ? obs: fatura.obs;
+      fatura.empresa = empresa ? empresa: fatura.empresa;
+      fatura.uuidcliente = uuidcliente ? uuidcliente: fatura.uuidcliente;
+
 
 
 

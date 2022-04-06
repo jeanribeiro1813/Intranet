@@ -12,7 +12,7 @@ import  {v4 as uuid} from 'uuid';
 class Cargo{
 
     @PrimaryGeneratedColumn()
-    cod_cargo_uuid!:string;
+    uuidcargo!:string;
 
     @Column()
     desc_cargo!: string;
@@ -27,8 +27,8 @@ class Cargo{
     cod_cargo!:number
 
     constructor(){
-        if (!this.cod_cargo_uuid){
-            this.cod_cargo_uuid = uuid();
+        if (!this.uuidcargo){
+            this.uuidcargo = uuid();
         }
     }
 

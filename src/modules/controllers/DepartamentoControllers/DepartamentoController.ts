@@ -14,20 +14,20 @@ export default class DepartamentoController {
 
     const funcao = await loadFuncao.executeDes();
 
-    return response.json(funcao);
+    return response.json(funcao.summary);
 
   }
 
       //Criação Departamento
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const { coddeparta,departamento} = request.body;
+        const { uuiddeparta,departamento} = request.body;
 
         const service = new CreateClientesServices();
 
         const result = await service.execute(
           {
-            coddeparta,departamento                
+            uuiddeparta,departamento                
 
           }
         );
@@ -43,7 +43,7 @@ export default class DepartamentoController {
 
       public async update (request :Request, response:Response): Promise<Response>{
 
-        const { coddeparta} = request.params
+        const { uuiddeparta} = request.params
 
         const { departamento} = request.body
 
@@ -52,7 +52,7 @@ export default class DepartamentoController {
         const fatura = await updateFatu.update(
 
           {
-            coddeparta,departamento
+            uuiddeparta,departamento
           }
 
         )
@@ -66,11 +66,11 @@ export default class DepartamentoController {
     
       public async delete(request:Request, response:Response):Promise<Response>{
 
-        const { coddeparta} = request.params;
+        const { uuiddeparta} = request.params;
 
         const deleteDepartamento = new DeleteClientesServices();
 
-       deleteDepartamento.execute({coddeparta});
+       deleteDepartamento.execute({uuiddeparta});
 
         return response.json('Delete realizado com sucesso');
       }

@@ -11,7 +11,7 @@ interface IRequest{
 
 
     user_id : string,
-    nome_usuario: string,
+    usuario: string,
     email: string,
     //Deixando opicional Assim o usuario pode ter a opção de mudar não sendo obrigatorio
     senha?: string,
@@ -21,7 +21,7 @@ interface IRequest{
 
 class UpdateShowProfileService {
 
-    public async updateProfile({user_id,nome_usuario,email,senha,old_senha} :IRequest): Promise<Users | AppError>{
+    public async updateProfile({user_id,usuario,email,senha,old_senha} :IRequest): Promise<Users | AppError>{
 
         const userUpdate = getCustomRepository(UsersRepository);
 
@@ -37,7 +37,7 @@ class UpdateShowProfileService {
 
         //Se existir um email e esse é o codigo do email for igual
 
-        if(userEmail && userEmail.codusuario !== user_id){
+        if(userEmail && userEmail.uuidusuario !== user_id){
             throw new AppError('Já existe usuario com esse email',409)
         }
 
@@ -64,7 +64,7 @@ class UpdateShowProfileService {
 
         //Atualizando os demais campos
 
-        user.nome_usuario = nome_usuario ? nome_usuario : user.nome_usuario;
+        user.usuario = usuario ? usuario : user.usuario;
         user.email = email ? email : user.email;
 
         await userUpdate.save(user)

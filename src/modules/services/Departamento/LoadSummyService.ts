@@ -8,7 +8,7 @@ interface IResponseDTO {
 
 interface IDescItemOfSummary {
 
-    coddeparta: string;
+    uuiddeparta: string;
     departamento:string;
   
 
@@ -27,7 +27,7 @@ class LoadClientesSummaryService{
         const summary = user.map((use) =>{
             const DescItemOfSummary = {
 
-                coddeparta:use.coddeparta,
+                uuiddeparta:use.uuiddeparta,
                 departamento:use.departamento,
                 
 

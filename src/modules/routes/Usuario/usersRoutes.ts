@@ -16,7 +16,7 @@ useRouter.post('/create',celebrate({
         [Segments.BODY] :{
             login : Joi.string().required(),
             senha : Joi.string().required(),
-            nome_usuario: Joi.string().required(),
+            usuario: Joi.string().required(),
             email : Joi.string().required(),
             contato:Joi.string().required(),
             departamento:Joi.string().required(),

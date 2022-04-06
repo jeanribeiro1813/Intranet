@@ -5,16 +5,16 @@ import DepartamentoRepository from '../../typeorm/repositories/DepartamentoRepos
 
 interface IRequestDTO{
 
-  coddeparta: string;
+  uuiddeparta: string;
 
 }
  class DeleteClientesService {
 
-     public async execute( {coddeparta}: IRequestDTO) : Promise<void> {
+     public async execute( {uuiddeparta}: IRequestDTO) : Promise<void> {
 
       const usersRepository = getCustomRepository(DepartamentoRepository);
 
-      const service = await usersRepository.findOne(coddeparta);
+      const service = await usersRepository.findOne(uuiddeparta);
 
       if (!service) {
         throw new AppError('Não Existe ',402);

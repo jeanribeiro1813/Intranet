@@ -33,7 +33,7 @@ for mudar a senha e essa tabela acossia uma novo token ligando com o id do usuar
       }
 
       //Gerando um token , pegando pelo custom de generate do Repositorio de Token
-      const {token}  = await userTokenRepository.generate(user.codusuario);
+      const {token}  = await userTokenRepository.generate(user.uuidusuario);
 
       //Pegando o caminho do arquivo que criei 
       const forgotPasswordTemplate = path.resolve(__dirname, '..', 'Users','views','forgot_password.hbs')
@@ -43,7 +43,7 @@ for mudar a senha e essa tabela acossia uma novo token ligando com o id do usuar
       await EtherelMail.sendMail({
   
         to:{
-          name: user.nome_usuario,
+          name: user.usuario,
           email: user.email
         },
         from: {
@@ -59,7 +59,7 @@ for mudar a senha e essa tabela acossia uma novo token ligando com o id do usuar
         file : forgotPasswordTemplate,
         //Aqui estou passando o nome do usuario e qual url vai o token para o usuario fazer o reset da senha 
         variables :{
-          name:   user.nome_usuario,
+          name:   user.usuario,
           link : `http://localhost:3333/reset_password?token=${token}`,
         },
 

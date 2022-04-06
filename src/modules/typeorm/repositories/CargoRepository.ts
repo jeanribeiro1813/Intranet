@@ -6,10 +6,10 @@ import Cargo from '../entities/Cargo';
 @EntityRepository(Cargo)
 export default class CargoRepository extends Repository<Cargo>{
 
-    public async findByCod(cod_cargo_uuid: string):Promise <Cargo | undefined>{
+    public async findByCod(uuidcargo: string):Promise <Cargo | undefined>{
 
         const cargo = await this.findOne({
-            where:{cod_cargo_uuid}
+            where:{uuidcargo}
         });
 
         return cargo;

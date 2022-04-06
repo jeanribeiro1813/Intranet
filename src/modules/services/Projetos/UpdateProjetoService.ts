@@ -5,10 +5,10 @@ import ProjetosRepository from '../../typeorm/repositories/ProjetosRepository'
 
 
 interface IRequestDTO {
-  cod_proj_uuid:string;
+  uuidprojeto:string;
   data:string;
   contrato:string;
-  co:string;
+  nprojeto:string;
   projeto:string;
   cliente:string;
   cliente2:string;
@@ -31,7 +31,7 @@ interface IRequestDTO {
 
   class UpdateprojetosService {
 
-    public async updateProj({cod_proj_uuid,data,contrato,co,projeto,cliente,cliente2, 
+    public async updateProj({uuidprojeto,data,contrato,nprojeto,projeto,cliente,cliente2, 
   numero,
   gerente,
   coordenador,
@@ -48,7 +48,7 @@ interface IRequestDTO {
 
       const usersRepository = getCustomRepository(ProjetosRepository);
 
-      const projetos = await usersRepository.findOne(cod_proj_uuid);
+      const projetos = await usersRepository.findOne(uuidprojeto);
 
       if (!projetos) {
         throw new AppError ('projetos não existe',404);
@@ -57,7 +57,7 @@ interface IRequestDTO {
       projetos.contrato = contrato ? contrato : projetos.contrato;
       projetos.data = data ? data : projetos.data;
       projetos.departamento = departamento ? departamento : projetos.departamento;
-      projetos.co = co ? co : projetos.co;
+      projetos.nprojeto = nprojeto ? nprojeto : projetos.nprojeto;
       projetos.projeto = projeto ? projeto : projetos.projeto;
       projetos.cliente = cliente ? cliente : projetos.cliente;
       projetos.cliente2 = cliente2 ? cliente2 : projetos.cliente2;

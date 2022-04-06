@@ -8,8 +8,10 @@ interface IResponseDTO {
 
 interface IDescItemOfSummary {
 
-    codativida: string;
+    uuidativida: string;
     atividade:string;
+    cod_atv:string;
+
   
 
 }
@@ -22,13 +24,16 @@ class LoadClientesSummaryService{
     public async executeDes (): Promise<IResponseDTO> {
         const projetosrRepository = getCustomRepository(AtividadeRepository);
 
-        const user = await projetosrRepository.find({});
+        const user = await projetosrRepository.find({order:{
+            cod_atv:'ASC'
+        }});
 
         const summary = user.map((use) =>{
             const DescItemOfSummary = {
 
-                codativida:use.codativida,
+                uuidativida:use.uuidativida,
                 atividade:use.atividade,
+                cod_atv: use.cod_atv,
                 
 
 

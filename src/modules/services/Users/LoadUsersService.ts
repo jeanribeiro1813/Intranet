@@ -2,14 +2,6 @@ import { getCustomRepository } from "typeorm";
 import Users from '../../../modules/typeorm/entities/Users';
 import UsersRepository from '../../../modules/typeorm/repositories/UsersRepository'
 
-interface IDadosUsers{
-    codusuario : string,
-    nome_usuario : string,
-    email: string,
-    contato:string,
-    cargo: string,
-    departamento: string
-}
 
 class LoadUsersService {
 

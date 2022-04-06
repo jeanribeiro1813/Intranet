@@ -12,7 +12,7 @@ import {
   class Users{
   
     @PrimaryGeneratedColumn()
-    codusuario!: string;
+    uuidusuario!: string;
   
     @Column()
     login!:string ;
@@ -21,7 +21,7 @@ import {
     senha!:string ;
   
     @Column()
-    nome_usuario!:string ;
+    usuario!:string ;
   
     @Column('int')
     n_cnh!:number ;
@@ -78,8 +78,8 @@ import {
     avatar!:string ;
   
     constructor(){
-        if (!this.codusuario){
-            this.codusuario = uuid();
+        if (!this.uuidusuario){
+            this.uuidusuario = uuid();
         }
     }
   }

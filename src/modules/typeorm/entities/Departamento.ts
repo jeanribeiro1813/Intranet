@@ -12,7 +12,7 @@ import  {v4 as uuid} from 'uuid';
 class Departamento{
 
   @PrimaryGeneratedColumn('uuid')
-  coddeparta!: string;
+  uuiddeparta!: string;
 
   @Column('date')
   departamento!:string ;
@@ -24,8 +24,8 @@ class Departamento{
   updated_at!: Date;
 
   constructor(){
-      if (!this.coddeparta){
-          this.coddeparta = uuid();
+      if (!this.uuiddeparta){
+          this.uuiddeparta = uuid();
       }
   }
 }

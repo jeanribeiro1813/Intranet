@@ -6,18 +6,18 @@ import CargoRepository from '../../typeorm/repositories/CargoRepository'
 
 
 interface IRequestDTO {
-  cod_cargo_uuid: string;
+  uuidcargo: string;
   desc_cargo:string;
   cod_cargo:number;
   }
 
   class UpdateCargoService {
 
-    public async update({cod_cargo_uuid,desc_cargo, cod_cargo}: IRequestDTO): Promise<Cargo | Error> {
+    public async update({uuidcargo,desc_cargo, cod_cargo}: IRequestDTO): Promise<Cargo | Error> {
 
       const usersRepository = getCustomRepository(CargoRepository);
 
-      const cargo = await usersRepository.findOne(cod_cargo_uuid);
+      const cargo = await usersRepository.findOne(uuidcargo);
 
       if (!cargo) {
         throw new AppError ('cargo não existe',404);

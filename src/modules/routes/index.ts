@@ -7,13 +7,15 @@ import sessionRoutes from './Usuario/sessionRoutes';
 import passwordRouter from './Usuario/passwordRoutes'
 import cargoRouter from './Cargo/CargoRoutes';
 import carrosRouter from './Carros/CarrosRoutes';
-import clientes from './Clientes/ClientesRoutes';
-import chamados from './Chamados/ChamadosRoutes';
-import profile  from './Profiles/profileRoutes';
+import clientesRouter from './Clientes/ClientesRoutes';
+import chamadosRouter from './Chamados/ChamadosRoutes';
+import profileRouter  from './Profiles/profileRoutes';
 import fatview from './Faturamento/fatu.View.Routes';
-import depart from './Departamento/DepartamentoRoutes';
-import atividade from './Atividade/AtividadeRoutes';
-
+import departRouter from './Departamento/DepartamentoRoutes';
+import atividadeRouter from './Atividade/AtividadeRoutes';
+import contratoRouter from './Contrato/ContratoRoutes'
+import funcionarioRouter from './Funcionarios/FuncionariosRoutes'
+import advRouter from './Adv/AdvRoutes'
 
 
 
@@ -27,11 +29,15 @@ routes.use('/session',sessionRoutes);
 routes.use('/password',passwordRouter);
 routes.use('/cargo',cargoRouter);
 routes.use('/carros',carrosRouter);
-routes.use('/clientes',clientes);
-routes.use('/chamados',chamados);
-routes.use('/profile',profile);
-routes.use('/depart',depart);
-routes.use('/ativ',atividade);
+routes.use('/clientes',clientesRouter);
+routes.use('/chamados',chamadosRouter);
+routes.use('/profile',profileRouter);
+routes.use('/depart',departRouter);
+routes.use('/ativ',atividadeRouter);
+routes.use('/contrato',contratoRouter);
+routes.use('/funcionario',funcionarioRouter);
+routes.use('/adv',advRouter)
+
 
 
 export default routes;
