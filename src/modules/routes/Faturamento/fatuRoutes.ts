@@ -17,19 +17,19 @@ fatRouter.post(
     fatController.create);
 
 //update
-fatRouter.put('/update/:codfat'
+fatRouter.put('/update/:uuidfat'
 ,celebrate({
     [Segments.PARAMS]:{
-        codfat: Joi.string().uuid().required(),
+        uuidfat: Joi.string().uuid().required(),
     }
 }),fatController.update);
 
 
 //Delete
-fatRouter.delete('/delete/:codfat',
+fatRouter.delete('/delete/:uuidfat',
 celebrate({
     [Segments.PARAMS]:{
-        codfat: Joi.string().uuid().required(),
+        uuidfat: Joi.string().uuid().required(),
     }
 }), fatController.delete);
 
@@ -39,10 +39,10 @@ fatRouter.post('/update',
 celebrate({
     [Segments.BODY]:{
 
-        codusuario: Joi.string().required(),
-        coddeparta:Joi.string().required(),
-        codprojeto:Joi.string().required(),
-        contrato: Joi.string().required(),
+        uuidusuario: Joi.string().required(),
+        uuiddeparta:Joi.string().required(),
+        uuidprojeto:Joi.string().required(),
+        uuidcontrato: Joi.string().required(),
         data:Joi.string().required(),
         status:Joi.string().required(),
         

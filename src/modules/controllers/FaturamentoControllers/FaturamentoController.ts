@@ -61,7 +61,7 @@ export default class FaturamentoController {
 
         const deletePorIndex = deleteFaturamento.execute({uuidfat});
 
-        return response.json('Delete realizado com sucesso');
+        return response.json('Deletado com sucesso');
       }
 
 
