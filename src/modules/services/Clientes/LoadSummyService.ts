@@ -8,7 +8,7 @@ interface IResponseDTO {
 
 interface IDescItemOfSummary {
 
-    id: string;
+    uuidcliente: string;
     projeto:string;
     cliente:string;
 
@@ -27,7 +27,7 @@ class LoadClientesSummaryService{
         const summary = user.map((use) =>{
             const DescItemOfSummary = {
 
-                id:use.id,
+                uuidcliente:use.uuidcliente,
                 projeto:use.projeto,
                 cliente:use.cliente
                 

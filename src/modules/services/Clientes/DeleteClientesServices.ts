@@ -5,16 +5,16 @@ import ClientesRepository from '../../typeorm/repositories/ClientesRepository'
 
 interface IRequestDTO{
 
-  id: string;
+  uuidcliente: string;
 
 }
  class DeleteClientesService {
 
-     public async execute( {id}: IRequestDTO) : Promise<void> {
+     public async execute( {uuidcliente}: IRequestDTO) : Promise<void> {
 
       const usersRepository = getCustomRepository(ClientesRepository);
 
-      const service = await usersRepository.findOne(id);
+      const service = await usersRepository.findOne(uuidcliente);
 
       if (!service) {
         throw new AppError('Não Existe ',402);

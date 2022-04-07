@@ -13,7 +13,7 @@ import  {v4 as uuid} from 'uuid';
 class Clientes{
 
     @PrimaryGeneratedColumn()
-    id!: string;
+    uuidcliente!: string;
 
     @Column()
     projeto!:string;
@@ -29,8 +29,8 @@ class Clientes{
 
 
     constructor(){
-        if (!this.id){
-            this.id = uuid();
+        if (!this.uuidcliente){
+            this.uuidcliente = uuid();
         }
     }
 

@@ -76,6 +76,9 @@ import {
 
     @Column()
     avatar!:string ;
+
+    @Column()
+    cpf_cnpj!: string;
   
     constructor(){
         if (!this.uuidusuario){

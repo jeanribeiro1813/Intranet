@@ -7,10 +7,10 @@ Clientes
 @EntityRepository(Clientes)
 export default class ClientesRepository extends Repository<Clientes>{
 
-    public async findById(id: string):Promise <Clientes | undefined>{
+    public async findById(uuidcliente: string):Promise <Clientes | undefined>{
 
         const Clientes = await this.findOne({
-            where:{id}
+            where:{uuidcliente}
         });
 
         return Clientes;

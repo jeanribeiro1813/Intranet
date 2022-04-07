@@ -27,6 +27,7 @@ interface IRequestDTO {
     alarm_id:number ,
     cod_usuario:number ,
     avatar:string ,
+    cpf_cnpj:string,
   
 
   }
@@ -52,7 +53,7 @@ interface IRequestDTO {
         departamento,
         alarm_id,
         cod_usuario,
-        avatar
+        avatar,cpf_cnpj
     }: IRequestDTO): Promise<Users> {
 
       const usersRepository = getCustomRepository(UsersRepository);
@@ -94,6 +95,7 @@ interface IRequestDTO {
         alarm_id,
         cod_usuario,
         avatar
+        ,cpf_cnpj
 
       });
 

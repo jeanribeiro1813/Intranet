@@ -6,7 +6,7 @@ import ClientesRepository from '../../typeorm/repositories/ClientesRepository'
 
 
 interface IRequestDTO {
-  id: string;
+  uuidcliente: string;
   projeto:string;
   cliente:string;
 
@@ -14,11 +14,11 @@ interface IRequestDTO {
 
   class UpdateClientService {
 
-    public async update({id,projeto, cliente}: IRequestDTO): Promise<Clientes | Error> {
+    public async update({uuidcliente,projeto, cliente}: IRequestDTO): Promise<Clientes | Error> {
 
       const usersRepository = getCustomRepository(ClientesRepository);
 
-      const client = await usersRepository.findOne(id);
+      const client = await usersRepository.findOne(uuidcliente);
 
       if (!client) {
         throw new AppError ('client não existe',404);

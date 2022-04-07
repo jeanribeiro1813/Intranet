@@ -7,7 +7,7 @@ import ClientesRepository from '../../typeorm/repositories/ClientesRepository'
 
 
 interface IRequestDTO {
-  id: string;
+  uuidcliente: string;
   projeto:string;
   cliente:string;
 
@@ -16,11 +16,11 @@ interface IRequestDTO {
 
   class CreateClientesService {
 
-    public async execute({ id,projeto, cliente}: IRequestDTO): Promise<Clientes | Error> {
+    public async execute({ uuidcliente,projeto, cliente}: IRequestDTO): Promise<Clientes | Error> {
 
       const clientesRepository = getCustomRepository(ClientesRepository);
 
-      const checkUserExists = await clientesRepository.findById(id);
+      const checkUserExists = await clientesRepository.findById(uuidcliente);
 
       if (checkUserExists) {
         throw new AppError('Nome já existe.',404);

@@ -21,13 +21,13 @@ export default class CargoController {
       //Criação Cargo
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const { id,projeto,cliente} = request.body;
+        const { uuidcliente,projeto,cliente} = request.body;
 
         const service = new CreateClientesServices();
 
         const result = await service.execute(
           {
-            id,projeto,cliente                
+            uuidcliente,projeto,cliente                
 
           }
         );
@@ -43,7 +43,7 @@ export default class CargoController {
 
       public async update (request :Request, response:Response): Promise<Response>{
 
-        const {id} = request.params
+        const {uuidcliente} = request.params
 
         const {projeto,cliente} = request.body
 
@@ -52,7 +52,7 @@ export default class CargoController {
         const fatura = await updateFatu.update(
 
           {
-            id,projeto,cliente
+            uuidcliente,projeto,cliente
           }
 
         )
@@ -66,11 +66,11 @@ export default class CargoController {
     
       public async delete(request:Request, response:Response):Promise<Response>{
 
-        const {id} = request.params;
+        const {uuidcliente} = request.params;
 
         const deleteCargo = new DeleteClientesServices();
 
-       deleteCargo.execute({id});
+       deleteCargo.execute({uuidcliente});
 
         return response.json('Delete realizado com sucesso');
       }

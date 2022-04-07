@@ -26,7 +26,7 @@ export default class UsersControllers {
         departamento,
         alarm_id,
         cod_usuario,
-        avatar} = request.body;
+        avatar,cpf_cnpj} = request.body;
 
     const createFuncao = new CreateUsersService();
 
@@ -47,7 +47,7 @@ export default class UsersControllers {
         departamento,
         alarm_id,
         cod_usuario,
-        avatar});
+        avatar,cpf_cnpj});
 
         if(funcao instanceof Error){
             return response.status(400).json(funcao.message);
