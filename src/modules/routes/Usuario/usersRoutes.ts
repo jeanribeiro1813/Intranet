@@ -7,8 +7,14 @@ import isAutenticacion from '../../services/middlewares/isAutenticacion';
 const useRouter = Router()
 const userControllers = new UsersControllers();
 
+useRouter.use(isAutenticacion);
+
 //Colocando Autenticação na rota
-useRouter.get('/load',isAutenticacion,userControllers.loading);
+useRouter.post('/load',celebrate({
+    [Segments.BODY]:{
+        status:Joi.string().required(),
+    }
+}),userControllers.loading);
 
 
 //No Create como obrigação tem que colocar os campos abaixo para a criação dos usuarios

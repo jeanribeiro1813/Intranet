@@ -62,11 +62,12 @@ export default class UsersControllers {
 
       public async loading (request: Request , response: Response){
 
+        const {status} = request.body;
+
         const loadingService = new LoadUsersService();
 
-        console.log(request.user.cod_usuario_uuid);
+        const result = await loadingService.load({status});
 
-        const result = await loadingService.load();
 
         return response.json(result);
 

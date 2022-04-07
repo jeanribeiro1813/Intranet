@@ -11,13 +11,13 @@ export default class FaturamentoController {
       //Criação Faturamento
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const {uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente} = request.body;
+        const {uuidfat,uuidusuario, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente} = request.body;
 
         const service = new CreateFaturamentoServicer();
 
         const result = await service.execute(
           {
-            uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente
+            uuidfat,uuidusuario, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente
 
           }
         );
@@ -26,7 +26,7 @@ export default class FaturamentoController {
           return response.status(400).json(result.message);
      }
 
-        return response.json(result);
+        return response.json('Criado com sucesso');
       }
 
       // Upgrade
@@ -35,19 +35,19 @@ export default class FaturamentoController {
 
         const {uuidfat} = request.params
 
-        const {uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente} = request.body
+        const {uuidusuario, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente} = request.body
 
         const updateFatu = new UpdateFaturamentoServes();
 
         const fatura = await updateFatu.update(
 
           {
-            uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente
+            uuidfat,uuidusuario, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente
           }
 
         )
 
-        return response.json(fatura);
+        return response.json('Atualizado com sucesso');
 
 
 
