@@ -9,10 +9,9 @@ import FaturamentoRepository from '../../../typeorm/repositories/FaturamentoRepo
 interface IRequestDTO {
   uuidfat:string,
   uuidusuario:string;
-  uuiddeparta:string;
   uuidprojeto:string;
   uuidcontrato:string;
-  uuidativida:string;
+  uuidatividade:string;
   data:string;
   inicio:string;
   fim:string;
@@ -26,7 +25,7 @@ interface IRequestDTO {
 
   class CreateFatService {
 
-    public async execute({ uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente}: IRequestDTO): Promise<Faturamento | Error> {
+    public async execute({ uuidfat,uuidusuario, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente}: IRequestDTO): Promise<Faturamento | Error> {
 
       const fatRepository = getCustomRepository(FaturamentoRepository);
 
@@ -39,7 +38,7 @@ interface IRequestDTO {
 
       const fat =  fatRepository.create({
         
-        uuidfat,uuidusuario, uuidcliente, uuidprojeto, uuidcontrato, uuidativida,data,inicio,fim,status,obs,empresa,uuiddeparta
+        uuidfat,uuidusuario, uuidcliente, uuidprojeto, uuidcontrato, uuidatividade,data,inicio,fim,status,obs,empresa
        
         /*
         uuidcliente

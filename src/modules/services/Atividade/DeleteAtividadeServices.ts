@@ -5,16 +5,16 @@ import AtividadeRepository from '../../typeorm/repositories/AtividadeRepository'
 
 interface IRequestDTO{
 
-  uuidativida: string;
+  uuidatividade: string;
 
 }
  class DeleteClientesService {
 
-     public async execute( {uuidativida}: IRequestDTO) : Promise<void> {
+     public async execute( {uuidatividade}: IRequestDTO) : Promise<void> {
 
       const usersRepository = getCustomRepository(AtividadeRepository);
 
-      const service = await usersRepository.findOne(uuidativida);
+      const service = await usersRepository.findOne(uuidatividade);
 
       if (!service) {
         throw new AppError('Não Existe ',402);

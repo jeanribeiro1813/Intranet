@@ -12,7 +12,7 @@ import  {v4 as uuid} from 'uuid';
 class Atividade{
 
   @PrimaryGeneratedColumn('uuid')
-  uuidativida!: string;
+  uuidatividade!: string;
 
   @Column('date')
   atividade!:string ;
@@ -27,8 +27,8 @@ class Atividade{
   cod_atv!:string ;
 
   constructor(){
-      if (!this.uuidativida){
-          this.uuidativida = uuid();
+      if (!this.uuidatividade){
+          this.uuidatividade = uuid();
       }
   }
 }

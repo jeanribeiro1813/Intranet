@@ -19,9 +19,6 @@ class FaturamentoView{
     @Column()
     usuario!: string;
 
-    @Column('uuid')
-    uuiddeparta!: string;
-
     @Column()
     departamento!: string
 
@@ -47,7 +44,7 @@ class FaturamentoView{
     cliente!:string ;
 
     @Column('uuid')
-    uuidativida!:string ;
+    uuidatividade!:string ;
 
     @Column()
     atividade!:string;

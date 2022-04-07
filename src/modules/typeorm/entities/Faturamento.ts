@@ -18,17 +18,13 @@ class Faturamento{
     uuidusuario!: string
 
     @Column('uuid')
-    //@Generated('uuid')
-    uuiddeparta!: string
-
-    @Column('uuid')
     uuidprojeto!: string
 
     @Column('uuid')
     uuidcontrato!:string ;
 
     @Column('uuid')
-    uuidativida!:string ;
+    uuidatividade!:string ;
 
     @Column('date')
     data!:string ;

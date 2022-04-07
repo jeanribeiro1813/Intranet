@@ -8,7 +8,7 @@ interface IResponseDTO {
 
 interface IDescItemOfSummary {
 
-    uuidativida: string;
+    uuidatividade: string;
     atividade:string;
     cod_atv:string;
 
@@ -31,7 +31,7 @@ class LoadClientesSummaryService{
         const summary = user.map((use) =>{
             const DescItemOfSummary = {
 
-                uuidativida:use.uuidativida,
+                uuidatividade:use.uuidatividade,
                 atividade:use.atividade,
                 cod_atv: use.cod_atv,
                 

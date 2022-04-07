@@ -12,8 +12,8 @@ const fatController = new FatController();
 fatRouter.use(isAutenticacion)
 
 //Create
-fatRouter.post(
-    '/create', 
+fatRouter.post( '/create',
+    
     fatController.create);
 
 //update
@@ -40,7 +40,6 @@ celebrate({
     [Segments.BODY]:{
 
         uuidusuario: Joi.string().required(),
-        uuiddeparta:Joi.string().required(),
         uuidprojeto:Joi.string().required(),
         uuidcontrato: Joi.string().required(),
         data:Joi.string().required(),

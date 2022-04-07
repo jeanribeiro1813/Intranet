@@ -7,7 +7,7 @@ import AtividadeRepository from '../../typeorm/repositories/AtividadeRepository'
 
 
 interface IRequestDTO {
-  uuidativida: string;
+  uuidatividade: string;
   atividade:string;
   cod_atv:string;
 
@@ -16,11 +16,11 @@ interface IRequestDTO {
 
   class CreateClientesService {
 
-    public async execute({ uuidativida,atividade,cod_atv}: IRequestDTO): Promise<Atividades | Error> {
+    public async execute({ uuidatividade,atividade,cod_atv}: IRequestDTO): Promise<Atividades | Error> {
 
       const clientesRepository = getCustomRepository(AtividadeRepository);
 
-      const checkUserExists = await clientesRepository.findById(uuidativida);
+      const checkUserExists = await clientesRepository.findById(uuidatividade);
 
       if (checkUserExists) {
         throw new AppError('Nome já existe.',404);
@@ -29,7 +29,7 @@ interface IRequestDTO {
 
       const cliet =  clientesRepository.create({
 
-        uuidativida,atividade,cod_atv
+        uuidatividade,atividade,cod_atv
 
       });
 

@@ -11,10 +11,9 @@ interface IRequestDTO {
    
   uuidfat:string,
   uuidusuario:string;
-  uuiddeparta:string;
   uuidprojeto:string;
   uuidcontrato:string;
-  uuidativida:string;
+  uuidatividade:string;
   data:string;
   inicio:string;
   fim:string;
@@ -30,19 +29,17 @@ interface IRequestDTO {
 
 
 class LoadPorUsersServices{
-  public async executeStatus ({uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,data,status}: IRequestDTO): Promise<Faturamento[]| Error> {
+  public async executeStatus ({uuidusuario, uuidprojeto,uuidcontrato,data,status}: IRequestDTO): Promise<Faturamento[]| Error> {
 
       const projetosRepository = getCustomRepository(FaturamentoRepository);
 
       //Criando um Select personalizado como filtrando 2 colunas
       const faturaUpdate = await projetosRepository.createQueryBuilder().select()
       .where("uuidusuario ILIKE :uuidusuario and\
-      uuiddeparta ILIKE :uuiddeparta and\
       uuidprojeto ILIKE :uuidprojeto  and\
       uuidcontrato ILIKE :uuidcontrato and\
         cast(split_part(cast(data as text), '-' ,2) as text) ILIKE :data\ ", 
       {uuidusuario:`%${uuidusuario}%`
-      ,uuiddeparta: `%${uuiddeparta}`
       ,uuidprojeto:`%${uuidprojeto}%`
       ,uuidcontrato:`%${uuidcontrato}%`
       ,data:`%${data}%`}).getMany();

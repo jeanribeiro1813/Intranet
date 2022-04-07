@@ -24,10 +24,10 @@ celebrate({
     }),fatViewController.exibir);
 
 //Return Por Usuario
-fatViewRouter.post('/show',
+fatViewRouter.post('/load',
 celebrate({
     [Segments.BODY]:{
-        usuario: Joi.string().required(),
+        uuidusuario: Joi.string().required(),
         data: Joi.string().required(),
     }
     }),fatViewController.execuUsers);

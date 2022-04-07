@@ -8,7 +8,7 @@ import AppError from "../../../../shared/errors/AppErrors";
 
 
 interface IRequestDTO {
-  usuario:string;
+  uuidusuario:string;
   data:string
   summary: [] | any
 }
@@ -18,15 +18,15 @@ interface IRequestDTO {
 
 
 class LoadPorUsersServices{
-  public async execute ({usuario ,data}: IRequestDTO): Promise<FaturamentoView[] | AppError> {
+  public async execute ({uuidusuario ,data}: IRequestDTO): Promise<FaturamentoView[] | AppError> {
 
       const projetosRepository = getCustomRepository(FaturamentoViewsRepository);
 
       //Criando um Select personalizado como filtrando 2 colunas
       const index_Prod = await projetosRepository.createQueryBuilder().select()
-      .where("usuario ILIKE :usuario and cast(split_part(cast(data as text), '-' ,2) as text) ILIKE :data ", 
+      .where(`uuidusuario :: text  ILIKE :uuidusuario and cast(split_part(cast(data as text), '-' ,2) as text) ILIKE :data `, 
 
-      {usuario: `%${usuario}%`,data:`%${data}%`}).getMany();
+      {uuidusuario: `%${uuidusuario}%`,data:`%${data}%`}).getMany();
 
       console.log(index_Prod)
 

@@ -48,12 +48,12 @@ export default class FaturamentoViewController {
 
       public async execuUsers(request: Request, response: Response): Promise< Response > {
 
-        const {usuario,data} = request.body;
+        const {uuidusuario,data} = request.body;
 
         const indexFat = new LoadPorUsersServices();
 
     
-        const showPorIndex = await indexFat.execute({usuario, data});
+        const showPorIndex = await indexFat.execute({uuidusuario, data});
         
         
         return response.json(showPorIndex);

@@ -8,10 +8,9 @@ interface IRequestDTO {
 
   uuidfat:string,
   uuidusuario:string;
-  uuiddeparta:string;
   uuidprojeto:string;
   uuidcontrato:string;
-  uuidativida:string;
+  uuidatividade:string;
   data:string;
   inicio:string;
   fim:string;
@@ -24,7 +23,7 @@ interface IRequestDTO {
 
   class CreatefaturaService {
 
-    public async update({uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidativida,data,inicio,fim,status,obs,empresa,uuidcliente}: IRequestDTO): Promise<Faturamento | Error> {
+    public async update({uuidfat,uuidusuario, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente}: IRequestDTO): Promise<Faturamento | Error> {
 
       const usersRepository = getCustomRepository(FaturamentoRepository);
 
@@ -37,10 +36,9 @@ interface IRequestDTO {
 
       fatura.uuidfat = uuidfat ? uuidfat : fatura.uuidfat;
       fatura.uuidusuario = uuidusuario ? uuidusuario : fatura.uuidusuario;
-      fatura.uuiddeparta = uuiddeparta ? uuiddeparta : fatura.uuiddeparta;
       fatura.uuidprojeto = uuidprojeto ? uuidprojeto : fatura.uuidprojeto;
       fatura.uuidcontrato = uuidcontrato ? uuidcontrato : fatura.uuidcontrato;
-      fatura.uuidativida = uuidativida ? uuidativida : fatura.uuidativida;
+      fatura.uuidatividade = uuidatividade ? uuidatividade : fatura.uuidatividade;
       fatura.data = data ? data : fatura.data;
       fatura.inicio = inicio ? inicio : fatura.inicio;
       fatura.fim = fim ? fim : fatura.fim;

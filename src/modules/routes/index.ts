@@ -33,7 +33,7 @@ routes.use('/clientes',clientesRouter);
 routes.use('/chamados',chamadosRouter);
 routes.use('/profile',profileRouter);
 routes.use('/depart',departRouter);
-routes.use('/ativ',atividadeRouter);
+routes.use('/atividade',atividadeRouter);
 routes.use('/contrato',contratoRouter);
 routes.use('/funcionario',funcionarioRouter);
 routes.use('/adv',advRouter)

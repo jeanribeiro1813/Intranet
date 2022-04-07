@@ -14,20 +14,20 @@ export default class AtividadeController {
 
     const funcao = await loadFuncao.executeDes();
 
-    return response.json(funcao);
+    return response.json(funcao.summary);
 
   }
 
       //Criação Atividade
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const {codativida,atividade } = request.body;
+        const {uuidatividade,atividade,cod_atv } = request.body;
 
         const service = new CreateClientesServices();
 
         const result = await service.execute(
           {
-            codativida,atividade                
+            uuidatividade,atividade,cod_atv
 
           }
         );
@@ -43,16 +43,16 @@ export default class AtividadeController {
 
       public async update (request :Request, response:Response): Promise<Response>{
 
-        const {codativida} = request.params
+        const {uuidatividade} = request.params
 
-        const {atividade    } = request.body
+        const {atividade,cod_atv} = request.body
 
         const updateFatu = new UpdateClientesServices();
 
         const fatura = await updateFatu.update(
 
           {
-            codativida,atividade
+            uuidatividade,atividade,cod_atv
           }
 
         )
@@ -66,11 +66,11 @@ export default class AtividadeController {
     
       public async delete(request:Request, response:Response):Promise<Response>{
 
-        const {codativida} = request.params;
+        const {uuidatividade} = request.params;
 
         const deleteAtividade = new DeleteClientesServices();
 
-       deleteAtividade.execute({codativida});
+       deleteAtividade.execute({uuidatividade});
 
         return response.json('Delete realizado com sucesso');
       }
