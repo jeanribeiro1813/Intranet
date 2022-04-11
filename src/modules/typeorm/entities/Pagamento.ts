@@ -43,6 +43,9 @@ class Clientes{
     uuidcolab_forne!: string;
 
     @Column()
+    cpf_cnpj!: string;
+
+    @Column()
     valor_pago!:string;
 
     @Column('date')
@@ -72,11 +75,8 @@ class Clientes{
     @Column()
     obs!: string;
 
-    @CreateDateColumn()
-    created_at!: Date;
 
-    @UpdateDateColumn()
-    updated_at!: Date;
+    
 
 
     constructor(){

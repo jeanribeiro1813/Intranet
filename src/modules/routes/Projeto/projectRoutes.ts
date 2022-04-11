@@ -33,12 +33,11 @@ projectRouter.put('/update/:cod_proj_uuid',celebrate({
 
 projectRouter.post('/loadProj',celebrate({
     [Segments.BODY]:{
-        contrato: Joi.string().required(),
-        co:Joi.string().required(),
-        status:Joi.string().required()
+        nprojeto: Joi.string().required(),
+        contrato:Joi.string().required()
 
     }
-}),projetoController.loadProjetos);
+}),projetoController.loadProjeto);
 
 
 

@@ -67,12 +67,11 @@ export default class FaturamentoController {
 
       public async updateStatus(request: Request, response: Response): Promise< Response > {
 
-        const {uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente} = request.body;
+        const {uuidusuario, uuidprojeto, uuidcontrato, data, status} = request.body;
 
         const indexFat = new UpdateFaturamentoStatus();
 
-        const showPorIndex = await indexFat.executeStatus({uuidfat,uuidusuario, uuiddeparta, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente
-        });
+        const showPorIndex = await indexFat.executeStatus({uuidusuario, uuidprojeto,uuidcontrato, data, status});
 
         
       

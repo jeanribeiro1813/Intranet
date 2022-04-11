@@ -35,18 +35,18 @@ celebrate({
 
 
 
-fatRouter.post('/update',
-// celebrate({
-//     [Segments.BODY]:{
+fatRouter.put('/updateStatus',
+ celebrate({
+     [Segments.BODY]:{
 
-//         uuidusuario: Joi.string().required(),
-//         uuidprojeto:Joi.string().required(),
-//         uuidcontrato: Joi.string().required(),
-//         data:Joi.string().required(),
-//         status:Joi.string().required(),
+         uuidusuario: Joi.string().required(),
+         uuidprojeto:Joi.string().required(),
+         uuidcontrato: Joi.string().required(),
+         data:Joi.string().required(),
+         status:Joi.string().required(),
         
-//     }
-//     }),
+     }
+     }),
     fatController.updateStatus);
 
 

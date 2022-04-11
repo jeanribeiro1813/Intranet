@@ -18,6 +18,7 @@ interface IDescItemOfSummary {
     uuidgrupon2:string;
     uuidsubgrupon3: string;
     uuidcolab_forne: string;
+    cpf_cnpj: string;
     valor_pago:string;
     data_pagto: string;
     data_vecto: string;
@@ -57,6 +58,7 @@ class LoadPagamentoSummaryService{
                 uuidgrupon2:use.uuidgrupon2,
                 uuidsubgrupon3:use.uuidsubgrupon3,
                 uuidcolab_forne:use.uuidcolab_forne,
+                cpf_cnpj:use.cpf_cnpj,
                 valor_pago:use.valor_pago,
                 data_pagto:use.data_pagto,
                 data_vecto:use.data_vecto,

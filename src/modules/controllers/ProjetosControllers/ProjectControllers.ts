@@ -1,5 +1,5 @@
 import CreateProjetosServices from '@modules/services/Projetos/CreateProjetosServices';
-import LoadProjetoContrato from '@modules/services/Projetos/LoadProjetoContratoParado';
+import LoadProjeto from '@modules/services/Projetos/LoadProjeto';
 import { Request, Response } from 'express';
 import LoadProjetosService from '../../services/Projetos/LoadProjetosServices';
 import LoadProjetoSummaryService  from '../../services/Projetos/LoadySummaryProjeServices';
@@ -91,17 +91,17 @@ export default class ProjetosControllers {
       }
 
 
-      //Load por Contrato , CO e Status
-      public async loadProjetos(request: Request, response: Response): Promise< Response > {
-        const {contrato,co,status} = request.body;
+      //Load por nprojeto , contrato
+      public async loadProjeto(request: Request, response: Response): Promise< Response > {
+        
+        const {nprojeto,contrato} = request.body;
 
-        const indexFat = new LoadProjetoContrato();
+        const indexFat = new LoadProjeto();
 
-        const showPorIndex = await indexFat.loadProjetos({contrato,co,status});
-
- 
+        const showPorIndex = await indexFat.loadProjetos({nprojeto,contrato});
 
         return response.json(showPorIndex);
+
       }
 
       //Crate

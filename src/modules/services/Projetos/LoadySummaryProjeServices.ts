@@ -7,7 +7,7 @@ interface IResponseDTO {
 
 interface IDescItemOfSummary {
 
-    uuidprojeto: string,
+  uuidprojeto: string,
   data:string ;
   contrato:string ;
   nprojeto:string

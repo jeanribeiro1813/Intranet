@@ -59,7 +59,7 @@ class FaturamentoView{
     fim!:string;
 
     @Column()
-    status!:string;
+    status!:string; 
 
     @Column()
     obs!:string;
