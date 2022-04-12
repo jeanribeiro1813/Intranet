@@ -34,9 +34,5 @@ celebrate({
 }), pagamentoController.delete);
 
 
-//Summary Objeto
-pagamentoRouter.get('/summary',pagamentoController.execute);
-
-
 
 export default pagamentoRouter;

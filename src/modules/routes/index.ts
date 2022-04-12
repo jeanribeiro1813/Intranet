@@ -2,6 +2,7 @@ import {Router} from 'express';
 
 import fatuRouter from './Faturamento/fatuRoutes';
 import projectRoutes from './Projeto/projectRoutes';
+import projectViewRoutes from './Projeto/projectViewRoutes';
 import usersRoutes from './Usuario/usersRoutes';
 import sessionRoutes from './Usuario/sessionRoutes';
 import passwordRouter from './Usuario/passwordRoutes'
@@ -17,6 +18,7 @@ import contratoRouter from './Contrato/ContratoRoutes';
 import funcionarioRouter from './Funcionarios/FuncionariosRoutes';
 import advRouter from './Adv/AdvRoutes';
 import pagamentoRouter from './Pagamento/PagamentoRoutes';
+import pagamentoViewRouter from './Pagamento/PagamentoViewRoutes';
 import manutencaoRouter from './Manutencao/ManutencaoRoutes';
 import paginascaoRouter from './Paginas/PaginasRoutes';
 import fornecedoresRoutes from './Fornecedores/FornecedoresRoutes';
@@ -32,7 +34,10 @@ const routes = Router();
 
 routes.use('/fat',fatuRouter);
 routes.use('/fatview',fatview);
+
 routes.use('/project',projectRoutes);
+routes.use('/projetoView',projectViewRoutes);
+
 routes.use('/users',usersRoutes);
 routes.use('/session',sessionRoutes);
 routes.use('/password',passwordRouter);
@@ -46,7 +51,10 @@ routes.use('/atividade',atividadeRouter);
 routes.use('/contrato',contratoRouter);
 routes.use('/funcionario',funcionarioRouter);
 routes.use('/adv',advRouter);
+
 routes.use('/pagamento',pagamentoRouter);
+routes.use('/pagamentoView',pagamentoViewRouter);
+
 routes.use('/manutencao',manutencaoRouter);
 routes.use('/paginas',paginascaoRouter);
 routes.use('/fornecedores',fornecedoresRoutes);

@@ -8,7 +8,7 @@ import {
 
 import  {v4 as uuid} from 'uuid';
 
-@Entity('vw_tb_proj')
+@Entity('tb_proj')
 class Projetos{
 
   @PrimaryGeneratedColumn('uuid')
@@ -30,7 +30,7 @@ class Projetos{
   cliente!:string ;
 
   @Column()
-  cliente2!:string ;
+  cliente2!:string;
 
   @Column()
   numero!:string ;

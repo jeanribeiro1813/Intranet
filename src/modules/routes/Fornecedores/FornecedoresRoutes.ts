@@ -15,29 +15,28 @@ fornecedoresRouter.post(
     '/create',celebrate({
         [Segments.BODY]:{
 
-            nome: Joi.string().required(),
-            contato: Joi.string().required(),
-            cargo: Joi.string().required()
+            usuario: Joi.string().required(),
+            cpf_cnpj: Joi.string().required(),
             
         }
     }),isAutenticacion, 
     fornecedoresController.create);
 
 //update
-fornecedoresRouter.put('/update/:uuidfornece'
+fornecedoresRouter.put('/update/:uuidusuario'
 ,isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
-        uuidfornece: Joi.string().uuid().required(),
+        uuidusuario: Joi.string().uuid().required(),
     }
 }),fornecedoresController.update);
 
 
 //Delete
-fornecedoresRouter.delete('/delete/:uuidfornece',isAutenticacion,
+fornecedoresRouter.delete('/delete/:uuidusuario',isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
-        uuidfornece: Joi.string().uuid().required(),
+        uuidusuario: Joi.string().uuid().required(),
     }
 }), fornecedoresController.delete);
 

@@ -1,7 +1,7 @@
 import { getCustomRepository,getRepository } from 'typeorm'
-import AppError from '../../../shared/errors/AppErrors';
-import Pagamento from '../../typeorm/entities/Pagamento';
-import PagamentoRepository from '../../typeorm/repositories/PagamentoRepository'
+import AppError from '../../../../shared/errors/AppErrors';
+import Pagamento from '../../../typeorm/entities/Pagamento';
+import PagamentoRepository from '../../../typeorm/repositories/PagamentoRepository'
 
 
 

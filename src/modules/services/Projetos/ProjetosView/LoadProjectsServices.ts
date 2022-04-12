@@ -1,7 +1,7 @@
 import { getCustomRepository, getRepository } from "typeorm";
-import AppError from "../../../shared/errors/AppErrors";
-import Projetos from "@modules/typeorm/entities/Projetos";
-import ProjetosRepository from "@modules/typeorm/repositories/ProjetosRepository";
+import AppError from "../../../../shared/errors/AppErrors";
+import ProjetosView from "@modules/typeorm/entities/ProjetosView";
+import ProjetosViewRepository from "@modules/typeorm/repositories/ProjetosViewRepository";
 
 
 interface IRequestDTO {
@@ -13,9 +13,9 @@ interface IRequestDTO {
 
 class LoadProjectsServices{
 
-  public async loadProjetos ({nprojeto,contrato, status}: IRequestDTO): Promise<Projetos[] | Error> {
+  public async loadProjetos ({nprojeto,contrato, status}: IRequestDTO): Promise<ProjetosView[] | Error> {
 
-      const projetosRepository = getCustomRepository(ProjetosRepository);
+      const projetosRepository = getCustomRepository(ProjetosViewRepository);
 
       //Criando um Select personalizado como filtrando 2 colunas
       const projeto = await projetosRepository.createQueryBuilder().select()

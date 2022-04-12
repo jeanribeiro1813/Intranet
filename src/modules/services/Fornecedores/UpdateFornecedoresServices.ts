@@ -7,10 +7,10 @@ import FornecedoresRepository from '../../typeorm/repositories/FornecedoresRepos
 
 interface IRequestDTO {
 
-  uuidfornece: string;
-  nome:string;
+  uuidusuario: string;
+  usuario:string;
   tp_doc:string;
-  doc: string;
+  cpf_cnpj: string;
   email:string;
   contato:string;
   contato2: string;
@@ -22,20 +22,20 @@ interface IRequestDTO {
 
   class UpdateFornecedoresService {
 
-    public async update({uuidfornece,nome,tp_doc,doc,email,contato,contato2,cargo,status,avatar}: IRequestDTO): Promise<Fornecedores | Error> {
+    public async update({uuidusuario,usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar}: IRequestDTO): Promise<Fornecedores | Error> {
 
       const fornecedoresRepository = getCustomRepository(FornecedoresRepository);
 
-      const fornecedores = await fornecedoresRepository.findOne(uuidfornece);
+      const fornecedores = await fornecedoresRepository.findOne(uuidusuario);
 
       if (!fornecedores) {
         throw new AppError ('fornecedores não existe',404);
       }
 
 
-      fornecedores.nome = nome ? nome : fornecedores.nome;
+      fornecedores.usuario = usuario ? usuario : fornecedores.usuario;
       fornecedores.tp_doc = tp_doc ? tp_doc : fornecedores.tp_doc;
-      fornecedores.doc = doc ? doc : fornecedores.doc;
+      fornecedores.cpf_cnpj = cpf_cnpj ? cpf_cnpj : fornecedores.cpf_cnpj;
       fornecedores.email = email ? email : fornecedores.email;
       fornecedores.contato = contato ? contato : fornecedores.contato;
       fornecedores.contato2 = contato2 ? contato2 : fornecedores.contato2;

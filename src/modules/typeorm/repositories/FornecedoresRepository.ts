@@ -5,11 +5,11 @@ import Fornecedores from '../entities/Fornecedores';
 @EntityRepository(Fornecedores)
 export default class FornecedoresRepository extends Repository<Fornecedores> {
 
-    public async findById(uuidfornece: string): Promise< Fornecedores | undefined > {
+    public async findById(uuidusuario: string): Promise< Fornecedores | undefined > {
 
       const fornecedores = this.findOne({
         where : {
-          uuidfornece
+          uuidusuario
         },
 
       });

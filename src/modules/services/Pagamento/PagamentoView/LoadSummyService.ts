@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import Pagamento from '../../typeorm/entities/Pagamento';
-import PagamentoRepository from '../../typeorm/repositories/PagamentoRepository'
+import PagamentoView from '../../../typeorm/entities/PagamentoView';
+import PagamentoViewRepository from '../../../typeorm/repositories/PagamentoViewRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];
@@ -9,24 +9,24 @@ interface IResponseDTO {
 interface IDescItemOfSummary {
 
     uuidpagamento: string;
-    uuidcliente:string;
+    cliente:string;
     empresa: string;
-    uuiddeparta: string;  
-    uuidprojeto:string;
-    uuidcontrato: string;
-    uuidcontabn1: string;
-    uuidgrupon2:string;
-    uuidsubgrupon3: string;
-    uuidcolab_forne: string;
+    departamento: string;  
+    nprojeto:string;
+    contrato: string;
+    contabn1: string;
+    grupon2:string;
+    subgrupon3: string;
+    usuario: string;
     cpf_cnpj: string;
     valor_pago:string;
     data_pagto: string;
     data_vecto: string;
-    uuidbancos:string;
+    banco:string;
     incidencia: string;
     parcelas_n: string;
     n_doc_pagto: string;  
-    uuidformapagto:string;
+    formapagto:string;
     status: string;
     obs: string;
   
@@ -39,7 +39,7 @@ interface IDescItemOfSummary {
 
 class LoadPagamentoSummaryService{
     public async executeDes (): Promise<IResponseDTO> {
-        const projetosrRepository = getCustomRepository(PagamentoRepository);
+        const projetosrRepository = getCustomRepository(PagamentoViewRepository);
 
         const user = await projetosrRepository.find({});
 
@@ -49,24 +49,24 @@ class LoadPagamentoSummaryService{
                 
 
                 uuidpagamento:use.uuidpagamento,
-                uuidcliente:use.uuidcliente,
+                cliente:use.cliente,
                 empresa:use.empresa,
-                uuiddeparta:use.uuiddeparta,
-                uuidprojeto:use.uuidprojeto,
-                uuidcontrato:use.uuidcontrato,
-                uuidcontabn1:use.uuidcontabn1,
-                uuidgrupon2:use.uuidgrupon2,
-                uuidsubgrupon3:use.uuidsubgrupon3,
-                uuidcolab_forne:use.uuidcolab_forne,
+                departamento:use.departamento,
+                nprojeto:use.nprojeto,
+                contrato:use.contrato,
+                contabn1:use.contabn1,
+                grupon2:use.grupon2,
+                subgrupon3:use.subgrupon3,
+                usuario:use.usuario,
                 cpf_cnpj:use.cpf_cnpj,
                 valor_pago:use.valor_pago,
                 data_pagto:use.data_pagto,
                 data_vecto:use.data_vecto,
-                uuidbancos:use.uuidbancos,
+                banco:use.banco,
                 incidencia:use.incidencia,
                 parcelas_n:use.parcelas_n,
                 n_doc_pagto:use.n_doc_pagto,
-                uuidformapagto:use.uuidformapagto,
+                formapagto:use.formapagto,
                 status:use.status,
                 obs:use.obs,
 

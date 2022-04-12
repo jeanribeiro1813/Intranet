@@ -75,7 +75,11 @@ class Clientes{
     @Column()
     obs!: string;
 
-
+    @CreateDateColumn()
+    created_at!: Date;
+  
+    @UpdateDateColumn()
+    updated_at!: Date;
     
 
 

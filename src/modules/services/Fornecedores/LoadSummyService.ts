@@ -8,10 +8,10 @@ interface IResponseDTO {
 
 interface IDescItemOfSummary {
 
-uuidfornece: string;
-  nome:string;
+    uuidusuario: string;
+usuario:string;
   tp_doc:string;
-  doc: string;
+  cpf_cnpj: string;
   email:string;
   contato:string;
   contato2: string;
@@ -31,16 +31,16 @@ class LoadFornecedoresSummaryService{
         const projetosrRepository = getCustomRepository(FornecedoresRepository);
 
         const user = await projetosrRepository.find({order:{
-            uuidfornece:'ASC'
+            uuidusuario:'ASC'
         }});
 
         const summary = user.map((use) =>{
             const DescItemOfSummary = {
 
-                uuidfornece:use.uuidfornece,
-                nome:use.nome,
+                uuidusuario:use.uuidusuario,
+                usuario:use.usuario,
                 tp_doc: use.tp_doc,
-                doc:use.doc,
+                cpf_cnpj:use.cpf_cnpj,
                 email:use.email,
                 contato: use.contato,
                 contato2:use.contato2,

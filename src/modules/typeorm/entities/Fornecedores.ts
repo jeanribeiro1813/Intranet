@@ -12,16 +12,16 @@ import  {v4 as uuid} from 'uuid';
 class Fornecedores{
 
   @PrimaryGeneratedColumn('uuid')
-  uuidfornece!: string;
+  uuidusuario!: string;
 
   @Column()
-  nome!:string ;
+  usuario!:string ;
 
   @Column()
   tp_doc!: string;
 
   @Column()
-  doc!:string ;
+  cpf_cnpj!:string ;
 
   @Column()
   email!: string;
@@ -48,8 +48,8 @@ class Fornecedores{
   updated_at!: Date;
 
   constructor(){
-      if (!this.uuidfornece){
-          this.uuidfornece = uuid();
+      if (!this.uuidusuario){
+          this.uuidusuario = uuid();
       }
   }
 }

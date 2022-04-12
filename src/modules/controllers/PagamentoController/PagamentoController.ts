@@ -1,22 +1,12 @@
 import { Request, Response } from 'express';
-import CreatePagamentoServices from '../../services/Pagamento/CreatePagamentoServices';
-import UpdatePagamentoServices from '../../services/Pagamento/UpdatePagamentoServices';
-import LoadSummyService  from '../../services/Pagamento/LoadSummyService';
-import DeletePagamentoServices from '@modules/services/Pagamento/DeletePagamentoServices';
+import CreatePagamentoServices from '../../services/Pagamento/Pagamento/CreatePagamentoServices';
+import UpdatePagamentoServices from '../../services/Pagamento/Pagamento/UpdatePagamentoServices';
+import DeletePagamentoServices from '@modules/services/Pagamento/Pagamento/DeletePagamentoServices';
 
 
 
 
 export default class CargoController {
-
-  public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
-
-    const funcao = await loadFuncao.executeDes();
-
-    return response.json(funcao.summary);
-
-  }
 
       //Criação Cargo
       public async create(request: Request, response: Response): Promise<Response>{

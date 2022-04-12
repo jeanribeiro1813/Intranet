@@ -21,13 +21,13 @@ export default class FornecedoresController {
       //Criação Atividade
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const {uuidfornece,nome,tp_doc,doc,email,contato,contato2,cargo,status,avatar } = request.body;
+        const {uuidusuario,usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar } = request.body;
 
         const service = new CreateFornecedoresServices();
 
         const result = await service.execute(
           {
-            uuidfornece,nome,tp_doc,doc,email,contato,contato2,cargo,status,avatar
+            uuidusuario,usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar
           }
         );
 
@@ -42,16 +42,16 @@ export default class FornecedoresController {
 
       public async update (request :Request, response:Response): Promise<Response>{
 
-        const {uuidfornece} = request.params
+        const {uuidusuario} = request.params
 
-        const {nome,tp_doc,doc,email,contato,contato2,cargo,status,avatar} = request.body
+        const {usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar} = request.body
 
         const updateForne = new UpdateFornecedoresServices();
 
         const fornecedor = await updateForne.update(
 
           {
-            uuidfornece, nome,tp_doc,doc,email,contato,contato2,cargo,status,avatar
+            uuidusuario, usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar
                    }
 
         )
@@ -65,11 +65,11 @@ export default class FornecedoresController {
     
       public async delete(request:Request, response:Response):Promise<Response>{
 
-        const {uuidfornece} = request.params;
+        const {uuidusuario} = request.params;
 
         const deleteFornecedores = new DeleteFornecedoresServices();
 
-       deleteFornecedores.execute({uuidfornece});
+       deleteFornecedores.execute({uuidusuario});
 
         return response.json('Delete realizado com sucesso');
       }

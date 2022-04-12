@@ -1,47 +1,20 @@
-import CreateProjetosServices from '@modules/services/Projetos/CreateProjetosServices';
-import LoadProjects from '@modules/services/Projetos/LoadProjectsServices';
+import CreateProjetosServices from '@modules/services/Projetos/Projetos/CreateProjetosServices';
 import { Request, Response } from 'express';
-import LoadProjetoSummaryService  from '../../services/Projetos/LoadySummaryProjeServices';
-import UpdateProjetoServicets from '../../services/Projetos/UpdateProjetoService'
+import UpdateProjetoServicets from '../../services/Projetos/Projetos/UpdateProjetoService'
 
 
 
 
 export default class ProjetosControllers {
 
-  public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadProjetoSummaryService();
-
-    const funcao = await loadFuncao.executeDes();
-
-    return response.json(funcao);
-
-  }
-
-
-      /**
-       * This method is uded for get projects by filter : nprojeto , contrato, status
-       */
-
-      public async loadProjects(request: Request, response: Response): Promise< Response > {
-      
-        const {nprojeto, contrato, status} = request.body;
-
-        const P = new LoadProjects();
-
-        const projetos = await P.loadProjetos({nprojeto,contrato,status});
-
-        return response.json(projetos);
-
-      }
-
+ 
     
       //Update
       public async update (request: Request , response: Response): Promise<Response>{
 
         const {uuidprojeto} = request.params
 
-        const {contrato,data,nprojeto,projeto,cliente,cliente2, 
+        const {contrato,data,nprojeto,projeto,cliente, cliente2,
           numero,
           gerente,
           coordenador,
@@ -70,7 +43,7 @@ export default class ProjetosControllers {
           nprojeto,
           projeto,
           cliente,
-          cliente2, 
+          cliente2,
           numero,
           gerente,
           coordenador,
@@ -93,7 +66,7 @@ export default class ProjetosControllers {
 
       //Crate
       public async create (request: Request, response: Response): Promise< Response > {
-        const {uuidprojeto,data,contrato,nprojeto,projeto,cliente,cliente2, 
+        const {uuidprojeto,data,contrato,nprojeto,projeto,cliente, cliente2,
           numero,
           gerente,
           coordenador,
@@ -110,7 +83,7 @@ export default class ProjetosControllers {
 
         const indexProj = new CreateProjetosServices();
 
-        const showPorIndex = await indexProj.execute({uuidprojeto,data,contrato,nprojeto,projeto,cliente,cliente2, 
+        const showPorIndex = await indexProj.execute({uuidprojeto,data,contrato,nprojeto,projeto,cliente, cliente2,
           numero,
           gerente,
           coordenador,

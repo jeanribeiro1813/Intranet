@@ -8,10 +8,10 @@ import FornecedoresRepository from '../../typeorm/repositories/FornecedoresRepos
 
 interface IRequestDTO {
 
-  uuidfornece: string;
-  nome:string;
+  uuidusuario: string;
+  usuario:string;
   tp_doc:string;
-  doc: string;
+  cpf_cnpj: string;
   email:string;
   contato:string;
   contato2: string;
@@ -25,11 +25,11 @@ interface IRequestDTO {
   class CreateFornecedoresService {
 
 
-    public async execute({ uuidfornece,nome,tp_doc,doc,email,contato,contato2,cargo,status,avatar}: IRequestDTO): Promise<Fornecedores | AppError> {
+    public async execute({ uuidusuario,usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar}: IRequestDTO): Promise<Fornecedores | AppError> {
 
       const fornecedoresRepository = getCustomRepository(FornecedoresRepository);
 
-      const checkFornecedorExists = await fornecedoresRepository.findById(uuidfornece);
+      const checkFornecedorExists = await fornecedoresRepository.findById(uuidusuario);
 
       if (checkFornecedorExists) {
         throw new AppError('Nome já existe.',404);
@@ -38,7 +38,7 @@ interface IRequestDTO {
 
       const fornecedor =  fornecedoresRepository.create({
 
-        uuidfornece,nome,tp_doc,doc,email,contato,contato2,cargo,status,avatar
+        uuidusuario,usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar
 
       });
 

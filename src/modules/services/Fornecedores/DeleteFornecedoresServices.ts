@@ -5,16 +5,16 @@ import FornecedoresRepository from '../../typeorm/repositories/FornecedoresRepos
 
 interface IRequestDTO{
 
-  uuidfornece: string;
+  uuidusuario: string;
 
 }
  class DeleteFornecedoresService {
 
-     public async execute( {uuidfornece}: IRequestDTO) : Promise<void> {
+     public async execute( {uuidusuario}: IRequestDTO) : Promise<void> {
 
       const fornecedoresRepository = getCustomRepository(FornecedoresRepository);
 
-      const service = await fornecedoresRepository.findOne(uuidfornece);
+      const service = await fornecedoresRepository.findOne(uuidusuario);
 
       if (!service) {
         throw new AppError('Não Existe ',402);
