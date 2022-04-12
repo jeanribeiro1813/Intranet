@@ -41,7 +41,6 @@ fatRouter.put('/updateStatus',
 
          uuidusuario: Joi.string().required(),
          uuidprojeto:Joi.string().required(),
-         uuidcontrato: Joi.string().required(),
          data:Joi.string().required(),
          status:Joi.string().required(),
         

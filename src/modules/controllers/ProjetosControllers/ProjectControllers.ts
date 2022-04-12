@@ -1,7 +1,6 @@
 import CreateProjetosServices from '@modules/services/Projetos/CreateProjetosServices';
-import LoadProjeto from '@modules/services/Projetos/LoadProjeto';
+import LoadProjects from '@modules/services/Projetos/LoadProjectsServices';
 import { Request, Response } from 'express';
-import LoadProjetosService from '../../services/Projetos/LoadProjetosServices';
 import LoadProjetoSummaryService  from '../../services/Projetos/LoadySummaryProjeServices';
 import UpdateProjetoServicets from '../../services/Projetos/UpdateProjetoService'
 
@@ -19,23 +18,25 @@ export default class ProjetosControllers {
 
   }
 
-      //Loading
 
-      public async loading (request: Request , response: Response){
+      /**
+       * This method is uded for get projects by filter : nprojeto , contrato, status
+       */
 
-        const {status} = request.body;
+      public async loadProjects(request: Request, response: Response): Promise< Response > {
+      
+        const {nprojeto, contrato, status} = request.body;
 
-        const loadingService = new LoadProjetosService();
+        const P = new LoadProjects();
 
-        const result = await loadingService.load({status});
+        const projetos = await P.loadProjetos({nprojeto,contrato,status});
 
-        return response.json(result);
+        return response.json(projetos);
 
       }
 
-      
+    
       //Update
-
       public async update (request: Request , response: Response): Promise<Response>{
 
         const {uuidprojeto} = request.params
@@ -90,22 +91,7 @@ export default class ProjetosControllers {
 
       }
 
-
-      //Load por nprojeto , contrato
-      public async loadProjeto(request: Request, response: Response): Promise< Response > {
-        
-        const {nprojeto,contrato} = request.body;
-
-        const indexFat = new LoadProjeto();
-
-        const showPorIndex = await indexFat.loadProjetos({nprojeto,contrato});
-
-        return response.json(showPorIndex);
-
-      }
-
       //Crate
-
       public async create (request: Request, response: Response): Promise< Response > {
         const {uuidprojeto,data,contrato,nprojeto,projeto,cliente,cliente2, 
           numero,

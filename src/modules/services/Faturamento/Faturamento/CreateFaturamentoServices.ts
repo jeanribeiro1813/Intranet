@@ -10,7 +10,6 @@ interface IRequestDTO {
   uuidfat:string,
   uuidusuario:string;
   uuidprojeto:string;
-  uuidcontrato:string;
   uuidatividade:string;
   data:string;
   inicio:string;
@@ -18,14 +17,12 @@ interface IRequestDTO {
   status:string;
   obs:string;
   empresa:string;
-  uuidcliente:string
-
 
   }
 
   class CreateFatService {
 
-    public async execute({ uuidfat,uuidusuario, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente}: IRequestDTO): Promise<Faturamento | Error> {
+    public async execute({ uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa}: IRequestDTO): Promise<Faturamento | Error> {
 
       const fatRepository = getCustomRepository(FaturamentoRepository);
 
@@ -38,7 +35,7 @@ interface IRequestDTO {
 
       const fat =  fatRepository.create({
         
-        uuidfat,uuidusuario, uuidcliente, uuidprojeto, uuidcontrato, uuidatividade,data,inicio,fim,status,obs,empresa
+        uuidfat,uuidusuario, uuidprojeto, uuidatividade,data,inicio,fim,status,obs,empresa
        
         /*
         uuidcliente

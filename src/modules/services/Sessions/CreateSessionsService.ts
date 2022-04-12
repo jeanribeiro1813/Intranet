@@ -1,8 +1,7 @@
 import { getCustomRepository } from 'typeorm'
 import AppError from '../../../shared/errors/AppErrors';
-import Users from '../../../modules/typeorm/entities/Users';
 import UsersRepository from '../../../modules/typeorm/repositories/UsersRepository'
-import { compare, hash } from 'bcryptjs';
+import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import authConfig from "@config/auth";
 
@@ -18,13 +17,7 @@ interface IRequestDTO {
   }
 
 interface IResponseDTO{
-
-    name:any;
     token:string;
-    cargo :string;
-    departamento:string
-    uuidusuario:string,
-    
 }
 
   class CreateSessionsService {
@@ -51,23 +44,20 @@ interface IResponseDTO{
       }
 
       //1 ° Parametro Payload , 2° Parametro Hash Posso pegar dentro do site MD5, 3° Configuração = ID e Validade do token 
-      const token = sign({},authConfig.jwt.secret,{
-
+      const token = sign(
+      {
+        uuiduser:user.uuidusuario,
+        job : user.cargo,
+        name :user.usuario,
+        departament:user.departamento,
+      },
+      authConfig.jwt.secret,
+      {
         subject: user.uuidusuario,
         expiresIn: authConfig.jwt.expireIn,
-  
-      })
+      });
 
-
-      
-
-      return {
-        uuidusuario:user.uuidusuario,
-        cargo : user.cargo,
-        name :user.usuario,
-        departamento:user.departamento,
-        token
-      };
+      return {token};
       
 
     }

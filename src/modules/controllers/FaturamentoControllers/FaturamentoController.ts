@@ -11,13 +11,13 @@ export default class FaturamentoController {
       //Criação Faturamento
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const {uuidfat,uuidusuario, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente} = request.body;
+        const {uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa} = request.body;
 
         const service = new CreateFaturamentoServicer();
 
         const result = await service.execute(
           {
-            uuidfat,uuidusuario, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente
+            uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa
 
           }
         );
@@ -35,14 +35,14 @@ export default class FaturamentoController {
 
         const {uuidfat} = request.params
 
-        const {uuidusuario, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente} = request.body
+        const {uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa} = request.body
 
         const updateFatu = new UpdateFaturamentoServes();
 
         const fatura = await updateFatu.update(
 
           {
-            uuidfat,uuidusuario, uuidprojeto,uuidcontrato,uuidatividade,data,inicio,fim,status,obs,empresa,uuidcliente
+            uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa
           }
 
         )
@@ -67,11 +67,11 @@ export default class FaturamentoController {
 
       public async updateStatus(request: Request, response: Response): Promise< Response > {
 
-        const {uuidusuario, uuidprojeto, uuidcontrato, data, status} = request.body;
+        const {uuidusuario, uuidprojeto, data, status} = request.body;
 
         const indexFat = new UpdateFaturamentoStatus();
 
-        const showPorIndex = await indexFat.executeStatus({uuidusuario, uuidprojeto,uuidcontrato, data, status});
+        const showPorIndex = await indexFat.executeStatus({uuidusuario, uuidprojeto, data, status});
 
         
       

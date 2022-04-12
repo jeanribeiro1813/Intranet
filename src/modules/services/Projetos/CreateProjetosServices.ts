@@ -59,8 +59,8 @@ interface IRequestDTO {
       }
 
       const project =  projRepository.create({
-        nprojeto,
-      data,contrato,projeto,cliente,cliente2, 
+        
+        uuidprojeto,nprojeto,data,contrato,projeto,cliente,cliente2, 
       numero,
       gerente,
       coordenador,
@@ -73,7 +73,7 @@ interface IRequestDTO {
       valor,
       memoalt,
       dt_fim,
-      cod_proj,
+      cod_proj
 
       });
 

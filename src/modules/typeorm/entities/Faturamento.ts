@@ -21,9 +21,6 @@ class Faturamento{
     uuidprojeto!: string
 
     @Column('uuid')
-    uuidcontrato!:string ;
-
-    @Column('uuid')
     uuidatividade!:string ;
 
     @Column('date')
@@ -50,8 +47,6 @@ class Faturamento{
     @Column()
     empresa!:string;
 
-    @Column('uuid')
-    uuidcliente!:string;
     
     constructor(){
         if (!this.uuidfat){

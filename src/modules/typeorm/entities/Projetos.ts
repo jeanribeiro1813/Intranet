@@ -8,7 +8,7 @@ import {
 
 import  {v4 as uuid} from 'uuid';
 
-@Entity('tb_proj')
+@Entity('vw_tb_proj')
 class Projetos{
 
   @PrimaryGeneratedColumn('uuid')
@@ -75,7 +75,7 @@ class Projetos{
   updated_at!: Date;
 
   @Column()
-  cod_proj!:number ;
+  cod_proj!:number
 
   constructor(){
       if (!this.uuidprojeto){

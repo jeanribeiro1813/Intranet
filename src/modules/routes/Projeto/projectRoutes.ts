@@ -9,14 +9,7 @@ const projectRouter = Router();
 
 const projetoController = new ProjetoController();
 
-// projectRouter.use(isAutenticacion);
-
-//Loading
-projectRouter.post('/load',celebrate({
-    [Segments.BODY]:{
-        status:Joi.string().required()
-    }
-}),projetoController.loading);
+projectRouter.use(isAutenticacion);
 
 
 //Summary Objeto
@@ -30,22 +23,18 @@ projectRouter.put('/update/:cod_proj_uuid',celebrate({
 }),projetoController.update);
 
 
-
 projectRouter.post('/loadProj',celebrate({
     [Segments.BODY]:{
-        nprojeto: Joi.string().required(),
-        contrato:Joi.string().required()
-
+        nprojeto: Joi.string().optional(),
+        contrato:Joi.string().optional(),
+        status:Joi.string().optional()
     }
-}),projetoController.loadProjeto);
-
+}),projetoController.loadProjects);
 
 
 projectRouter.post(
     '/create', 
     projetoController.create);
-
-
 
 
 
