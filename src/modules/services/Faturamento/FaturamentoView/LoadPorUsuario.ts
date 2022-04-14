@@ -24,7 +24,7 @@ class LoadPorUsersServices{
 
       //Criando um Select personalizado como filtrando 2 colunas
       const index_Prod = await projetosRepository.createQueryBuilder().select()
-      .where(`uuidusuario :: text  ILIKE :uuidusuario and cast(split_part(cast(data as text), '-' ,2) as text) ILIKE :data `, 
+      .where(`uuidusuario :: text  ILIKE :uuidusuario and substring(data::text,1,7) ILIKE :data `, 
 
       {uuidusuario: `%${uuidusuario}%`,data:`%${data}%`}).getMany();
 

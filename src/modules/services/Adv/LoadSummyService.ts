@@ -1,5 +1,4 @@
 import { getCustomRepository } from "typeorm";
-import Adv from '../../typeorm/entities/Adv';
 import AdvRepository from '../../typeorm/repositories/AdvRepository'
 
 interface IResponseDTO {

@@ -15,35 +15,23 @@ class Clientes{
     @PrimaryGeneratedColumn()
     uuidpagamento!: string;
 
-    @Column('uuid')
-    uuidcliente!:string;
-
     @Column()
     empresa!: string;
 
     @Column('uuid')
-    uuiddeparta!: string;
-
-    @Column('uuid')
     uuidprojeto!:string;
 
-    @Column('uuid')
-    uuidcontrato!: string;
+    @Column()
+    n1!: string;
 
     @Column()
-    uuidcontabn1!: string;
+    n2!:string;
 
     @Column()
-    uuidgrupon2!:string;
-
-    @Column()
-    uuidsubgrupon3!: string;
+    n3!: string;
 
     @Column('uuid')
     uuidcolab_forne!: string;
-
-    @Column()
-    cpf_cnpj!: string;
 
     @Column()
     valor_pago!:string;

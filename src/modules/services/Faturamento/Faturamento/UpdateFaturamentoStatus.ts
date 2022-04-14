@@ -25,7 +25,7 @@ class UpdateFaturamentoServices{
       const faturas = await projetosRepository.createQueryBuilder().select()
       .where("uuidusuario::text ILIKE :uuidusuario and\
       uuidprojeto::text ILIKE :uuidprojeto  and\
-      split_part(data::text, '-' ,2) ILIKE :data\ ", 
+      substring(data::text, 1,7) ILIKE :data\ ", 
       {uuidusuario:`%${uuidusuario}%`
       ,uuidprojeto:`%${uuidprojeto}%`
       ,data:`%${data}%`}).getMany();
