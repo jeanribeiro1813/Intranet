@@ -15,7 +15,7 @@ class Cargo{
     uuidcargo!:string;
 
     @Column()
-    desc_cargo!: string;
+    cargo!: string;
 
     @CreateDateColumn()
     created_at!: Date;

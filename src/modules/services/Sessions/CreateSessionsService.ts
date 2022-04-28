@@ -48,7 +48,6 @@ interface IResponseDTO{
       {
         uuiduser:user.uuidusuario,
         job : user.cargo,
-        name :user.usuario,
         departament:user.departamento,
       },
       authConfig.jwt.secret,

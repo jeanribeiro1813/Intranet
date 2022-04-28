@@ -9,7 +9,7 @@ interface IResponseDTO {
 interface IDescItemOfSummary {
 
     uuidcargo: string;
-    desc_cargo:string;
+    cargo:string;
     cod_cargo:number;
 
 }
@@ -28,7 +28,7 @@ class LoadCargoSummaryService{
             const DescItemOfSummary = {
 
                 uuidcargo:use.uuidcargo,
-                desc_cargo:use.desc_cargo,
+                cargo:use.cargo,
                 cod_cargo:use.cod_cargo
                 
 

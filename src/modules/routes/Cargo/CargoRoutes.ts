@@ -16,20 +16,29 @@ cargoRouter.post(
     cargoController.create);
 
 //update
-cargoRouter.put('/update/:cod_cargo_uuid'
+cargoRouter.put('/update/:uuidcargo'
 ,isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
-        cod_cargo_uuid: Joi.string().uuid().required(),
+        uuidcargo: Joi.string().uuid().required(),
     }
 }),cargoController.update);
 
 
+cargoRouter.get(
+    '/index/:uuidcargo',celebrate({
+        [Segments.PARAMS]:{
+            uuidcargo:Joi.string().uuid().required()
+        }
+    }),isAutenticacion,
+       cargoController.index);
+
+
 //Delete
-cargoRouter.delete('/delete/:cod_cargo_uuid',isAutenticacion,
+cargoRouter.delete('/delete/:uuidcargo',isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
-        cod_cargo_uuid: Joi.string().uuid().required(),
+        uuidcargo: Joi.string().uuid().required(),
     }
 }), cargoController.delete);
 

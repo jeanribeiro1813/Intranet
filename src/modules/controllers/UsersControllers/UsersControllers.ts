@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import CreateUsersService  from '../../services/Users/CreateUsersService';
 import LoadIndexService from '../../services/Users/LoadindexService'
-
+import FilterEspecificoUsersServices from '../../services/Users/FilterEspecificoUsersServices'
 
 
 export default class UsersControllers {
@@ -71,6 +71,19 @@ export default class UsersControllers {
 
       }  
 
+      public async filter (request: Request , response: Response){
+
+        const {status,uuidusuario,h_status,uuiddeparta,uuidcargo} = request.body;
+    
+        const loadingService = new FilterEspecificoUsersServices();
+    
+        const result = await loadingService.filterService({status,uuidusuario,h_status,uuiddeparta,uuidcargo});
+    
+    
+        return response.json(result);
+    
+      }  
+    
 
   }
 

@@ -17,21 +17,31 @@ departamentoRouter.post(
     '/create',isAutenticacion,
     departamentoController.create);
 
+
+departamentoRouter.get(
+     '/index/:uuiddeparta',celebrate({
+         [Segments.PARAMS]:{
+             uuiddeparta:Joi.string().uuid().required()
+         }
+     }),isAutenticacion,
+        departamentoController.index);
+    
+
 //update
-departamentoRouter.put('/update/:coddeparta'
+departamentoRouter.put('/update/:uuiddeparta'
 ,isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
-        coddeparta: Joi.string().uuid().required(),
+        uuiddeparta: Joi.string().uuid().required(),
     }
 }),departamentoController.update);
 
 
 //Delete
-departamentoRouter.delete('/delete/:coddeparta',isAutenticacion,
+departamentoRouter.delete('/delete/:uuiddeparta',isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
-        coddeparta: Joi.string().uuid().required(),
+        uuiddeparta: Joi.string().uuid().required(),
     }
 }), departamentoController.delete);
 

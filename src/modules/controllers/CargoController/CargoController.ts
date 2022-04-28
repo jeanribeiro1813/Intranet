@@ -3,6 +3,7 @@ import CreateCargoServicer from '../../services/Cargo/CreateCargoServices';
 import UpdateCargoServes from '../../services/Cargo/UpdateCargoServices';
 import LoadSummyService  from '../../services/Cargo/LoadSummyService';
 import DeleteCargoService from '@modules/services/Cargo/DeleteCargoServices';
+import LoadIndexCargoServices from '@modules/services/Cargo/LoadIndexCargoServices'
 
 
 
@@ -21,13 +22,13 @@ export default class CargoController {
       //Criação Cargo
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const { uuidcargo,desc_cargo,cod_cargo} = request.body;
+        const { uuidcargo,cargo,cod_cargo} = request.body;
 
         const service = new CreateCargoServicer();
 
         const result = await service.execute(
           {
-            uuidcargo,desc_cargo,cod_cargo
+            uuidcargo,cargo,cod_cargo
                 
 
           }
@@ -46,14 +47,14 @@ export default class CargoController {
 
         const {uuidcargo} = request.params
 
-        const {desc_cargo,cod_cargo} = request.body
+        const {cargo,cod_cargo} = request.body
 
         const updateFatu = new UpdateCargoServes();
 
         const fatura = await updateFatu.update(
 
           {
-            uuidcargo,desc_cargo,cod_cargo
+            uuidcargo,cargo,cod_cargo
           }
 
         )
@@ -74,6 +75,17 @@ export default class CargoController {
        deleteCargo.execute({uuidcargo});
 
         return response.json('Delete realizado com sucesso');
+      }
+
+      public async index(request:Request, response:Response):Promise<Response>{
+
+        const {uuidcargo} = request.params;
+
+        const Cargo = new LoadIndexCargoServices();
+
+       const result = await Cargo.index({uuidcargo});
+
+        return response.json(result);
       }
 
 

@@ -3,6 +3,7 @@ import CreateClientesServices from '../../services/Departamento/CreateDepartamen
 import UpdateClientesServices from '../../services/Departamento/UpdateDepartamentoServices';
 import LoadSummyService  from '../../services/Departamento/LoadSummyService';
 import DeleteClientesServices from '@modules/services/Departamento/DeleteDepartamentoServices';
+import LoadIndexDepartamentoServices from '../../services/Departamento/LoadIndexDepartamentoServices';
 
 
 
@@ -75,6 +76,16 @@ export default class DepartamentoController {
         return response.json('Delete realizado com sucesso');
       }
 
+      public async index(request:Request, response:Response):Promise<Response>{
+
+        const { uuiddeparta } = request.params;
+
+        const indexDepartamento = new LoadIndexDepartamentoServices();
+
+        const result = await indexDepartamento.index({uuiddeparta});
+
+        return response.json(result);
+      }
 
     
   }

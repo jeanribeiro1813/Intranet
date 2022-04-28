@@ -19,6 +19,23 @@ useRouter.get('/index/:uuidusuario',celebrate({
 }),userControllers.loading);
 
 
+useRouter.post('/filter'
+,celebrate({
+
+    [Segments.BODY]:{
+
+        status:Joi.string().optional(),
+        uuidusuario:Joi.string().optional(),
+        h_status:Joi.string().optional(),
+        uuiddeparta:Joi.string().optional(),
+        uuidcargo:Joi.string().optional(),
+
+    }
+}
+),userControllers.filter);
+
+
+
 //No Create como obrigação tem que colocar os campos abaixo para a criação dos usuarios
 useRouter.post('/create',celebrate({
         [Segments.BODY] :{

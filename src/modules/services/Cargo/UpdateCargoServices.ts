@@ -7,13 +7,13 @@ import CargoRepository from '../../typeorm/repositories/CargoRepository'
 
 interface IRequestDTO {
   uuidcargo: string;
-  desc_cargo:string;
+  cargo:string;
   cod_cargo:number;
   }
 
   class UpdateCargoService {
 
-    public async update({uuidcargo,desc_cargo, cod_cargo}: IRequestDTO): Promise<Cargo | Error> {
+    public async update({uuidcargo,cargo, cod_cargo}: IRequestDTO): Promise<Cargo | Error> {
 
       const usersRepository = getCustomRepository(CargoRepository);
 
@@ -25,7 +25,7 @@ interface IRequestDTO {
 
 
       cargo.desc_cargo = desc_cargo ? desc_cargo : cargo.desc_cargo;
-      cargo.cod_cargo = cod_cargo ? cod_cargo : cargo.cod_cargo;
+      cargo.cargo = cargo ? cargo : cargo.cargo;
 
 
 
