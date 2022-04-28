@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import UsersControllers from '../../controllers/UsuersControllers/UsersControllers';
+import UsersControllers from '../../controllers/UsersControllers/UsersControllers';
 import {celebrate, Joi, Segments} from 'celebrate';
 import isAutenticacion from '../../services/middlewares/isAutenticacion';
 
@@ -9,10 +9,12 @@ const userControllers = new UsersControllers();
 
 useRouter.use(isAutenticacion);
 
-//Colocando Autenticação na rota
-useRouter.post('/load',celebrate({
-    [Segments.BODY]:{
-        status:Joi.string().required(),
+
+useRouter.get('/index/:uuidusuario',celebrate({
+
+    [Segments.PARAMS]:{
+
+        uuidusuario:Joi.string().required(),
     }
 }),userControllers.loading);
 

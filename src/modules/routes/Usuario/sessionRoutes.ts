@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import SessionControllers from '../../controllers/UsuersControllers/SessionControllers';
+import SessionControllers from '../../controllers/UsersControllers/SessionControllers';
 import {celebrate, Joi, Segments} from 'celebrate';
 
 const sessionRoutes = Router()

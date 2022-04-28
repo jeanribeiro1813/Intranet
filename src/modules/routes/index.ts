@@ -4,6 +4,7 @@ import fatuRouter from './Faturamento/fatuRoutes';
 import projectRoutes from './Projeto/projectRoutes';
 import projectViewRoutes from './Projeto/projectViewRoutes';
 import usersRoutes from './Usuario/usersRoutes';
+import usersViewRoutes from './Usuario/usersViewRoutes';
 import sessionRoutes from './Usuario/sessionRoutes';
 import passwordRouter from './Usuario/passwordRoutes'
 import cargoRouter from './Cargo/CargoRoutes';
@@ -39,6 +40,8 @@ routes.use('/project',projectRoutes);
 routes.use('/projetoView',projectViewRoutes);
 
 routes.use('/users',usersRoutes);
+routes.use('/usersView',usersViewRoutes);
+
 routes.use('/session',sessionRoutes);
 routes.use('/password',passwordRouter);
 routes.use('/cargo',cargoRouter);

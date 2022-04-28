@@ -11,7 +11,7 @@ import {
   @Entity('tb_usuario')
   class Users{
   
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     uuidusuario!: string;
   
     @Column()
@@ -57,10 +57,10 @@ import {
     contato2!:string ;
   
     @Column()
-    cargo!:string ;
+    uuidcargo!:string ;
   
     @Column()
-    departamento!:string ;
+    uuiddeparta!:string ;
   
     @Column('int')
     alarm_id!:number ;

@@ -4,13 +4,11 @@ import {
     ViewEntity,
 } from "typeorm";
 
-import  {v4 as uuid} from 'uuid';
-
 
 @ViewEntity('vw_tb_pagamentos')
 class PagamentoView{
 
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn()
     uuidpagamento!: string;
 
     @Column()
