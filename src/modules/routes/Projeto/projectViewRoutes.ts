@@ -16,7 +16,9 @@ projectRouter.use(isAutenticacion);
 projectRouter.get('/summary',projetoViewController.execute);
 
 
-projectRouter.post('/loadProj',celebrate({
+
+projectRouter.post('/filter',celebrate({
+
     [Segments.BODY]:{
         nprojeto: Joi.string().optional(),
         contrato:Joi.string().optional(),
@@ -24,6 +26,15 @@ projectRouter.post('/loadProj',celebrate({
     }
 }),projetoViewController.loadProjects);
 
+
+projectRouter.get('/index/:uuidprojeto',celebrate({
+    
+    [Segments.PARAMS]:{
+        
+        uuidprojeto: Joi.string().uuid().required(),
+      
+    }
+}),projetoViewController.index);
 
 
 

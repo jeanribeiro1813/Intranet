@@ -1,7 +1,7 @@
 import LoadProjects from '@modules/services/Projetos//ProjetosView/LoadProjectsServices';
 import { Request, Response } from 'express';
 import LoadProjetoSummaryService  from '../../services/Projetos/ProjetosView/LoadySummaryProjeServices';
-
+import LoadIndexProjeServices  from '../../services/Projetos/ProjetosView/LoadIndexProjeServices';
 
 
 
@@ -28,6 +28,18 @@ export default class ProjetosControllers {
         const P = new LoadProjects();
 
         const projetos = await P.loadProjetos({nprojeto,contrato,status});
+
+        return response.json(projetos);
+
+      }
+
+      public async index(request: Request, response: Response): Promise< Response > {
+      
+        const {uuidprojeto} = request.params;
+
+        const P = new LoadIndexProjeServices();
+
+        const projetos = await P.index({uuidprojeto});
 
         return response.json(projetos);
 

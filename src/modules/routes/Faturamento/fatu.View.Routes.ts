@@ -9,7 +9,7 @@ const fatViewRouter = Router();
 const fatViewController = new FaturamentoViewController();
 
 
-fatViewRouter.use(isAutenticacion)
+fatViewRouter.use(isAutenticacion);
 
 
 //Summary Objeto
@@ -17,10 +17,10 @@ fatViewRouter.get('/summary',fatViewController.execute);
 
 
 //Return Por Index
-fatViewRouter.get('/show/:codfat',
+fatViewRouter.get('/index/:uuidfat',
 celebrate({
     [Segments.PARAMS]:{
-        codfat: Joi.string().uuid().required(),}
+        uuidfat: Joi.string().uuid().required(),}
     }),fatViewController.exibir);
 
 //Return Por Usuario
@@ -31,7 +31,6 @@ celebrate({
         data: Joi.string().required(),
     }
     }),fatViewController.execuUsers);
-
 
 
 export default fatViewRouter;

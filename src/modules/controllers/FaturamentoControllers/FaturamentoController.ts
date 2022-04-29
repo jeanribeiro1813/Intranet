@@ -1,23 +1,37 @@
 import { Request, Response } from 'express';
-import CreateFaturamentoServicer from '../../services/Faturamento/Faturamento/CreateFaturamentoServices';
-import UpdateFaturamentoServes from '../../services/Faturamento/Faturamento/UpdateFaturamentoServices';
-import DeleteFaturamentoService from '@modules/services/Faturamento/Faturamento/DeleteServices';
-import UpdateFaturamentoStatus  from '@modules/services/Faturamento/Faturamento/UpdateFaturamentoStatus'
 
+import LoadIndexService from '@modules/services/Faturamento/Faturamento/LoadIndexServices';
+import CreateFaturamentoServices from '@modules/services/Faturamento/Faturamento/CreateFaturamentoServices';
+import UpdateFaturamentoServes from '@modules/services/Faturamento/Faturamento/UpdateFaturamentoServices';
+import DeleteFaturamentoService from '@modules/services/Faturamento/Faturamento/DeleteServices';
+import UpdateFaturamentoStatus  from '@modules/services/Faturamento/Faturamento/UpdateFaturamentoStatus';
 
 
 export default class FaturamentoController {
 
+      public async loading (request: Request , response: Response){
+
+        const {uuidfat} = request.params;
+
+        const loadingService = new LoadIndexService();
+
+        const result = await loadingService.load({uuidfat});
+
+
+        return response.json(result);
+
+      }  
+
       //Criação Faturamento
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const {uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa} = request.body;
+        const {uuidfat, uuidusuario, uuidprojeto, uuidatividade, data, inicio, fim, status, obs, empresa} = request.body;
 
-        const service = new CreateFaturamentoServicer();
+        const service = new CreateFaturamentoServices();
 
         const result = await service.execute(
           {
-            uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa
+            uuidfat, uuidusuario, uuidprojeto, uuidatividade, data, inicio, fim, status, obs, empresa
 
           }
         );

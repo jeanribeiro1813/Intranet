@@ -5,6 +5,7 @@ import {
 } from "typeorm";
 
 @ViewEntity('vw_tb_fat')
+
 class FaturamentoView{
 
     @PrimaryGeneratedColumn('uuid')

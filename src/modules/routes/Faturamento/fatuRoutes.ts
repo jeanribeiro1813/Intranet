@@ -9,7 +9,16 @@ const fatRouter = Router();
 const fatController = new FatController();
 
 
-fatRouter.use(isAutenticacion)
+fatRouter.use(isAutenticacion);
+
+//index
+fatRouter.get('/index/:uuidfat',celebrate({
+
+    [Segments.PARAMS]:{
+
+        uuidfat:Joi.string().required(),
+    }
+}),fatController.loading);
 
 //Create
 fatRouter.post( '/create',

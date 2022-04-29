@@ -10,6 +10,7 @@ import {
 import  {v4 as uuid} from 'uuid';
 
 @ViewEntity('vw_tb_proj')
+
 class ProjetosView{
 
   @PrimaryGeneratedColumn('uuid')
