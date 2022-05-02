@@ -28,7 +28,7 @@ class FilterEspeServices{
        uuidcargo:`%${uuidcargo}%`}).getMany();
 
       if(!result){
-        throw  AppError ('Não Existe',405);
+        throw  new AppError ('Não Existe',405);
       }
 
       return result;

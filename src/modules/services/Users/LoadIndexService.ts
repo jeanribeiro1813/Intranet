@@ -17,7 +17,7 @@ class LoadIndexService {
         const index_Prod = await loadService.findByCodUser(uuidusuario);
 
         if (!index_Prod){
-            throw AppError ('Usuarios não encontrado',404)
+            throw new AppError ('Usuarios não encontrado',404)
         }
      
         return index_Prod;

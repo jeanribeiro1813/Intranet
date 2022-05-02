@@ -47,14 +47,15 @@ interface IResponseDTO{
       const token = sign(
       {
         uuiduser:user.uuidusuario,
-        job : user.cargo,
-        departament:user.departamento,
+        job : user.uuidcargo,
+        departament:user.dt_validade,
       },
       authConfig.jwt.secret,
       {
         subject: user.uuidusuario,
         expiresIn: authConfig.jwt.expireIn,
       });
+
 
       return {token};
       
