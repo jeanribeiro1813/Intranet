@@ -1,4 +1,4 @@
-const ENV = 'local';
+const ENV = "server";
 
 if (ENV === 'local'){
 module.exports = {

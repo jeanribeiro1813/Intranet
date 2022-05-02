@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CreateChamadosServices from '../../services/Chamados/CreateChamadosServices';
 import UpdateChamadosServices from '../../services/Chamados/UpdateChamadosServices';
 import LoadSummyService  from '../../services/Chamados/LoadSummyService';
-import DeleteChamadosServices from '@modules/services/Chamados/DeleteChamadosServices';
+import DeleteChamadosServices from '../../services/Chamados/DeleteChamadosServices';
 
 
 

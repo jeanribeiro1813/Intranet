@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import FaturamentoViewController from '../../controllers/FaturamentoControllers/FaturamentoViewController';
 import {celebrate, Joi, Segments} from 'celebrate';
-import isAutenticacion from '@modules/services/middlewares/isAutenticacion';
+import isAutenticacion from '../../services/middlewares/isAutenticacion';
 
 const fatViewRouter = Router();
 

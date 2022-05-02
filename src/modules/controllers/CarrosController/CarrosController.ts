@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CreateCarrosServices from '../../services/Carros/CreateCarrosServices';
 import UpdateCarrosServices from '../../services/Carros/UpdateCarrosServices';
 import LoadSummyService  from '../../services/Carros/LoadSummyService';
-import DeleteCarrosServices from '@modules/services/Carros/DeleteCarrosServices';
+import DeleteCarrosServices from '../../services/Carros/DeleteCarrosServices';
 
 
 

@@ -1,7 +1,6 @@
-import AppError from '@shared/errors/AppErrors';
-import { getCustomRepository,getRepository } from 'typeorm'
+import AppError from '../../../../shared/errors/AppErrors';
+import { getCustomRepository } from 'typeorm'
 import FaturamentoRepository from '../../../typeorm/repositories/FaturamentoRepository'
-import Faturamento from '../../../typeorm/entities/Faturamento'
 
 interface IRequestDTO{
 

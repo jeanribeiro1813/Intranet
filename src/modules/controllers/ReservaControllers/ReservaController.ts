@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CreateReservaServices from '../../services/Reserva/CreateReservaServices';
 import UpdateReservaServices from '../../services/Reserva/UpdateReservaServices';
 import LoadSummyService  from '../../services/Paginas/LoadSummyService';
-import DeleteReservaServices from '@modules/services/Reserva/DeleteReservaServices';
+import DeleteReservaServices from '../../services/Reserva/DeleteReservaServices';
 
 
 

@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 
-import LoadIndexService from '@modules/services/Faturamento/Faturamento/LoadIndexServices';
-import CreateFaturamentoServices from '@modules/services/Faturamento/Faturamento/CreateFaturamentoServices';
-import UpdateFaturamentoServes from '@modules/services/Faturamento/Faturamento/UpdateFaturamentoServices';
-import DeleteFaturamentoService from '@modules/services/Faturamento/Faturamento/DeleteServices';
-import UpdateFaturamentoStatus  from '@modules/services/Faturamento/Faturamento/UpdateFaturamentoStatus';
+import LoadIndexService from '../../services/Faturamento/Faturamento/LoadIndexServices';
+import CreateFaturamentoServices from '../../services/Faturamento/Faturamento/CreateFaturamentoServices';
+import UpdateFaturamentoServes from '../../services/Faturamento/Faturamento/UpdateFaturamentoServices';
+import DeleteFaturamentoService from '../../services/Faturamento/Faturamento/DeleteServices';
+import UpdateFaturamentoStatus  from '../../services/Faturamento/Faturamento/UpdateFaturamentoStatus';
 
 
 export default class FaturamentoController {

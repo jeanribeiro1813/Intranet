@@ -1,4 +1,4 @@
-import LoadProjects from '@modules/services/Projetos//ProjetosView/LoadProjectsServices';
+import LoadProjects from '../../services/Projetos//ProjetosView/LoadProjectsServices';
 import { Request, Response } from 'express';
 import LoadProjetoSummaryService  from '../../services/Projetos/ProjetosView/LoadySummaryProjeServices';
 import LoadIndexProjeServices  from '../../services/Projetos/ProjetosView/LoadIndexProjeServices';

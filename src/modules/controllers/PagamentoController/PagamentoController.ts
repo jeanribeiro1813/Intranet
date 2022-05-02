@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import CreatePagamentoServices from '../../services/Pagamento/Pagamento/CreatePagamentoServices';
 import UpdatePagamentoServices from '../../services/Pagamento/Pagamento/UpdatePagamentoServices';
-import DeletePagamentoServices from '@modules/services/Pagamento/Pagamento/DeletePagamentoServices';
+import DeletePagamentoServices from '../../services/Pagamento/Pagamento/DeletePagamentoServices';
 
 
 export default class CargoController {

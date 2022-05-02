@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import Controller from '../../controllers/BancosControllers/BancosController';
 import {celebrate, Joi, Segments} from 'celebrate';
-import isAutenticacion from '@modules/services/middlewares/isAutenticacion';
+import isAutenticacion from '../../services/middlewares/isAutenticacion';
 
 const router = Router();
 

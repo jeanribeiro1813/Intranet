@@ -28,6 +28,8 @@ import n2Router from './N2/N2Routes';
 import n3Router from './N3/N3Routes';
 import bancosRouter from './Bancos/BancosRoutes';
 import formPagRouter from './FormPag/FormPagRoutes';
+import ramaisRoutes from './Ramais/RamaisRoutes';
+
 
 
 
@@ -67,6 +69,8 @@ routes.use('/N2',n2Router);
 routes.use('/N3',n3Router);
 routes.use('/bancos',bancosRouter);
 routes.use('/formPag',formPagRouter);
+routes.use('/ramais',ramaisRoutes);
+
 
 
 

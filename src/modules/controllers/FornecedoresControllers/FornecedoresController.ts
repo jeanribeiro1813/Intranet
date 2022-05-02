@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CreateFornecedoresServices from '../../services/Fornecedores/CreateFornecedoresServices';
 import UpdateFornecedoresServices from '../../services/Fornecedores/UpdateFornecedoresServices';
 import LoadSummyService  from '../../services/Fornecedores/LoadSummyService';
-import DeleteFornecedoresServices from '@modules/services/Fornecedores/DeleteFornecedoresServices';
+import DeleteFornecedoresServices from '../../services/Fornecedores/DeleteFornecedoresServices';
 
 
 

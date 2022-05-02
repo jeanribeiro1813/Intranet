@@ -3,7 +3,7 @@ import AppError from '../../../shared/errors/AppErrors';
 import UsersRepository from '../../../modules/typeorm/repositories/UsersRepository'
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import authConfig from "@config/auth";
+import authConfig from "../../../config/auth";
 
 // Tela de Sessão e criando autenticação
 

@@ -1,4 +1,4 @@
-import CreateProjetosServices from '@modules/services/Projetos/Projetos/CreateProjetosServices';
+import CreateProjetosServices from '../../services/Projetos/Projetos/CreateProjetosServices';
 import { Request, Response } from 'express';
 import UpdateProjetoServicets from '../../services/Projetos/Projetos/UpdateProjetoService'
 

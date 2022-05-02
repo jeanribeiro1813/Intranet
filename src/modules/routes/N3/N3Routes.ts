@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import Controller from '../../controllers/N3Controllers/N3Controller';
 import {celebrate, Joi, Segments} from 'celebrate';
-import isAutenticacion from '@modules/services/middlewares/isAutenticacion';
+import isAutenticacion from '../../services/middlewares/isAutenticacion';
 
 const router = Router();
 

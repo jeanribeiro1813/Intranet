@@ -1,5 +1,5 @@
 import Redis , {Redis as RedisClient} from 'ioredis';
-import cacheConfig from '@config/cache';
+import cacheConfig from '../../config/cache';
 
 
 //Criando uma Classe para configuar o Redis no caso de configurar um "memoria", salvar , e deletar

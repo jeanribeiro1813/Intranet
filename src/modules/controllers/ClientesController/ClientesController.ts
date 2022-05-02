@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CreateClientesServices from '../../services/Clientes/CreateClientesServices';
 import UpdateClientesServices from '../../services/Clientes/UpdateClientesServices';
 import LoadSummyService  from '../../services/Clientes/LoadSummyService';
-import DeleteClientesServices from '@modules/services/Clientes/DeleteClientesServices';
+import DeleteClientesServices from '../../services/Clientes/DeleteClientesServices';
 
 
 

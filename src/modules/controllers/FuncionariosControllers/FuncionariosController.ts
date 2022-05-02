@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CreateFuncionariosServices from '../../services/Funcionarios/CreateFuncionariosServices';
 import UpdateFuncionarioServices from '../../services/Funcionarios/UpdateFuncionarioServices';
 import LoadSummyService  from '../../services/Funcionarios/LoadSummyService';
-import DeleteFuncionariosServices from '@modules/services/Funcionarios/DeleteFuncionariosServices';
+import DeleteFuncionariosServices from '../../services/Funcionarios/DeleteFuncionariosServices';
 
 
 

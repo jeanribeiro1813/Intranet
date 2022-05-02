@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CreateManuntencoesServices from '../../services/Manuntencoes/CreateManuntencoesServices';
 import UpdateManuntencoesServices from '../../services/Manuntencoes/UpdateManuntencoesServices';
 import LoadSummyService  from '../../services/Manuntencoes/LoadSummyService';
-import DeleteManuntencoesServices from '@modules/services/Manuntencoes/DeleteManuntencoesServices';
+import DeleteManuntencoesServices from '../../services/Manuntencoes/DeleteManuntencoesServices';
 
 
 

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CreateContratoServices from '../../services/Contrato/CreateContratoServices';
 import UpdateContratoServices from '../../services/Contrato/UpdateContratoServices';
 import LoadSummyService  from '../../services/Contrato/LoadSummyService';
-import DeleteContratoServices from '@modules/services/Contrato/DeleteContratoServices';
+import DeleteContratoServices from '../../services/Contrato/DeleteContratoServices';
 
 
 

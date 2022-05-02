@@ -1,8 +1,9 @@
 import { Router } from 'express';
 
 import FatController from '../../controllers/FaturamentoControllers/FaturamentoController';
+import isAutenticacion from '../../services/middlewares/isAutenticacion';
 import {celebrate, Joi, Segments} from 'celebrate';
-import isAutenticacion from '@modules/services/middlewares/isAutenticacion';
+
 
 const fatRouter = Router();
 

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CreateAdvServices from '../../services/Adv/CreateAdvServices';
 import UpdateAdvServices from '../../services/Adv/UpdateAdvServices';
 import LoadSummyService  from '../../services/Adv/LoadSummyService';
-import DeleteAdvServices from '@modules/services/Adv/DeleteAdvServices';
+import DeleteAdvServices from '../..//services/Adv/DeleteAdvServices';
 
 
 

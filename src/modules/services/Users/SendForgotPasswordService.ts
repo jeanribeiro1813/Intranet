@@ -2,7 +2,8 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../shared/errors/AppErrors';
 import UsersRepository from '../../typeorm/repositories/UsersRepository';
 import UserTokenRepository from '../../typeorm/repositories/UserTokenRepository'
-import EtherelMail from '@config/mail/etherelMail'
+import EtherelMail from '../../../config/mail/etherelMail'
+
 import path from 'path';
 
 //Aqui só vou precisar do email justamente para envio do link de recuperação de senha 
