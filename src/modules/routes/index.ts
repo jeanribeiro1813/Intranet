@@ -65,7 +65,7 @@ routes.use('/fornecedores',fornecedoresRoutes);
 routes.use('/N1',n1Router);
 routes.use('/N2',n2Router);
 routes.use('/N3',n3Router);
-routes.use('/Bancos',bancosRouter);
+routes.use('/bancos',bancosRouter);
 routes.use('/formPag',formPagRouter);
 
 
