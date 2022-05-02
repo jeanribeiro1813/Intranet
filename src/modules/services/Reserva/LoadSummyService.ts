@@ -1,5 +1,4 @@
 import { getCustomRepository } from "typeorm";
-import Reserva from '../../typeorm/entities/Reserva';
 import ReservaRepository from '../../typeorm/repositories/ReservaRepository'
 
 interface IResponseDTO {
@@ -15,7 +14,7 @@ interface IDescItemOfSummary {
     dt_chegada: string;
     hora_saida:string;
     hora_chegada: string;
-    km_saida: number;
+    km_saida: string;
     km_chegada: string;
     projeto: string;
     cancelado:number;
@@ -33,6 +32,7 @@ interface IDescItemOfSummary {
 
 class LoadClientesSummaryService{
     public async executeDes (): Promise<IResponseDTO> {
+
         const projetosrRepository = getCustomRepository(ReservaRepository);
 
         const user = await projetosrRepository.find({});

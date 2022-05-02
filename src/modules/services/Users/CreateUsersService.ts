@@ -22,13 +22,20 @@ interface IRequestDTO {
     dt_nasc:string ,
     contato:string ,
     contato2:string ,
-    cargo:string ,
-    departamento:string ,
+    uuidcargo:string,
+    uuiddeparta:string ,
     alarm_id:number ,
     cod_usuario:number ,
     avatar:string ,
     cpf_cnpj:string,
-  
+    equadramento: number,
+    carga_horaria:  number,
+    proventos:  number,
+    va: number,
+    vr: number,
+    vt: number,
+    banco: number,
+
 
   }
 
@@ -49,12 +56,20 @@ interface IRequestDTO {
         dt_nasc,
         contato,
         contato2,
-        cargo,
-        departamento,
+        uuidcargo,
+        uuiddeparta,
         alarm_id,
         cod_usuario,
-        avatar,cpf_cnpj
+        avatar,cpf_cnpj,
+        equadramento,
+        carga_horaria,
+        proventos,
+        va,
+        vr,
+        vt,
+        banco,
     }: IRequestDTO): Promise<Users> {
+
 
       const usersRepository = getCustomRepository(UsersRepository);
 
@@ -90,12 +105,19 @@ interface IRequestDTO {
         dt_nasc,
         contato,
         contato2,
-        cargo,
-        departamento,
+        uuidcargo,
+        uuiddeparta,
         alarm_id,
         cod_usuario,
-        avatar
-        ,cpf_cnpj
+        avatar,
+        cpf_cnpj,
+        equadramento,
+        carga_horaria,
+        proventos,
+        va,
+        vr,
+        vt,
+        banco
 
       });
 

@@ -17,7 +17,7 @@ class LoadIndexDepartamento{
         const departamento = await DepartamentorRepository.findById(uuiddeparta);
 
         if(!departamento){
-            throw new AppErrors('Departamento não encontrado',409)
+            throw new AppError('Departamento não encontrado',409)
         }
 
         return departamento;

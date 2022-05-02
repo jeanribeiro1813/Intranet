@@ -48,7 +48,7 @@ interface IResponseDTO{
       {
         uuiduser:user.uuidusuario,
         job : user.uuidcargo,
-        departament:user.dt_validade,
+        departament:user.uuiddeparta,
       },
       authConfig.jwt.secret,
       {

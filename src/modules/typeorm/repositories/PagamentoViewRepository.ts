@@ -1,4 +1,3 @@
-import { add } from 'date-fns';
 import { Repository, EntityRepository } from 'typeorm';
 
 import PagamentoView from '../entities/PagamentoView';

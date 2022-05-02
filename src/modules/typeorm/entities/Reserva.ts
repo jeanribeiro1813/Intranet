@@ -33,7 +33,7 @@ import {
     hora_chegada!:string ;
   
     @Column()
-    km_saida!: number;
+    km_saida!: string;
   
     @Column()
     km_chegada!:string ;

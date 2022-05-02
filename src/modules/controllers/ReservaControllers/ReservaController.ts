@@ -22,7 +22,7 @@ export default class ReservaController {
       public async create(request: Request, response: Response): Promise<Response>{
 
         const {cod_reserva_uuid,placa,usuario,dt_saida,
-          dt_chegada,hora_saida,hora_chegada,km_saida,
+          dt_chegada,dt_cancel,hora_saida,hora_chegada,km_saida,
           km_chegada,projeto,cancelado,desc_cancel,dev_obs,cod_reserva} = request.body;
 
         const service = new CreateReservaServices();
@@ -32,10 +32,10 @@ export default class ReservaController {
           {
 
             cod_reserva_uuid,placa,usuario,dt_saida,
-            dt_chegada,hora_saida,hora_chegada,km_saida,
+          dt_chegada,dt_cancel,hora_saida,hora_chegada,km_saida,
             km_chegada,projeto,cancelado,desc_cancel,dev_obs,cod_reserva
 
-          }\
+          }
         );
 
         if(result instanceof Error){
@@ -49,16 +49,20 @@ export default class ReservaController {
 
       public async update (request :Request, response:Response): Promise<Response>{
 
-        const {cod_page_uuid} = request.params
+        const {cod_reserva_uuid} = request.params
 
-        const {pagina,descricao,banner,cod_page} = request.body
+        const {placa,usuario,dt_saida,
+          dt_chegada,dt_cancel,hora_saida,hora_chegada,km_saida,
+            km_chegada,projeto,cancelado,desc_cancel,dev_obs,cod_reserva} = request.body
 
         const updateFatu = new UpdateReservaServices();
 
         const fatura = await updateFatu.update(
 
           {
-            cod_page_uuid,pagina,descricao,banner,cod_page
+            cod_reserva_uuid,placa,usuario,dt_saida,
+            dt_chegada,dt_cancel,hora_saida,hora_chegada,km_saida,
+              km_chegada,projeto,cancelado,desc_cancel,dev_obs,cod_reserva
           }
 
         )
@@ -72,11 +76,11 @@ export default class ReservaController {
     
       public async delete(request:Request, response:Response):Promise<Response>{
 
-        const {cod_page_uuid} = request.params;
+        const {cod_reserva_uuid} = request.params;
 
         const deleteAtividade = new DeleteReservaServices();
 
-       deleteAtividade.execute({cod_page_uuid});
+       deleteAtividade.execute({cod_reserva_uuid});
 
         return response.json('Delete realizado com sucesso');
       }

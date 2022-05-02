@@ -16,6 +16,10 @@ interface IRequestDTO {
   descricao: string;
 }
 
+interface IRequestDelete {
+  uuidformpag: string;
+}
+
 interface IResponseDTO {
   summary: IDescItemOfSummary[];
 }
@@ -90,11 +94,11 @@ interface IResponseDTO {
 
     }
 
-    public async delete( {uuidformpag}: IRequestDTO) : Promise<void> {
+    public async delete( {uuidformpag}: IRequestDelete) : Promise<void> {
 
       const repository = getCustomRepository(Repository);
 
-      const result = await repository.findOne(uuidformpag);
+      const result = await repository.findOne({uuidformpag});
 
       if (!result) {
         throw new AppError('Não Existe ',402);

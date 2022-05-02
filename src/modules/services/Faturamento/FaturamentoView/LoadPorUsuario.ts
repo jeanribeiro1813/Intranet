@@ -5,12 +5,14 @@ import AppError from "../../../../shared/errors/AppErrors";
 
 
 
+interface IResponseDTO {
+  summary: IDescItemOfSummary[];
+}
 
-
-interface IRequestDTO {
+interface IDescItemOfSummary {
   uuidusuario:string;
   data:string
-  summary: [] | any
+
 }
 
 
@@ -18,7 +20,7 @@ interface IRequestDTO {
 
 
 class LoadPorUsersServices{
-  public async execute ({uuidusuario ,data}: IRequestDTO): Promise<FaturamentoView[] | AppError> {
+  public async execute ({uuidusuario ,data}: IDescItemOfSummary): Promise<FaturamentoView[] | AppError> {
 
       const projetosRepository = getCustomRepository(FaturamentoViewsRepository);
 

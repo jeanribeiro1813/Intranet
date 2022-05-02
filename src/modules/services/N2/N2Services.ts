@@ -16,6 +16,11 @@ interface IRequestDTO {
   descricao: string;
 }
 
+interface IRequestDelete {
+  uuidn2: string;
+
+}
+
 interface IResponseDTO {
   summary: IDescItemOfSummary[];
 }
@@ -90,7 +95,7 @@ interface IResponseDTO {
 
     }
 
-    public async delete( {uuidn2}: IRequestDTO) : Promise<void> {
+    public async delete( {uuidn2}: IRequestDelete) : Promise<void> {
 
       const repository = getCustomRepository(Repository);
 

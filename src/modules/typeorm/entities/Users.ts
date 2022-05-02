@@ -41,10 +41,10 @@ import {
     @Column()
     h_status!:string ;
   
-    @Column()
+    @Column('time with time zone')
     last_log!:string ;
   
-    @Column()
+    @Column('time with time zone')
     log_time!:string ;
   
     @Column('date')
@@ -56,10 +56,10 @@ import {
     @Column()
     contato2!:string ;
   
-    @Column()
+    @Column('uuid')
     uuidcargo!:string ;
   
-    @Column()
+    @Column('uuid')
     uuiddeparta!:string ;
   
     @Column('int')
@@ -79,6 +79,29 @@ import {
 
     @Column()
     cpf_cnpj!: string;
+
+    @Column('numeric')
+    equadramento!: number;
+  
+    @Column('numeric')
+    carga_horaria!: number;
+  
+    @Column('numeric')
+    proventos!: number;
+
+    @Column('numeric')
+    va!: number;
+
+    @Column('numeric')
+    vr!: number;
+
+    @Column('numeric')
+    vt!: number;
+
+    @Column()
+    banco!: number;
+  
+  
   
     constructor(){
         if (!this.uuidusuario){

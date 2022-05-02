@@ -10,7 +10,7 @@ interface IRequestDTO {
 
 
 class LoadFilterServices{
-  public async filter ({uuidpagamento}: IRequestDTO): Promise < PagamentoViewRepository[] | AppError > {
+  public async filter ({uuidpagamento}: IRequestDTO): Promise < PagamentoView[] | AppError > {
 
       const projetosRepository = getCustomRepository(PagamentoViewRepository);
 
@@ -23,7 +23,7 @@ class LoadFilterServices{
         throw new AppError ('Não Existe',40);
       }
       
-    return index_Prod;
+      return index_Prod;
 }
   }
 

@@ -1,6 +1,6 @@
 import { getCustomRepository, getRepository } from "typeorm";
 import FaturamentoViewsRepository from '../../../../modules/typeorm/repositories/FaturamentoViewsRepository';
-import Faturamento from '../../../../modules/typeorm/entities/Faturamento';
+import Faturamento from '../../../../modules/typeorm/entities/FaturamentoView';
 import AppError from "../../../../shared/errors/AppErrors";
 
 interface IRequestDTO {
@@ -10,7 +10,7 @@ interface IRequestDTO {
 
 class LoadIndexServices{
 
-  public async load ({uuidfat}: IRequestDTO): Promise<FaturamentoView | undefined> {
+  public async load ({uuidfat}: IRequestDTO): Promise<Faturamento | undefined> {
 
       const repository = getCustomRepository(FaturamentoViewsRepository);
 

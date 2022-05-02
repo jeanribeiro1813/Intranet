@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import Projetos from '../../../typeorm/repositories/Projetos'
+import Projetos from '../../../typeorm/entities/ProjetosView'
 import ProjetosViewRepository from '../../../typeorm/repositories/ProjetosViewRepository';
 import AppError from "../../../../shared/errors/AppErrors";
 
@@ -23,7 +23,7 @@ class LoadIndexProjeServices{
         const projeto = await projetosrRepository.findByCode(uuidprojeto);
 
         if(!projeto){
-            throw AppError('Esse projeto não existe',404)
+            throw new AppError('Esse projeto não existe',404)
         }
 
         return projeto;

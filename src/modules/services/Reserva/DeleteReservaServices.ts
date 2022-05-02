@@ -1,6 +1,5 @@
 import AppError from '@shared/errors/AppErrors';
 import { getCustomRepository,getRepository } from 'typeorm'
-import Reserva from '../../typeorm/entities/Reserva';
 import ReservaRepository from '../../typeorm/repositories/ReservaRepository'
 
 interface IRequestDTO{

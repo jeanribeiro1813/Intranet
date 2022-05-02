@@ -67,7 +67,7 @@ export default class N3Controller {
 
     const services = new Services();
 
-    services.delete({uuidbanco});
+    await services.delete({uuidbanco});
 
     return response.json('Delete realizado com sucesso');
   }

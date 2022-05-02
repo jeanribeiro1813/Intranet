@@ -17,21 +17,22 @@ interface IRequestDTO {
 
       const usersRepository = getCustomRepository(CargoRepository);
 
-      const cargo = await usersRepository.findOne(uuidcargo);
+      const cargoService = await usersRepository.findOne(uuidcargo);
 
-      if (!cargo) {
+      if (!cargoService) {
         throw new AppError ('cargo não existe',404);
       }
 
 
-      cargo.desc_cargo = desc_cargo ? desc_cargo : cargo.desc_cargo;
-      cargo.cargo = cargo ? cargo : cargo.cargo;
+     
+      cargoService.cargo = cargo ? cargo : cargoService.cargo;
+      cargoService.cod_cargo = cod_cargo ? cod_cargo: cargoService.cod_cargo
 
 
 
-      await usersRepository.save(cargo);
+      await usersRepository.save(cargoService);
 
-      return cargo;
+      return cargoService;
     }
   }
 

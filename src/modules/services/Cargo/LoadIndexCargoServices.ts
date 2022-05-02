@@ -17,7 +17,7 @@ class LoadIndexCargo{
         const cargo = await cargoRepository.findByCod(uuidcargo);
 
         if(!cargo){
-            throw new AppErrors('Departamento não encontrado',409)
+            throw new AppError('Departamento não encontrado',409)
         }
 
         return cargo;

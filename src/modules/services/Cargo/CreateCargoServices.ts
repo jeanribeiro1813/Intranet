@@ -27,15 +27,15 @@ interface IRequestDTO {
 
       }
 
-      const cargo =  cargoRepository.create({
+      const cargoService =  cargoRepository.create({
         cargo , cod_cargo
 
 
       });
 
-      await cargoRepository.save(cargo);
+      await cargoRepository.save(cargoService);
 
-      return cargo;
+      return cargoService;
     }
   }
 

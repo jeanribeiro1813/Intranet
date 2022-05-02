@@ -15,7 +15,7 @@ interface IRequestDTO {
   dt_chegada: string;
   hora_saida:string;
   hora_chegada: string;
-  km_saida: number;
+  km_saida: string;
   km_chegada: string;
   projeto: string;
   cancelado:number;

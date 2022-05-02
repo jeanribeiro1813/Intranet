@@ -19,7 +19,7 @@ class LoadIndexService{
 
         const projetosrRepository = getCustomRepository(PagamentoViewRepository);
 
-        const projetos = await projetosrRepository.findByCode({uuidpagamento});
+        const projetos = await projetosrRepository.findByCode(uuidpagamento);
 
         if(!projetos){
             throw new AppError("Não Existe esse projeto",409);

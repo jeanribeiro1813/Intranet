@@ -21,8 +21,7 @@ export default class ProfileController {
             usuario:result.usuario,
             login : result.login,
             email: result.email,
-            cargo: result.cargo,
-            departamento: result.departamento    
+     
         }]
             
 
