@@ -20,7 +20,7 @@ interface IDescItemOfSummary {
 
 
 class LoadPorUsersServices{
-  public async execute ({uuidusuario ,data}: IDescItemOfSummary): Promise<FaturamentoView[] | AppError> {
+  public async execute ({uuidusuario ,data}: IDescItemOfSummary): Promise<IResponseDTO[]> {
 
       const projetosRepository = getCustomRepository(FaturamentoViewsRepository);
 
@@ -64,11 +64,11 @@ class LoadPorUsersServices{
 
     )
 
-    const responseDTO = {
-        summary,
+    const result : any = {
+        summary
     };
 
-    return responseDTO.summary;
+    return result.summary;
 }
   }
 
