@@ -20,24 +20,24 @@ interface IRequestDTO {
 
     public async update({cod_page_uuid,pagina,descricao,banner,cod_page}: IRequestDTO): Promise<Paginas | Error> {
 
-      const usersRepository = getCustomRepository(PaginaRepository);
+      const Repository = getCustomRepository(PaginaRepository);
 
-      const client = await usersRepository.findOne(cod_page_uuid);
+      const result = await Repository.findOne(cod_page_uuid);
 
-      if (!client) {
+      if (!result) {
         throw new AppError ('client não existe',404);
       }
 
 
-      client.pagina = pagina ? pagina : client.pagina;
-      client.descricao = descricao ? descricao : client.descricao;
-      client.cod_page = cod_page ? cod_page : client.cod_page;
-      client.banner = banner ? banner : client.banner;
+      result.pagina = pagina ? pagina : result.pagina;
+      result.descricao = descricao ? descricao : result.descricao;
+      result.cod_page = cod_page ? cod_page : result.cod_page;
+      result.banner = banner ? banner : result.banner;
   
 
-      await usersRepository.save(client);
+      await Repository.save(result);
 
-      return client;
+      return result;
     }
   }
 

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import FilterServices from '../../services/Users/views/FilterServices';
+import FilterServices from '../../services/Users/User_View/FilterServices';
 
 export default class UsersControllers {
 

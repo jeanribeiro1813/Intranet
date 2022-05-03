@@ -19,24 +19,24 @@ interface IRequestDTO {
 
   class CreatePaginasService {
 
-    public async execute({ cod_page_uuid,pagina,descricao,banner,cod_page}: IRequestDTO): Promise<Paginas | Error> {
+    public async create({ cod_page_uuid,pagina,descricao,banner,cod_page}: IRequestDTO): Promise<Paginas | Error> {
 
-      const clientesRepository = getCustomRepository(PaginaRepository);
+      const Repository = getCustomRepository(PaginaRepository);
 
-      const checkUserExists = await clientesRepository.findById(cod_page_uuid);
+      const result = await Repository.findById(cod_page_uuid);
 
-      if (checkUserExists) {
+      if (result) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const cliet =  clientesRepository.create({
+      const cliet =  Repository.create({
 
         cod_page_uuid,pagina,descricao,banner,cod_page
 
       });
 
-      await clientesRepository.save(cliet);
+      await Repository.save(cliet);
 
       return cliet;
     }

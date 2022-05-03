@@ -12,7 +12,7 @@ export default class AtividadeController {
   public async execute(request: Request, response: Response): Promise<Response> {
     const loadFuncao = new LoadSummyService();
 
-    const funcao = await loadFuncao.executeDes();
+    const funcao = await loadFuncao.summary();
 
     return response.json(funcao.summary);
 
@@ -25,7 +25,7 @@ export default class AtividadeController {
 
         const service = new CreateClientesServices();
 
-        const result = await service.execute(
+        const result = await service.create(
           {
             uuidatividade,atividade,cod_atv
 
@@ -70,7 +70,7 @@ export default class AtividadeController {
 
         const deleteAtividade = new DeleteClientesServices();
 
-       deleteAtividade.execute({uuidatividade});
+       deleteAtividade.delete({uuidatividade});
 
         return response.json('Delete realizado com sucesso');
       }

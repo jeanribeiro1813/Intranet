@@ -1,5 +1,4 @@
 import { getCustomRepository } from "typeorm";
-import Paginas from '../../../typeorm/entities/Paginas';
 import PaginaRepository from '../../../typeorm/repositories/PaginaRepository'
 
 interface IResponseDTO {
@@ -21,7 +20,7 @@ interface IDescItemOfSummary {
 
 
 
-class LoadPaginasSummaryService{
+class LoadPagamentoSummaryService{
     public async executeDes (): Promise<IResponseDTO> {
         const projetosrRepository = getCustomRepository(PaginaRepository);
 
@@ -30,12 +29,13 @@ class LoadPaginasSummaryService{
         const summary = user.map((use) =>{
             const DescItemOfSummary = {
 
+                
+
                 cod_page_uuid:use.cod_page_uuid,
                 pagina:use.pagina,
                 descricao:use.descricao,
                 banner:use.banner,
                 cod_page:use.cod_page,
-
                 
 
 
@@ -53,4 +53,4 @@ class LoadPaginasSummaryService{
     }
 }
 
-export default LoadPaginasSummaryService;
+export default LoadPagamentoSummaryService;

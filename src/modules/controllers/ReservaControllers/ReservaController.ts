@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CreateReservaServices from '../../services/Reserva/CreateReservaServices';
-import UpdateReservaServices from '../../services/Reserva/UpdateReservaServices';
+import CreateReservaServices from '../../services/Reserva/Reserva/CreateReservaServices';
+import UpdateReservaServices from '../../services/Reserva/Reserva/UpdateReservaServices';
 import LoadSummyService  from '../../services/Paginas/Paginas_View/LoadSummyService';
-import DeleteReservaServices from '../../services/Reserva/DeleteReservaServices';
+import DeleteReservaServices from '../../services/Reserva/Reserva/DeleteReservaServices';
 
 
 

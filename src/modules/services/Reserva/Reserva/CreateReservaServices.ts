@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm'
-import AppError from '../../../shared/errors/AppErrors';
-import Reserva from '../../typeorm/entities/Reserva';
-import ReservaRepository from '../../typeorm/repositories/ReservaRepository'
+import AppError from '../../../../shared/errors/AppErrors';
+import Reserva from '../../../typeorm/entities/Reserva';
+import ReservaRepository from '../../../typeorm/repositories/ReservaRepository'
 
 
 
@@ -28,20 +28,20 @@ interface IRequestDTO {
 
   class CreateReservaService {
 
-    public async execute({ cod_reserva_uuid,placa,usuario,dt_saida,
+    public async create({ cod_reserva_uuid,placa,usuario,dt_saida,
       dt_chegada,hora_saida,hora_chegada,km_saida,
       km_chegada,projeto,cancelado,desc_cancel,dev_obs,cod_reserva}: IRequestDTO): Promise<Reserva | Error> {
 
-      const clientesRepository = getCustomRepository(ReservaRepository);
+      const Repository = getCustomRepository(ReservaRepository);
 
-      const checkUserExists = await clientesRepository.findById(cod_reserva_uuid);
+      const result = await Repository.findById(cod_reserva_uuid);
 
-      if (checkUserExists) {
+      if (result) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const cliet =  clientesRepository.create({
+      const cliet =  Repository.create({
 
         cod_reserva_uuid,placa,usuario,dt_saida,
         dt_chegada,hora_saida,hora_chegada,km_saida,
@@ -49,7 +49,7 @@ interface IRequestDTO {
 
       });
 
-      await clientesRepository.save(cliet);
+      await Repository.save(cliet);
 
       return cliet;
     }

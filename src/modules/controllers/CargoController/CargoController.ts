@@ -13,7 +13,7 @@ export default class CargoController {
   public async execute(request: Request, response: Response): Promise<Response> {
     const loadFuncao = new LoadSummyService();
 
-    const funcao = await loadFuncao.executeDes();
+    const funcao = await loadFuncao.summary();
 
     return response.json(funcao.summary);
 
@@ -72,7 +72,7 @@ export default class CargoController {
 
         const deleteCargo = new DeleteCargoService();
 
-       deleteCargo.execute({uuidcargo});
+       await deleteCargo.delete({uuidcargo});
 
         return response.json('Delete realizado com sucesso');
       }

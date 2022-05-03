@@ -12,7 +12,7 @@ export default class CargoController {
   public async execute(request: Request, response: Response): Promise<Response> {
     const loadFuncao = new LoadSummyService();
 
-    const funcao = await loadFuncao.executeDes();
+    const funcao = await loadFuncao.summary();
 
     return response.json(funcao);
 
@@ -25,7 +25,7 @@ export default class CargoController {
 
         const service = new CreateCarrosServices();
 
-        const result = await service.execute(
+        const result = await service.create(
           {
             id_uuid,placa, carro,ano,cor, km,ativo,garagem,id
                 
@@ -71,7 +71,7 @@ export default class CargoController {
 
         const deleteCargo = new DeleteCarrosServices();
 
-       deleteCargo.execute({id_uuid});
+       await deleteCargo.delete({id_uuid});
 
         return response.json('Delete realizado com sucesso');
       }

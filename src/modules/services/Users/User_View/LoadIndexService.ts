@@ -1,7 +1,7 @@
-import AppError from "../../../shared/errors/AppErrors";
+import AppError from "../../../../shared/errors/AppErrors";
 import { getCustomRepository } from "typeorm";
-import Users from '../../../modules/typeorm/entities/Users';
-import UsersRepository from '../../../modules/typeorm/repositories/UsersRepository'
+import Users from '../../../typeorm/entities/Users';
+import UsersRepository from '../../../typeorm/repositories/UsersRepository'
 
 interface IResponseDTO{
 

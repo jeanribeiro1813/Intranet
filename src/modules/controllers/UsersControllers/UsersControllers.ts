@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import CreateUsersService  from '../../services/Users/CreateUsersService';
-import LoadIndexService from '../../services/Users/LoadIndexService';
-import FilterEspecificoUsersServices from '../../services/Users/FilterEspecificoUsersServices'
+import CreateUsersService  from '../../services/Users/Users/CreateUsersService';
+import LoadIndexService from '../../services/Users/User_View/LoadIndexService';
+import FilterEspecificoUsersServices from '../../services/Users/User_View/FilterEspecificoUsersServices'
 
 
 export default class UsersControllers {

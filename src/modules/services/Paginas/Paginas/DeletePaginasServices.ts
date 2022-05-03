@@ -10,16 +10,16 @@ interface IRequestDTO{
 }
  class DeletePaginasService {
 
-     public async execute( {cod_page_uuid}: IRequestDTO) : Promise<void> {
+     public async delete( {cod_page_uuid}: IRequestDTO) : Promise<void> {
 
-      const usersRepository = getCustomRepository(PaginaRepository);
+      const Repository = getCustomRepository(PaginaRepository);
 
-      const service = await usersRepository.findOne(cod_page_uuid);
+      const service = await Repository.findOne(cod_page_uuid);
 
       if (!service) {
         throw new AppError('Não Existe ',402);
       }
-      await usersRepository.remove(service);
+      await Repository.remove(service);
       }
   }
 

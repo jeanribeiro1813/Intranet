@@ -21,7 +21,7 @@ projectRouter.post('/filter',celebrate({
 
     [Segments.BODY]:{
         nprojeto: Joi.string().optional(),
-        contrato:Joi.string().optional(),
+        departamento:Joi.string().optional(),
         status:Joi.string().optional()
     }
 }),projetoViewController.loadProjects);

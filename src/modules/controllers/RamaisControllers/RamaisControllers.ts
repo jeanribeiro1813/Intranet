@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CreateRamaisServices from '../../services/Ramais/CreateRamaisServices';
-import UpdateRamaisServices from '../../services/Ramais/UpdateRamaisServices';
-import DeleteRamaisServices from '../../services/Ramais/DeleteRamaisServices';
-import LoadSummyService from '../../services/Ramais/LoadSummyService';
+import CreateRamaisServices from '../../services/Ramais/Ramais/CreateRamaisServices';
+import UpdateRamaisServices from '../../services/Ramais/Ramais/UpdateRamaisServices';
+import DeleteRamaisServices from '../../services/Ramais/Ramais/DeleteRamaisServices';
+import LoadSummyService from '../../services/Ramais/Ramais_View/LoadSummyService';
 
 
 
@@ -27,7 +27,7 @@ export default class N3Controller {
 
     const services = new CreateRamaisServices();
 
-    const result = await services.execute(
+    const result = await services.create(
       {
         uuidramal,ramal,cod_atv            
 
@@ -71,7 +71,7 @@ export default class N3Controller {
 
     const services = new DeleteRamaisServices();
 
-    services.execute({uuidramal});
+    await services.delete({uuidramal});
 
     return response.json('Delete realizado com sucesso');
   }

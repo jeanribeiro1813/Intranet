@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import Ramais from '../../typeorm/entities/Ramais';
-import RamaisRepository from '../../typeorm/repositories/RamaisRepository'
+import Ramais from '../../../typeorm/entities/Ramais';
+import RamaisRepository from '../../../typeorm/repositories/RamaisRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];

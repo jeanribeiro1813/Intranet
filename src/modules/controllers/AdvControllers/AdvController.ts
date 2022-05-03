@@ -17,7 +17,7 @@ export default class AtividadeController {
 
         const service = new CreateAdvServices();
 
-        const result = await service.execute(
+        const result = await service.create(
           {
             codadv,cod_page,desc_adv ,cod_adv              
 
@@ -62,7 +62,7 @@ export default class AtividadeController {
 
         const deleteAtividade = new DeleteAdvServices();
 
-       deleteAtividade.execute({codadv});
+       await deleteAtividade.delete({codadv});
 
         return response.json('Delete realizado com sucesso');
       }
