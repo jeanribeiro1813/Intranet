@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CreateContratoServices from '../../services/Contrato/CreateContratoServices';
-import UpdateContratoServices from '../../services/Contrato/UpdateContratoServices';
-import LoadSummyService  from '../../services/Contrato/LoadSummyService';
-import DeleteContratoServices from '../../services/Contrato/DeleteContratoServices';
+import CreateContratoServices from '../../services/Contrato/Contrato/CreateContratoServices';
+import UpdateContratoServices from '../../services/Contrato/Contrato/UpdateContratoServices';
+import LoadSummyService  from '../../services/Contrato/Contrato View/LoadSummyService';
+import DeleteContratoServices from '../../services/Contrato/Contrato/DeleteContratoServices';
 
 
 

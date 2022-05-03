@@ -22,18 +22,18 @@ interface IRequestDTO {
 
   class CreateFatService {
 
-    public async execute({ uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa}: IRequestDTO): Promise<Faturamento | Error> {
+    public async create({ uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa}: IRequestDTO): Promise<Faturamento | Error> {
 
-      const fatRepository = getCustomRepository(FaturamentoRepository);
+      const Repository = getCustomRepository(FaturamentoRepository);
 
-      const checkUserExists = await fatRepository.findByCode(uuidfat);
+      const faturamento = await Repository.findByCode(uuidfat);
 
-      if (checkUserExists) {
+      if (faturamento) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const fat =  fatRepository.create({
+      const fat =  Repository.create({
         
         uuidfat,uuidusuario, uuidprojeto, uuidatividade,data,inicio,fim,status,obs,empresa
        
@@ -44,7 +44,7 @@ interface IRequestDTO {
 
       });
 
-      await fatRepository.save(fat);
+      await Repository.save(fat);
 
       return fat;
     }

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CreateManuntencoesServices from '../../services/Manuntencoes/CreateManuntencoesServices';
-import UpdateManuntencoesServices from '../../services/Manuntencoes/UpdateManuntencoesServices';
-import LoadSummyService  from '../../services/Manuntencoes/LoadSummyService';
-import DeleteManuntencoesServices from '../../services/Manuntencoes/DeleteManuntencoesServices';
+import CreateManuntencoesServices from '../../services/Manuntencoes/Manutencao/CreateManuntencoesServices';
+import UpdateManuntencoesServices from '../../services/Manuntencoes/Manutencao/UpdateManuntencoesServices';
+import LoadSummyService  from '../../services/Manuntencoes/Manutencao_View/LoadSummyService';
+import DeleteManuntencoesServices from '../../services/Manuntencoes/Manutencao/DeleteManuntencoesServices';
 
 
 

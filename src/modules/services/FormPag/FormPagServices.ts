@@ -48,7 +48,7 @@ interface IResponseDTO {
       return result;
     }
 
-    public async read (): Promise<IResponseDTO> {
+    public async summary (): Promise<IResponseDTO> {
 
       const repository = getCustomRepository(Repository);
 

@@ -31,7 +31,7 @@ interface IDescItemOfSummary {
 
 
 class LoadFatSummaryService{
-    public async executeDes (): Promise<IResponseDTO> {
+    public async summary (): Promise<IResponseDTO> {
         const projetosrRepository = getCustomRepository(FaturamentoViewsRepository);
 
         const user = await projetosrRepository.find({});

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import CreateCargoServicer from '../../services/Cargo/CreateCargoServices';
-import UpdateCargoServes from '../../services/Cargo/UpdateCargoServices';
-import LoadSummyService  from '../../services/Cargo/LoadSummyService';
-import DeleteCargoService from '../../services/Cargo/DeleteCargoServices';
-import LoadIndexCargoServices from '../../services/Cargo/LoadIndexCargoServices'
+import CreateCargoServicer from '../../services/Cargo/Cargo/CreateCargoServices';
+import UpdateCargoServes from '../../services/Cargo/Cargo/UpdateCargoServices';
+import LoadSummyService  from '../../services/Cargo/Cargo View/LoadSummyService';
+import DeleteCargoService from '../../services/Cargo/Cargo/DeleteCargoServices';
+import LoadIndexCargoServices from '../../services/Cargo/Cargo View/LoadIndexCargoServices'
 
 
 

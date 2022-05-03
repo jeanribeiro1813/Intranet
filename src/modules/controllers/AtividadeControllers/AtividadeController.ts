@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CreateClientesServices from '../../services/Atividade/CreateAtividadeServices';
-import UpdateClientesServices from '../../services/Atividade/UpdateAtividadeServices';
-import LoadSummyService  from '../../services/Atividade/LoadSummyService';
-import DeleteClientesServices from '../../services/Atividade/DeleteAtividadeServices';
+import CreateClientesServices from '../../services/Atividade/Atividades/CreateAtividadeServices';
+import UpdateClientesServices from '../../services/Atividade/Atividades/UpdateAtividadeServices';
+import LoadSummyService  from '../../services/Atividade/Atividades_Views/LoadSummyService';
+import DeleteClientesServices from '../../services/Atividade/Atividades/DeleteAtividadeServices';
 
 
 

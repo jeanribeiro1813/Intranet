@@ -17,12 +17,12 @@ interface IRequestDTO {
 
 class UpdateFaturamentoServices{
 
-  public async executeStatus ({uuidusuario, uuidprojeto, data, status}: IRequestDTO): Promise<Faturamento[]| Error> {
+  public async updateStatus ({uuidusuario, uuidprojeto, data, status}: IRequestDTO): Promise<Faturamento[]| Error> {
 
-      const projetosRepository = getCustomRepository(FaturamentoRepository);
+      const Repository = getCustomRepository(FaturamentoRepository);
 
       //Criando um Select personalizado como filtrando 2 colunas
-      const faturas = await projetosRepository.createQueryBuilder().select()
+      const result = await Repository.createQueryBuilder().select()
       .where("uuidusuario::text ILIKE :uuidusuario and\
       uuidprojeto::text ILIKE :uuidprojeto  and\
       substring(data::text, 1,7) ILIKE :data\ ", 
@@ -30,24 +30,21 @@ class UpdateFaturamentoServices{
       ,uuidprojeto:`%${uuidprojeto}%`
       ,data:`%${data}%`}).getMany();
 
-      console.log(faturas);
 
-
-
-      if(!faturas){
+      if(!result){
         throw new AppError ('Não Existe',401);
       }
 
 
       const createfaturaService = new CreatefaturaService();
 
-      faturas.forEach(async function(dados){
+      result.forEach(async function(dados){
         dados.status = status;
         await createfaturaService.update(dados);
       });
 
 
-      return faturas;
+      return result;
 
     
   }

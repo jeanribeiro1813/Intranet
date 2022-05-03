@@ -1,22 +1,14 @@
 import { Request, Response } from 'express';
-import CreateAdvServices from '../../services/Adv/CreateAdvServices';
-import UpdateAdvServices from '../../services/Adv/UpdateAdvServices';
-import LoadSummyService  from '../../services/Adv/LoadSummyService';
-import DeleteAdvServices from '../..//services/Adv/DeleteAdvServices';
+import CreateAdvServices from '../../services/Adv/Adv/CreateAdvServices';
+import UpdateAdvServices from '../../services/Adv/Adv/UpdateAdvServices';
+import DeleteAdvServices from '../../services/Adv/Adv/DeleteAdvServices';
+
+
 
 
 
 
 export default class AtividadeController {
-
-  public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
-
-    const funcao = await loadFuncao.executeDes();
-
-    return response.json(funcao.summary);
-
-  }
 
       //Criação Atividade
       public async create(request: Request, response: Response): Promise<Response>{

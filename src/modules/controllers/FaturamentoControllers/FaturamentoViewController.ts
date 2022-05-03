@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import LoadSummyService  from '../../services/Faturamento/FaturamentoView/LoadSummyService';
-import LoadPorUsersServices from '../../services/Faturamento/FaturamentoView/LoadPorUsuario';
-import LoadIndexServices from '../../services/Faturamento/Faturamento/LoadIndexServices';
+import LoadPorUsersServices from '../../services/Faturamento/FaturamentoView/FilterService';
+import LoadIndexServices from '../../services/Faturamento/FaturamentoView/LoadIndexServices';
 
 
 

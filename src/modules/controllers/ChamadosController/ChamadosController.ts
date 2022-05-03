@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CreateChamadosServices from '../../services/Chamados/CreateChamadosServices';
-import UpdateChamadosServices from '../../services/Chamados/UpdateChamadosServices';
-import LoadSummyService  from '../../services/Chamados/LoadSummyService';
-import DeleteChamadosServices from '../../services/Chamados/DeleteChamadosServices';
+import CreateChamadosServices from '../../services/Chamados/Chamados/CreateChamadosServices';
+import UpdateChamadosServices from '../../services/Chamados/Chamados/UpdateChamadosServices';
+import LoadSummyService  from '../../services/Chamados/Chamados View/LoadSummyService';
+import DeleteChamadosServices from '../../services/Chamados/Chamados/DeleteChamadosServices';
 
 
 

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CreateClientesServices from '../../services/Clientes/CreateClientesServices';
-import UpdateClientesServices from '../../services/Clientes/UpdateClientesServices';
-import LoadSummyService  from '../../services/Clientes/LoadSummyService';
-import DeleteClientesServices from '../../services/Clientes/DeleteClientesServices';
+import CreateClientesServices from '../../services/Clientes/Clientes/CreateClientesServices';
+import UpdateClientesServices from '../../services/Clientes/Clientes/UpdateClientesServices';
+import LoadSummyService  from '../../services/Clientes/Clientes_View/LoadSummyService';
+import DeleteClientesServices from '../../services/Clientes/Clientes/DeleteClientesServices';
 
 
 

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CreateFornecedoresServices from '../../services/Fornecedores/CreateFornecedoresServices';
-import UpdateFornecedoresServices from '../../services/Fornecedores/UpdateFornecedoresServices';
-import LoadSummyService  from '../../services/Fornecedores/LoadSummyService';
-import DeleteFornecedoresServices from '../../services/Fornecedores/DeleteFornecedoresServices';
+import CreateFornecedoresServices from '../../services/Fornecedores/Fornecedores/CreateFornecedoresServices';
+import UpdateFornecedoresServices from '../../services/Fornecedores/Fornecedores/UpdateFornecedoresServices';
+import LoadSummyService  from '../../services/Fornecedores/Fornecedores_View/LoadSummyService';
+import DeleteFornecedoresServices from '../../services/Fornecedores/Fornecedores/DeleteFornecedoresServices';
 
 
 

@@ -17,27 +17,28 @@ export default class RedisCache{
 
 
     //Criando uma função save para assim armazenar a minha query 
-    //Podemos ver que pede uma chame e um valor para executar 
+    //Podemos ver que pede uma chave e um valor para executar é um SET
     public async save (key:string,value:any):Promise<void>{
         
         await this.client.set(key, JSON.stringify(value))
     
     }
 
-    //
-    public async recover<T>(key:string):Promise < T | null>{
+    //É algo mais generalisa porém feito para pegar os dados é um GET
+    public async recover<Generalista>(key:string):Promise < Generalista | null>{
         const data = await this.client.get(key)
 
         if(!data){
             return null;
         }
 
-        const parseData = JSON.parse(data) as T;
+        const parseData = JSON.parse(data) as Generalista;
 
         return parseData;
     }
 
 
+    //Apagar o cache da Query , DELETE
     public async invalidation (key : string): Promise <void>{
         await this.client.del(key)
     }

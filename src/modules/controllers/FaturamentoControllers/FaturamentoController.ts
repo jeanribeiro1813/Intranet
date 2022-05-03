@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import LoadIndexService from '../../services/Faturamento/Faturamento/LoadIndexServices';
+import LoadIndexService from '../../services/Faturamento/FaturamentoView/LoadIndexServices';
 import CreateFaturamentoServices from '../../services/Faturamento/Faturamento/CreateFaturamentoServices';
 import UpdateFaturamentoServes from '../../services/Faturamento/Faturamento/UpdateFaturamentoServices';
 import DeleteFaturamentoService from '../../services/Faturamento/Faturamento/DeleteServices';

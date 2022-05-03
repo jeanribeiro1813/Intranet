@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import CreateClientesServices from '../../services/Departamento/CreateDepartamentoServices';
-import UpdateClientesServices from '../../services/Departamento/UpdateDepartamentoServices';
-import LoadSummyService  from '../../services/Departamento/LoadSummyService';
-import DeleteClientesServices from '../../services/Departamento/DeleteDepartamentoServices';
-import LoadIndexDepartamentoServices from '../../services/Departamento/LoadIndexDepartamentoServices';
+import CreateClientesServices from '../../services/Departamento/Departamento/CreateDepartamentoServices';
+import UpdateClientesServices from '../../services/Departamento/Departamento/UpdateDepartamentoServices';
+import LoadSummyService  from '../../services/Departamento/Departamento_View/LoadSummyService';
+import DeleteClientesServices from '../../services/Departamento/Departamento/DeleteDepartamentoServices';
+import LoadIndexDepartamentoServices from '../../services/Departamento/Departamento_View/LoadIndexDepartamentoServices';
 
 
 

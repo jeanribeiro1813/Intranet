@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CreateFuncionariosServices from '../../services/Funcionarios/CreateFuncionariosServices';
-import UpdateFuncionarioServices from '../../services/Funcionarios/UpdateFuncionarioServices';
-import LoadSummyService  from '../../services/Funcionarios/LoadSummyService';
-import DeleteFuncionariosServices from '../../services/Funcionarios/DeleteFuncionariosServices';
+import CreateFuncionariosServices from '../../services/Funcionarios/Funcionarios/CreateFuncionariosServices';
+import UpdateFuncionarioServices from '../../services/Funcionarios/Funcionarios/UpdateFuncionarioServices';
+import LoadSummyService  from '../../services/Funcionarios/Funcionarios_View/LoadSummyService';
+import DeleteFuncionariosServices from '../../services/Funcionarios/Funcionarios/DeleteFuncionariosServices';
 
 
 

@@ -23,29 +23,29 @@ interface IRequestDTO {
 
     public async update({uuidfat,uuidusuario, uuidprojeto, uuidatividade,data,inicio,fim,status,obs,empresa}: IRequestDTO): Promise<Faturamento | Error> {
 
-      const usersRepository = getCustomRepository(FaturamentoRepository);
+      const Repository = getCustomRepository(FaturamentoRepository);
 
-      const fatura = await usersRepository.findOne(uuidfat);
+      const result = await Repository.findOne(uuidfat);
 
-      if (!fatura) {
+      if (!result) {
         throw new AppError ('fatura não existe',404);
       }
 
 
-      fatura.uuidfat = uuidfat ? uuidfat : fatura.uuidfat;
-      fatura.uuidusuario = uuidusuario ? uuidusuario : fatura.uuidusuario;
-      fatura.uuidprojeto = uuidprojeto ? uuidprojeto : fatura.uuidprojeto;
-      fatura.uuidatividade = uuidatividade ? uuidatividade : fatura.uuidatividade;
-      fatura.data = data ? data : fatura.data;
-      fatura.inicio = inicio ? inicio : fatura.inicio;
-      fatura.fim = fim ? fim : fatura.fim;
-      fatura.status = status ? status: fatura.status;
-      fatura.obs = obs ? obs: fatura.obs;
-      fatura.empresa = empresa ? empresa: fatura.empresa;
+      result.uuidfat = uuidfat ? uuidfat : result.uuidfat;
+      result.uuidusuario = uuidusuario ? uuidusuario : result.uuidusuario;
+      result.uuidprojeto = uuidprojeto ? uuidprojeto : result.uuidprojeto;
+      result.uuidatividade = uuidatividade ? uuidatividade : result.uuidatividade;
+      result.data = data ? data : result.data;
+      result.inicio = inicio ? inicio : result.inicio;
+      result.fim = fim ? fim : result.fim;
+      result.status = status ? status: result.status;
+      result.obs = obs ? obs: result.obs;
+      result.empresa = empresa ? empresa: result.empresa;
 
-      await usersRepository.save(fatura);
+      await Repository.save(result);
 
-      return fatura;
+      return result;
     }
   }
 

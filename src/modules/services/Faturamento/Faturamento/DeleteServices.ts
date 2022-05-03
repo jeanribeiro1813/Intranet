@@ -9,16 +9,16 @@ interface IRequestDTO{
 }
  class DeleteFaturamentoService {
 
-     public async execute( {uuidfat}: IRequestDTO) : Promise<void> {
+     public async delete( {uuidfat}: IRequestDTO) : Promise<void> {
 
-      const usersRepository = getCustomRepository(FaturamentoRepository);
+      const Repository = getCustomRepository(FaturamentoRepository);
 
-      const service = await usersRepository.findOne(uuidfat);
+      const service = await Repository.findOne(uuidfat);
 
       if (!service) {
         throw new AppError('Não Existe ',402);
       }
-      await usersRepository.remove(service);
+      await Repository.remove(service);
       }
   }
 

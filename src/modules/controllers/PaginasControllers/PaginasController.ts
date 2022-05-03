@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CreatePaginasServices from '../../services/Paginas/CreatePaginasServices';
-import UpdatePaginasServices from '../../services/Paginas/UpdatePaginasServices';
-import LoadSummyService  from '../../services/Paginas/LoadSummyService';
-import DeletePaginasServices from '../../services/Paginas/DeletePaginasServices';
+import CreatePaginasServices from '../../services/Paginas/Paginas/CreatePaginasServices';
+import UpdatePaginasServices from '../../services/Paginas/Paginas/UpdatePaginasServices';
+import LoadSummyService  from '../../services/Paginas/Paginas_View/LoadSummyService';
+import DeletePaginasServices from '../../services/Paginas/Paginas/DeletePaginasServices';
 
 
 
