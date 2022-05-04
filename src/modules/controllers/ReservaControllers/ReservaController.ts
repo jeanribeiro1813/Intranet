@@ -27,7 +27,7 @@ export default class ReservaController {
 
         const service = new CreateReservaServices();
 
-        const result = await service.execute(
+        const result = await service.create(
 
           {
 
@@ -80,7 +80,7 @@ export default class ReservaController {
 
         const deleteAtividade = new DeleteReservaServices();
 
-       deleteAtividade.execute({cod_reserva_uuid});
+       await deleteAtividade.delete({cod_reserva_uuid});
 
         return response.json('Delete realizado com sucesso');
       }

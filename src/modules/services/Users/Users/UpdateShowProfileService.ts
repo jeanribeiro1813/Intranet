@@ -1,8 +1,8 @@
 import { getCustomRepository } from "typeorm";
-import Users from '../../typeorm/entities/Users';
+import Users from '../../../typeorm/entities/Users';
 import {compare, hash} from 'bcryptjs'
-import UsersRepository from '../../typeorm/repositories/UsersRepository'
-import AppError from '../../../shared/errors/AppErrors';
+import UsersRepository from '../../../typeorm/repositories/UsersRepository'
+import AppError from '../../../../shared/errors/AppErrors';
 
 
 //Como esse serviço é com o usuario logado tenho que utilizar o user_id que está dentro da tabela user Token

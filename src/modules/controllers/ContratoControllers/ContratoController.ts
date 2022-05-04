@@ -12,7 +12,7 @@ export default class ContratoController {
   public async execute(request: Request, response: Response): Promise<Response> {
     const loadFuncao = new LoadSummyService();
 
-    const funcao = await loadFuncao.executeDes();
+    const funcao = await loadFuncao.summary();
 
     return response.json(funcao.summary);
 
@@ -25,7 +25,7 @@ export default class ContratoController {
 
         const service = new CreateContratoServices();
 
-        const result = await service.execute(
+        const result = await service.create(
           {
             uuidcontrato,contrato               
 
@@ -70,7 +70,7 @@ export default class ContratoController {
 
         const deleteAtividade = new DeleteContratoServices();
 
-       deleteAtividade.execute({uuidcontrato});
+       await deleteAtividade.delete({uuidcontrato});
 
         return response.json('Delete realizado com sucesso');
       }

@@ -11,7 +11,7 @@ export default class FaturamentoViewController {
 
     const loadFuncao = new LoadSummyService();
 
-    const funcao = await loadFuncao.executeDes();
+    const funcao = await loadFuncao.summary();
 
     return response.json(funcao.summary);
 
@@ -23,7 +23,7 @@ export default class FaturamentoViewController {
 
     const indexFat = new LoadIndexServices();
 
-    const showPerIndex = await indexFat.load({uuidfat});
+    const showPerIndex = await indexFat.index({uuidfat});
 
     const result = {
                 
@@ -53,7 +53,7 @@ export default class FaturamentoViewController {
     const indexFat = new LoadPorUsersServices();
 
 
-    const showPorIndex = await indexFat.execute({uuidusuario, data});
+    const showPorIndex = await indexFat.filter({uuidusuario, data});
 
 
     return response.json(showPorIndex);

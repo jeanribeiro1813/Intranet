@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import ShowProfileService from '../../services/Users/ShowProfileService';
-import UpdateShowProfileService from '../../services/Users/UpdateShowProfileService';
+import ShowProfileService from '../../services/Users/Users/ShowProfileService';
+import UpdateShowProfileService from '../../services/Users/Users/UpdateShowProfileService';
 
 
 

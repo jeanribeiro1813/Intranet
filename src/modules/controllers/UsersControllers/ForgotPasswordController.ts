@@ -1,4 +1,4 @@
-import SendForgotPasswordService from '../../services/Users/SendForgotPasswordService';
+import SendForgotPasswordService from '../../services/Users/Users/SendForgotPasswordService';
 import { Request, Response } from 'express';
 
 

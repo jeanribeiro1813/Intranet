@@ -14,15 +14,6 @@ pagamentoRouter.use(isAutenticacion);
 //Summary Objeto
 pagamentoRouter.get('/summary',pagamentoViewController.execute);
 
-pagamentoRouter.get('/index/:uuidpagamento',celebrate({
-    
-    [Segments.PARAMS]:{
-
-        uuidpagamento:Joi.string().uuid().required()
-    }
-}),pagamentoViewController.index);
-
-
 pagamentoRouter.post('/filter',celebrate({
     
     [Segments.BODY]:{

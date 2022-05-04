@@ -12,7 +12,7 @@ export default class FornecedoresController {
   public async execute(request: Request, response: Response): Promise<Response> {
     const loadFuncao = new LoadSummyService();
 
-    const funcao = await loadFuncao.executeDes();
+    const funcao = await loadFuncao.summary();
 
     return response.json(funcao.summary);
 
@@ -25,7 +25,7 @@ export default class FornecedoresController {
 
         const service = new CreateFornecedoresServices();
 
-        const result = await service.execute(
+        const result = await service.create(
           {
             uuidusuario,usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar
           }
@@ -69,7 +69,7 @@ export default class FornecedoresController {
 
         const deleteFornecedores = new DeleteFornecedoresServices();
 
-       deleteFornecedores.execute({uuidusuario});
+       await deleteFornecedores.delete({uuidusuario});
 
         return response.json('Delete realizado com sucesso');
       }

@@ -25,7 +25,7 @@ export default class PaginasController {
 
         const service = new CreatePaginasServices();
 
-        const result = await service.execute(
+        const result = await service.create(
           {
             cod_page_uuid,pagina,descricao,banner,cod_page              
 
@@ -70,7 +70,7 @@ export default class PaginasController {
 
         const deleteAtividade = new DeletePaginasServices();
 
-       deleteAtividade.execute({cod_page_uuid});
+        await deleteAtividade.delete({cod_page_uuid});
 
         return response.json('Delete realizado com sucesso');
       }

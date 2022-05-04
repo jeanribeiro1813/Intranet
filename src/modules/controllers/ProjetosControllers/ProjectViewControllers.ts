@@ -23,11 +23,11 @@ export default class ProjetosControllers {
 
       public async loadProjects(request: Request, response: Response): Promise< Response > {
       
-        const {nprojeto, departamento, status} = request.body;
+        const { departamento, status} = request.body;
 
         const P = new LoadProjects();
 
-        const projetos = await P.loadProjetos({nprojeto,departamento,status});
+        const projetos = await P.loadProjetos({departamento,status});
 
         return response.json(projetos);
 

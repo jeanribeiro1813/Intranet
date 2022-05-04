@@ -21,6 +21,9 @@ class Clientes{
     @Column('uuid')
     uuidprojeto!:string;
 
+    @Column('uuid')
+    uuidcontrato!:string;
+
     @Column()
     n1!: string;
 

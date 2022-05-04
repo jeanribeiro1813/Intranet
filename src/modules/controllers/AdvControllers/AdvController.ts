@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import CreateAdvServices from '../../services/Adv/Adv/CreateAdvServices';
 import UpdateAdvServices from '../../services/Adv/Adv/UpdateAdvServices';
 import DeleteAdvServices from '../../services/Adv/Adv/DeleteAdvServices';
+import LoadSummyService from '../../services/Adv/Adv_View/LoadSummyService';
 
 
 
@@ -9,6 +10,16 @@ import DeleteAdvServices from '../../services/Adv/Adv/DeleteAdvServices';
 
 
 export default class AtividadeController {
+
+
+  public async summary(request:Request, response:Response):Promise<Response>{
+
+    const Atividade = new LoadSummyService();
+
+    const result = await Atividade.summary();
+
+    return response.json(result);
+  }
 
       //Criação Atividade
       public async create(request: Request, response: Response): Promise<Response>{

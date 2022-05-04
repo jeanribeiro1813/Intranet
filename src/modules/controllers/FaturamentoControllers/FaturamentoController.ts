@@ -15,7 +15,7 @@ export default class FaturamentoController {
 
         const loadingService = new LoadIndexService();
 
-        const result = await loadingService.load({uuidfat});
+        const result = await loadingService.index({uuidfat});
 
 
         return response.json(result);
@@ -29,7 +29,7 @@ export default class FaturamentoController {
 
         const service = new CreateFaturamentoServices();
 
-        const result = await service.execute(
+        const result = await service.create(
           {
             uuidfat, uuidusuario, uuidprojeto, uuidatividade, data, inicio, fim, status, obs, empresa
 
@@ -73,7 +73,7 @@ export default class FaturamentoController {
 
         const deleteFaturamento = new DeleteFaturamentoService();
 
-        const deletePorIndex = deleteFaturamento.execute({uuidfat});
+        const deletePorIndex = deleteFaturamento.delete({uuidfat});
 
         return response.json('Deletado com sucesso');
       }
@@ -85,7 +85,7 @@ export default class FaturamentoController {
 
         const indexFat = new UpdateFaturamentoStatus();
 
-        const showPorIndex = await indexFat.executeStatus({uuidusuario, uuidprojeto, data, status});
+        const showPorIndex = await indexFat.updateStatus({uuidusuario, uuidprojeto, data, status});
 
         
       

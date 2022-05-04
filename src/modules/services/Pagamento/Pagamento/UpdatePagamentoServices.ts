@@ -10,6 +10,7 @@ interface IRequestDTO {
   uuidpagamento: string;
   empresa: string;
   uuidprojeto:string;
+  uuidcontrato:string;
   n1: string;
   n2:string;
   n3: string;
@@ -28,7 +29,7 @@ interface IRequestDTO {
 
   class UpdatePagamentoService {
 
-    public async update({ uuidpagamento, empresa, uuidprojeto, n1, n2, n3, uuidcolab_forne, valor_pago
+    public async update({ uuidpagamento, empresa, uuidprojeto,uuidcontrato, n1, n2, n3, uuidcolab_forne, valor_pago
       ,data_pagto, data_vecto, uuidbancos, incidencia, parcelas_n, n_doc_pagto, uuidformapagto, status, obs}: IRequestDTO): Promise<Pagamento | Error> {
 
       const usersRepository = getCustomRepository(PagamentoRepository);
@@ -40,6 +41,7 @@ interface IRequestDTO {
       }
       result.empresa = empresa ? empresa : result.empresa;
       result.uuidprojeto = uuidprojeto ? uuidprojeto : result.uuidprojeto;
+      result.uuidcontrato = uuidcontrato ?uuidcontrato : result.uuidcontrato;
       result.n1 = n1 ? n1 : result.n1;
       result.n2 = n2 ? n2 : result.n2;
       result.n3 = n3 ? n3 : result.n3;

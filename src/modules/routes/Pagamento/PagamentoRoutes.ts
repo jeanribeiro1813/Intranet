@@ -34,5 +34,15 @@ celebrate({
 }), pagamentoController.delete);
 
 
+//index
+pagamentoRouter.delete('/index/:uuidpagamento',isAutenticacion,
+celebrate({
+    [Segments.PARAMS]:{
+        uuidpagamento: Joi.string().uuid().required(),
+    }
+}), pagamentoController.index);
+
+
+
 
 export default pagamentoRouter;

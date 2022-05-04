@@ -25,7 +25,7 @@ export default class FuncionariosController {
 
         const service = new CreateFuncionariosServices();
 
-        const result = await service.execute(
+        const result = await service.create(
           {
             cod_func_uuid,cod_cargo,cod_usuario,cod_func         
 
@@ -70,7 +70,7 @@ export default class FuncionariosController {
 
         const deleteAtividade = new DeleteFuncionariosServices();
 
-       deleteAtividade.execute({cod_func_uuid});
+       deleteAtividade.delete({cod_func_uuid});
 
         return response.json('Delete realizado com sucesso');
       }

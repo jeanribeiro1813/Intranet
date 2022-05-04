@@ -26,7 +26,7 @@ export default class ChamadosController {
 
         const service = new CreateChamadosServices();
 
-        const result = await service.execute(
+        const result = await service.create(
           {
             cod_chamado_uuid,cod_usuario, equipamento,descricao,prioridade,
       dt_solicitacao,dt_conclusao,desc_conclusao,cod_chamado              
@@ -73,7 +73,7 @@ export default class ChamadosController {
 
         const deleteCargo = new DeleteChamadosServices();
 
-       deleteCargo.execute({cod_chamado_uuid});
+       await deleteCargo.delete({cod_chamado_uuid});
 
         return response.json('Delete realizado com sucesso');
       }

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import CreatePagamentoServices from '../../services/Pagamento/Pagamento/CreatePagamentoServices';
 import UpdatePagamentoServices from '../../services/Pagamento/Pagamento/UpdatePagamentoServices';
 import DeletePagamentoServices from '../../services/Pagamento/Pagamento/DeletePagamentoServices';
+import LoadIndexService  from '../../services/Pagamento/PagamentoView/LoadIndexService';
 
 
 export default class CargoController {
@@ -9,14 +10,14 @@ export default class CargoController {
       //Criação Cargo
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const { uuidpagamento, empresa, uuidprojeto, n1, n2, n3, uuidcolab_forne, valor_pago
+        const { uuidpagamento, empresa, uuidprojeto,uuidcontrato, n1, n2, n3, uuidcolab_forne, valor_pago
           ,data_pagto, data_vecto, uuidbancos, incidencia, parcelas_n, n_doc_pagto, uuidformapagto, status, obs} = request.body;
 
         const service = new CreatePagamentoServices();
 
         const result = await service.execute(
           {
-            uuidpagamento, empresa, uuidprojeto, n1, n2, n3, uuidcolab_forne, valor_pago
+            uuidpagamento, empresa, uuidprojeto, uuidcontrato,n1, n2, n3, uuidcolab_forne, valor_pago
             ,data_pagto, data_vecto, uuidbancos, incidencia, parcelas_n, n_doc_pagto, uuidformapagto, status, obs
           }
         );
@@ -34,7 +35,7 @@ export default class CargoController {
 
         const {uuidpagamento} = request.params
 
-        const {empresa, uuidprojeto,  n1, n2, n3, uuidcolab_forne, valor_pago
+        const {empresa, uuidprojeto,uuidcontrato,  n1, n2, n3, uuidcolab_forne, valor_pago
           , data_pagto, data_vecto, uuidbancos, incidencia, parcelas_n, n_doc_pagto, uuidformapagto, status, obs} = request.body
 
         const updateFatu = new UpdatePagamentoServices();
@@ -42,7 +43,7 @@ export default class CargoController {
         const fatura = await updateFatu.update(
 
           {
-            uuidpagamento, empresa, uuidprojeto, n1, n2, n3, uuidcolab_forne, valor_pago
+            uuidpagamento, empresa, uuidprojeto,uuidcontrato, n1, n2, n3, uuidcolab_forne, valor_pago
             , data_pagto, data_vecto, uuidbancos, incidencia, parcelas_n, n_doc_pagto, uuidformapagto, status, obs          }
 
         )
@@ -65,6 +66,17 @@ export default class CargoController {
         return response.json('Delete realizado com sucesso');
       }
 
+      public async index(request: Request, response: Response): Promise<Response> {
+
+        const {uuidpagamento} = request.params
+    
+        const loadFuncao = new LoadIndexService();
+    
+        const funcao = await loadFuncao.index({uuidpagamento});
+    
+        return response.json(funcao);
+    
+      }
 
     
   }

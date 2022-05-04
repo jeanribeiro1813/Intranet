@@ -20,7 +20,7 @@ projectRouter.get('/summary',projetoViewController.execute);
 projectRouter.post('/filter',celebrate({
 
     [Segments.BODY]:{
-        nprojeto: Joi.string().optional(),
+        
         departamento:Joi.string().optional(),
         status:Joi.string().optional()
     }

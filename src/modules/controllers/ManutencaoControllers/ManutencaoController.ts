@@ -25,7 +25,7 @@ export default class ManutencaoController {
 
         const service = new CreateManuntencoesServices();
 
-        const result = await service.execute(
+        const result = await service.create(
           {
             cod_manutencao_uuid,descricao,valor,cod_manutencao
           }
@@ -69,7 +69,7 @@ export default class ManutencaoController {
 
         const deleteAtividade = new DeleteManuntencoesServices();
 
-       deleteAtividade.execute({cod_manutencao_uuid});
+        await deleteAtividade.delete({cod_manutencao_uuid});
 
         return response.json('Delete realizado com sucesso');
       }

@@ -35,7 +35,7 @@ celebrate({
 
 
 //Summary Objeto
-advRouter.get('/summary',advController.execute);
+advRouter.get('/summary',advController.summary);
 
 
 

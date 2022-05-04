@@ -1,4 +1,4 @@
-import ResetPasswordService from '../../services/Users/ResetPasswordService';
+import ResetPasswordService from '../../services/Users/Users/ResetPasswordService';
 import { Request, Response } from 'express';
 
 

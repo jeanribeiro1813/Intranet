@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import PagamentoView from '../../../typeorm/entities/PagamentoView';
-import PagamentoViewRepository from '../../../typeorm/repositories/PagamentoViewRepository'
+import Pagamento from '../../../typeorm/entities/Pagamento';
+import PagamentoRepository from '../../../typeorm/repositories/PagamentoRepository'
 import AppError from '../../../../shared/errors/AppErrors';
 
 
@@ -10,14 +10,10 @@ interface IResponseDTO {
 
 }
 
-
-
-
-
 class LoadIndexService{
-    public async index ({uuidpagamento}:IResponseDTO): Promise< PagamentoView | AppError > {
+    public async index ({uuidpagamento}:IResponseDTO): Promise< Pagamento | AppError > {
 
-        const projetosrRepository = getCustomRepository(PagamentoViewRepository);
+        const projetosrRepository = getCustomRepository(PagamentoRepository);
 
         const projetos = await projetosrRepository.findByCode(uuidpagamento);
 
