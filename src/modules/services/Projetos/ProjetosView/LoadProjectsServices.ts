@@ -23,8 +23,8 @@ class LoadProjectsServices{
 
       //Criando um Select personalizado como filtrando 2 colunas
       const projeto = await projetosRepository.createQueryBuilder().select()
-      .where(' nprojeto ILIKE :nprojeto or departamento ILIKE :departamento or status ilike :status or contrato ILIKE :contrato ', 
-      {nprojeto:`%${nprojeto}%`,departamento:`%${departamento}%`, status:`%${status}%`,contrato:`%${contrato}%`}).getMany();
+      .where('(departamento ILIKE :departamento AND status ilike :status) OR (contrato ILIKE :contrato AND nprojeto ILIKE :nprojeto) ', 
+      {departamento:`%${departamento}%`, status:`%${status}%`,contrato:`%${contrato}%`,nprojeto:`%${nprojeto}%`}).getMany();
 
       if(!projeto){
         throw new AppError ('Não Existe',405);

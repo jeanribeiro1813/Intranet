@@ -2,6 +2,7 @@ import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import FaturamentoRepository from '../../../typeorm/repositories/FaturamentoRepository'
 import Faturamento from '../../../typeorm/entities/Faturamento'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 interface IRequestDTO {
@@ -25,11 +26,15 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(FaturamentoRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findOne(uuidfat);
 
       if (!result) {
         throw new AppError ('fatura não existe',404);
       }
+
+      await redisCache.invalidation('API_REDIS_SUMMARY');
 
 
       result.uuidfat = uuidfat ? uuidfat : result.uuidfat;

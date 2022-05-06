@@ -83,11 +83,11 @@ export default class DiasController {
 
       public async filter(request:Request, response:Response):Promise<Response>{
 
-        const {ano,mes,dias} = request.body;
+        const {ano} = request.body;
 
         const resultfilter = new LoadFilterServices();
 
-        const filtro = await resultfilter.filter({ano,mes,dias});
+        const filtro = await resultfilter.filter({ano});
 
         return response.json(filtro);
       }

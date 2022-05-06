@@ -30,7 +30,6 @@ class LoadPorUsersServices{
 
       {uuidusuario: `%${uuidusuario}%`,data:`%${data}%`}).getMany();
 
-      console.log(index_Prod)
 
       if(!index_Prod){
         throw new AppError ('Não Existe',40);

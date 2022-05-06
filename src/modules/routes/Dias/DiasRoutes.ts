@@ -41,8 +41,6 @@ diasRouter.get('/summary',diasController.summary);
 diasRouter.post('/filter',celebrate({
     [Segments.BODY]:{
         ano:Joi.string().optional(),
-        mes:Joi.string().optional(),
-        dias:Joi.string().optional()
     }
 }),diasController.filter);
 

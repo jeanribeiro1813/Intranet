@@ -80,8 +80,8 @@ import {
     @Column()
     cpf_cnpj!: string;
 
-    @Column('numeric')
-    equadramento!: number;
+    @Column('text')
+    enquadramento!: string;
   
     @Column('numeric')
     carga_horaria!: number;

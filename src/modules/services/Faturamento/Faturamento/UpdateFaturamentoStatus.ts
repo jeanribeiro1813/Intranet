@@ -3,6 +3,7 @@ import FaturamentoRepository from '../../../../modules/typeorm/repositories/Fatu
 import Faturamento from '../../../../modules/typeorm/entities/Faturamento';
 import AppError from "../../../../shared/errors/AppErrors";
 import CreatefaturaService from "./UpdateFaturamentoServices";
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 interface IRequestDTO {
@@ -21,6 +22,8 @@ class UpdateFaturamentoServices{
 
       const Repository = getCustomRepository(FaturamentoRepository);
 
+      const redisCache = new RedisCache();
+
       //Criando um Select personalizado como filtrando 2 colunas
       const result = await Repository.createQueryBuilder().select()
       .where("uuidusuario::text ILIKE :uuidusuario and\
@@ -35,9 +38,11 @@ class UpdateFaturamentoServices{
         throw new AppError ('Não Existe',401);
       }
 
-
+      
       const createfaturaService = new CreatefaturaService();
-
+      
+      await redisCache.invalidation('API_REDIS_SUMMARY');
+      
       result.forEach(async function(dados){
         dados.status = status;
         await createfaturaService.update(dados);

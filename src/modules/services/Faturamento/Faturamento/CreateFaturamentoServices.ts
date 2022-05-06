@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Faturamento from '../../../typeorm/entities/Faturamento';
 import FaturamentoRepository from '../../../typeorm/repositories/FaturamentoRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -26,6 +27,9 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(FaturamentoRepository);
 
+
+      const redisCache = new RedisCache();
+
       const faturamento = await Repository.findByCode(uuidfat);
 
       if (faturamento) {
@@ -36,13 +40,10 @@ interface IRequestDTO {
       const fat =  Repository.create({
         
         uuidfat,uuidusuario, uuidprojeto, uuidatividade,data,inicio,fim,status,obs,empresa
-       
-        /*
-        uuidcliente
-        uuiddeparta Fazer update para verificar pela a tabela departamento*/
-
 
       });
+
+      await redisCache.invalidation('API_REDIS_SUMMARY');
 
       await Repository.save(fat);
 

@@ -27,7 +27,7 @@ import AppError from '../../../shared/errors/AppErrors';
         const limiter = new RateLimiterRedis({
             storeClient: redisClient,
             keyPrefix: 'ratelimit',
-            points:10,
+            points:5,
             duration:1
         });
 

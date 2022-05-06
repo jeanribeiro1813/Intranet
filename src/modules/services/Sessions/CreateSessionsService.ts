@@ -47,8 +47,6 @@ interface IResponseDTO{
       const token = sign(
       {
         uuiduser:user.uuidusuario,
-        job : user.uuidcargo,
-        departament:user.uuiddeparta,
       },
       authConfig.jwt.secret,
       {
