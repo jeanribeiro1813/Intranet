@@ -6,10 +6,6 @@ import AppError from "../../../../shared/errors/AppErrors";
 
 
 interface IResponseDTO {
-  summary: IDescItemOfSummary[];
-}
-
-interface IDescItemOfSummary {
   uuidusuario:string;
   data:string
 
@@ -20,7 +16,7 @@ interface IDescItemOfSummary {
 
 
 class LoadPorUsersServices{
-  public async filter ({uuidusuario ,data}: IDescItemOfSummary): Promise<IResponseDTO[]> {
+  public async filter ({uuidusuario ,data}: IResponseDTO): Promise<FaturamentoView[]> {
 
       const projetosRepository = getCustomRepository(FaturamentoViewsRepository);
 
@@ -35,40 +31,12 @@ class LoadPorUsersServices{
         throw new AppError ('Não Existe',40);
       }
       
-      const summary = index_Prod.map((use) =>{
 
-        const DescItemOfSummary = {
-
-            uuidfat: use?.uuidfat,
-            cliente: use?.cliente,
-            departamento: use?.departamento,
-            nprojeto: use?.nprojeto,
-            projeto: use?.projeto,
-            contrato :use?.contrato,
-            atividade: use?.atividade,
-            data: use?.data,
-            inicio: use?.inicio,
-            fim: use?.fim,
-            obs: use?.obs,
-            status:use?.status
-
-
-
-        }
-
-        return DescItemOfSummary;
-        
-        }
-
-
-    )
-
-    const result : any = {
-        summary
-    };
-
-    return result.summary;
+ 
+    return index_Prod;
 }
+
+
   }
 
 

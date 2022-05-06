@@ -39,6 +39,9 @@ import {
   
     @Column('date')
     dt_nasc!:Date ;
+
+    @Column('text')
+    enquadramento!:string ;
   
   
   }
