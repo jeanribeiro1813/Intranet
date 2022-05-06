@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import FaturamentoViewsRepository from '../../../../modules/typeorm/repositories/FaturamentoViewsRepository';
-import FaturamentoView from '../../../../modules/typeorm/entities/FaturamentoView'
-import AppError from "../../../../shared/errors/AppErrors";
+import RedisCache from '../../../../shared/cache/RedisCache';
+import FaturamentoView from '../../../typeorm/entities/FaturamentoView';
 
 
 interface IResponseDTO {
@@ -34,6 +34,35 @@ class LoadFatSummaryService{
     public async summary (): Promise<IResponseDTO> {
         const projetosrRepository = getCustomRepository(FaturamentoViewsRepository);
 
+        //Podendo instanciar e chamar as funções Redis que criei
+        //const redisCache = new RedisCache();
+
+
+        /*
+        
+        //Criando um recover no caso de cache, aqui vai ser onde ele vai procurar se existe cache 
+        
+        let fatview = redisCache.recover<FaturamentoView>('API_REDIS_SUMMARY')
+
+        //Se não existir nenhum cache ele vai no if pois ele vai criar um cache lá
+        
+        
+        */
+        
+        
+        /*
+            //Tenho que colocar tudo da condição pois o cache vai ser criado aqui 
+            if(!fatview){
+
+                const user = await projetosrRepository.find({});
+                
+                //Criando um save Redis
+
+                await redisCache.save('API_REDIS_SUMMARY',fatview)
+            }
+
+            return user;
+        */
         const user = await projetosrRepository.find({});
 
         const summary = user.map((use) =>{
@@ -64,6 +93,8 @@ class LoadFatSummaryService{
         const responseDTO = {
             summary,
         };
+
+        
 
         return responseDTO;
     }

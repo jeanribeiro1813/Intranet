@@ -1,5 +1,4 @@
 import { getCustomRepository } from "typeorm";
-import PagamentoView from '../../../typeorm/entities/PagamentoView';
 import PagamentoViewRepository from '../../../typeorm/repositories/PagamentoViewRepository'
 
 interface IResponseDTO {

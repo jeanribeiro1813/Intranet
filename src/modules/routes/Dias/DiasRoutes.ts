@@ -38,7 +38,7 @@ celebrate({
 diasRouter.get('/summary',diasController.summary);
 
 //Filter
-diasRouter.get('/filter',celebrate({
+diasRouter.post('/filter',celebrate({
     [Segments.BODY]:{
         ano:Joi.string().optional(),
         mes:Joi.string().optional(),

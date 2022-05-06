@@ -2,6 +2,7 @@ import LoadProjects from '../../services/Projetos//ProjetosView/LoadProjectsServ
 import { Request, Response } from 'express';
 import LoadProjetoSummaryService  from '../../services/Projetos/ProjetosView/LoadySummaryProjeServices';
 import LoadIndexProjeServices  from '../../services/Projetos/ProjetosView/LoadIndexProjeServices';
+import Contrato from '../../typeorm/entities/Contrato';
 
 
 
@@ -23,11 +24,11 @@ export default class ProjetosControllers {
 
       public async loadProjects(request: Request, response: Response): Promise< Response > {
       
-        const { departamento, status} = request.body;
+        const { departamento, status, nprojeto,contrato} = request.body;
 
         const P = new LoadProjects();
 
-        const projetos = await P.loadProjetos({departamento,status});
+        const projetos = await P.loadProjetos({departamento,status,nprojeto,contrato});
 
         return response.json(projetos);
 

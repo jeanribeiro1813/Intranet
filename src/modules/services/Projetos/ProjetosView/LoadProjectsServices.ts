@@ -7,19 +7,24 @@ import ProjetosViewRepository from "../../..//typeorm/repositories/ProjetosViewR
 interface IRequestDTO {
 
   status:string;
-  departamento:string
+  departamento:string;
+  nprojeto:string;
+  contrato:string;
+
+
 }
 
 
 class LoadProjectsServices{
 
-  public async loadProjetos ({departamento, status}: IRequestDTO): Promise<ProjetosView[] | Error> {
+  public async loadProjetos ({departamento, status,nprojeto,contrato}: IRequestDTO): Promise<ProjetosView[] | Error> {
 
       const projetosRepository = getCustomRepository(ProjetosViewRepository);
 
       //Criando um Select personalizado como filtrando 2 colunas
       const projeto = await projetosRepository.createQueryBuilder().select()
-      .where('departamento ILIKE :departamento and status ilike :status', {departamento:`%${departamento}%`, status:`%${status}%`}).getMany();
+      .where(' nprojeto ILIKE :nprojeto or departamento ILIKE :departamento or status ilike :status or contrato ILIKE :contrato ', 
+      {nprojeto:`%${nprojeto}%`,departamento:`%${departamento}%`, status:`%${status}%`,contrato:`%${contrato}%`}).getMany();
 
       if(!projeto){
         throw new AppError ('Não Existe',405);
