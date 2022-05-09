@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm'
 import AppError from '../../../shared/errors/AppErrors';
-import Entitie from '../../typeorm/entities/FormPag';
-import Repository from '../../typeorm/repositories/FormPagRepository';
+import Entitie from '../../../shared/infra/typeorm/entities/FormPag';
+import Repository from '../../../shared/infra/typeorm/repositories/FormPagRepository';
 
 
 interface IDescItemOfSummary {

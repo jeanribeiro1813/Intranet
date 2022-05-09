@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import AdvRepository from '../../../typeorm/repositories/AdvRepository'
-import Adv from '../../../typeorm/entities/Adv'
+import AdvRepository from '../../../../shared/infra/typeorm/repositories/AdvRepository'
+import Adv from '../../../../shared/infra/typeorm/entities/Adv'
 import AppError from "../../../../shared/errors/AppErrors";
 
 

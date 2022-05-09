@@ -1,6 +1,6 @@
 import { getCustomRepository, getRepository } from "typeorm";
-import FaturamentoViewsRepository from '../../../typeorm/repositories/FaturamentoViewsRepository';
-import FaturamentoView from '../../../typeorm/entities/FaturamentoView'
+import FaturamentoViewsRepository from '../../../../shared/infra/typeorm/repositories/FaturamentoViewsRepository';
+import FaturamentoView from '../../../../shared/infra/typeorm/entities/FaturamentoView'
 import AppError from "../../../../shared/errors/AppErrors";
 
 

@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import AppError from '../../../shared/errors/AppErrors';
 import authConfig from '../../../config/auth';
-import UsersRepository from '../../../modules/typeorm/repositories/UsersRepository'
+import UsersRepository from '../../../shared/infra/typeorm/repositories/UsersRepository'
 import { getCustomRepository } from "typeorm";
-import Users from "@modules/typeorm/entities/Users";
+import Users from "@shared/infra/typeorm/entities/Users";
 
 interface TokenPayload{
     iat: number,

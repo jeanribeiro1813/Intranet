@@ -3,7 +3,7 @@ import { Router } from 'express';
 import ProjectViewControllers from '../../controllers/ProjetosControllers/ProjectViewControllers';
 import { celebrate,Joi,Segments } from 'celebrate';
 import isAutenticacion from '../../services/middlewares/isAutenticacion';
-import Contrato from '../../typeorm/entities/Contrato';
+import Contrato from '../../../shared/infra/typeorm/entities/Contrato';
 
 
 const projectRouter = Router();

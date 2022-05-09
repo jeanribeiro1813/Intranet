@@ -1,6 +1,6 @@
 import AppError from '../../../../shared/errors/AppErrors';
 import { getCustomRepository,getRepository } from 'typeorm'
-import DiasRepository from '../../../typeorm/repositories/DiasRepository'
+import DiasRepository from '../../../../shared/infra/typeorm/repositories/DiasRepository'
 
 interface IRequestDTO{
 

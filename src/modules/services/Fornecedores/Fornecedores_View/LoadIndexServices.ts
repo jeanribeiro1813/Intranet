@@ -1,6 +1,6 @@
 import { getCustomRepository, getRepository } from "typeorm";
-import FornecedoresRepository from '../../../typeorm/repositories/FornecedoresRepository'
-import Fornecedores from '../../../typeorm/entities/Fornecedores'
+import FornecedoresRepository from '../../../../shared/infra/typeorm/repositories/FornecedoresRepository'
+import Fornecedores from '../../../../shared/infra/typeorm/entities/Fornecedores'
 import AppError from "../../../../shared/errors/AppErrors";
 
 interface IRequestDTO {

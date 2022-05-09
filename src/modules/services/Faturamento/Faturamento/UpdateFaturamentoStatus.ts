@@ -1,6 +1,6 @@
 import { getCustomRepository, getRepository } from "typeorm";
-import FaturamentoRepository from '../../../../modules/typeorm/repositories/FaturamentoRepository';
-import Faturamento from '../../../../modules/typeorm/entities/Faturamento';
+import FaturamentoRepository from '../../../../shared/infra/typeorm/repositories/FaturamentoRepository';
+import Faturamento from '../../../../shared/infra/typeorm/entities/Faturamento';
 import AppError from "../../../../shared/errors/AppErrors";
 import CreatefaturaService from "./UpdateFaturamentoServices";
 import RedisCache from '../../../../shared/cache/RedisCache';

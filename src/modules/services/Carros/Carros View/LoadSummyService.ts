@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import Carros from '../../../typeorm/entities/Carros';
-import CarrosRepository from '../../../typeorm/repositories/CarrosRepository'
+import Carros from '../../../../shared/infra/typeorm/entities/Carros';
+import CarrosRepository from '../../../../shared/infra/typeorm/repositories/CarrosRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];

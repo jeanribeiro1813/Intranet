@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import Reserva from '../../../typeorm/entities/Reserva';
-import ReservaRepository from '../../../typeorm/repositories/ReservaRepository'
+import Reserva from '../../../../shared/infra/typeorm/entities/Reserva';
+import ReservaRepository from '../../../../shared/infra/typeorm/repositories/ReservaRepository'
 import AppError from '../../../../shared/errors/AppErrors';
 
 

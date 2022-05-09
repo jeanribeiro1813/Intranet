@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import PagamentoViewRepository from '../../../typeorm/repositories/PagamentoViewRepository'
+import PagamentoViewRepository from '../../../../shared/infra/typeorm/repositories/PagamentoViewRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];

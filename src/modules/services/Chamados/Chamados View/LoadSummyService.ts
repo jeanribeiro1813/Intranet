@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import Chamados from '../../../typeorm/entities/Chamados';
-import ChamadosRepository from '../../../typeorm/repositories/ChamadosRepository'
+import Chamados from '../../../../shared/infra/typeorm/entities/Chamados';
+import ChamadosRepository from '../../../../shared/infra/typeorm/repositories/ChamadosRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];

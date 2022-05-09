@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import Departamento from '../../../typeorm/entities/Departamento';
-import DepartamentoRepository from '../../../typeorm/repositories/DepartamentoRepository'
+import Departamento from '../../../../shared/infra/typeorm/entities/Departamento';
+import DepartamentoRepository from '../../../../shared/infra/typeorm/repositories/DepartamentoRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];

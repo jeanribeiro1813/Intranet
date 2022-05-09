@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm'
 import AppError from '../../../shared/errors/AppErrors';
-import Entitie from '../../typeorm/entities/N1';
-import Repository from '../../typeorm/repositories/N1Repository'
+import Entitie from '../../../shared/infra/typeorm/entities/N1';
+import Repository from '../../../shared/infra/typeorm/repositories/N1Repository'
 
 
 interface IDescItemOfSummary {

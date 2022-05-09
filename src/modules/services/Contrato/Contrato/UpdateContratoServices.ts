@@ -1,7 +1,7 @@
 import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
-import Contrato from '../../../typeorm/entities/Contrato';
-import ContratoRepository from '../../../typeorm/repositories/ContratoRepository'
+import Contrato from '../../../../shared/infra/typeorm/entities/Contrato';
+import ContratoRepository from '../../../../shared/infra/typeorm/repositories/ContratoRepository'
 
 
 

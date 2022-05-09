@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import AdvRepository from '../../../typeorm/repositories/AdvRepository'
+import AdvRepository from '../../../../shared/infra/typeorm/repositories/AdvRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];

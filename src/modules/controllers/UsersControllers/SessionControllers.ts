@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import CreateSessionsService from '../../services/Sessions/CreateSessionsService';
-import Users from '../../typeorm/entities/Users';
+import Users from '../../../shared/infra/typeorm/entities/Users';
 
 export default class SessionController {
     public async create (request: Request, response: Response):Promise <Response>{

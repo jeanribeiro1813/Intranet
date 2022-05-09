@@ -1,7 +1,7 @@
 import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
-import Carros from '../../../typeorm/entities/Carros';
-import CarrosRepository from '../../../typeorm/repositories/CarrosRepository'
+import Carros from '../../../../shared/infra/typeorm/entities/Carros';
+import CarrosRepository from '../../../../shared/infra/typeorm/repositories/CarrosRepository'
 
 
 

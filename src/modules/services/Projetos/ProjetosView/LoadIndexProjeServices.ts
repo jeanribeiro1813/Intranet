@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import Projetos from '../../../typeorm/entities/ProjetosView'
-import ProjetosViewRepository from '../../../typeorm/repositories/ProjetosViewRepository';
+import Projetos from '../../../../shared/infra/typeorm/entities/ProjetosView'
+import ProjetosViewRepository from '../../../../shared/infra/typeorm/repositories/ProjetosViewRepository';
 import AppError from "../../../../shared/errors/AppErrors";
 
 

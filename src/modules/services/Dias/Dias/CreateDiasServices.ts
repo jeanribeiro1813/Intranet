@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
-import Dias from '../../../typeorm/entities/Dias';
-import DiasRepository from '../../../typeorm/repositories/DiasRepository'
+import Dias from '../../../../shared/infra/typeorm/entities/Dias';
+import DiasRepository from '../../../../shared/infra/typeorm/repositories/DiasRepository'
 
 
 

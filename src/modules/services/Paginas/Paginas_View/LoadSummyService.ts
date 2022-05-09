@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import PaginaRepository from '../../../typeorm/repositories/PaginaRepository'
+import PaginaRepository from '../../../../shared/infra/typeorm/repositories/PaginaRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];

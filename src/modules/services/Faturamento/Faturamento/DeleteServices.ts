@@ -1,6 +1,6 @@
 import AppError from '../../../../shared/errors/AppErrors';
 import { getCustomRepository } from 'typeorm'
-import FaturamentoRepository from '../../../typeorm/repositories/FaturamentoRepository'
+import FaturamentoRepository from '../../../../shared/infra/typeorm/repositories/FaturamentoRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
 
 

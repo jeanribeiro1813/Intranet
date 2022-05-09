@@ -40,7 +40,8 @@ diasRouter.get('/summary',diasController.summary);
 //Filter
 diasRouter.post('/filter',celebrate({
     [Segments.BODY]:{
-        ano:Joi.string().optional(),
+        ano:Joi.string().required(),
+        mes:Joi.string().optional(),
     }
 }),diasController.filter);
 

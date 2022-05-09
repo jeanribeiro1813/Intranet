@@ -1,7 +1,7 @@
 import AppError from "../../../../shared/errors/AppErrors";
 import { getCustomRepository } from "typeorm";
-import Clientes from '../../../typeorm/entities/Clientes';
-import ClientesRepository from '../../../typeorm/repositories/ClientesRepository'
+import Clientes from '../../../../shared/infra/typeorm/entities/Clientes';
+import ClientesRepository from '../../../../shared/infra/typeorm/repositories/ClientesRepository'
 
 
 

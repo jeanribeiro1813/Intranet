@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import DiasRepository from '../../../typeorm/repositories/DiasRepository'
+import DiasRepository from '../../../../shared/infra/typeorm/repositories/DiasRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];

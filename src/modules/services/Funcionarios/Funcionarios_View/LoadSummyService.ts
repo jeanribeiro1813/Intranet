@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import FuncionarioRepository from '../../../typeorm/repositories/FuncionarioRepository'
+import FuncionarioRepository from '../../../../shared/infra/typeorm/repositories/FuncionarioRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];

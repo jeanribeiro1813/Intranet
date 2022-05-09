@@ -1,8 +1,8 @@
 import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
-import UsersRepository from '../../../typeorm/repositories/UsersRepository';
+import UsersRepository from '../../../../shared/infra/typeorm/repositories/UsersRepository';
 import {isAfter,addHours} from 'date-fns';
-import UserTokenRepository from '../../../typeorm/repositories/UserTokenRepository';
+import UserTokenRepository from '../../../../shared/infra/typeorm/repositories/UserTokenRepository';
 import {hash} from 'bcrypt';
 
 //Aqui só vou precisar do email justamente para envio do link de recuperação de senha 

@@ -1,6 +1,6 @@
 import { getCustomRepository, getRepository } from "typeorm";
-import FaturamentoViewsRepository from '../../../typeorm/repositories/FaturamentoViewsRepository';
-import Faturamento from '../../../typeorm/entities/FaturamentoView';
+import FaturamentoViewsRepository from '../../../../shared/infra/typeorm/repositories/FaturamentoViewsRepository';
+import Faturamento from '../../../../shared/infra/typeorm/entities/FaturamentoView';
 import AppError from "../../../../shared/errors/AppErrors";
 
 interface IRequestDTO {

@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
-import Manutencoes from '../../../typeorm/entities/Manutencoes';
-import ManuntencoesRepository from '../../../typeorm/repositories/ManuntencoesRepository'
+import Manutencoes from '../../../../shared/infra/typeorm/entities/Manutencoes';
+import ManuntencoesRepository from '../../../../shared/infra/typeorm/repositories/ManuntencoesRepository'
 
 
 

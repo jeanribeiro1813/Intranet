@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import Manutencoes from '../../../typeorm/entities/Manutencoes';
-import ManuntencoesRepository from '../../../typeorm/repositories/ManuntencoesRepository'
+import Manutencoes from '../../../../shared/infra/typeorm/entities/Manutencoes';
+import ManuntencoesRepository from '../../../../shared/infra/typeorm/repositories/ManuntencoesRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];

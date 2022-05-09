@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
-import Chamados from '../../../typeorm/entities/Chamados';
-import ChamadosRepository from '../../../typeorm/repositories/ChamadosRepository'
+import Chamados from '../../../../shared/infra/typeorm/entities/Chamados';
+import ChamadosRepository from '../../../../shared/infra/typeorm/repositories/ChamadosRepository'
 
 
 

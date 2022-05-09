@@ -2,7 +2,7 @@ import LoadProjects from '../../services/Projetos//ProjetosView/LoadProjectsServ
 import { Request, Response } from 'express';
 import LoadProjetoSummaryService  from '../../services/Projetos/ProjetosView/LoadySummaryProjeServices';
 import LoadIndexProjeServices  from '../../services/Projetos/ProjetosView/LoadIndexProjeServices';
-import Contrato from '../../typeorm/entities/Contrato';
+import Contrato from '../../../shared/infra/typeorm/entities/Contrato';
 
 
 

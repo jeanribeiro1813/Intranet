@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
-import Users from '../../../typeorm/entities/Users';
-import UsersRepository from '../../../typeorm/repositories/UsersRepository'
+import Users from '../../../../shared/infra/typeorm/entities/Users';
+import UsersRepository from '../../../../shared/infra/typeorm/repositories/UsersRepository'
 import { hash } from 'bcryptjs';
 
 
@@ -31,10 +31,12 @@ interface IRequestDTO {
     enquadramento: string,
     carga_horaria:  number,
     proventos:  number,
-    va: number,
-    vr: number,
     vt: number,
     banco: number,
+    seguro: number,
+    cv_medico: number,
+    tp_va_vr: string,
+    va_vr: number,
 
 
   }
@@ -64,10 +66,12 @@ interface IRequestDTO {
         enquadramento,
         carga_horaria,
         proventos,
-        va,
-        vr,
         vt,
         banco,
+        seguro,
+        cv_medico,
+        tp_va_vr,
+        va_vr
     }: IRequestDTO): Promise<Users> {
 
 
@@ -114,10 +118,12 @@ interface IRequestDTO {
         enquadramento,
         carga_horaria,
         proventos,
-        va,
-        vr,
         vt,
-        banco
+        banco,
+        seguro,
+        cv_medico,
+        tp_va_vr,
+        va_vr
 
       });
 

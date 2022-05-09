@@ -18,11 +18,11 @@ export default class CargoController {
   }
   public async filter(request: Request, response: Response): Promise<Response> {
 
-    const {uuidpagamento} = request.body
+    const {data_pagto} = request.body
 
     const loadFuncao = new LoadFilterServices();
 
-    const funcao = await loadFuncao.filter({uuidpagamento});
+    const funcao = await loadFuncao.filter({data_pagto});
 
     return response.json(funcao);
 

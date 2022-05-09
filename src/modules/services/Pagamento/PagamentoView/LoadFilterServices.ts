@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import PagamentoView from '../../../typeorm/entities/PagamentoView';
-import PagamentoViewRepository from '../../../typeorm/repositories/PagamentoViewRepository'
+import PagamentoView from '../../../../shared/infra/typeorm/entities/PagamentoView';
+import PagamentoViewRepository from '../../../../shared/infra/typeorm/repositories/PagamentoViewRepository'
 import AppError from '../../../../shared/errors/AppErrors';
 
 

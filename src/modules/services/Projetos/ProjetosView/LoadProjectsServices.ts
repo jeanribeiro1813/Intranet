@@ -1,7 +1,7 @@
 import { getCustomRepository, getRepository } from "typeorm";
 import AppError from "../../../../shared/errors/AppErrors";
-import ProjetosView from "../../../typeorm/entities/ProjetosView";
-import ProjetosViewRepository from "../../..//typeorm/repositories/ProjetosViewRepository";
+import ProjetosView from "../../../../shared/infra/typeorm/entities/ProjetosView";
+import ProjetosViewRepository from "../../../../shared/infra/typeorm/repositories/ProjetosViewRepository";
 
 
 interface IRequestDTO {

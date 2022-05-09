@@ -7,12 +7,12 @@
     "database": "intranet",
     "$schema" : "public",
     "entities": [
-        "./src/modules/typeorm/entities/*.ts"
+        "./src/shared/infra/typeorm/entities/*.ts"
     ],
     "migrations": [
-        "./src/modules/database/migrations/*.ts"
+        "./src/shared/infra/database/migrations/*.ts"
     ],
     "cli": {
-        "migrationsDir":"./src/modules/database/migrations"
+        "migrationsDir":"./src/modules/infra/database/migrations"
     }
 }

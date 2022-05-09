@@ -30,10 +30,12 @@ export default class UsersControllers {
       enquadramento,
       carga_horaria,
       proventos,
-      va,
-      vr,
       vt,
-      banco,} = request.body;
+      banco,
+      seguro,
+      cv_medico,
+      tp_va_vr,
+      va_vr} = request.body;
 
     const createFuncao = new CreateUsersService();
 
@@ -59,10 +61,12 @@ export default class UsersControllers {
       enquadramento,
       carga_horaria,
       proventos,
-      va,
-      vr,
       vt,
-      banco,});
+      banco,
+      seguro,
+      cv_medico,
+      tp_va_vr,
+      va_vr});
 
         if(funcao instanceof Error){
             return response.status(400).json(funcao.message);

@@ -1,7 +1,7 @@
 import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
-import Paginas from '../../../typeorm/entities/Paginas';
-import PaginaRepository from '../../../typeorm/repositories/PaginaRepository'
+import Paginas from '../../../../shared/infra/typeorm/entities/Paginas';
+import PaginaRepository from '../../../../shared/infra/typeorm/repositories/PaginaRepository'
 
 
 

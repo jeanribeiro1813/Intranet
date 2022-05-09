@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import Atividades from '../../../typeorm/entities/Atividades';
-import AtividadeRepository from '../../../typeorm/repositories/AtividadeRepository'
+import Atividades from '../../../../shared/infra/typeorm/entities/Atividades';
+import AtividadeRepository from '../../../../shared/infra/typeorm/repositories/AtividadeRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];

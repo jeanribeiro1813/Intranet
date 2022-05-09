@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
-import Pagamento from '../../../typeorm/entities/Pagamento';
-import PagamentoRepository from '../../../typeorm/repositories/PagamentoRepository'
+import Pagamento from '../../../../shared/infra/typeorm/entities/Pagamento';
+import PagamentoRepository from '../../../../shared/infra/typeorm/repositories/PagamentoRepository'
 
 
 interface IRequestDTO {

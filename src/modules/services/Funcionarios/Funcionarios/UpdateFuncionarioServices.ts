@@ -1,7 +1,7 @@
 import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
-import Funcionarios from '../../../typeorm/entities/Funcionarios';
-import FuncionarioRepository from '../../../typeorm/repositories/FuncionarioRepository'
+import Funcionarios from '../../../../shared/infra/typeorm/entities/Funcionarios';
+import FuncionarioRepository from '../../../../shared/infra/typeorm/repositories/FuncionarioRepository'
 
 
 

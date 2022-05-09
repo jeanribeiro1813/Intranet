@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import ContratoRepository from '../../../typeorm/repositories/ContratoRepository'
+import ContratoRepository from '../../../../shared/infra/typeorm/repositories/ContratoRepository'
 
 interface IResponseDTO {
     summary: IDescItemOfSummary[];
