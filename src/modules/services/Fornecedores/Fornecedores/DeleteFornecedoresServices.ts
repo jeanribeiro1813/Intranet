@@ -2,6 +2,8 @@ import AppError from '../../../../shared/errors/AppErrors';
 import { getCustomRepository,getRepository } from 'typeorm'
 import Fornecedores from '../../../../shared/infra/typeorm/entities/Fornecedores';
 import FornecedoresRepository from '../../../../shared/infra/typeorm/repositories/FornecedoresRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
+
 
 interface IRequestDTO{
 
@@ -14,11 +16,16 @@ interface IRequestDTO{
 
       const fornecedoresRepository = getCustomRepository(FornecedoresRepository);
 
+      const redisCache = new RedisCache();
+
       const service = await fornecedoresRepository.findOne(uuidusuario);
 
       if (!service) {
         throw new AppError('Não Existe ',402);
       }
+
+      await redisCache.invalidation('API_REDIS_SUMMARY');
+
       await fornecedoresRepository.remove(service);
       }
   }

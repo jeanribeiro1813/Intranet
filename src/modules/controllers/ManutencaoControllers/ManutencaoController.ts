@@ -14,7 +14,7 @@ export default class ManutencaoController {
 
     const funcao = await loadFuncao.executeDes();
 
-    return response.json(funcao.summary);
+    return response.json(funcao);
 
   }
 

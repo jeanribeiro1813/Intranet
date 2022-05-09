@@ -1,62 +1,28 @@
 import { getCustomRepository } from "typeorm";
 import Carros from '../../../../shared/infra/typeorm/entities/Carros';
 import CarrosRepository from '../../../../shared/infra/typeorm/repositories/CarrosRepository'
-
-interface IResponseDTO {
-    summary: IDescItemOfSummary[];
-}
-
-interface IDescItemOfSummary {
-
-    id_uuid: string;
-    placa:string;
-    carro:string;
-    ano: number;
-    cor:string;
-    km:string;
-    ativo: number;
-    garagem:string;
-    id:number;
-  
-  
-
-}
-
-
-
-
+import RedisCache from '../../../../shared/cache/RedisCache';
+import AppError from '../../../../shared/errors/AppErrors';
 
 class LoadCarrosSummaryService{
-    public async summary (): Promise<IResponseDTO> {
+    public async summary (): Promise<Carros[] | AppError> {
         const projetosrRepository = getCustomRepository(CarrosRepository);
 
-        const user = await projetosrRepository.find({});
+        const redisCache = new RedisCache();
 
-        const summary = user.map((use) =>{
-            const DescItemOfSummary = {
-
-                id_uuid:use.id_uuid,
-                placa:use.placa,
-                carro:use.carro,
-                ano:use.ano,
-                cor:use.cor,
-                km:use.km,
-                ativo:use.ativo,
-                garagem:use.garagem,
-                id:use.id
-                
+        let responseDTO = await redisCache.recover<Carros[]>('API_REDIS_SUMMARY')
 
 
-            }
-            return DescItemOfSummary;
-            }
-
-        )
-
-        const responseDTO = {
-            summary,
-        };
-
+        if(!responseDTO){
+  
+            responseDTO  = await projetosrRepository.find();
+            
+            //Criando um save Redis
+  
+            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+        }
+        
+        
         return responseDTO;
     }
 }

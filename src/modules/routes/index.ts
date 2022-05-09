@@ -60,7 +60,7 @@ routes.use('/funcionario',funcionarioRouter);
 routes.use('/adv',advRouter);
 
 routes.use('/pagamento',pagamentoRouter);
-routes.use('/pagamentoView',pagamentoViewRouter);
+routes.use('/pagamentoview',pagamentoViewRouter);
 
 routes.use('/manutencao',manutencaoRouter);
 routes.use('/paginas',paginascaoRouter);

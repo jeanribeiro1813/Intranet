@@ -5,19 +5,19 @@ import AppError from '../../../../shared/errors/AppErrors';
 
 
 interface IRequestDTO {
-  data_pagto: string;
+  incidencia: string;
 }
 
 
 class LoadFilterServices{
-  public async filter ({data_pagto}: IRequestDTO): Promise < PagamentoView[] | AppError > {
+  public async filter ({incidencia}: IRequestDTO): Promise < PagamentoView[] | AppError > {
 
       const projetosRepository = getCustomRepository(PagamentoViewRepository);
 
       //Criando um Select personalizado como filtrando 2 colunas
       const index_Prod = await projetosRepository.createQueryBuilder().select()
-      .where(`substring(data_pagto::text, 1,4) ILIKE :data_pagto and substring(data_pagto::text, 6,2) ILIKE :data_pagto `, 
-      {data_pagto: `%${data_pagto}%`,}).getMany();
+      .where(`incidencia::text ILIKE :incidencia  `, 
+      {incidencia: `%${incidencia}%`,}).getMany();
 
       if(!index_Prod){
         throw new AppError ('Não Existe',40);

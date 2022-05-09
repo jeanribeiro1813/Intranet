@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Atividades from '../../../../shared/infra/typeorm/entities/Atividades';
 import AtividadeRepository from '../../../../shared/infra/typeorm/repositories/AtividadeRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -20,6 +21,8 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(AtividadeRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findById(uuidatividade);
 
       if (result) {
@@ -32,6 +35,8 @@ interface IRequestDTO {
         uuidatividade,atividade,cod_atv
 
       });
+
+      await redisCache.invalidation('API_REDIS_SUMMARY');
 
       await Repository.save(cliet);
 

@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Departamento from '../../../../shared/infra/typeorm/entities/Departamento';
 import DepartamentoRepository from '../../../../shared/infra/typeorm/repositories/DepartamentoRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -19,6 +20,8 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(DepartamentoRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findById(uuiddeparta);
 
       if (result) {
@@ -31,6 +34,8 @@ interface IRequestDTO {
         uuiddeparta,departamento
 
       });
+
+      await redisCache.invalidation('API_REDIS_SUMMARY');
 
       await Repository.save(cliet);
 

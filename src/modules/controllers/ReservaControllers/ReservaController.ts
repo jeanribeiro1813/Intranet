@@ -14,7 +14,7 @@ export default class ReservaController {
 
     const funcao = await loadFuncao.executeDes();
 
-    return response.json(funcao.summary);
+    return response.json(funcao);
 
   }
 

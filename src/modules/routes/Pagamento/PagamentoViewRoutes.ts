@@ -18,7 +18,7 @@ pagamentoRouter.post('/filter',celebrate({
     
     [Segments.BODY]:{
 
-        uuidpagamento:Joi.string().uuid().required()
+        incidencia:Joi.string().required()
     }
 }),pagamentoViewController.filter);
 

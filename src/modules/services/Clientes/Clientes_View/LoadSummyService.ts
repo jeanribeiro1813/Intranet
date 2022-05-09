@@ -1,46 +1,28 @@
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository,getRepository } from 'typeorm'
+import AppError from '../../../../shared/errors/AppErrors';
+import Clientes from '../../../../shared/infra/typeorm/entities/Clientes';
 import ClientesRepository from '../../../../shared/infra/typeorm/repositories/ClientesRepository'
-
-interface IResponseDTO {
-    summary: IDescItemOfSummary[];
-}
-
-interface IDescItemOfSummary {
-
-    uuidcliente: string;
-    projeto:string;
-    cliente:string;
-
-}
-
-
-
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 class LoadClientesSummaryService{
-    public async summary (): Promise<IResponseDTO> {
+    public async summary (): Promise<Clientes[] | AppError> {
+
         const projetosrRepository = getCustomRepository(ClientesRepository);
+    
+        const redisCache = new RedisCache();
 
-        const user = await projetosrRepository.find({});
-
-        const summary = user.map((use) =>{
-            const DescItemOfSummary = {
-
-                uuidcliente:use.uuidcliente,
-                projeto:use.projeto,
-                cliente:use.cliente
-                
+        let responseDTO = await redisCache.recover<Clientes[]>('API_REDIS_SUMMARY')
 
 
-            }
-            return DescItemOfSummary;
-            }
-
-        )
-
-        const responseDTO = {
-            summary,
-        };
+        if(!responseDTO){
+  
+            responseDTO  = await projetosrRepository.find();
+            
+            //Criando um save Redis
+  
+            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+        }
 
         return responseDTO;
     }

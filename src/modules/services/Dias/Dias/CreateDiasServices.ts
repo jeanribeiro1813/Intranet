@@ -2,7 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Dias from '../../../../shared/infra/typeorm/entities/Dias';
 import DiasRepository from '../../../../shared/infra/typeorm/repositories/DiasRepository'
-
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -22,6 +22,8 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(DiasRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findById(uuiddiasuteis);
 
       if (result) {
@@ -35,6 +37,9 @@ interface IRequestDTO {
 
       });
 
+
+      await redisCache.invalidation('API_REDIS_SUMMARY');
+      
       await Repository.save(dia);
 
       return dia;

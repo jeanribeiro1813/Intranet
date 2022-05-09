@@ -11,7 +11,7 @@ export default class N3Controller {
       
     const funcao = await services.read();
 
-    return response.json(funcao.summary);
+    return response.json(funcao);
 
   }
 

@@ -1,49 +1,26 @@
+import Adv from "../../../../shared/infra/typeorm/entities/Adv";
 import { getCustomRepository } from "typeorm";
 import AdvRepository from '../../../../shared/infra/typeorm/repositories/AdvRepository'
-
-interface IResponseDTO {
-    summary: IDescItemOfSummary[];
-}
-
-interface IDescItemOfSummary {
-
-    codadv: string;
-    cod_page:number;
-    desc_adv: string;
-    cod_adv: string;
-  
-
-}
-
-
-
+import AppError from "../../../../shared/errors/AppErrors";
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 class LoadClientesSummaryService{
-    public async summary (): Promise<IResponseDTO> {
+    public async summary (): Promise<Adv[] | AppError> {
         const projetosrRepository = getCustomRepository(AdvRepository);
 
-        const user = await projetosrRepository.find({});
+        const redisCache = new RedisCache();
 
-        const summary = user.map((use) =>{
-            const DescItemOfSummary = {
+        let responseDTO = await redisCache.recover<Adv[]>('API_REDIS_SUMMARY')
 
-                codadv:use.codadv,
-                cod_page:use.cod_page,
-                desc_adv:use.desc_adv,
-                cod_adv:use.cod_adv,
-                
+        if(!responseDTO){
 
+            responseDTO  = await projetosrRepository.find();
+            
+            //Criando um save Redis
 
-            }
-            return DescItemOfSummary;
-            }
-
-        )
-
-        const responseDTO = {
-            summary,
-        };
+            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+        }
 
         return responseDTO;
     }

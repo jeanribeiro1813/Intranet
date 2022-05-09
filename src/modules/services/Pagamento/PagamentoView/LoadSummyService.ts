@@ -8,6 +8,7 @@ interface IResponseDTO {
 interface IDescItemOfSummary {
 
     uuidpagamento: string;
+    linha:number;
     cliente:string;
     empresa: string;
     departamento: string;  
@@ -37,7 +38,8 @@ interface IDescItemOfSummary {
 
 
 class LoadPagamentoSummaryService{
-    public async executeDes (): Promise<IResponseDTO> {
+    public async execute (): Promise<IResponseDTO> {
+
         const projetosrRepository = getCustomRepository(PagamentoViewRepository);
 
         const user = await projetosrRepository.find({});
@@ -48,6 +50,7 @@ class LoadPagamentoSummaryService{
                 
 
                 uuidpagamento:use.uuidpagamento,
+                linha:use.linha,
                 cliente:use.cliente,
                 empresa:use.empresa,
                 departamento:use.departamento,
@@ -78,11 +81,11 @@ class LoadPagamentoSummaryService{
 
         )
 
-        const responseDTO = {
+        const responseDTO : any = {
             summary,
         };
 
-        return responseDTO;
+        return responseDTO.summary;
     }
 }
 

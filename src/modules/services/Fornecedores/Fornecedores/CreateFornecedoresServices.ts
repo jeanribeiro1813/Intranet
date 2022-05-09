@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Fornecedores from '../../../../shared/infra/typeorm/entities/Fornecedores';
 import FornecedoresRepository from '../../../../shared/infra/typeorm/repositories/FornecedoresRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -29,6 +30,8 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(FornecedoresRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findById(uuidusuario);
 
       if (result) {
@@ -41,6 +44,8 @@ interface IRequestDTO {
         uuidusuario,usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar
 
       });
+
+      await redisCache.invalidation('API_REDIS_SUMMARY');
 
       await Repository.save(fornecedor);
 

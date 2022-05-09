@@ -1,47 +1,30 @@
 import { getCustomRepository } from "typeorm";
 import ContratoRepository from '../../../../shared/infra/typeorm/repositories/ContratoRepository'
-
-interface IResponseDTO {
-    summary: IDescItemOfSummary[];
-}
-
-interface IDescItemOfSummary {
-
-    uuidcontrato: string;
-    contrato:string;
-  
-
-}
-
-
-
+import Contrato from '../../../../shared/infra/typeorm/entities/Contrato';
+import AppError from '../../../../shared/errors/AppErrors';
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 class LoadClientesSummaryService{
-    public async summary (): Promise<IResponseDTO> {
+    public async summary (): Promise<Contrato[] | AppError> {
+      
         const projetosrRepository = getCustomRepository(ContratoRepository);
 
-        const user = await projetosrRepository.find({});
+        const redisCache = new RedisCache();
 
-        const summary = user.map((use) =>{
-            const DescItemOfSummary = {
-
-                uuidcontrato:use.uuidcontrato,
-                contrato:use.contrato,
-    
-                
+        let responseDTO = await redisCache.recover<Contrato[]>('API_REDIS_SUMMARY')
 
 
-            }
-            return DescItemOfSummary;
-            }
-
-        )
-
-        const responseDTO = {
-            summary,
-        };
-
+        if(!responseDTO){
+  
+            responseDTO  = await projetosrRepository.find();
+            
+            //Criando um save Redis
+  
+            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+        }
+        
+        
         return responseDTO;
     }
 }

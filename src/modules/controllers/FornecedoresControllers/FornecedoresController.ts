@@ -14,7 +14,7 @@ export default class FornecedoresController {
 
     const funcao = await loadFuncao.summary();
 
-    return response.json(funcao.summary);
+    return response.json(funcao);
 
   }
 

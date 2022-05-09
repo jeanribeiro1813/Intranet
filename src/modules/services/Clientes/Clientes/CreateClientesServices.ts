@@ -2,7 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Clientes from '../../../../shared/infra/typeorm/entities/Clientes';
 import ClientesRepository from '../../../../shared/infra/typeorm/repositories/ClientesRepository'
-
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -20,6 +20,8 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(ClientesRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findById(uuidcliente);
 
       if (result) {
@@ -33,6 +35,8 @@ interface IRequestDTO {
 
 
       });
+
+      await redisCache.invalidation('API_REDIS_SUMMARY');
 
       await Repository.save(cliet);
 

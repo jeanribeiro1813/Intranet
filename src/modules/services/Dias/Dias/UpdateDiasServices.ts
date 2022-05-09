@@ -2,7 +2,7 @@ import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Dias from '../../../../shared/infra/typeorm/entities/Dias';
 import DiasRepository from '../../../../shared/infra/typeorm/repositories/DiasRepository'
-
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 interface IRequestDTO {
@@ -21,12 +21,16 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(DiasRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findOne(uuiddiasuteis);
 
       if (!result) {
         throw new AppError ('client não existe',404);
       }
 
+      
+      await redisCache.invalidation('API_REDIS_SUMMARY');
 
       result.ano = ano ? ano : result.ano;
       result.mes = mes ? mes : result.mes;

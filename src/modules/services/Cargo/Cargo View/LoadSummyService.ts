@@ -1,48 +1,27 @@
 import { getCustomRepository } from "typeorm";
 import Cargo from '../../../../shared/infra/typeorm/entities/Cargo';
 import CargoRepository from '../../../../shared/infra/typeorm/repositories/CargoRepository'
-
-interface IResponseDTO {
-    summary: IDescItemOfSummary[];
-}
-
-interface IDescItemOfSummary {
-
-    uuidcargo: string;
-    cargo:string;
-    cod_cargo:number;
-
-}
-
-
-
+import RedisCache from '../../../../shared/cache/RedisCache';
+import AppError from '../../../../shared/errors/AppErrors';
 
 
 class LoadCargoSummaryService{
-    public async summary (): Promise<IResponseDTO> {
+    public async summary (): Promise< Cargo[] | AppError> {
         const projetosrRepository = getCustomRepository(CargoRepository);
-
-        const user = await projetosrRepository.find({});
-
-        const summary = user.map((use) =>{
-            const DescItemOfSummary = {
-
-                uuidcargo:use.uuidcargo,
-                cargo:use.cargo,
-                cod_cargo:use.cod_cargo
-                
+        
+        const redisCache = new RedisCache();
+        
+        let responseDTO = await redisCache.recover<Cargo[]>('API_REDIS_SUMMARY')
 
 
-            }
-            return DescItemOfSummary;
-            }
-
-        )
-
-        const responseDTO = {
-            summary,
-        };
-
+        if(!responseDTO){
+  
+            responseDTO  = await projetosrRepository.find();
+            
+            //Criando um save Redis
+  
+            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+        }
         return responseDTO;
     }
 }

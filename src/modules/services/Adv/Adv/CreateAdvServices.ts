@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Adv from '../../../../shared/infra/typeorm/entities/Adv';
 import AdvRepository from '../../../../shared/infra/typeorm/repositories/AdvRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -21,6 +22,8 @@ interface IRequestDTO {
 
       const clientesRepository = getCustomRepository(AdvRepository);
 
+      const redisCache = new RedisCache();
+
       const checkUserExists = await clientesRepository.findById(codadv);
 
       if (checkUserExists) {
@@ -33,6 +36,8 @@ interface IRequestDTO {
         cod_page,desc_adv,cod_adv
 
       });
+
+      await redisCache.invalidation('API_REDIS_SUMMARY');
 
       await clientesRepository.save(cliet);
 

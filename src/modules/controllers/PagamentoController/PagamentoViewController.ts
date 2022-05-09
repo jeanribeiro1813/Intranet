@@ -9,20 +9,23 @@ import LoadFilterServices  from '../../services/Pagamento/PagamentoView/LoadFilt
 export default class CargoController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
+
     const loadFuncao = new LoadSummyService();
 
-    const funcao = await loadFuncao.executeDes();
+    const funcao = await loadFuncao.execute();
+    
+    console.log(funcao)
 
-    return response.json(funcao.summary);
+    return response.json(funcao);
 
   }
   public async filter(request: Request, response: Response): Promise<Response> {
 
-    const {data_pagto} = request.body
+    const {incidencia} = request.body
 
     const loadFuncao = new LoadFilterServices();
 
-    const funcao = await loadFuncao.filter({data_pagto});
+    const funcao = await loadFuncao.filter({incidencia});
 
     return response.json(funcao);
 

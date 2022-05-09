@@ -2,7 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Contrato from '../../../../shared/infra/typeorm/entities/Contrato';
 import ContratoRepository from '../../../../shared/infra/typeorm/repositories/ContratoRepository'
-
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -21,6 +21,8 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(ContratoRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findById(uuidcontrato);
 
       if (result) {
@@ -33,6 +35,8 @@ interface IRequestDTO {
         uuidcontrato,contrato
 
       });
+
+      await redisCache.invalidation('API_REDIS_SUMMARY');
 
       await Repository.save(cliet);
 

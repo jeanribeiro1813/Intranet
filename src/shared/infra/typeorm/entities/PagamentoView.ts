@@ -11,6 +11,9 @@ class PagamentoView{
     @PrimaryGeneratedColumn()
     uuidpagamento!: string;
 
+    @Column('integer')
+    linha!: number;
+
     @Column()
     cliente!:string;
 

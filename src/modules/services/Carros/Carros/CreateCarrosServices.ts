@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Carros from '../../../../shared/infra/typeorm/entities/Carros';
 import CarrosRepository from '../../../../shared/infra/typeorm/repositories/CarrosRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -27,6 +28,9 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(CarrosRepository);
 
+      const redisCache = new RedisCache();
+
+
       const result = await Repository.findById(id_uuid);
 
       if (result) {
@@ -39,6 +43,8 @@ interface IRequestDTO {
 
 
       });
+
+      await redisCache.invalidation('API_REDIS_SUMMARY');
 
       await Repository.save(carros);
 

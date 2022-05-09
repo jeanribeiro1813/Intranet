@@ -2,6 +2,7 @@ import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Cargo from '../../../../shared/infra/typeorm/entities/Cargo';
 import CargoRepository from '../../../../shared/infra/typeorm/repositories/CargoRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -17,6 +18,8 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(CargoRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findOne(uuidcargo);
 
       if (!result) {
@@ -24,7 +27,8 @@ interface IRequestDTO {
       }
 
 
-     
+      await redisCache.invalidation('API_REDIS_SUMMARY');
+
       result.cargo = cargo ? cargo : result.cargo;
       result.cod_cargo = cod_cargo ? cod_cargo: result.cod_cargo
 

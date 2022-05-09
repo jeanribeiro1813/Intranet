@@ -1,52 +1,31 @@
+import AppError from "../../../../shared/errors/AppErrors";
 import { getCustomRepository } from "typeorm";
 import Atividades from '../../../../shared/infra/typeorm/entities/Atividades';
 import AtividadeRepository from '../../../../shared/infra/typeorm/repositories/AtividadeRepository'
-
-interface IResponseDTO {
-    summary: IDescItemOfSummary[];
-}
-
-interface IDescItemOfSummary {
-
-    uuidatividade: string;
-    atividade:string;
-    cod_atv:string;
-
-  
-
-}
-
-
-
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 class LoadClientesSummaryService{
-    public async summary (): Promise<IResponseDTO> {
+    public async summary (): Promise<Atividades []| AppError> {
         const projetosrRepository = getCustomRepository(AtividadeRepository);
+        
+        const redisCache = new RedisCache();
 
-        const user = await projetosrRepository.find({order:{
-            cod_atv:'ASC'
-        }});
-
-        const summary = user.map((use) =>{
-            const DescItemOfSummary = {
-
-                uuidatividade:use.uuidatividade,
-                atividade:use.atividade,
-                cod_atv: use.cod_atv,
-                
+        let responseDTO = await redisCache.recover<Atividades[]>('API_REDIS_SUMMARY')
 
 
-            }
-            return DescItemOfSummary;
-            }
+        if(!responseDTO){
 
-        )
+            responseDTO  = await projetosrRepository.find({order:{
+                cod_atv:'ASC'
+            }});
+            
+            //Criando um save Redis
 
-        const responseDTO = {
-            summary,
-        };
-
+            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+        }
+        
+        
         return responseDTO;
     }
 }
