@@ -1,6 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import PagamentoViewRepository from '../../../../shared/infra/typeorm/repositories/PagamentoViewRepository'
 import PagamentoView from '../../../../shared/infra/typeorm/entities/PagamentoView';
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 class LoadPagamentoSummaryService{
@@ -8,9 +9,21 @@ class LoadPagamentoSummaryService{
 
         const projetosrRepository = getCustomRepository(PagamentoViewRepository);
 
-        const user = await projetosrRepository.find({});
+        const redisCache = new RedisCache();
 
-        return user;
+        let responseDTO = await redisCache.recover<PagamentoView[]>('API_REDIS_SUMMARY')
+
+
+        if(!responseDTO){
+
+            responseDTO  = await projetosrRepository.find();
+            
+            //Criando um save Redis
+
+            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+        }
+        
+        return responseDTO;
     }
 }
 
