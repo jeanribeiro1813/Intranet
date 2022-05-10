@@ -35,7 +35,7 @@ celebrate({
 
 
 //index
-pagamentoRouter.delete('/index/:uuidpagamento',isAutenticacion,
+pagamentoRouter.get('/index/:uuidpagamento',isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
         uuidpagamento: Joi.string().uuid().required(),
