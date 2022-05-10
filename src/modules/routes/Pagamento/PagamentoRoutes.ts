@@ -34,14 +34,6 @@ celebrate({
 }), pagamentoController.delete);
 
 
-//index
-pagamentoRouter.get('/index/:uuidpagamento',isAutenticacion,
-celebrate({
-    [Segments.PARAMS]:{
-        uuidpagamento: Joi.string().uuid().required(),
-    }
-}), pagamentoController.index);
-
 
 
 

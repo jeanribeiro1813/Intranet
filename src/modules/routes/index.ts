@@ -16,7 +16,6 @@ import fatview from './Faturamento/fatu.View.Routes';
 import departRouter from './Departamento/DepartamentoRoutes';
 import atividadeRouter from './Atividade/AtividadeRoutes';
 import contratoRouter from './Contrato/ContratoRoutes';
-import funcionarioRouter from './Funcionarios/FuncionariosRoutes';
 import advRouter from './Adv/AdvRoutes';
 import pagamentoRouter from './Pagamento/PagamentoRoutes';
 import pagamentoViewRouter from './Pagamento/PagamentoViewRoutes';
@@ -56,7 +55,6 @@ routes.use('/profile',profileRouter);
 routes.use('/depart',departRouter);
 routes.use('/atividade',atividadeRouter);
 routes.use('/contrato',contratoRouter);
-routes.use('/funcionario',funcionarioRouter);
 routes.use('/adv',advRouter);
 
 routes.use('/pagamento',pagamentoRouter);

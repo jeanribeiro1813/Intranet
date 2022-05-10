@@ -10,7 +10,6 @@ interface IRequestDTO {
   uuidpagamento: string;
   empresa: string; 
   uuidprojeto:string;
-  uuidcontrato:string;
   n1: string;
   n2:string;
   n3: string;
@@ -30,7 +29,7 @@ interface IRequestDTO {
 
   class CreatePagamentoService {
 
-    public async execute({ uuidpagamento, empresa, uuidprojeto,uuidcontrato, n1, n2 , n3, uuidcolab_forne , valor_pago
+    public async execute({ uuidpagamento, empresa, uuidprojeto, n1, n2 , n3, uuidcolab_forne , valor_pago
       ,data_pagto , data_vecto,uuidbancos ,incidencia ,parcelas_n ,n_doc_pagto , uuidformapagto ,status ,obs}: IRequestDTO): Promise<Pagamento | AppError> {
 
       const clientesRepository = getCustomRepository(PagamentoRepository);
@@ -44,7 +43,7 @@ interface IRequestDTO {
 
       const cliet =  clientesRepository.create({
 
-        uuidpagamento, empresa, uuidprojeto,uuidcontrato, n1, n2 , n3, uuidcolab_forne , valor_pago
+        uuidpagamento, empresa, uuidprojeto, n1, n2 , n3, uuidcolab_forne , valor_pago
         ,data_pagto , data_vecto,uuidbancos ,incidencia ,parcelas_n ,n_doc_pagto , uuidformapagto ,status ,obs
       });
 

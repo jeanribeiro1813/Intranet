@@ -5,8 +5,6 @@ import UsersRepository from '../../../../shared/infra/typeorm/repositories/Users
 import { hash } from 'bcryptjs';
 
 
-
-
 interface IRequestDTO {
     login:string ,   
     senha:string ,
@@ -40,11 +38,10 @@ interface IRequestDTO {
 
   }
 
-  class CreateUsersService {
+  class UpdatePaginasService {
 
     public async execute({ 
-        login,   
-        senha,
+
         usuario,
         n_cnh,
         dt_validade,
@@ -73,64 +70,26 @@ interface IRequestDTO {
         va_vr
     }: IRequestDTO): Promise<Users> {
 
+        const Repository = getCustomRepository(UsersRepository);
 
-      const usersRepository = getCustomRepository(UsersRepository);
-
-      const loginUserExists = await usersRepository.findByLogin(login);
-
-      if (loginUserExists) {
-        throw new AppError('Login já cadastrado.',409);
-
+        const result = await Repository.findOne({cod_page_uuid});
+  
+        if (!result) {
+          throw new AppError ('client não existe',404);
+        }
+  
+  
+        result.pagina = pagina ? pagina : result.pagina;
+        result.descricao = descricao ? descricao : result.descricao;
+        result.cod_page = cod_page ? cod_page : result.cod_page;
+        result.banner = banner ? banner : result.banner;
+    
+  
+        await Repository.save(result);
+  
+        return result;
       }
-
-      const checkUserExists = await usersRepository.findByEmail(email);
-
-
-      if (checkUserExists) {
-        throw new AppError('Email já cadastrado.',409);
-
-      }
-
-      const hashedPassword = await hash(senha, 8);
-
-      const user =  usersRepository.create({
-        login,   
-        senha: hashedPassword,
-        usuario,
-        n_cnh,
-        dt_validade,
-        email,
-        ramal,
-        status,
-        h_status,
-        last_log,
-        log_time,
-        dt_nasc,
-        contato,
-        contato2,
-        uuidcargo,
-        uuiddeparta,
-        alarm_id,
-        cod_usuario,
-        avatar,
-        cpf_cnpj,
-        enquadramento,
-        carga_horaria,
-        proventos,
-        vt,
-        banco,
-        seguro,
-        cv_medico,
-        tp_va_vr,
-        va_vr
-
-      });
-
-
-      await usersRepository.save(user);
-
-      return user;
     }
-  }
-
-  export default CreateUsersService;
+  
+    export default UpdatePaginasService;
+  
