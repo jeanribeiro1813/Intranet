@@ -27,7 +27,7 @@ interface IRequestDTO {
       }
 
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_CARGO');
 
       result.cargo = cargo ? cargo : result.cargo;
       result.cod_cargo = cod_cargo ? cod_cargo: result.cod_cargo

@@ -35,7 +35,7 @@ interface IRequestDTO {
         throw new AppError ('fornecedores não existe',404);
       }
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_FORNECEDORES');
 
       result.usuario = usuario ? usuario : result.usuario;
       result.tp_doc = tp_doc ? tp_doc : result.tp_doc;

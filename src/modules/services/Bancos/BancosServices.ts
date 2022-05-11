@@ -38,7 +38,7 @@ interface IRequestDelete {
 
       });
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_BANCO');
 
       await repository.save(result);
 
@@ -51,7 +51,7 @@ interface IRequestDelete {
 
       const redisCache = new RedisCache();
 
-      let responseDTO = await redisCache.recover<Entitie[]>('API_REDIS_SUMMARY')
+      let responseDTO = await redisCache.recover<Entitie[]>('API_REDIS_BANCO')
 
 
       if(!responseDTO){
@@ -60,7 +60,7 @@ interface IRequestDelete {
           
           //Criando um save Redis
 
-          await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+          await redisCache.save('API_REDIS_BANCO',responseDTO)
       }
       
       
@@ -83,7 +83,7 @@ interface IRequestDelete {
         throw new AppError ('Dados não existe',404);
       }
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_BANCO');
 
       result.codigo = codigo ? codigo : result.codigo;
       result.descricao = descricao ? descricao : result.descricao;
@@ -108,7 +108,7 @@ interface IRequestDelete {
         throw new AppError('Não Existe ',402);
       }
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_BANCO');
       
       await repository.remove(result);
     }

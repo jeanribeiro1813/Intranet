@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Paginas from '../../../../shared/infra/typeorm/entities/Paginas';
 import PaginaRepository from '../../../../shared/infra/typeorm/repositories/PaginaRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -23,6 +24,8 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(PaginaRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findById(cod_page_uuid);
 
       if (result) {
@@ -35,6 +38,8 @@ interface IRequestDTO {
         cod_page_uuid,pagina,descricao,banner,cod_page
 
       });
+
+      await redisCache.invalidation('API_REDIS_PAGINAS');
 
       await Repository.save(cliet);
 

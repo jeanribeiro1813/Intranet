@@ -35,7 +35,7 @@ interface IRequestDTO {
 
       });
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_DEPARTAMENTO');
 
       await Repository.save(cliet);
 

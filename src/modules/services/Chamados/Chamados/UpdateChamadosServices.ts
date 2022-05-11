@@ -35,7 +35,7 @@ interface IRequestDTO {
         throw new AppError ('chamados não existe',404);
       }
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_CHAMADOS');
 
       result.cod_usuario = cod_usuario ? cod_usuario : result.cod_usuario;
       result.equipamento = equipamento ? equipamento : result.equipamento;

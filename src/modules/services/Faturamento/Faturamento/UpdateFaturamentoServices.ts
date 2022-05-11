@@ -34,7 +34,7 @@ interface IRequestDTO {
         throw new AppError ('fatura não existe',404);
       }
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_FAT');
 
 
       result.uuidfat = uuidfat ? uuidfat : result.uuidfat;

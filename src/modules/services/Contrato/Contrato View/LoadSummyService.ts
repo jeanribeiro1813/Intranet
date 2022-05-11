@@ -12,7 +12,7 @@ class LoadClientesSummaryService{
 
         const redisCache = new RedisCache();
 
-        let responseDTO = await redisCache.recover<Contrato[]>('API_REDIS_SUMMARY')
+        let responseDTO = await redisCache.recover<Contrato[]>('API_REDIS_CONTRATO')
 
 
         if(!responseDTO){
@@ -21,7 +21,7 @@ class LoadClientesSummaryService{
             
             //Criando um save Redis
   
-            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+            await redisCache.save('API_REDIS_CONTRATO',responseDTO)
         }
         
         

@@ -1,50 +1,30 @@
 import { getCustomRepository } from "typeorm";
 import Manutencoes from '../../../../shared/infra/typeorm/entities/Manutencoes';
 import ManuntencoesRepository from '../../../../shared/infra/typeorm/repositories/ManuntencoesRepository'
-
-interface IResponseDTO {
-    summary: IDescItemOfSummary[];
-}
-
-interface IDescItemOfSummary {
-
-    cod_manutencao_uuid: string;
-    descricao:string;
-    valor: string;
-    cod_manutencao: number;
-
-}
-
-
-
+import RedisCache from '../../../../shared/cache/RedisCache';
+import AppError from "../../../../shared/errors/AppErrors";
 
 
 class LoadManuntencaoSummaryService{
-    public async executeDes (): Promise<IResponseDTO> {
+    public async executeDes (): Promise<Manutencoes[] | AppError> {
         const projetosrRepository = getCustomRepository(ManuntencoesRepository);
 
-        const user = await projetosrRepository.find({});
-
-        const summary = user.map((use) =>{
-            const DescItemOfSummary = {
-
-                cod_manutencao_uuid:use.cod_manutencao_uuid,
-                descricao:use.descricao,
-                valor:use.valor,
-                cod_manutencao:use.cod_manutencao,
-                
-
-
-            }
-            return DescItemOfSummary;
-            }
-
-        )
-
-        const responseDTO = {
-            summary,
-        };
-
+       
+        const redisCache = new RedisCache();
+      
+        let responseDTO = await redisCache.recover<Manutencoes[]>('API_REDIS_MANUTENCAO')
+  
+  
+        if(!responseDTO){
+  
+            responseDTO  = await projetosrRepository.find();
+            
+            //Criando um save Redis
+  
+            await redisCache.save('API_REDIS_MANUTENCAO',responseDTO)
+        }
+        
+        
         return responseDTO;
     }
 }

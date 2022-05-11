@@ -33,7 +33,7 @@ interface IRequestDTO {
         throw new AppError ('carros não existe',404);
       }
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_CARROS');
 
       result.placa = placa ? placa : result.placa;
       result.carro = carro ? carro : result.carro;

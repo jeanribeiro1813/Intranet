@@ -30,7 +30,7 @@ interface IRequestDTO {
       }
 
       
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_DIAS');
 
       result.ano = ano ? ano : result.ano;
       result.mes = mes ? mes : result.mes;

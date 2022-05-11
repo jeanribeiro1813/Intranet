@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Manutencoes from '../../../../shared/infra/typeorm/entities/Manutencoes';
 import ManuntencoesRepository from '../../../../shared/infra/typeorm/repositories/ManuntencoesRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -21,6 +22,8 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(ManuntencoesRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findById(cod_manutencao_uuid);
 
       if (result) {
@@ -33,6 +36,8 @@ interface IRequestDTO {
         cod_manutencao_uuid,descricao,valor,cod_manutencao
 
       });
+
+      await redisCache.invalidation('API_REDIS_MANUTENCAO');
 
       await Repository.save(cliet);
 

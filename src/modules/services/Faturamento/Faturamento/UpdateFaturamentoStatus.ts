@@ -41,7 +41,7 @@ class UpdateFaturamentoServices{
       
       const createfaturaService = new CreatefaturaService();
       
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_FAT');
       
       result.forEach(async function(dados){
         dados.status = status;

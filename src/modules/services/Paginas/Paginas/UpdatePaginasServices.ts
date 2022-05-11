@@ -2,6 +2,7 @@ import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Paginas from '../../../../shared/infra/typeorm/entities/Paginas';
 import PaginaRepository from '../../../../shared/infra/typeorm/repositories/PaginaRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -22,12 +23,15 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(PaginaRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findOne(cod_page_uuid);
 
       if (!result) {
         throw new AppError ('client não existe',404);
       }
 
+      await redisCache.invalidation('API_REDIS_PAGINAS');
 
       result.pagina = pagina ? pagina : result.pagina;
       result.descricao = descricao ? descricao : result.descricao;

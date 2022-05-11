@@ -11,7 +11,7 @@ class LoadPagamentoSummaryService{
 
         const redisCache = new RedisCache();
 
-        let responseDTO = await redisCache.recover<PagamentoView[]>('API_REDIS_SUMMARY')
+        let responseDTO = await redisCache.recover<PagamentoView[]>('API_REDIS_PAGAMENTO')
 
 
         if(!responseDTO){
@@ -20,7 +20,7 @@ class LoadPagamentoSummaryService{
             
             //Criando um save Redis
 
-            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+            await redisCache.save('API_REDIS_PAGAMENTO',responseDTO)
         }
         
         return responseDTO;

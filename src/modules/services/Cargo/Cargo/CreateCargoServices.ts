@@ -36,7 +36,7 @@ interface IRequestDTO {
 
       });
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_CARGO');
 
       await Repository.save(cargoService);
 

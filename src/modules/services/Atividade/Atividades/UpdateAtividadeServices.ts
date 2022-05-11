@@ -28,7 +28,7 @@ interface IRequestDTO {
         throw new AppError ('client não existe',404);
       }
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_ATIVIDADE');
 
       result.atividade = atividade ? atividade : result.atividade;
       result.cod_atv = cod_atv ? cod_atv : result.cod_atv;

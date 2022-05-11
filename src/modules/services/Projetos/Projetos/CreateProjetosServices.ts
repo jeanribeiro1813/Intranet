@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Projetos from '../../../../shared/infra/typeorm/entities/Projetos';
 import ProjetosRepository from '../../../../shared/infra/typeorm/repositories/ProjetosRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -51,6 +52,8 @@ interface IRequestDTO {
 
       const projRepository = getCustomRepository(ProjetosRepository);
 
+      const redisCache = new RedisCache();
+
       const checkUserExists = await projRepository.findByCode(uuidprojeto);
 
       if (checkUserExists) {
@@ -76,6 +79,8 @@ interface IRequestDTO {
       cod_proj
 
       });
+
+      await redisCache.invalidation('API_REDIS_PROJETOS');
 
       await projRepository.save(project);
 

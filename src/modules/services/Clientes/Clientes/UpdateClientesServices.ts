@@ -27,7 +27,7 @@ interface IRequestDTO {
         throw new AppError ('client não existe',404);
       }
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_CLIENTES');
       
       result.projeto = projeto ? projeto : result.projeto;
       result.cliente = cliente ? cliente : result.cliente;

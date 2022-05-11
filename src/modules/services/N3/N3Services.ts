@@ -2,13 +2,9 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../shared/errors/AppErrors';
 import Entitie from '../../../shared/infra/typeorm/entities/N3';
 import Repository from '../../../shared/infra/typeorm/repositories/N3Repository'
+import RedisCache from '../../../shared/cache/RedisCache';
 
 
-interface IDescItemOfSummary {
-  uuidn3: string;
-  codigo:string;
-  descricao: string;
-}
 
 interface IRequestDTO {
   uuidn3: string;
@@ -21,15 +17,15 @@ interface IRequestDelete {
  
 }
 
-interface IResponseDTO {
-  summary: IDescItemOfSummary[];
-}
+
 
   class CreateServices {
 
     public async create({uuidn3, codigo, descricao}: IRequestDTO): Promise<Entitie | Error> {
 
       const repository = getCustomRepository(Repository);
+
+      const redisCache = new RedisCache();
 
       const checkUserExists = await repository.findById(codigo);
 
@@ -44,33 +40,32 @@ interface IResponseDTO {
 
       });
 
+      await redisCache.invalidation('API_REDIS_N3');
+  
       await repository.save(result);
 
       return result;
     }
 
-    public async read (): Promise<IResponseDTO> {
+    public async read (): Promise<Entitie[] | AppError> {
 
       const repository = getCustomRepository(Repository);
 
-      const list = await repository.find({});
+      const redisCache = new RedisCache();
 
-      const summary = list.map((obj) =>{
-          const DescItemOfSummary = {
-              uuidn3:obj.uuidn3,
-              codigo:obj.codigo,
-              descricao:obj.descricao
+      let responseDTO = await redisCache.recover<Entitie[]>('API_REDIS_N3')
 
-          }
-          return DescItemOfSummary;
-          }
 
-      )
+      if(!responseDTO){
 
-      const responseDTO = {
-          summary,
-      };
+          responseDTO  = await repository.find();
+          
+          //Criando um save Redis
 
+          await redisCache.save('API_REDIS_N3',responseDTO)
+      }
+      
+      
       return responseDTO;
     }
 
@@ -78,11 +73,16 @@ interface IResponseDTO {
 
       const repository = getCustomRepository(Repository);
 
+      const redisCache = new RedisCache();
+
+
       const result = await repository.findOne(uuidn3);
 
       if (!result) {
         throw new AppError ('Dados não existe',404);
       }
+
+      await redisCache.invalidation('API_REDIS_N3');
 
 
       result.codigo = codigo ? codigo : result.codigo;
@@ -99,11 +99,16 @@ interface IResponseDTO {
 
       const repository = getCustomRepository(Repository);
 
+      const redisCache = new RedisCache();
+
       const result = await repository.findOne(uuidn3);
 
       if (!result) {
         throw new AppError('Não Existe ',402);
       }
+
+      await redisCache.invalidation('API_REDIS_N3');
+
       await repository.remove(result);
     }
 

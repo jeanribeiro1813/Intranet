@@ -10,7 +10,7 @@ class LoadCarrosSummaryService{
 
         const redisCache = new RedisCache();
 
-        let responseDTO = await redisCache.recover<Carros[]>('API_REDIS_SUMMARY')
+        let responseDTO = await redisCache.recover<Carros[]>('API_REDIS_CARROS')
 
 
         if(!responseDTO){
@@ -19,7 +19,7 @@ class LoadCarrosSummaryService{
             
             //Criando um save Redis
   
-            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+            await redisCache.save('API_REDIS_CARROS',responseDTO)
         }
         
         

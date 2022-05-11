@@ -11,7 +11,7 @@ class LoadClientesSummaryService{
 
         const redisCache = new RedisCache();
 
-        let responseDTO = await redisCache.recover<Adv[]>('API_REDIS_SUMMARY')
+        let responseDTO = await redisCache.recover<Adv[]>('API_REDIS_ADv')
 
         if(!responseDTO){
 
@@ -19,7 +19,7 @@ class LoadClientesSummaryService{
             
             //Criando um save Redis
 
-            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+            await redisCache.save('API_REDIS_ADv',responseDTO)
         }
 
         return responseDTO;

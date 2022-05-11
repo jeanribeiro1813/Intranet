@@ -15,7 +15,7 @@ class LoadSummary{
 
         const redisCache = new RedisCache();
 
-        let responseDTO = await redisCache.recover<Chamados[]>('API_REDIS_SUMMARY')
+        let responseDTO = await redisCache.recover<Chamados[]>('API_REDIS_CHAMADOS')
 
 
         if(!responseDTO){
@@ -24,7 +24,7 @@ class LoadSummary{
             
             //Criando um save Redis
   
-            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+            await redisCache.save('API_REDIS_CHAMADOS',responseDTO)
         }
         
         

@@ -38,7 +38,7 @@ interface IRequestDTO {
       });
 
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_DIAS');
       
       await Repository.save(dia);
 

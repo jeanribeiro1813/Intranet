@@ -44,7 +44,7 @@ interface IRequestDTO {
 
       });
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_CARROS');
 
       await Repository.save(carros);
 

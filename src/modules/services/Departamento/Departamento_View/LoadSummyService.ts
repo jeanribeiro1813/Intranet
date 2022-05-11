@@ -1,47 +1,30 @@
 import { getCustomRepository } from "typeorm";
 import Departamento from '../../../../shared/infra/typeorm/entities/Departamento';
 import DepartamentoRepository from '../../../../shared/infra/typeorm/repositories/DepartamentoRepository'
-
-interface IResponseDTO {
-    summary: IDescItemOfSummary[];
-}
-
-interface IDescItemOfSummary {
-
-    uuiddeparta: string;
-    departamento:string;
-  
-
-}
-
-
-
+import RedisCache from '../../../../shared/cache/RedisCache';
+import AppError from "../../../../shared/errors/AppErrors";
 
 
 class LoadClientesSummaryService{
-    public async summary (): Promise<IResponseDTO> {
+    
+    public async summary (): Promise<Departamento[]| AppError> {
         const projetosrRepository = getCustomRepository(DepartamentoRepository);
 
-        const user = await projetosrRepository.find({});
+        const redisCache = new RedisCache();
 
-        const summary = user.map((use) =>{
-            const DescItemOfSummary = {
-
-                uuiddeparta:use.uuiddeparta,
-                departamento:use.departamento,
-                
+        let responseDTO = await redisCache.recover<Departamento[]>('API_REDIS_DEPARTAMENTO')
 
 
-            }
-            return DescItemOfSummary;
-            }
+        if(!responseDTO){
 
-        )
+            responseDTO  = await projetosrRepository.find();
+            
+            //Criando um save Redis
 
-        const responseDTO = {
-            summary,
-        };
-
+            await redisCache.save('API_REDIS_DEPARTAMENTO',responseDTO)
+        }
+        
+        
         return responseDTO;
     }
 }

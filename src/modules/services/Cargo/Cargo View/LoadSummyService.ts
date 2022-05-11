@@ -11,7 +11,7 @@ class LoadCargoSummaryService{
         
         const redisCache = new RedisCache();
         
-        let responseDTO = await redisCache.recover<Cargo[]>('API_REDIS_SUMMARY')
+        let responseDTO = await redisCache.recover<Cargo[]>('API_REDIS_CARGO')
 
 
         if(!responseDTO){
@@ -20,7 +20,7 @@ class LoadCargoSummaryService{
             
             //Criando um save Redis
   
-            await redisCache.save('API_REDIS_SUMMARY',responseDTO)
+            await redisCache.save('API_REDIS_CARGO',responseDTO)
         }
         return responseDTO;
     }

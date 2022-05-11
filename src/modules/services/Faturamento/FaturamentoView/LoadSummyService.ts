@@ -17,7 +17,7 @@ class LoadFatSummaryService{
         const redisCache = new RedisCache();
         
 
-        let fatview = await redisCache.recover<FaturamentoView[]>('API_REDIS_SUMMARY')
+        let fatview = await redisCache.recover<FaturamentoView[]>('API_REDIS_FAT')
 
         
 
@@ -27,7 +27,7 @@ class LoadFatSummaryService{
             
             //Criando um save Redis
 
-            await redisCache.save('API_REDIS_SUMMARY',fatview)
+            await redisCache.save('API_REDIS_FAT',fatview)
         }
 
         return fatview;

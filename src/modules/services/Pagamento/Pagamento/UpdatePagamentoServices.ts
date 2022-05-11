@@ -2,6 +2,7 @@ import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Pagamento from '../../../../shared/infra/typeorm/entities/Pagamento';
 import PagamentoRepository from '../../../../shared/infra/typeorm/repositories/PagamentoRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -33,11 +34,16 @@ interface IRequestDTO {
 
       const usersRepository = getCustomRepository(PagamentoRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await usersRepository.findOne(uuidpagamento);
 
       if (!result) {
         throw new AppError ('client não existe',404);
       }
+
+      await redisCache.invalidation('API_REDIS_PAGAMENTO');
+
       result.empresa = empresa ? empresa : result.empresa;
       result.uuidprojeto = uuidprojeto ? uuidprojeto : result.uuidprojeto;
       result.n1 = n1 ? n1 : result.n1;

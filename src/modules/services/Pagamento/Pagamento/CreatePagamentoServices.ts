@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Pagamento from '../../../../shared/infra/typeorm/entities/Pagamento';
 import PagamentoRepository from '../../../../shared/infra/typeorm/repositories/PagamentoRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 interface IRequestDTO {
@@ -34,6 +35,8 @@ interface IRequestDTO {
 
       const clientesRepository = getCustomRepository(PagamentoRepository);
 
+      const redisCache = new RedisCache();
+
       const checkUserExists = await clientesRepository.findByCode(uuidpagamento);
 
       if (checkUserExists) {
@@ -46,6 +49,9 @@ interface IRequestDTO {
         uuidpagamento, empresa, uuidprojeto, n1, n2 , n3, uuidcolab_forne , valor_pago
         ,data_pagto , data_vecto,uuidbancos ,incidencia ,parcelas_n ,n_doc_pagto , uuidformapagto ,status ,obs
       });
+
+
+      await redisCache.invalidation('API_REDIS_PAGAMENTO');
 
       await clientesRepository.save(cliet);
 

@@ -30,7 +30,7 @@ interface IRequestDTO {
       }
 
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_ADv');
 
       result.cod_page = cod_page ? cod_page : result.cod_page;
       result.desc_adv = desc_adv ? desc_adv : result.desc_adv;

@@ -24,7 +24,7 @@ interface IRequestDTO{
         throw new AppError('Não Existe ',402);
       }
 
-      await redisCache.invalidation('API_REDIS_SUMMARY');
+      await redisCache.invalidation('API_REDIS_ATIVIDADE');
 
       await Repository.remove(service);
       }

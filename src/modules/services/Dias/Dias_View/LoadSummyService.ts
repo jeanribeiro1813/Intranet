@@ -13,13 +13,13 @@ class LoadPagamentoSummaryService{
 
         const redisCache = new RedisCache();
 
-        let dias = await redisCache.recover<Dias[]>('API_REDIS_SUMMARY')
+        let dias = await redisCache.recover<Dias[]>('API_REDIS_DIAS')
 
         if(!dias){
             
             dias =  await Repository.find({});
 
-            await redisCache.save('API_REDIS_SUMMARY',dias)
+            await redisCache.save('API_REDIS_DIAS',dias)
 
         }
 

@@ -2,6 +2,7 @@ import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Projetos from '../../../../shared/infra/typeorm/entities/Projetos';
 import ProjetosRepository from '../../../../shared/infra/typeorm/repositories/ProjetosRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 interface IRequestDTO {
@@ -48,11 +49,15 @@ interface IRequestDTO {
 
       const usersRepository = getCustomRepository(ProjetosRepository);
 
+      const redisCache = new RedisCache();
+
       const projetos = await usersRepository.findOne(uuidprojeto);
 
       if (!projetos) {
         throw new AppError ('projetos não existe',404);
       }
+
+      await redisCache.invalidation('API_REDIS_PROJETOS');
 
       projetos.contrato = contrato ? contrato : projetos.contrato;
       projetos.data = data ? data : projetos.data;

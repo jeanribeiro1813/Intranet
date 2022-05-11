@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../shared/errors/AppErrors';
 import Entitie from '../../../shared/infra/typeorm/entities/FormPag';
 import Repository from '../../../shared/infra/typeorm/repositories/FormPagRepository';
+import RedisCache from '../../../shared/cache/RedisCache';
 
 
 interface IDescItemOfSummary {
@@ -30,6 +31,8 @@ interface IResponseDTO {
 
       const repository = getCustomRepository(Repository);
 
+      const redisCache = new RedisCache();
+
       const checkUserExists = await repository.findById(uuidformpag);
 
       if (checkUserExists) {
@@ -43,45 +46,51 @@ interface IResponseDTO {
 
       });
 
+
+      await redisCache.invalidation('API_REDIS_FORMPAG');
+
       await repository.save(result);
 
       return result;
     }
 
-    public async summary (): Promise<IResponseDTO> {
+    public async summary (): Promise<Entitie[] | AppError> {
 
       const repository = getCustomRepository(Repository);
 
-      const list = await repository.find({});
+      const redisCache = new RedisCache();
+      
+      let responseDTO = await redisCache.recover<Entitie[]>('API_REDIS_FORMPAG')
 
-      const summary = list.map((obj) =>{
-          const DescItemOfSummary = {
-              uuidformpag:obj.uuidformpag,
-              codigo:obj.codigo,
-              descricao:obj.descricao
 
-          }
-          return DescItemOfSummary;
-          }
+      if(!responseDTO){
 
-      )
+          responseDTO  = await repository.find();
+          
+          //Criando um save Redis
 
-      const responseDTO = {
-          summary,
-      };
-
+          await redisCache.save('API_REDIS_FORMPAG',responseDTO)
+      }
+      
+      
       return responseDTO;
+  
     }
+
 
     public async update({uuidformpag, codigo, descricao}: IRequestDTO): Promise<Entitie | Error> {
 
       const repository = getCustomRepository(Repository);
+
+      const redisCache = new RedisCache();
 
       const result = await repository.findOne(uuidformpag);
 
       if (!result) {
         throw new AppError ('Dados não existe',404);
       }
+
+      await redisCache.invalidation('API_REDIS_FORMPAG');
 
 
       result.codigo = codigo ? codigo : result.codigo;
@@ -98,11 +107,16 @@ interface IResponseDTO {
 
       const repository = getCustomRepository(Repository);
 
+      const redisCache = new RedisCache();
+
       const result = await repository.findOne({uuidformpag});
 
       if (!result) {
         throw new AppError('Não Existe ',402);
       }
+
+      await redisCache.invalidation('API_REDIS_FORMPAG');
+
       await repository.remove(result);
     }
 
