@@ -1,6 +1,6 @@
 import { getCustomRepository, getRepository } from "typeorm";
-import FuncionarioRepository from '../../../../shared/infra/typeorm/repositories/FuncionarioRepository'
-import Funcionarios from '../../../../shared/infra/typeorm/entities/Funcionarios'
+import Manutencoes from '../../../../shared/infra/typeorm/entities/Manutencoes';
+import ManuntencoesRepository from '../../../../shared/infra/typeorm/repositories/ManuntencoesRepository'
 import AppError from "../../../../shared/errors/AppErrors";
 
 interface IRequestDTO {
@@ -10,9 +10,9 @@ interface IRequestDTO {
 
 class LoadIndexServices{
 
-  public async index ({cod_func_uuid}: IRequestDTO): Promise<Funcionarios | undefined> {
+  public async index ({cod_func_uuid}: IRequestDTO): Promise<Manutencoes | undefined> {
 
-      const Repository = getCustomRepository(FuncionarioRepository);
+      const Repository = getCustomRepository(ManuntencoesRepository);
 
       const result = await Repository.findById(cod_func_uuid);
 

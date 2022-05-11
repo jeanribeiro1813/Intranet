@@ -1,7 +1,7 @@
 import AppError from '../../../../shared/errors/AppErrors';
 import { getCustomRepository,getRepository } from 'typeorm'
-import Atividades from '../../../../shared/infra/typeorm/entities/Atividades';
-import AtividadeRepository from '../../../../shared/infra/typeorm/repositories/AtividadeRepository'
+import Manutencoes from '../../../../shared/infra/typeorm/entities/Manutencoes';
+import ManuntencoesRepository from '../../../../shared/infra/typeorm/repositories/ManuntencoesRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
 
 interface IRequestDTO{
@@ -14,7 +14,7 @@ interface IRequestDTO{
 
      public async delete( {cod_manutencao_uuid}: IRequestDTO) : Promise<void> {
 
-      const usersRepository = getCustomRepository(AtividadeRepository);
+      const usersRepository = getCustomRepository(ManuntencoesRepository);
 
       const redisCache = new RedisCache();
 
