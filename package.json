@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .ts",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "start": "node dist/shared/infra/http/server.js",
+    "start-pm2": "pm2 start dist/shared/infra/http/server.js",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "lint-fix": "eslint . --ext .ts --fix",
     "test": "jest"
