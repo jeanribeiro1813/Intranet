@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Users from '../../../../shared/infra/typeorm/entities/Users';
 import UsersRepository from '../../../../shared/infra/typeorm/repositories/UsersRepository'
 import { hash } from 'bcryptjs';
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -78,6 +79,8 @@ interface IRequestDTO {
 
       const loginUserExists = await usersRepository.findByLogin(login);
 
+      const redisCache = new RedisCache();
+
       if (loginUserExists) {
         throw new AppError('Login já cadastrado.',409);
 
@@ -125,6 +128,8 @@ interface IRequestDTO {
         va_vr
 
       });
+
+      await redisCache.invalidation('API_REDIS_USER');
 
 
       await usersRepository.save(user);

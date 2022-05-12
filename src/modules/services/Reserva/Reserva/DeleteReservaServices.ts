@@ -1,6 +1,8 @@
 import AppError from '../../../../shared/errors/AppErrors';
 import { getCustomRepository,getRepository } from 'typeorm'
-import ReservaRepository from '../../../../shared/infra/typeorm/repositories/ReservaRepository'
+import ReservaRepository from '../../../../shared/infra/typeorm/repositories/ReservaRepository';
+import RedisCache from '../../../../shared/cache/RedisCache';
+
 
 interface IRequestDTO{
 
@@ -13,11 +15,16 @@ interface IRequestDTO{
 
       const Repository = getCustomRepository(ReservaRepository);
 
+      const redisCache = new RedisCache()
+
       const service = await Repository.findOne(cod_reserva_uuid);
 
       if (!service) {
         throw new AppError('Não Existe ',402);
       }
+
+      await redisCache.invalidation('API_REDIS_RESERVA');
+
       await Repository.remove(service);
       }
   }

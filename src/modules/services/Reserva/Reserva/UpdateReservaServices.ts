@@ -2,6 +2,7 @@ import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Reserva from '../../../../shared/infra/typeorm/entities/Reserva';
 import ReservaRepository from '../../../../shared/infra/typeorm/repositories/ReservaRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -34,12 +35,15 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(ReservaRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findOne(cod_reserva_uuid);
 
       if (!result) {
         throw new AppError ('reserva não existe',404);
       }
 
+      await redisCache.invalidation('API_REDIS_RESERVA');
 
       result.placa = placa ? placa : result.placa;
       result.usuario = usuario ? usuario : result.usuario;

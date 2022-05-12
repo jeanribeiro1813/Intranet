@@ -1,52 +1,29 @@
+import AppError from "../../../../shared/errors/AppErrors";
 import { getCustomRepository } from "typeorm";
 import Ramais from '../../../../shared/infra/typeorm/entities/Ramais';
 import RamaisRepository from '../../../../shared/infra/typeorm/repositories/RamaisRepository'
-
-interface IResponseDTO {
-    summary: IDescItemOfSummary[];
-}
-
-interface IDescItemOfSummary {
-
-    uuidramal: string;
-    ramal:number;
-    cod_atv:string;
-
-  
-
-}
-
-
-
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 class LoadRamaisSummary{
-    public async executeDes (): Promise<IResponseDTO> {
+    public async executeDes (): Promise<Ramais[] | AppError> {
         const projetosrRepository = getCustomRepository(RamaisRepository);
 
-        const user = await projetosrRepository.find({order:{
-            cod_atv:'ASC'
-        }});
-
-        const summary = user.map((use) =>{
-            const DescItemOfSummary = {
-
-                uuidramal: use.uuidramal,
-                ramal:use.ramal,
-                cod_atv:use.cod_atv,
-                
-
-
-            }
-            return DescItemOfSummary;
-            }
-
-        )
-
-        const responseDTO = {
-            summary,
-        };
-
+        const redisCache = new RedisCache();
+  
+        let responseDTO = await redisCache.recover<Ramais[]>('API_REDIS_RAMAIS')
+  
+  
+        if(!responseDTO){
+  
+            responseDTO  = await projetosrRepository.find();
+            
+            //Criando um save Redis
+  
+            await redisCache.save('API_REDIS_RAMAIS',responseDTO)
+        }
+        
+    
         return responseDTO;
     }
 }

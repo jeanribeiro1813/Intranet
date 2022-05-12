@@ -3,6 +3,7 @@ import Users from '../../../../shared/infra/typeorm/entities/Users';
 import {compare, hash} from 'bcryptjs'
 import UsersRepository from '../../../../shared/infra/typeorm/repositories/UsersRepository'
 import AppError from '../../../../shared/errors/AppErrors';
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 //Como esse serviço é com o usuario logado tenho que utilizar o user_id que está dentro da tabela user Token
@@ -24,6 +25,8 @@ class UpdateShowProfileService {
     public async updateProfile({user_id,usuario,email,senha,old_senha} :IRequest): Promise<Users | AppError>{
 
         const userUpdate = getCustomRepository(UsersRepository);
+
+        const redisCache = new RedisCache();
 
         //buscando por id
         const user = await userUpdate.findByCodUser(user_id);
@@ -63,6 +66,8 @@ class UpdateShowProfileService {
         }
 
         //Atualizando os demais campos
+
+        await redisCache.invalidation('API_REDIS_USER');
 
         user.usuario = usuario ? usuario : user.usuario;
         user.email = email ? email : user.email;

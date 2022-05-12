@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Ramais from '../../../../shared/infra/typeorm/entities/Ramais';
 import RamaisRepository from '../../../../shared/infra/typeorm/repositories/RamaisRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -20,6 +21,8 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(RamaisRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findById(uuidramal);
 
       if (result) {
@@ -32,6 +35,8 @@ interface IRequestDTO {
         uuidramal,ramal,cod_atv
 
       });
+
+      await redisCache.invalidation('API_REDIS_RAMAIS');
 
       await Repository.save(cliet);
 

@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Reserva from '../../../../shared/infra/typeorm/entities/Reserva';
 import ReservaRepository from '../../../../shared/infra/typeorm/repositories/ReservaRepository'
+import RedisCache from '../../../../shared/cache/RedisCache';
 
 
 
@@ -34,6 +35,8 @@ interface IRequestDTO {
 
       const Repository = getCustomRepository(ReservaRepository);
 
+      const redisCache = new RedisCache();
+
       const result = await Repository.findById(cod_reserva_uuid);
 
       if (result) {
@@ -48,6 +51,8 @@ interface IRequestDTO {
         km_chegada,projeto,cancelado,desc_cancel,dev_obs,cod_reserva
 
       });
+
+      await redisCache.invalidation('API_REDIS_RESERVA');
 
       await Repository.save(cliet);
 
