@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CreateUsersService  from '../../services/Users/Users/CreateUsersService';
 import LoadIndexService from '../../services/Users/User_View/LoadIndexService';
 import FilterEspecificoUsersServices from '../../services/Users/User_View/FilterEspecificoUsersServices'
-
+import UpdateUsersService from '../../services/Users/Users/UpdateUsersService'
 
 export default class UsersControllers {
 
@@ -73,7 +73,7 @@ export default class UsersControllers {
        }
   
 
-        return response.json('Usuario Cadastrado');
+        return response.json(funcao);
 
   }
 
@@ -103,6 +103,68 @@ export default class UsersControllers {
         return response.json(result);
     
       }  
+
+      public async update (request :Request, response:Response): Promise<Response>{
+
+        const {uuidusuario} = request.params
+    
+        const { login,   
+          usuario,
+          n_cnh,
+          dt_validade,
+          email,
+          ramal,
+          status,
+          dt_nasc,
+          contato,
+          contato2,
+          uuidcargo,
+          uuiddeparta,
+          cpf_cnpj,
+          enquadramento,
+          carga_horaria,
+          proventos,
+          vt,
+          banco,
+          seguro,
+          cv_medico,
+          va_vr} = request.body
+    
+        const services = new UpdateUsersService();
+    
+        const result = await services.update(
+    
+          {uuidusuario,
+            login,   
+            usuario,
+            n_cnh,
+            dt_validade,
+            email,
+            ramal,
+            status,
+            dt_nasc,
+            contato,
+            contato2,
+            uuidcargo,
+            uuiddeparta,
+            cpf_cnpj,
+            enquadramento,
+            carga_horaria,
+            proventos,
+            vt,
+            banco,
+            seguro,
+            cv_medico,
+            va_vr
+          }
+    
+        )
+    
+        return response.json(result);
+    
+    
+    
+      }
     
 
   }
