@@ -1,8 +1,8 @@
-import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Adv from '../../../../shared/infra/typeorm/entities/Adv';
 import AdvRepository from '../../../../shared/infra/typeorm/repositories/AdvRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -13,33 +13,37 @@ interface IRequestDTO {
   desc_adv: string;
   cod_adv: string;
 
-
   }
 
+  @injectable()
   class CreateClientesService {
 
-    public async create({ codadv,cod_page,desc_adv,cod_adv}: IRequestDTO): Promise<Adv | Error> {
+    constructor(
+      @inject('AdvRepository')
+      private advRepository: AdvRepository){
+      
+    }
 
-      const clientesRepository = getCustomRepository(AdvRepository);
+    public async create({ codadv,cod_page,desc_adv,cod_adv}: IRequestDTO): Promise<Adv | AppError> {
+
+
 
       const redisCache = new RedisCache();
 
-      const checkUserExists = await clientesRepository.findById(codadv);
+      const checkUserExists = await this.advRepository.findById(codadv);
 
-      if (checkUserExists) {
+      if (!checkUserExists) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const cliet =  clientesRepository.create({
+      const cliet =  this.advRepository.create({
 
         cod_page,desc_adv,cod_adv
 
       });
 
       await redisCache.invalidation('API_REDIS_ADv');
-
-      await clientesRepository.save(cliet);
 
       return cliet;
     }

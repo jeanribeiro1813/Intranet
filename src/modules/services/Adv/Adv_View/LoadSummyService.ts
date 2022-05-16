@@ -3,19 +3,26 @@ import { getCustomRepository } from "typeorm";
 import AdvRepository from '../../../../shared/infra/typeorm/repositories/AdvRepository'
 import AppError from "../../../../shared/errors/AppErrors";
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
+@injectable()
+class LoadClientesSummaryService {
 
-class LoadClientesSummaryService{
+  constructor(
+    @inject('AdvRepository')
+    private advRepository: AdvRepository){
+    
+  }
+
     public async summary (): Promise<Adv[] | AppError> {
-        const projetosrRepository = getCustomRepository(AdvRepository);
-
+        
         const redisCache = new RedisCache();
 
         let responseDTO = await redisCache.recover<Adv[]>('API_REDIS_ADv')
 
         if(!responseDTO){
 
-            responseDTO  = await projetosrRepository.find();
+            responseDTO  = await await this.advRepository.findAll();
             
             //Criando um save Redis
 

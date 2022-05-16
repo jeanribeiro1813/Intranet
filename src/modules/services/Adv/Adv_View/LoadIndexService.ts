@@ -2,7 +2,7 @@ import { getCustomRepository } from "typeorm";
 import AdvRepository from '../../../../shared/infra/typeorm/repositories/AdvRepository'
 import Adv from '../../../../shared/infra/typeorm/entities/Adv'
 import AppError from "../../../../shared/errors/AppErrors";
-
+import {injectable, inject} from 'tsyringe'
 
 
 interface IResponseDTO {
@@ -12,15 +12,18 @@ interface IResponseDTO {
 
 }
 
+@injectable()
+class LoadIndexService {
 
+  constructor(
+    @inject('AdvRepository')
+    private advRepository: AdvRepository){
+}
 
-
-
-class LoadIndexService{
     public async index ({codadv}:IResponseDTO): Promise<Adv | AppError> {
-        const Repository = getCustomRepository(AdvRepository);
 
-        const result = await Repository.findById(codadv);
+
+        const result =  await this.advRepository.findById(codadv);
 
         if(!result){
             throw new AppError('Codigo não encontrado',409)

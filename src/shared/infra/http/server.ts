@@ -8,6 +8,7 @@ import AppError from '../../errors/AppErrors';
 import {errors} from 'celebrate';
 import rateLimiter from '../../../modules/services/middlewares/rateLimiter';
 
+import '../../container/index'
 import '../../database';
 
 const app = express();

@@ -3,7 +3,8 @@ import CreateAdvServices from '../../services/Adv/Adv/CreateAdvServices';
 import UpdateAdvServices from '../../services/Adv/Adv/UpdateAdvServices';
 import DeleteAdvServices from '../../services/Adv/Adv/DeleteAdvServices';
 import LoadSummyService from '../../services/Adv/Adv_View/LoadSummyService';
-
+import LoadIndexService from '../../services/Adv/Adv_View/LoadIndexService'
+import { container } from "tsyringe";
 
 
 
@@ -14,7 +15,7 @@ export default class AtividadeController {
 
   public async summary(request:Request, response:Response):Promise<Response>{
 
-    const Atividade = new LoadSummyService();
+    const Atividade = container.resolve(LoadSummyService)
 
     const result = await Atividade.summary();
 
@@ -26,7 +27,7 @@ export default class AtividadeController {
 
         const {codadv,cod_page,desc_adv ,cod_adv} = request.body;
 
-        const service = new CreateAdvServices();
+       const service = container.resolve(CreateAdvServices)
 
         const result = await service.create(
           {
@@ -50,7 +51,7 @@ export default class AtividadeController {
 
         const {cod_page,desc_adv ,cod_adv} = request.body
 
-        const updateFatu = new UpdateAdvServices();
+        const updateFatu = container.resolve(UpdateAdvServices);
 
         const fatura = await updateFatu.update(
 
@@ -65,15 +66,25 @@ export default class AtividadeController {
 
 
       }
-
     
       public async delete(request:Request, response:Response):Promise<Response>{
 
         const {codadv} = request.params;
 
-        const deleteAtividade = new DeleteAdvServices();
+        const deleteAtividade = container.resolve(DeleteAdvServices);
 
        await deleteAtividade.delete({codadv});
+
+        return response.json('Delete realizado com sucesso');
+      }
+    
+      public async index(request:Request, response:Response):Promise<Response>{
+
+        const {codadv} = request.params;
+
+        const deleteAtividade = container.resolve(LoadIndexService);
+
+       await deleteAtividade.index({codadv});
 
         return response.json('Delete realizado com sucesso');
       }
