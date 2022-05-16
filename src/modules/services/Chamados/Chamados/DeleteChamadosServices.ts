@@ -1,23 +1,33 @@
 import AppError from '../../../../shared/errors/AppErrors';
-import { getCustomRepository,getRepository } from 'typeorm'
 import Chamados from '../../../../shared/infra/typeorm/entities/Chamados';
 import ChamadosRepository from '../../../../shared/infra/typeorm/repositories/ChamadosRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
+
 
 interface IRequestDTO{
 
   cod_chamado_uuid:string;
 
 }
- class DeleteChamadosService {
+
+
+
+@injectable()
+class DeleteChamadosService {
+
+  constructor(
+    @inject('ChamadosRepository')
+    private chamadosRepository: ChamadosRepository){
+    
+  }
+
 
      public async delete( {cod_chamado_uuid}: IRequestDTO) : Promise<void> {
 
-      const Repository = getCustomRepository(ChamadosRepository);
-
       const redisCache = new RedisCache();
 
-      const service = await Repository.findOne(cod_chamado_uuid);
+      const service = await this.chamadosRepository.findById(cod_chamado_uuid);
 
       if (!service) {
         throw new AppError('Não Existe ',402);
@@ -25,7 +35,7 @@ interface IRequestDTO{
 
       await redisCache.invalidation('API_REDIS_CHAMADOS');
 
-      await Repository.remove(service);
+      await this.chamadosRepository.remove(service);
       
       }
   }

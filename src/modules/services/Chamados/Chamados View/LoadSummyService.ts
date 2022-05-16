@@ -3,15 +3,22 @@ import Chamados from '../../../../shared/infra/typeorm/entities/Chamados';
 import ChamadosRepository from '../../../../shared/infra/typeorm/repositories/ChamadosRepository'
 import AppError from '../../../../shared/errors/AppErrors';
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
 
 
+@injectable()
+class LoadSummary {
 
-class LoadSummary{
+  constructor(
+    @inject('ChamadosRepository')
+    private chamadosRepository: ChamadosRepository){
+    
+  }
+
     public async summary (): Promise<Chamados[] | AppError> {
-        const projetosrRepository = getCustomRepository(ChamadosRepository);
 
         const redisCache = new RedisCache();
 
@@ -20,7 +27,7 @@ class LoadSummary{
 
         if(!responseDTO){
   
-            responseDTO  = await projetosrRepository.find();
+            responseDTO  = await this.chamadosRepository.findAll();
             
             //Criando um save Redis
   

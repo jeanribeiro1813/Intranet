@@ -3,7 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Dias from '../../../../shared/infra/typeorm/entities/Dias';
 import DiasRepository from '../../../../shared/infra/typeorm/repositories/DiasRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
-
+import {injectable, inject} from 'tsyringe'
 
 interface IRequestDTO {
 
@@ -15,15 +15,21 @@ interface IRequestDTO {
 
   }
 
+
+  @injectable()
   class UpdatePaginasService {
+
+  constructor(
+    @inject('DiasRepository')
+    private diasRepository: DiasRepository){
+    
+  }
 
     public async update({uuiddiasuteis,ano,mes,codigo,dias}: IRequestDTO): Promise<Dias | AppError> {
 
-      const Repository = getCustomRepository(DiasRepository);
-
       const redisCache = new RedisCache();
 
-      const result = await Repository.findOne(uuiddiasuteis);
+      const result = await this.diasRepository.findById(uuiddiasuteis);
 
       if (!result) {
         throw new AppError ('client não existe',404);
@@ -38,7 +44,7 @@ interface IRequestDTO {
       result.dias = dias ? dias : result.dias;
   
 
-      await Repository.save(result);
+      await this.diasRepository.save(result);
 
       return result;
     }

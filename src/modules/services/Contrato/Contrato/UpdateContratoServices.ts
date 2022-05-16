@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Contrato from '../../../../shared/infra/typeorm/entities/Contrato';
 import ContratoRepository from '../../../../shared/infra/typeorm/repositories/ContratoRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -14,15 +15,23 @@ interface IRequestDTO {
 
   }
 
-  class UpdateClientService {
+
+  
+@injectable()
+class UpdateClientService {
+
+  constructor(
+    @inject('ContratoRepository')
+    private contratoRepository: ContratoRepository){
+    
+  }
+
 
     public async update({uuidcontrato,contrato}: IRequestDTO): Promise<Contrato | Error> {
 
-      const Repository = getCustomRepository(ContratoRepository);
-
       const redisCache = new RedisCache();
 
-      const result = await Repository.findOne(uuidcontrato);
+      const result = await this.contratoRepository.findById(uuidcontrato);
 
       if (!result) {
         throw new AppError ('client não existe',404);
@@ -34,7 +43,7 @@ interface IRequestDTO {
 
   
 
-      await Repository.save(result);
+      await this.contratoRepository.save(result);
 
       return result;
     }

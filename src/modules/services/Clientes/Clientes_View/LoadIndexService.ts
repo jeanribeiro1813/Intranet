@@ -2,6 +2,7 @@ import AppError from "../../../../shared/errors/AppErrors";
 import { getCustomRepository } from "typeorm";
 import Clientes from '../../../../shared/infra/typeorm/entities/Clientes';
 import ClientesRepository from '../../../../shared/infra/typeorm/repositories/ClientesRepository'
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -13,15 +14,18 @@ interface IResponseDTO {
 }
 
 
+@injectable()
+class LoadIndex {
 
+  constructor(
+    @inject('ClientesRepository')
+    private clientesRepository: ClientesRepository){
+    
+  }
 
-
-class LoadIndex{
     public async index ({uuidcliente}:IResponseDTO): Promise< Clientes| AppError> {
 
-        const Repository = getCustomRepository(ClientesRepository);
-
-        const result = await Repository.findById(uuidcliente)
+        const result = await this.clientesRepository.findById(uuidcliente)
 
         
         if(!result){

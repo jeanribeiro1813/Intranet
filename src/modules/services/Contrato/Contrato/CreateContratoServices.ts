@@ -1,8 +1,8 @@
-import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Contrato from '../../../../shared/infra/typeorm/entities/Contrato';
 import ContratoRepository from '../../../../shared/infra/typeorm/repositories/ContratoRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -15,22 +15,28 @@ interface IRequestDTO {
 
   }
 
+  @injectable()
   class CreateClientesService {
+
+    constructor(
+      @inject('ContratoRepository')
+      private contratoRepository: ContratoRepository){
+      
+    }
+
 
     public async create({ uuidcontrato,contrato}: IRequestDTO): Promise<Contrato | Error> {
 
-      const Repository = getCustomRepository(ContratoRepository);
-
       const redisCache = new RedisCache();
 
-      const result = await Repository.findById(uuidcontrato);
+      const result = await this.contratoRepository.findById(uuidcontrato);
 
       if (result) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const cliet =  Repository.create({
+      const cliet =  this.contratoRepository.create({
 
         uuidcontrato,contrato
 
@@ -38,7 +44,6 @@ interface IRequestDTO {
 
       await redisCache.invalidation('API_REDIS_CONTRATO');
 
-      await Repository.save(cliet);
 
       return cliet;
     }

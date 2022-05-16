@@ -2,6 +2,7 @@ import AppError from "../../../../shared/errors/AppErrors";
 import { getCustomRepository } from "typeorm";
 import Contrato from '../../../../shared/infra/typeorm/entities/Contrato';
 import ContratoRepository from '../../../../shared/infra/typeorm/repositories/ContratoRepository'
+import {injectable, inject} from 'tsyringe'
 
 
 interface IResponseDTO {
@@ -11,16 +12,17 @@ interface IResponseDTO {
 
 }
 
+@injectable()
+class LoadIndex {
 
-
-
-
-class LoadIndex{
+  constructor(
+    @inject('ContratoRepository')
+    private contratoRepository: ContratoRepository){
+    
+  }
     public async index ({uuidcontrato}:IResponseDTO): Promise< Contrato| AppError> {
 
-        const Repository = getCustomRepository(ContratoRepository);
-
-        const result = await Repository.findById(uuidcontrato)
+        const result = await this.contratoRepository.findById(uuidcontrato)
 
         
         if(!result){

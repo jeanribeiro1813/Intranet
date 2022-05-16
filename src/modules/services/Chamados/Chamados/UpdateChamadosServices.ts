@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Chamados from '../../../../shared/infra/typeorm/entities/Chamados';
 import ChamadosRepository from '../../../../shared/infra/typeorm/repositories/ChamadosRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 interface IRequestDTO {
@@ -19,17 +20,22 @@ interface IRequestDTO {
 
   }
 
+  @injectable()
   class UpdateChamadosService {
+
+    constructor(
+      @inject('ChamadosRepository')
+      private chamadosRepository: ChamadosRepository){
+      
+    }
 
     public async update({cod_chamado_uuid,cod_usuario, equipamento,descricao,prioridade,
       dt_solicitacao,dt_conclusao,desc_conclusao,cod_chamado}: IRequestDTO): Promise<Chamados | Error> {
-
-      const Repository = getCustomRepository(ChamadosRepository);
-      
+     
       const redisCache = new RedisCache();
 
 
-      const result = await Repository.findOne(cod_chamado_uuid);
+      const result = await this.chamadosRepository.findById(cod_chamado_uuid);
 
       if (!result) {
         throw new AppError ('chamados não existe',404);
@@ -48,7 +54,7 @@ interface IRequestDTO {
 
 
 
-      await Repository.save(result);
+      await this.chamadosRepository.save(result);
 
       return result;
     }

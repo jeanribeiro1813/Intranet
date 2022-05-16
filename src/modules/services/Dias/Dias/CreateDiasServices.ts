@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Dias from '../../../../shared/infra/typeorm/entities/Dias';
 import DiasRepository from '../../../../shared/infra/typeorm/repositories/DiasRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -16,22 +17,28 @@ interface IRequestDTO {
 
   }
 
-  class CreateDiasService {
+  
+@injectable()
+class CreateDiasService {
+
+  constructor(
+    @inject('DiasRepository')
+    private diasRepository: DiasRepository){
+    
+  }
 
     public async create({ uuiddiasuteis,ano,mes,codigo,dias}: IRequestDTO): Promise< Dias | AppError> {
 
-      const Repository = getCustomRepository(DiasRepository);
-
       const redisCache = new RedisCache();
 
-      const result = await Repository.findById(uuiddiasuteis);
+      const result = await this.diasRepository.findById(uuiddiasuteis);
 
       if (result) {
         throw new AppError('Não existe.',404);
 
       }
 
-      const dia =  Repository.create({
+      const dia =  this.diasRepository.create({
 
         uuiddiasuteis,ano,mes,codigo,dias
 
@@ -39,8 +46,6 @@ interface IRequestDTO {
 
 
       await redisCache.invalidation('API_REDIS_DIAS');
-      
-      await Repository.save(dia);
 
       return dia;
     }

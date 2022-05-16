@@ -1,8 +1,7 @@
 import AppError from '../../../../shared/errors/AppErrors';
-import { getCustomRepository,getRepository } from 'typeorm'
-import Departamento from '../../../../shared/infra/typeorm/entities/Departamento';
 import DepartamentoRepository from '../../../../shared/infra/typeorm/repositories/DepartamentoRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 interface IRequestDTO{
@@ -10,15 +9,21 @@ interface IRequestDTO{
   uuiddeparta: string;
 
 }
- class DeleteClientesService {
+
+@injectable()
+class DeleteClientesService {
+
+  constructor(
+    @inject('DepartamentoRepository')
+    private departamentoRepository: DepartamentoRepository){
+    
+  }
 
      public async execute( {uuiddeparta}: IRequestDTO) : Promise<void> {
 
-      const Repository = getCustomRepository(DepartamentoRepository);
-
       const redisCache = new RedisCache();
 
-      const result = await Repository.findOne(uuiddeparta);
+      const result = await this.departamentoRepository.findById(uuiddeparta);
 
       if (!result) {
         throw new AppError('Não Existe ',402);
@@ -26,7 +31,7 @@ interface IRequestDTO{
 
       await redisCache.invalidation('API_REDIS_DEPARTAMENTO');
 
-      await Repository.remove(result);
+      await this.departamentoRepository.remove(result);
       }
   }
 

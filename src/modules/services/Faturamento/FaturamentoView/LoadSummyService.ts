@@ -2,17 +2,20 @@ import { getCustomRepository } from "typeorm";
 import FaturamentoViewsRepository from '../../../../shared/infra/typeorm/repositories/FaturamentoViewsRepository';
 import RedisCache from '../../../../shared/cache/RedisCache';
 import FaturamentoView from '../../../../shared/infra/typeorm/entities/FaturamentoView';
+import {injectable, inject} from 'tsyringe'
 
 
 
+@injectable()
+class LoadFatSummaryService {
 
+  constructor(
+    @inject('FaturamentoViewsRepository')
+    private fatRepository: FaturamentoViewsRepository){
+    
+  }
 
-
-class LoadFatSummaryService{
-    public async summary (): Promise< FaturamentoView[] > {
-
-        const projetosrRepository = getCustomRepository(FaturamentoViewsRepository);
-        
+    public async summary (): Promise< FaturamentoView[] > {      
 
         const redisCache = new RedisCache();
         
@@ -23,7 +26,7 @@ class LoadFatSummaryService{
 
         if(!fatview){
 
-            fatview  = await projetosrRepository.find();
+            fatview  = await this.fatRepository.findAll();
             
             //Criando um save Redis
 

@@ -2,6 +2,7 @@ import { getCustomRepository } from "typeorm";
 import Departamento from '../../../../shared/infra/typeorm/entities/Departamento'
 import DepartamentoRepository from '../../../../shared/infra/typeorm/repositories/DepartamentoRepository'
 import AppError from "../../../../shared/errors/AppErrors";
+import {injectable, inject} from 'tsyringe'
 
 
 interface IRequestDTO{
@@ -9,12 +10,19 @@ interface IRequestDTO{
     uuiddeparta:string;
 }
 
-class LoadIndexDepartamento{
+
+@injectable()
+  class LoadIndexDepartamento {
+  
+    constructor(
+      @inject('DepartamentoRepository')
+      private departamentoRepository: DepartamentoRepository){
+      
+    }
+
     public async index ({uuiddeparta}:IRequestDTO): Promise<Departamento | AppError> {
 
-        const DepartamentorRepository = getCustomRepository(DepartamentoRepository);
-
-        const departamento = await DepartamentorRepository.findById(uuiddeparta);
+        const departamento = await this.departamentoRepository.findById(uuiddeparta);
 
         if(!departamento){
             throw new AppError('Departamento não encontrado',409)

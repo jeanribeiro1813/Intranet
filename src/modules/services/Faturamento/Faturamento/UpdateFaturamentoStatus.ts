@@ -20,7 +20,7 @@ class UpdateFaturamentoServices{
 
   public async updateStatus ({uuidusuario, uuidprojeto, data, status}: IRequestDTO): Promise<Faturamento[]| Error> {
 
-      const Repository = getCustomRepository(FaturamentoRepository);
+      const Repository = getRepository(Faturamento);
 
       const redisCache = new RedisCache();
 

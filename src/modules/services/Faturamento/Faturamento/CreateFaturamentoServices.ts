@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Faturamento from '../../../../shared/infra/typeorm/entities/Faturamento';
 import FaturamentoRepository from '../../../../shared/infra/typeorm/repositories/FaturamentoRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -21,31 +22,35 @@ interface IRequestDTO {
 
   }
 
+
+  @injectable()
   class CreateFatService {
+  
+    constructor(
+      @inject('FaturamentoRepository')
+      private fatRepository: FaturamentoRepository){
+      
+    }
+
 
     public async create({ uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa}: IRequestDTO): Promise<Faturamento | Error> {
 
-      const Repository = getCustomRepository(FaturamentoRepository);
-
-
       const redisCache = new RedisCache();
 
-      const faturamento = await Repository.findByCode(uuidfat);
+      const faturamento = await this.fatRepository.findById(uuidfat);
 
       if (faturamento) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const fat =  Repository.create({
+      const fat =  this.fatRepository.create({
         
         uuidfat,uuidusuario, uuidprojeto, uuidatividade,data,inicio,fim,status,obs,empresa
 
       });
 
       await redisCache.invalidation('API_REDIS_FAT');
-
-      await Repository.save(fat);
 
       return fat;
     }

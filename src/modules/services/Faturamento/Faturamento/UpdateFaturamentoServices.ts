@@ -24,7 +24,7 @@ interface IRequestDTO {
 
     public async update({uuidfat,uuidusuario, uuidprojeto, uuidatividade,data,inicio,fim,status,obs,empresa}: IRequestDTO): Promise<Faturamento | Error> {
 
-      const Repository = getCustomRepository(FaturamentoRepository);
+      const Repository = getRepository(Faturamento);
 
       const redisCache = new RedisCache();
 
