@@ -1,22 +1,76 @@
 import { add } from 'date-fns';
-import { Repository, EntityRepository } from 'typeorm';
+import { Repository, EntityRepository,getRepository } from 'typeorm';
 
-import Manutencoes from '../entities/Manutencoes';
+import Entities from '../entities/Manutencoes';
 
-@EntityRepository(Manutencoes)
-export default class ManutencoesRepository extends Repository<Manutencoes> {
 
-    public async findById(cod_manutencao_uuid: string): Promise< Manutencoes | undefined > {
+interface ICreate{
 
-      const Manutencoe = this.findOne({
-        where : {
-          cod_manutencao_uuid
-        },
+  cod_manutencao_uuid: string;
+  descricao: string;
+  valor:string ;
+  cod_manutencao:number;
 
+
+}
+
+interface IRepository {
+findById(uuid: string): Promise<Entities | undefined>;
+create(data: ICreate): Promise<Entities>;
+save(obj: Entities): Promise<Entities>;
+remove(obj: Entities): Promise<Entities>;
+findAll(): Promise <Entities[]>
+
+}
+
+
+@EntityRepository(Entities)
+
+ class ManutencoesRepository implements IRepository {
+
+    private ormRepository: Repository<Entities>;
+    
+      public async findById(uuid: string): Promise<Entities | undefined> {
+        this.ormRepository = getRepository(Entities);
+        const result = await this.ormRepository.findOne(uuid);
+        return result;
+    }
+    public async create({
+      cod_manutencao_uuid,
+      descricao,
+      valor,
+      cod_manutencao
+  }: ICreate): Promise<Entities> {
+      this.ormRepository = getRepository(Entities);
+
+      const result = this.ormRepository.create({
+        cod_manutencao_uuid,
+        descricao,
+        valor,
+        cod_manutencao
       });
-      return Manutencoe;
+
+      await this.ormRepository.save(result);
+
+      return result;
+  }
+
+  public async save(obj: Entities): Promise<Entities> {
+      this.ormRepository = getRepository(Entities);
+      return this.ormRepository.save(obj);
+  }
+
+  public async remove(obj: Entities): Promise<Entities> {
+      this.ormRepository = getRepository(Entities);
+      return this.ormRepository.remove(obj);
+  }
+
+  public async findAll():Promise<Entities[]>{
+    this.ormRepository = getRepository(Entities);
+    return this.ormRepository.find();
+  }
 }
 
 
-}
+export default ManutencoesRepository;
 

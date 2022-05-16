@@ -3,6 +3,7 @@ import CreateCarrosServices from '../../services/Carros/Carros/CreateCarrosServi
 import UpdateCarrosServices from '../../services/Carros/Carros/UpdateCarrosServices';
 import LoadSummyService  from '../../services/Carros/Carros View/LoadSummyService';
 import DeleteCarrosServices from '../../services/Carros/Carros/DeleteCarrosServices';
+import { container } from "tsyringe";
 
 
 
@@ -10,7 +11,7 @@ import DeleteCarrosServices from '../../services/Carros/Carros/DeleteCarrosServi
 export default class CargoController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve(LoadSummyService)
 
     const funcao = await loadFuncao.summary();
 
@@ -23,7 +24,7 @@ export default class CargoController {
 
         const {id_uuid,placa, carro,ano,cor, km,ativo,garagem,id} = request.body;
 
-        const service = new CreateCarrosServices();
+        const service = container.resolve(CreateCarrosServices)
 
         const result = await service.create(
           {
@@ -48,7 +49,7 @@ export default class CargoController {
 
         const { placa, carro,ano,cor, km,ativo,garagem,id} = request.body
 
-        const updateCarros = new UpdateCarrosServices();
+        const updateCarros = container.resolve(UpdateCarrosServices)
 
         const cargo = await updateCarros.update(
 
@@ -69,7 +70,7 @@ export default class CargoController {
 
         const {id_uuid} = request.params;
 
-        const deleteCargo = new DeleteCarrosServices();
+        const deleteCargo = container.resolve(DeleteCarrosServices)
 
        await deleteCargo.delete({id_uuid});
 

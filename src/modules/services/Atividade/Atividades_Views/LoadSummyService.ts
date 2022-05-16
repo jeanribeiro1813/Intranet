@@ -1,13 +1,21 @@
 import AppError from "../../../../shared/errors/AppErrors";
-import { getCustomRepository } from "typeorm";
 import Atividades from '../../../../shared/infra/typeorm/entities/Atividades';
 import AtividadeRepository from '../../../../shared/infra/typeorm/repositories/AtividadeRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
-class LoadClientesSummaryService{
+@injectable()
+class LoadClientesSummaryService {
+
+  constructor(
+    @inject('AtividadeRepository')
+    private atividadeRepository: AtividadeRepository){
+    
+  }
+
     public async summary (): Promise<Atividades []| AppError> {
-        const projetosrRepository = getCustomRepository(AtividadeRepository);
+
         
         const redisCache = new RedisCache();
 
@@ -16,9 +24,7 @@ class LoadClientesSummaryService{
 
         if(!responseDTO){
 
-            responseDTO  = await projetosrRepository.find({order:{
-                cod_atv:'ASC'
-            }});
+            responseDTO  = await this.atividadeRepository.findAll();
             
             //Criando um save Redis
 

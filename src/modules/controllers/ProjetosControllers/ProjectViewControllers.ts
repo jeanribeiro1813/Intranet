@@ -1,7 +1,6 @@
 import LoadProjects from '../../services/Projetos//ProjetosView/LoadProjectsServices';
 import { Request, Response } from 'express';
 import LoadProjetoSummaryService  from '../../services/Projetos/ProjetosView/LoadySummaryProjeServices';
-import LoadIndexProjeServices  from '../../services/Projetos/ProjetosView/LoadIndexProjeServices';
 import Contrato from '../../../shared/infra/typeorm/entities/Contrato';
 
 
@@ -34,18 +33,7 @@ export default class ProjetosControllers {
 
       }
 
-      public async index(request: Request, response: Response): Promise< Response > {
-      
-        const {uuidprojeto} = request.params;
-
-        const P = new LoadIndexProjeServices();
-
-        const projetos = await P.index({uuidprojeto});
-
-        return response.json(projetos);
-
-      }
-
+  
  
 
 

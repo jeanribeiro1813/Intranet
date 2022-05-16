@@ -1,22 +1,68 @@
 import { add } from 'date-fns';
-import { Repository, EntityRepository } from 'typeorm';
+import { Repository, EntityRepository,getRepository } from 'typeorm';
 
 import Departamento from '../entities/Departamento';
 
-@EntityRepository(Departamento)
-export default class CarrosRepository extends Repository<Departamento> {
+interface IDiasClientes{
 
-    public async findById(uuiddeparta: string): Promise< Departamento | undefined > {
-
-      const faturamento = this.findOne({
-        where : {
-          uuiddeparta
-        },
-
-      });
-      return faturamento;
-}
-
+  uuiddeparta: string;
+  departamento:string ;
 
 }
+
+interface IDepartamentoRepository {
+  findById(cod_chamado_uuid: string): Promise<Departamento | undefined>;
+  create(data: IDiasClientes): Promise<Departamento>;
+  save(departamento: Departamento): Promise<Departamento>;
+  remove(departamento: Departamento): Promise<Departamento>;
+  findAll(): Promise <Departamento[]>
+
+}
+
+ 
+  @EntityRepository(Departamento)
+  
+   class DepartamentoRepository implements IDepartamentoRepository {
+  
+      private ormRepository: Repository<Departamento>;
+      
+        public async findById(uuiddeparta: string): Promise<Departamento | undefined> {
+          this.ormRepository = getRepository(Departamento);
+          const result = await this.ormRepository.findOne(uuiddeparta);
+          return result;
+      }
+      public async create({
+        uuiddeparta,
+       departamento      
+    }: IDiasClientes): Promise<Departamento> {
+        this.ormRepository = getRepository(Departamento);
+  
+        const result = this.ormRepository.create({
+          uuiddeparta,
+          departamento      
+        });
+  
+        await this.ormRepository.save(result);
+  
+        return result;
+    }
+  
+    public async save(departamento: Departamento): Promise<Departamento> {
+        this.ormRepository = getRepository(Departamento);
+        return this.ormRepository.save(departamento);
+    }
+  
+    public async remove(departamento: Departamento): Promise<Departamento> {
+        this.ormRepository = getRepository(Departamento);
+        return this.ormRepository.remove(departamento );
+    }
+  
+    public async findAll():Promise<Departamento[]>{
+      this.ormRepository = getRepository(Departamento);
+      return this.ormRepository.find();
+    }
+  }
+  
+
+  export default DepartamentoRepository;
 

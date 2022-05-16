@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Carros from '../../../../shared/infra/typeorm/entities/Carros';
 import CarrosRepository from '../../../../shared/infra/typeorm/repositories/CarrosRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -19,15 +20,20 @@ interface IRequestDTO {
 
   }
 
-  class UpdateCargoService {
+  @injectable()
+class UpdateCargoService {
+
+  constructor(
+    @inject('CarrosRepository')
+    private carrosRepository: CarrosRepository){
+    
+  }
 
     public async update({id_uuid,placa, carro,ano,cor, km,ativo,garagem,id}: IRequestDTO): Promise<Carros | Error> {
 
-      const Repository = getCustomRepository(CarrosRepository);
-
       const redisCache = new RedisCache();
 
-      const result = await Repository.findOne(id_uuid);
+      const result = await this.carrosRepository.findById(id_uuid);
 
       if (!result) {
         throw new AppError ('carros não existe',404);
@@ -46,7 +52,7 @@ interface IRequestDTO {
 
 
 
-      await Repository.save(result);
+      await this.carrosRepository.save(result);
 
       return result;
     }

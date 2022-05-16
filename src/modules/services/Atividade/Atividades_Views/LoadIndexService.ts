@@ -2,6 +2,7 @@ import AppError from "../../../../shared/errors/AppErrors";
 import { getCustomRepository } from "typeorm";
 import Atividades from '../../../../shared/infra/typeorm/entities/Atividades';
 import AtividadeRepository from '../../../../shared/infra/typeorm/repositories/AtividadeRepository'
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -12,15 +13,20 @@ interface IResponseDTO {
 }
 
 
+@injectable()
+class LoadClientesSummaryService {
 
+    constructor(
+        @inject('AtividadeRepository')
+        private atividadeRepository: AtividadeRepository){
+        
+      }
+  
 
-
-class LoadClientesSummaryService{
     public async index ({uuidatividade}:IResponseDTO): Promise< Atividades| AppError> {
 
-        const Repository = getCustomRepository(AtividadeRepository);
 
-        const result = await Repository.findById(uuidatividade)
+        const result = await this.atividadeRepository.findById(uuidatividade)
 
         
         if(!result){

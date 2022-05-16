@@ -32,15 +32,6 @@ projectRouter.post('/filter',celebrate({
 }),projetoViewController.loadProjects);
 
 
-projectRouter.get('/index/:uuidprojeto',celebrate({
-    
-    [Segments.PARAMS]:{
-        
-        uuidprojeto: Joi.string().uuid().required(),
-      
-    }
-}),projetoViewController.index);
-
 
 
 export default projectRouter;

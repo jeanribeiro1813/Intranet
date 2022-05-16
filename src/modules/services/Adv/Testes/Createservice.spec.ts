@@ -7,9 +7,9 @@ import FakeAdvRepository from '../../../../shared/infra/typeorm/repositories/fak
 describe ('CreateADV', ()=>{
     test('Criação de apenas um ADV', async ()=>{
        
-        const fakeAdvRepository = new FakeAdvRepository();
+        // const fakeAdvRepository = new FakeAdvRepository();
         
-        const createAdvServices = new CreateAdvServices(fakeAdvRepository);
+        // const createAdvServices = new CreateAdvServices(fakeAdvRepository);
 
 
     }),

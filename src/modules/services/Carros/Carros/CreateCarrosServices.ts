@@ -3,7 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Carros from '../../../../shared/infra/typeorm/entities/Carros';
 import CarrosRepository from '../../../../shared/infra/typeorm/repositories/CarrosRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
-
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -17,28 +17,30 @@ interface IRequestDTO {
   ativo: number;
   garagem:string;
   id:number;
-
-
-
   }
 
+  @injectable()
   class CreateCargoService {
 
-    public async create({ id_uuid,placa, carro,ano,cor, km,ativo,garagem,id}: IRequestDTO): Promise<Carros | Error> {
+    constructor(
+      @inject('CarrosRepository')
+      private carrosRepository: CarrosRepository){
+      
+    }
 
-      const Repository = getCustomRepository(CarrosRepository);
+    public async create({ id_uuid,placa, carro,ano,cor, km,ativo,garagem,id}: IRequestDTO): Promise<Carros | Error> {
 
       const redisCache = new RedisCache();
 
 
-      const result = await Repository.findById(id_uuid);
+      const result = await this.carrosRepository.findById(id_uuid);
 
       if (result) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const carros =  Repository.create({
+      const carros =  this.carrosRepository.create({id_uuid,
         placa, carro,ano,cor, km,ativo,garagem,id
 
 
@@ -46,7 +48,6 @@ interface IRequestDTO {
 
       await redisCache.invalidation('API_REDIS_CARROS');
 
-      await Repository.save(carros);
 
       return carros;
     }

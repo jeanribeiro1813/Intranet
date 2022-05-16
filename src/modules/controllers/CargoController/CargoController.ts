@@ -4,6 +4,7 @@ import UpdateCargoServes from '../../services/Cargo/Cargo/UpdateCargoServices';
 import LoadSummyService  from '../../services/Cargo/Cargo View/LoadSummyService';
 import DeleteCargoService from '../../services/Cargo/Cargo/DeleteCargoServices';
 import LoadIndexCargoServices from '../../services/Cargo/Cargo View/LoadIndexCargoServices'
+import { container } from "tsyringe";
 
 
 
@@ -11,7 +12,7 @@ import LoadIndexCargoServices from '../../services/Cargo/Cargo View/LoadIndexCar
 export default class CargoController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve(LoadSummyService)
 
     const funcao = await loadFuncao.summary();
 
@@ -24,7 +25,7 @@ export default class CargoController {
 
         const { uuidcargo,cargo,cod_cargo} = request.body;
 
-        const service = new CreateCargoServicer();
+        const service = container.resolve(CreateCargoServicer)
 
         const result = await service.execute(
           {
@@ -49,7 +50,7 @@ export default class CargoController {
 
         const {cargo,cod_cargo} = request.body
 
-        const updateFatu = new UpdateCargoServes();
+        const updateFatu = container.resolve(UpdateCargoServes)
 
         const fatura = await updateFatu.update(
 
@@ -70,7 +71,7 @@ export default class CargoController {
 
         const {uuidcargo} = request.params;
 
-        const deleteCargo = new DeleteCargoService();
+        const deleteCargo = container.resolve(DeleteCargoService)
 
        await deleteCargo.delete({uuidcargo});
 
@@ -81,7 +82,7 @@ export default class CargoController {
 
         const {uuidcargo} = request.params;
 
-        const Cargo = new LoadIndexCargoServices();
+        const Cargo = container.resolve(LoadIndexCargoServices)
 
        const result = await Cargo.index({uuidcargo});
 

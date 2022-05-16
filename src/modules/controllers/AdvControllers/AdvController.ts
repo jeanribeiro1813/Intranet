@@ -82,11 +82,11 @@ export default class AtividadeController {
 
         const {codadv} = request.params;
 
-        const deleteAtividade = container.resolve(LoadIndexService);
+        const indexAdv = container.resolve(LoadIndexService);
 
-       await deleteAtividade.index({codadv});
+       const result = await indexAdv.index({codadv});
 
-        return response.json('Delete realizado com sucesso');
+        return response.json(result);
       }
 
 

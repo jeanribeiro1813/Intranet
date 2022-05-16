@@ -1,20 +1,90 @@
 import { add } from 'date-fns';
-import { Repository, EntityRepository } from 'typeorm';
+import { Repository, EntityRepository,getRepository } from 'typeorm';
 
 import Faturamento from '../entities/Faturamento';
 
-@EntityRepository(Faturamento)
-export default class FaturamentoRepository extends Repository<Faturamento> {
+interface ICreateFaturamento{
 
-  public async findByCode(uuidfat: string): Promise< Faturamento | undefined > {
+  uuidfat: string;
+  uuidusuario: string
+  uuidprojeto: string
+  uuidatividade:string ;
+  data:string ;
+  inicio:string ;
+  fim:string ;
+  status:string;
+  obs:string;
+  empresa:string;
+}
 
-    const faturamento = this.findOne({
-      where : {
-        uuidfat
-      },
-
-    });
-    return faturamento;
-  }
+interface IFaturamentoRepository {
+  findById(uuidfat: string): Promise<Faturamento | undefined>;
+  create(data: ICreateFaturamento): Promise<Faturamento>;
+  save(fatu: Faturamento): Promise<Faturamento>;
+  remove(fatu: Faturamento): Promise<Faturamento>;
+  findAll(): Promise <Faturamento[]>
 
 }
+
+ 
+  @EntityRepository(Faturamento)
+  
+   class FaturamentoRepository implements IFaturamentoRepository {
+  
+      private ormRepository: Repository<Faturamento>;
+      
+        public async findById(id_uuid: string): Promise<Faturamento | undefined> {
+          this.ormRepository = getRepository(Faturamento);
+          const result = await this.ormRepository.findOne(id_uuid);
+          return result;
+      }
+      public async create({
+        uuidfat,
+        uuidusuario,
+        uuidprojeto,
+        uuidatividade,
+        data,
+        inicio,
+        fim,
+        status,
+        obs,
+        empresa,
+    }: ICreateFaturamento): Promise<Faturamento> {
+        this.ormRepository = getRepository(Faturamento);
+  
+        const result = this.ormRepository.create({
+          uuidfat,
+          uuidusuario,
+          uuidprojeto,
+          uuidatividade,
+          data,
+          inicio,
+          fim,
+          status,
+          obs,
+          empresa,
+        });
+  
+        await this.ormRepository.save(result);
+  
+        return result;
+    }
+  
+    public async save(fatu: Faturamento): Promise<Faturamento> {
+        this.ormRepository = getRepository(Faturamento);
+        return this.ormRepository.save(fatu);
+    }
+  
+    public async remove(fatu: Faturamento): Promise<Faturamento> {
+        this.ormRepository = getRepository(Faturamento);
+        return this.ormRepository.remove(fatu);
+    }
+  
+    public async findAll():Promise<Faturamento[]>{
+      this.ormRepository = getRepository(Faturamento);
+      return this.ormRepository.find();
+    }
+  }
+  
+
+  export default FaturamentoRepository;

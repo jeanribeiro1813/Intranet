@@ -24,5 +24,15 @@ projectRouter.post(
     projetoController.create);
 
 
+    
+projectRouter.get('/index/:uuidprojeto',celebrate({
+    
+    [Segments.PARAMS]:{
+        
+        uuidprojeto: Joi.string().uuid().required(),
+      
+    }
+}),projetoController.index);
+
 
 export default projectRouter;

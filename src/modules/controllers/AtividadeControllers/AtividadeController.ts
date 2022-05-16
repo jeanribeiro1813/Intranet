@@ -3,6 +3,8 @@ import CreateClientesServices from '../../services/Atividade/Atividades/CreateAt
 import UpdateClientesServices from '../../services/Atividade/Atividades/UpdateAtividadeServices';
 import LoadSummyService  from '../../services/Atividade/Atividades_Views/LoadSummyService';
 import DeleteClientesServices from '../../services/Atividade/Atividades/DeleteAtividadeServices';
+import LoadIndexService from '../../services/Atividade/Atividades_Views/LoadIndexService';
+import { container } from "tsyringe";
 
 
 
@@ -10,7 +12,8 @@ import DeleteClientesServices from '../../services/Atividade/Atividades/DeleteAt
 export default class AtividadeController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
+    
+    const loadFuncao = container.resolve(LoadSummyService)
 
     const funcao = await loadFuncao.summary();
 
@@ -23,7 +26,7 @@ export default class AtividadeController {
 
         const {uuidatividade,atividade,cod_atv } = request.body;
 
-        const service = new CreateClientesServices();
+        const service = container.resolve(CreateClientesServices);
 
         const result = await service.create(
           {
@@ -47,7 +50,7 @@ export default class AtividadeController {
 
         const {atividade,cod_atv} = request.body
 
-        const updateFatu = new UpdateClientesServices();
+        const updateFatu = container.resolve(UpdateClientesServices);
 
         const fatura = await updateFatu.update(
 
@@ -68,12 +71,25 @@ export default class AtividadeController {
 
         const {uuidatividade} = request.params;
 
-        const deleteAtividade = new DeleteClientesServices();
+        const deleteAtividade = container.resolve(DeleteClientesServices);
 
        deleteAtividade.delete({uuidatividade});
 
         return response.json('Delete realizado com sucesso');
       }
+
+
+      public async index(request:Request, response:Response):Promise<Response>{
+
+        const {uuidatividade} = request.params;
+
+        const indexAtividade = container.resolve(LoadIndexService);
+
+        const result = await indexAtividade.index({uuidatividade});
+
+        return response.json(result);
+      }
+
 
 
     

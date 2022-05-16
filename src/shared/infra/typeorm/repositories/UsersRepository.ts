@@ -1,49 +1,154 @@
-import { EntityRepository, Repository } from "typeorm";
-import Users from "../entities/Users";
+import { EntityRepository, Repository ,getRepository} from "typeorm";
+import Entities from "../entities/Users";
 
-@EntityRepository (Users)
-export default class UsersRepository extends Repository<Users>{
+interface ICreate{
 
-    public async findByCodUser(uuidusuario: string): Promise<Users | undefined> {
+    uuidusuario: string;
+    login:string ;
+    senha:string ;
+    usuario:string ;
+    n_cnh:number ;
+    dt_validade:string ;
+    email:string ;
+    ramal:number ;
+    status:string ;
+    h_status:string ;
+    last_log:string ;
+    log_time:string ;
+    dt_nasc:string ;
+    contato:string ;
+    contato2:string ;
+    uuidcargo:string ;
+    uuiddeparta:string ; 
+    alarm_id:number ;
+    cod_usuario:number ;
+    avatar:string ;
+    cpf_cnpj: string;
+    enquadramento: string;
+    carga_horaria: number;  
+    proventos: number;
+    vt: number;
+    banco: number;
+    seguro: number;
+    cv_medico: number;
+    tp_va_vr: string;  
+    va_vr: number;
 
-        const user = await this.findOne({
-            where:{
-                uuidusuario
-            }
-        });
-        return user;
-    }
 
-    public async findByName(usuario: string):Promise<Users | undefined> {
-        const user = await this.findOne({
-            where:{
-                usuario
-            }
-        });
-
-        return user
-    }
-
-    public async findByEmail (email : string):Promise<Users | undefined>{
-
-        const user = await this.findOne({
-            where:{
-                email
-            }
-        });
-
-        return user;
 }
 
-public async findByLogin (login : string):Promise<Users | undefined>{
+interface IRepository {
+findById(uuid: string): Promise<Entities | undefined>;
+create(data: ICreate): Promise<Entities>;
+save(obj: Entities): Promise<Entities>;
+remove(obj: Entities): Promise<Entities>;
+findAll(): Promise <Entities[]>
 
-    const user = await this.findOne({
-        where:{
-            login
-        }
+}
+
+
+@EntityRepository(Entities)
+
+class UsersRepository implements IRepository {
+
+  private ormRepository: Repository<Entities>;
+  
+    public async findById(uuid: string): Promise<Entities | undefined> {
+      this.ormRepository = getRepository(Entities);
+      const result = await this.ormRepository.findOne(uuid);
+      return result;
+  }
+  public async create({
+    
+    uuidusuario,
+    login,
+    senha,
+    usuario,
+    n_cnh,
+    dt_validade,
+    email,
+    ramal,
+    status,
+    h_status,
+    last_log,
+    log_time,
+    dt_nasc,
+    contato,
+    contato2,
+    uuidcargo,
+    uuiddeparta, 
+    alarm_id,
+    cod_usuario,
+    avatar,
+    cpf_cnpj,
+    enquadramento,
+    carga_horaria,  
+    proventos,
+    vt,
+    banco,
+    seguro,
+    cv_medico,
+    tp_va_vr,  
+    va_vr,
+  
+}: ICreate): Promise<Entities> {
+    this.ormRepository = getRepository(Entities);
+
+    const result = this.ormRepository.create({
+        uuidusuario,
+        login,
+        senha,
+        usuario,
+        n_cnh,
+        dt_validade,
+        email,
+        ramal,
+        status,
+        h_status,
+        last_log,
+        log_time,
+        dt_nasc,
+        contato,
+        contato2,
+        uuidcargo,
+        uuiddeparta, 
+        alarm_id,
+        cod_usuario,
+        avatar,
+        cpf_cnpj,
+        enquadramento,
+        carga_horaria,  
+        proventos,
+        vt,
+        banco,
+        seguro,
+        cv_medico,
+        tp_va_vr,  
+        va_vr,
+    
     });
 
-    return user;
+    await this.ormRepository.save(result);
+
+    return result;
+}
+
+public async save(obj: Entities): Promise<Entities> {
+    this.ormRepository = getRepository(Entities);
+    return this.ormRepository.save(obj);
+}
+
+public async remove(obj: Entities): Promise<Entities> {
+    this.ormRepository = getRepository(Entities);
+    return this.ormRepository.remove(obj);
+}
+
+public async findAll():Promise<Entities[]>{
+  this.ormRepository = getRepository(Entities);
+  return this.ormRepository.find();
 }
 }
+
+
+export default UsersRepository;
 

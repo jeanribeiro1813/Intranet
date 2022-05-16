@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import Projetos from '../../../../shared/infra/typeorm/entities/ProjetosView'
-import ProjetosViewRepository from '../../../../shared/infra/typeorm/repositories/ProjetosViewRepository';
+import Projetos from '../../../../shared/infra/typeorm/entities/Projetos'
+import ProjetosRepository from '../../../../shared/infra/typeorm/repositories/ProjetosRepository';
 import AppError from "../../../../shared/errors/AppErrors";
 
 
@@ -18,7 +18,7 @@ class LoadIndexProjeServices{
 
     public async index ({uuidprojeto}:IRequestDTO): Promise <Projetos | AppError> {
         
-        const projetosrRepository = getCustomRepository(ProjetosViewRepository);
+        const projetosrRepository = getCustomRepository(ProjetosRepository);
 
         const projeto = await projetosrRepository.findByCode(uuidprojeto);
 

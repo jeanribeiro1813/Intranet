@@ -3,10 +3,20 @@ import Carros from '../../../../shared/infra/typeorm/entities/Carros';
 import CarrosRepository from '../../../../shared/infra/typeorm/repositories/CarrosRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
 import AppError from '../../../../shared/errors/AppErrors';
+import {injectable, inject} from 'tsyringe'
 
-class LoadCarrosSummaryService{
+
+
+@injectable()
+class LoadCarrosSummaryService {
+
+  constructor(
+    @inject('CarrosRepository')
+    private carrosRepository: CarrosRepository){
+    
+  }
+
     public async summary (): Promise<Carros[] | AppError> {
-        const projetosrRepository = getCustomRepository(CarrosRepository);
 
         const redisCache = new RedisCache();
 
@@ -15,7 +25,7 @@ class LoadCarrosSummaryService{
 
         if(!responseDTO){
   
-            responseDTO  = await projetosrRepository.find();
+            responseDTO  = await this.carrosRepository.findAll();
             
             //Criando um save Redis
   

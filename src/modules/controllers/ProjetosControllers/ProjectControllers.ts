@@ -1,6 +1,7 @@
 import CreateProjetosServices from '../../services/Projetos/Projetos/CreateProjetosServices';
 import { Request, Response } from 'express';
 import UpdateProjetoServicets from '../../services/Projetos/Projetos/UpdateProjetoService'
+import LoadIndexProjeServices  from '../../services/Projetos/ProjetosView/LoadIndexProjeServices';
 
 
 
@@ -103,6 +104,18 @@ export default class ProjetosControllers {
         return response.json(showPorIndex);
       }
 
+      
+      public async index(request: Request, response: Response): Promise< Response > {
+      
+        const {uuidprojeto} = request.params;
+
+        const P = new LoadIndexProjeServices();
+
+        const projetos = await P.index({uuidprojeto});
+
+        return response.json(projetos);
+
+      }
 
 
   }

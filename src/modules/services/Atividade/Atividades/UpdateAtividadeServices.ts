@@ -1,8 +1,9 @@
 import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
-import Atividades from '../../../../shared/infra/typeorm/entities/Atividades';
+import Atividades from '../../../../shared/infra/typeorm/entities/Atividades'
 import AtividadeRepository from '../../../../shared/infra/typeorm/repositories/AtividadeRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -14,15 +15,22 @@ interface IRequestDTO {
 
   }
 
-  class UpdateClientService {
+
+@injectable()
+class UpdateClientService {
+
+  constructor(
+    @inject('AtividadeRepository')
+    private atividadeRepository: AtividadeRepository){
+    
+  }
 
     public async update({uuidatividade,atividade,cod_atv}: IRequestDTO): Promise<Atividades | Error> {
 
-      const Repository = getCustomRepository(AtividadeRepository);
 
       const redisCache = new RedisCache();
 
-      const result = await Repository.findOne(uuidatividade);
+      const result = await this.atividadeRepository.findById(uuidatividade);
 
       if (!result) {
         throw new AppError ('client não existe',404);
@@ -33,7 +41,7 @@ interface IRequestDTO {
       result.atividade = atividade ? atividade : result.atividade;
       result.cod_atv = cod_atv ? cod_atv : result.cod_atv;
 
-      await Repository.save(result);
+      await this.atividadeRepository.save(result);
 
       return result;
     }

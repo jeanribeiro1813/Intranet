@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Atividades from '../../../../shared/infra/typeorm/entities/Atividades';
 import AtividadeRepository from '../../../../shared/infra/typeorm/repositories/AtividadeRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -15,22 +16,29 @@ interface IRequestDTO {
 
   }
 
+  @injectable()
   class CreateClientesService {
+
+    constructor(
+      @inject('AtividadeRepository')
+      private atividadeRepository: AtividadeRepository){
+      
+    }
+
 
     public async create({ uuidatividade,atividade,cod_atv}: IRequestDTO): Promise<Atividades | Error> {
 
-      const Repository = getCustomRepository(AtividadeRepository);
 
       const redisCache = new RedisCache();
 
-      const result = await Repository.findById(uuidatividade);
+      const result = await this.atividadeRepository.findById(uuidatividade);
 
       if (result) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const cliet =  Repository.create({
+      const service =  this.atividadeRepository.create({
 
         uuidatividade,atividade,cod_atv
 
@@ -38,9 +46,8 @@ interface IRequestDTO {
 
       await redisCache.invalidation('API_REDIS_ATIVIDADE');
 
-      await Repository.save(cliet);
 
-      return cliet;
+      return service;
     }
   }
 

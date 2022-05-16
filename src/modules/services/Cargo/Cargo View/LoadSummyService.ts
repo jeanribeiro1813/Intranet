@@ -3,10 +3,18 @@ import Cargo from '../../../../shared/infra/typeorm/entities/Cargo';
 import CargoRepository from '../../../../shared/infra/typeorm/repositories/CargoRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
 import AppError from '../../../../shared/errors/AppErrors';
+import {injectable, inject} from 'tsyringe'
 
+@injectable()
+class LoadCargoSummaryService {
 
-class LoadCargoSummaryService{
-    public async summary (): Promise< Cargo[] | AppError> {
+  constructor(
+    @inject('CargoRepository')
+    private cargoeRepository: CargoRepository){
+    
+  }
+
+   public async summary (): Promise< Cargo[] | AppError> {
         const projetosrRepository = getCustomRepository(CargoRepository);
         
         const redisCache = new RedisCache();
@@ -16,7 +24,7 @@ class LoadCargoSummaryService{
 
         if(!responseDTO){
   
-            responseDTO  = await projetosrRepository.find();
+            responseDTO  = await this.cargoeRepository.findAll();
             
             //Criando um save Redis
   
