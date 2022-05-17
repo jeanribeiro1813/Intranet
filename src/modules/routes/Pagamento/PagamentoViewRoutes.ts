@@ -23,12 +23,6 @@ pagamentoRouter.post('/filter',celebrate({
 }),pagamentoViewController.filter);
 
 //index
-pagamentoRouter.get('/index/:uuidpagamento',isAutenticacion,
-celebrate({
-    [Segments.PARAMS]:{
-        uuidpagamento: Joi.string().uuid().required(),
-    }
-}), pagamentoViewController.index);
 
 
 

@@ -1,4 +1,3 @@
-import { getCustomRepository } from "typeorm";
 import PagamentoViewRepository from '../../../../shared/infra/typeorm/repositories/PagamentoViewRepository'
 import PagamentoView from '../../../../shared/infra/typeorm/entities/PagamentoView';
 import RedisCache from '../../../../shared/cache/RedisCache';

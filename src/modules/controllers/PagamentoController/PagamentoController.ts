@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import CreatePagamentoServices from '../../services/Pagamento/Pagamento/CreatePagamentoServices';
 import UpdatePagamentoServices from '../../services/Pagamento/Pagamento/UpdatePagamentoServices';
 import DeletePagamentoServices from '../../services/Pagamento/Pagamento/DeletePagamentoServices';
+import LoadIndexService  from '../../services/Pagamento/PagamentoView/LoadIndexService';
 import { container } from "tsyringe";
 
 
@@ -66,7 +67,18 @@ export default class CargoController {
         return response.json('Delete realizado com sucesso');
       }
 
+      public async index(request: Request, response: Response): Promise<Response> {
 
+        const {uuidpagamento} = request.params
+    
+        const loadFuncao = container.resolve( LoadIndexService)
+    
+        const funcao = await loadFuncao.index({uuidpagamento});
+    
+        return response.json(funcao);
+    
+      }
+    
     
   }
 
