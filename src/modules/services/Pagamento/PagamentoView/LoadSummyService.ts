@@ -12,7 +12,7 @@ class LoadPagamentoSummaryService {
         
       }
       
-    public async execute (): Promise<PagamentoView[]> {
+    public async summary (): Promise<PagamentoView[]> {
 
         const redisCache = new RedisCache();
 

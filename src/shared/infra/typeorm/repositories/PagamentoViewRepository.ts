@@ -33,6 +33,7 @@ interface ICreate{
 }
 
 interface IRepository {
+  
 findById(uuid: string): Promise<Entities | undefined>;
 create(data: ICreate): Promise<Entities>;
 save(obj: Entities): Promise<Entities>;

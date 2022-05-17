@@ -3,7 +3,7 @@ import {
     Column,
     PrimaryGeneratedColumn,
     CreateDateColumn,
-    UpdateDateColumn,
+    UpdateDateColumn
   } from "typeorm";
   
   import  {v4 as uuid} from 'uuid';

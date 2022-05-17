@@ -12,9 +12,9 @@ export default class CargoController {
  
   public async execute(request: Request, response: Response): Promise<Response> {
 
-    const loadFuncao = container.resolve( LoadSummyService)
+    const loadFuncao = container.resolve(LoadSummyService)
 
-    const funcao = await loadFuncao.execute();
+    const funcao = await loadFuncao.summary();
     
     return response.json(funcao);
 

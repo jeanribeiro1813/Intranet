@@ -2,7 +2,6 @@ import { getCustomRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Users from '../../../../shared/infra/typeorm/entities/Users';
 import UsersRepository from '../../../../shared/infra/typeorm/repositories/UsersRepository'
-import { hash } from 'bcryptjs';
 import RedisCache from '../../../../shared/cache/RedisCache';
 
 
