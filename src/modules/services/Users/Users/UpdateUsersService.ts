@@ -66,7 +66,7 @@ interface IRequestDTO {
 
       const redisCache = new RedisCache();
 
-      const result = await Repository.findByCodUser(uuidusuario);
+      const result = await Repository.findById(uuidusuario);
 
       if (!result) {
         throw new AppError ('client não existe',404);

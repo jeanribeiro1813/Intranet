@@ -3,14 +3,14 @@ import CreatePaginasServices from '../../services/Paginas/Paginas/CreatePaginasS
 import UpdatePaginasServices from '../../services/Paginas/Paginas/UpdatePaginasServices';
 import LoadSummyService  from '../../services/Paginas/Paginas_View/LoadSummyService';
 import DeletePaginasServices from '../../services/Paginas/Paginas/DeletePaginasServices';
-
+import { container } from "tsyringe";
 
 
 
 export default class PaginasController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve( LoadSummyService)
 
     const funcao = await loadFuncao.executeDes();
 
@@ -23,7 +23,7 @@ export default class PaginasController {
 
         const {cod_page_uuid,pagina,descricao,banner,cod_page} = request.body;
 
-        const service = new CreatePaginasServices();
+        const service = container.resolve( CreatePaginasServices);
 
         const result = await service.create(
           {
@@ -47,7 +47,7 @@ export default class PaginasController {
 
         const {pagina,descricao,banner,cod_page} = request.body
 
-        const updateFatu = new UpdatePaginasServices();
+        const updateFatu = container.resolve( UpdatePaginasServices);
 
         const fatura = await updateFatu.update(
 
@@ -68,7 +68,7 @@ export default class PaginasController {
 
         const {cod_page_uuid} = request.params;
 
-        const deleteAtividade = new DeletePaginasServices();
+        const deleteAtividade = container.resolve( DeletePaginasServices);
 
         await deleteAtividade.delete({cod_page_uuid});
 

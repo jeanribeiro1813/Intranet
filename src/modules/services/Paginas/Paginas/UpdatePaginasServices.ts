@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Paginas from '../../../../shared/infra/typeorm/entities/Paginas';
 import PaginaRepository from '../../../../shared/infra/typeorm/repositories/PaginaRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -17,15 +18,19 @@ interface IRequestDTO {
 
   }
 
-  class UpdatePaginasService {
+  @injectable()
+class UpdatePaginasService {
 
+    constructor(
+        @inject('PaginaRepository')
+        private paginaRepository: PaginaRepository){
+        
+      }
     public async update({cod_page_uuid,pagina,descricao,banner,cod_page}: IRequestDTO): Promise<Paginas | Error> {
-
-      const Repository = getCustomRepository(PaginaRepository);
 
       const redisCache = new RedisCache();
 
-      const result = await Repository.findOne(cod_page_uuid);
+      const result = await this.paginaRepository.findById(cod_page_uuid);
 
       if (!result) {
         throw new AppError ('client não existe',404);
@@ -39,7 +44,7 @@ interface IRequestDTO {
       result.banner = banner ? banner : result.banner;
   
 
-      await Repository.save(result);
+      await this.paginaRepository.save(result);
 
       return result;
     }

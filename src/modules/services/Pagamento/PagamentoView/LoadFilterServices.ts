@@ -1,6 +1,5 @@
-import { getCustomRepository } from "typeorm";
+import { getRepository } from "typeorm";
 import PagamentoView from '../../../../shared/infra/typeorm/entities/PagamentoView';
-import PagamentoViewRepository from '../../../../shared/infra/typeorm/repositories/PagamentoViewRepository'
 import AppError from '../../../../shared/errors/AppErrors';
 
 
@@ -12,7 +11,7 @@ interface IRequestDTO {
 class LoadFilterServices{
   public async filter ({incidencia}: IRequestDTO): Promise < PagamentoView[] | AppError > {
 
-      const projetosRepository = getCustomRepository(PagamentoViewRepository);
+      const projetosRepository = getRepository(PagamentoView);
 
       //Criando um Select personalizado como filtrando 2 colunas
       const index_Prod = await projetosRepository.createQueryBuilder().select()

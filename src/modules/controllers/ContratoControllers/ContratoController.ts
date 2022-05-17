@@ -3,6 +3,7 @@ import CreateContratoServices from '../../services/Contrato/Contrato/CreateContr
 import UpdateContratoServices from '../../services/Contrato/Contrato/UpdateContratoServices';
 import LoadSummyService  from '../../services/Contrato/Contrato View/LoadSummyService';
 import DeleteContratoServices from '../../services/Contrato/Contrato/DeleteContratoServices';
+import { container } from "tsyringe";
 
 
 
@@ -10,7 +11,7 @@ import DeleteContratoServices from '../../services/Contrato/Contrato/DeleteContr
 export default class ContratoController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve(LoadSummyService)
 
     const funcao = await loadFuncao.summary();
 
@@ -23,7 +24,7 @@ export default class ContratoController {
 
         const {uuidcontrato,contrato } = request.body;
 
-        const service = new CreateContratoServices();
+        const service = container.resolve(CreateContratoServices)
 
         const result = await service.create(
           {
@@ -47,7 +48,7 @@ export default class ContratoController {
 
         const {contrato } = request.body
 
-        const updateFatu = new UpdateContratoServices();
+        const updateFatu = container.resolve(UpdateContratoServices)
 
         const fatura = await updateFatu.update(
 
@@ -68,7 +69,7 @@ export default class ContratoController {
 
         const {uuidcontrato} = request.params;
 
-        const deleteAtividade = new DeleteContratoServices();
+        const deleteAtividade = container.resolve(DeleteContratoServices)
 
        await deleteAtividade.delete({uuidcontrato});
 

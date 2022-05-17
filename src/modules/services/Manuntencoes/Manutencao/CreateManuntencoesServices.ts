@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Manutencoes from '../../../../shared/infra/typeorm/entities/Manutencoes';
 import ManuntencoesRepository from '../../../../shared/infra/typeorm/repositories/ManuntencoesRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -16,22 +17,27 @@ interface IRequestDTO {
 
   }
 
-  class CreateManuntencoesService {
+  @injectable()
+class CreateManuntencoesService {
+
+    constructor(
+        @inject('ManuntencoesRepository')
+        private manutencaoresRepository: ManuntencoesRepository){
+        
+      }
 
     public async create({ cod_manutencao_uuid,descricao,valor,cod_manutencao}: IRequestDTO): Promise<Manutencoes | Error> {
 
-      const Repository = getCustomRepository(ManuntencoesRepository);
-
       const redisCache = new RedisCache();
 
-      const result = await Repository.findById(cod_manutencao_uuid);
+      const result = await this.manutencaoresRepository.findById(cod_manutencao_uuid);
 
       if (result) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const cliet =  Repository.create({
+      const cliet =  this.manutencaoresRepository.create({
 
         cod_manutencao_uuid,descricao,valor,cod_manutencao
 
@@ -39,7 +45,6 @@ interface IRequestDTO {
 
       await redisCache.invalidation('API_REDIS_MANUTENCAO');
 
-      await Repository.save(cliet);
 
       return cliet;
     }

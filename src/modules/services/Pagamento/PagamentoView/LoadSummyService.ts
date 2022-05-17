@@ -2,12 +2,18 @@ import { getCustomRepository } from "typeorm";
 import PagamentoViewRepository from '../../../../shared/infra/typeorm/repositories/PagamentoViewRepository'
 import PagamentoView from '../../../../shared/infra/typeorm/entities/PagamentoView';
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
+@injectable()
+class LoadPagamentoSummaryService {
 
-class LoadPagamentoSummaryService{
+    constructor(
+        @inject('PagamentoViewRepository')
+        private PagamentoRepository: PagamentoViewRepository){
+        
+      }
+      
     public async execute (): Promise<PagamentoView[]> {
-
-        const projetosrRepository = getCustomRepository(PagamentoViewRepository);
 
         const redisCache = new RedisCache();
 
@@ -16,7 +22,7 @@ class LoadPagamentoSummaryService{
 
         if(!responseDTO){
 
-            responseDTO  = await projetosrRepository.find();
+            responseDTO  = await this.PagamentoRepository.findAll();
             
             //Criando um save Redis
 

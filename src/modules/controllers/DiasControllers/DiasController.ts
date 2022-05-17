@@ -5,7 +5,7 @@ import DeleteDiasServices from '../../services/Dias/Dias/DeleteDiasServices';
 import LoadSummyService from '../../services/Dias/Dias_View/LoadSummyService';
 import LoadFilterServices from '../../services/Dias/Dias_View/LoadFilterServices';
 import LoadIndexService from '../../services/Dias/Dias_View/LoadIndexService';
-
+import { container } from "tsyringe";
 
 
 
@@ -17,7 +17,7 @@ export default class DiasController {
 
   public async summary(request:Request, response:Response):Promise<Response>{
 
-    const Atividade = new LoadSummyService();
+    const Atividade = container.resolve(LoadSummyService);
 
     const result = await Atividade.executeDes();
 
@@ -29,7 +29,7 @@ export default class DiasController {
         
         const {uuiddiasuteis,ano,mes ,codigo,dias} = request.body;
 
-        const service = new CreateDiasServices();
+        const service = container.resolve( CreateDiasServices);
 
         const result = await service.create(
           {
@@ -53,7 +53,7 @@ export default class DiasController {
 
         const {ano,mes ,codigo,dias} = request.body
 
-        const updateFatu = new UpdateDiasServices();
+        const updateFatu = container.resolve( UpdateDiasServices);
 
         const fatura = await updateFatu.update(
 
@@ -74,7 +74,7 @@ export default class DiasController {
 
         const {uuiddiasuteis} = request.params;
 
-        const deleteAtividade = new DeleteDiasServices();
+        const deleteAtividade = container.resolve( DeleteDiasServices);
 
         await deleteAtividade.delete({uuiddiasuteis});
 
@@ -96,7 +96,7 @@ export default class DiasController {
 
         const {uuiddiasuteis} = request.params;
 
-        const resultIndex = new LoadIndexService();
+        const resultIndex = container.resolve( LoadIndexService);
 
         const result = await resultIndex.index({uuiddiasuteis});
 

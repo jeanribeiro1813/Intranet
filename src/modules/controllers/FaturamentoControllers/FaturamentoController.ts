@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-
+import { container } from "tsyringe";
 import LoadIndexService from '../../services/Faturamento/FaturamentoView/LoadIndexServices';
 import CreateFaturamentoServices from '../../services/Faturamento/Faturamento/CreateFaturamentoServices';
 import UpdateFaturamentoServes from '../../services/Faturamento/Faturamento/UpdateFaturamentoServices';
@@ -13,7 +13,7 @@ export default class FaturamentoController {
 
         const {uuidfat} = request.params;
 
-        const loadingService = new LoadIndexService();
+        const loadingService = container.resolve( LoadIndexService) 
 
         const result = await loadingService.index({uuidfat});
 
@@ -27,7 +27,7 @@ export default class FaturamentoController {
 
         const {uuidfat, uuidusuario, uuidprojeto, uuidatividade, data, inicio, fim, status, obs, empresa} = request.body;
 
-        const service = new CreateFaturamentoServices();
+        const service = container.resolve(CreateFaturamentoServices)
 
         const result = await service.create(
           {
@@ -71,7 +71,7 @@ export default class FaturamentoController {
 
         const {uuidfat} = request.params;
 
-        const deleteFaturamento = new DeleteFaturamentoService();
+        const deleteFaturamento = container.resolve( DeleteFaturamentoService)
 
         const deletePorIndex = deleteFaturamento.delete({uuidfat});
 

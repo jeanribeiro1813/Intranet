@@ -4,11 +4,13 @@ import Users from '../../../../shared/infra/typeorm/entities/Users';
 import UsersRepository from '../../../../shared/infra/typeorm/repositories/UsersRepository'
 import { hash } from 'bcryptjs';
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
 
 interface IRequestDTO {
+    uuidusuario:string,
     login:string ,   
     senha:string ,
     usuario:string ,
@@ -41,9 +43,16 @@ interface IRequestDTO {
 
   }
 
-  class CreateUsersService {
+  @injectable()
+class CreateUsersService {
 
+    constructor(
+        @inject('UsersRepository')
+        private usersRepository: UsersRepository){
+        
+      }
     public async execute({ 
+      uuidusuario,
         login,   
         senha,
         usuario,
@@ -77,7 +86,7 @@ interface IRequestDTO {
 
       const usersRepository = getCustomRepository(UsersRepository);
 
-      const loginUserExists = await usersRepository.findByLogin(login);
+      const loginUserExists = await this.usersRepository.findByLogin(login);
 
       const redisCache = new RedisCache();
 
@@ -86,7 +95,7 @@ interface IRequestDTO {
 
       }
 
-      const checkUserExists = await usersRepository.findByEmail(email);
+      const checkUserExists = await this.usersRepository.findByEmail(email);
 
 
       if (checkUserExists) {
@@ -96,7 +105,7 @@ interface IRequestDTO {
 
       const hashedPassword = await hash(senha, 8);
 
-      const user =  usersRepository.create({
+      const user =  usersRepository.create({uuidusuario,
         login,   
         senha: hashedPassword,
         usuario,
@@ -130,9 +139,6 @@ interface IRequestDTO {
       });
 
       await redisCache.invalidation('API_REDIS_USER');
-
-
-      await usersRepository.save(user);
 
       return user;
     }

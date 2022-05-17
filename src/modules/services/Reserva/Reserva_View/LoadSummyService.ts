@@ -3,14 +3,19 @@ import ReservaRepository from '../../../../shared/infra/typeorm/repositories/Res
 import Reserva from "../../../../shared/infra/typeorm/entities/Reserva";
 import RedisCache from '../../../../shared/cache/RedisCache';
 import AppError from "../../../../shared/errors/AppErrors";
+import {injectable, inject} from 'tsyringe'
 
 
-class LoadClientesSummaryService{
+@injectable()
+class LoadClientesSummaryService {
+
+    constructor(
+        @inject('ReservaRepository')
+        private reservaRepository: ReservaRepository){
+        
+      }
+
     public async executeDes (): Promise<Reserva[] | AppError> {
-
-        const projetosrRepository = getCustomRepository(ReservaRepository);
-
-        const user = await projetosrRepository.find({});
 
         const redisCache = new RedisCache();
   
@@ -19,7 +24,7 @@ class LoadClientesSummaryService{
   
         if(!responseDTO){
   
-            responseDTO  = await projetosrRepository.find();
+            responseDTO  = await this.reservaRepository.findAll();
             
             //Criando um save Redis
   

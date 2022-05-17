@@ -4,6 +4,7 @@ import UpdateClientesServices from '../../services/Departamento/Departamento/Upd
 import LoadSummyService  from '../../services/Departamento/Departamento_View/LoadSummyService';
 import DeleteClientesServices from '../../services/Departamento/Departamento/DeleteDepartamentoServices';
 import LoadIndexDepartamentoServices from '../../services/Departamento/Departamento_View/LoadIndexDepartamentoServices';
+import { container } from "tsyringe";
 
 
 
@@ -11,7 +12,7 @@ import LoadIndexDepartamentoServices from '../../services/Departamento/Departame
 export default class DepartamentoController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve(LoadSummyService)
 
     const funcao = await loadFuncao.summary();
 
@@ -24,7 +25,7 @@ export default class DepartamentoController {
 
         const { uuiddeparta,departamento} = request.body;
 
-        const service = new CreateClientesServices();
+        const service = container.resolve(CreateClientesServices)
 
         const result = await service.execute(
           {
@@ -48,7 +49,7 @@ export default class DepartamentoController {
 
         const { departamento} = request.body
 
-        const updateFatu = new UpdateClientesServices();
+        const updateFatu = container.resolve(UpdateClientesServices)
 
         const fatura = await updateFatu.update(
 
@@ -69,7 +70,7 @@ export default class DepartamentoController {
 
         const { uuiddeparta} = request.params;
 
-        const deleteDepartamento = new DeleteClientesServices();
+        const deleteDepartamento = container.resolve(DeleteClientesServices)
 
        deleteDepartamento.execute({uuiddeparta});
 
@@ -80,7 +81,7 @@ export default class DepartamentoController {
 
         const { uuiddeparta } = request.params;
 
-        const indexDepartamento = new LoadIndexDepartamentoServices();
+        const indexDepartamento = container.resolve(LoadIndexDepartamentoServices)
 
         const result = await indexDepartamento.index({uuiddeparta});
 

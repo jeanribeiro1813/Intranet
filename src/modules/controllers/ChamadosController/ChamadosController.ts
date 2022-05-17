@@ -3,6 +3,7 @@ import CreateChamadosServices from '../../services/Chamados/Chamados/CreateChama
 import UpdateChamadosServices from '../../services/Chamados/Chamados/UpdateChamadosServices';
 import LoadSummyService  from '../../services/Chamados/Chamados View/LoadSummyService';
 import DeleteChamadosServices from '../../services/Chamados/Chamados/DeleteChamadosServices';
+import { container } from "tsyringe";
 
 
 
@@ -10,7 +11,7 @@ import DeleteChamadosServices from '../../services/Chamados/Chamados/DeleteChama
 export default class ChamadosController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve(LoadSummyService);
 
     const funcao = await loadFuncao.summary();
 
@@ -24,7 +25,7 @@ export default class ChamadosController {
         const { cod_chamado_uuid,cod_usuario, equipamento,descricao,prioridade,
           dt_solicitacao,dt_conclusao,desc_conclusao,cod_chamado} = request.body;
 
-        const service = new CreateChamadosServices();
+        const service = container.resolve(CreateChamadosServices);
 
         const result = await service.create(
           {
@@ -50,7 +51,7 @@ export default class ChamadosController {
         const {cod_usuario, equipamento,descricao,prioridade,
           dt_solicitacao,dt_conclusao,desc_conclusao,cod_chamado} = request.body
 
-        const updateFatu = new UpdateChamadosServices();
+        const updateFatu = container.resolve(UpdateChamadosServices)
 
         const fatura = await updateFatu.update(
 
@@ -71,7 +72,7 @@ export default class ChamadosController {
 
         const {cod_chamado_uuid} = request.params;
 
-        const deleteCargo = new DeleteChamadosServices();
+        const deleteCargo = container.resolve(DeleteChamadosServices)
 
        await deleteCargo.delete({cod_chamado_uuid});
 

@@ -3,6 +3,7 @@ import CreateManuntencoesServices from '../../services/Manuntencoes/Manutencao/C
 import UpdateManuntencoesServices from '../../services/Manuntencoes/Manutencao/UpdateManuntencoesServices';
 import LoadSummyService  from '../../services/Manuntencoes/Manutencao_View/LoadSummyService';
 import DeleteManuntencoesServices from '../../services/Manuntencoes/Manutencao/DeleteManuntencoesServices';
+import { container } from "tsyringe";
 
 
 
@@ -10,7 +11,7 @@ import DeleteManuntencoesServices from '../../services/Manuntencoes/Manutencao/D
 export default class ManutencaoController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve(LoadSummyService)
 
     const funcao = await loadFuncao.executeDes();
 
@@ -23,8 +24,7 @@ export default class ManutencaoController {
 
         const {cod_manutencao_uuid,descricao,valor,cod_manutencao} = request.body;
 
-        const service = new CreateManuntencoesServices();
-
+        const service = container.resolve(CreateManuntencoesServices);
         const result = await service.create(
           {
             cod_manutencao_uuid,descricao,valor,cod_manutencao
@@ -46,7 +46,7 @@ export default class ManutencaoController {
 
         const {descricao,valor,cod_manutencao} = request.body
 
-        const updateFatu = new UpdateManuntencoesServices();
+        const updateFatu = container.resolve(UpdateManuntencoesServices)
 
         const fatura = await updateFatu.update(
 
@@ -67,7 +67,7 @@ export default class ManutencaoController {
 
         const {cod_manutencao_uuid} = request.params;
 
-        const deleteAtividade = new DeleteManuntencoesServices();
+        const deleteAtividade = container.resolve(DeleteManuntencoesServices)
 
         await deleteAtividade.delete({cod_manutencao_uuid});
 

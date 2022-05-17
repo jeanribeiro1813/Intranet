@@ -18,7 +18,7 @@ interface IResponseDTO {
 class LoadPorUsersServices{
   public async filter ({uuidusuario ,data}: IResponseDTO): Promise<FaturamentoView[]> {
 
-      const projetosRepository = getCustomRepository(FaturamentoViewsRepository);
+      const projetosRepository = getRepository(FaturamentoView);
 
       //Criando um Select personalizado como filtrando 2 colunas
       const index_Prod = await projetosRepository.createQueryBuilder().select()

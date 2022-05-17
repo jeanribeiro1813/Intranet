@@ -3,6 +3,7 @@ import CreateReservaServices from '../../services/Reserva/Reserva/CreateReservaS
 import UpdateReservaServices from '../../services/Reserva/Reserva/UpdateReservaServices';
 import LoadSummyService  from '../../services/Paginas/Paginas_View/LoadSummyService';
 import DeleteReservaServices from '../../services/Reserva/Reserva/DeleteReservaServices';
+import { container } from "tsyringe";
 
 
 
@@ -10,7 +11,7 @@ import DeleteReservaServices from '../../services/Reserva/Reserva/DeleteReservaS
 export default class ReservaController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve(LoadSummyService)
 
     const funcao = await loadFuncao.executeDes();
 
@@ -25,7 +26,7 @@ export default class ReservaController {
           dt_chegada,dt_cancel,hora_saida,hora_chegada,km_saida,
           km_chegada,projeto,cancelado,desc_cancel,dev_obs,cod_reserva} = request.body;
 
-        const service = new CreateReservaServices();
+        const service = container.resolve(CreateReservaServices);
 
         const result = await service.create(
 
@@ -55,7 +56,7 @@ export default class ReservaController {
           dt_chegada,dt_cancel,hora_saida,hora_chegada,km_saida,
             km_chegada,projeto,cancelado,desc_cancel,dev_obs,cod_reserva} = request.body
 
-        const updateFatu = new UpdateReservaServices();
+        const updateFatu = container.resolve(UpdateReservaServices);
 
         const fatura = await updateFatu.update(
 
@@ -78,7 +79,7 @@ export default class ReservaController {
 
         const {cod_reserva_uuid} = request.params;
 
-        const deleteAtividade = new DeleteReservaServices();
+        const deleteAtividade = container.resolve(DeleteReservaServices);
 
        await deleteAtividade.delete({cod_reserva_uuid});
 

@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Projetos from '../../../../shared/infra/typeorm/entities/Projetos';
 import ProjetosRepository from '../../../../shared/infra/typeorm/repositories/ProjetosRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -28,12 +29,16 @@ interface IRequestDTO {
   memoalt:string;
   dt_fim:string;
   cod_proj:number;
-
-
-
   }
 
-  class CreateFatService {
+  @injectable()
+  class CreateProjetosService {
+  
+      constructor(
+          @inject('ProjetosRepository')
+          private projetosRepository: ProjetosRepository){
+          
+        }
 
     public async execute({uuidprojeto,nprojeto,data,contrato,projeto,cliente,cliente2 ,
       numero,
@@ -50,18 +55,16 @@ interface IRequestDTO {
       dt_fim,
       cod_proj}: IRequestDTO): Promise<Projetos | Error> {
 
-      const projRepository = getCustomRepository(ProjetosRepository);
-
       const redisCache = new RedisCache();
 
-      const checkUserExists = await projRepository.findByCode(uuidprojeto);
+      const checkUserExists = await this.projetosRepository.findById(uuidprojeto);
 
       if (checkUserExists) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const project =  projRepository.create({
+      const project =  this.projetosRepository.create({
         
         uuidprojeto,nprojeto,data,contrato,projeto,cliente, cliente2,
       numero,
@@ -82,10 +85,8 @@ interface IRequestDTO {
 
       await redisCache.invalidation('API_REDIS_PROJETOS');
 
-      await projRepository.save(project);
-
       return project;
     }
   }
 
-  export default CreateFatService;
+  export default CreateProjetosService;

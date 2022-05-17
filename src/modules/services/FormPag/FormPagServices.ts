@@ -3,7 +3,7 @@ import AppError from '../../../shared/errors/AppErrors';
 import Entitie from '../../../shared/infra/typeorm/entities/FormPag';
 import Repository from '../../../shared/infra/typeorm/repositories/FormPagRepository';
 import RedisCache from '../../../shared/cache/RedisCache';
-
+import {injectable, inject} from 'tsyringe'
 
 interface IDescItemOfSummary {
   uuidformpag: string;
@@ -25,22 +25,28 @@ interface IResponseDTO {
   summary: IDescItemOfSummary[];
 }
 
-  class CreateServices {
+
+@injectable()
+class CreateServices {
+
+    constructor(
+        @inject('Repository')
+        private formpagRepository: Repository){
+        
+      }
 
     public async create({uuidformpag, codigo, descricao}: IRequestDTO): Promise<Entitie | Error> {
 
-      const repository = getCustomRepository(Repository);
-
       const redisCache = new RedisCache();
 
-      const checkUserExists = await repository.findById(uuidformpag);
+      const checkUserExists = await this.formpagRepository.findById(uuidformpag);
 
       if (checkUserExists) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const result =  repository.create({
+      const result =  this.formpagRepository.create({
 
         uuidformpag, codigo, descricao
 
@@ -48,8 +54,6 @@ interface IResponseDTO {
 
 
       await redisCache.invalidation('API_REDIS_FORMPAG');
-
-      await repository.save(result);
 
       return result;
     }
@@ -65,7 +69,7 @@ interface IResponseDTO {
 
       if(!responseDTO){
 
-          responseDTO  = await repository.find();
+          responseDTO  = await this.formpagRepository.findAll();
           
           //Criando um save Redis
 
@@ -80,11 +84,9 @@ interface IResponseDTO {
 
     public async update({uuidformpag, codigo, descricao}: IRequestDTO): Promise<Entitie | Error> {
 
-      const repository = getCustomRepository(Repository);
-
       const redisCache = new RedisCache();
 
-      const result = await repository.findOne(uuidformpag);
+      const result = await this.formpagRepository.findById(uuidformpag);
 
       if (!result) {
         throw new AppError ('Dados não existe',404);
@@ -97,7 +99,7 @@ interface IResponseDTO {
       result.descricao = descricao ? descricao : result.descricao;
   
 
-      await repository.save(result);
+      await this.formpagRepository.save(result);
 
       return result;
 
@@ -105,11 +107,9 @@ interface IResponseDTO {
 
     public async delete( {uuidformpag}: IRequestDelete) : Promise<void> {
 
-      const repository = getCustomRepository(Repository);
-
       const redisCache = new RedisCache();
 
-      const result = await repository.findOne({uuidformpag});
+      const result = await this.formpagRepository.findById(uuidformpag);
 
       if (!result) {
         throw new AppError('Não Existe ',402);
@@ -117,7 +117,7 @@ interface IResponseDTO {
 
       await redisCache.invalidation('API_REDIS_FORMPAG');
 
-      await repository.remove(result);
+      await this.formpagRepository.remove(result);
     }
 
 

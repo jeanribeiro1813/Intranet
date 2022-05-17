@@ -38,7 +38,7 @@ interface IRequestDTO {
       }
 
       //Se o Token existir vai pegar o Id do Usuario pela variavel userToken da TABELA USERS_TOKENS
-      const user = await usersRepository.findByCodUser(userToken.user_id);
+      const user = await usersRepository.findById(userToken.user_id);
       
 
       //Vai verificar se existe o usuario 

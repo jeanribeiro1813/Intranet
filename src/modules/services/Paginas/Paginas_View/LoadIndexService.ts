@@ -2,6 +2,7 @@ import { getCustomRepository } from "typeorm";
 import Paginas from '../../../../shared/infra/typeorm/entities/Paginas';
 import PaginaRepository from '../../../../shared/infra/typeorm/repositories/PaginaRepository'
 import AppError from '../../../../shared/errors/AppErrors';
+import {injectable, inject} from 'tsyringe'
 
 
 interface IResponseDTO {
@@ -11,15 +12,18 @@ interface IResponseDTO {
 }
 
 
+@injectable()
+class LoadIndexService {
 
+    constructor(
+        @inject('PaginaRepository')
+        private paginaRepository: PaginaRepository){
+        
+      }
 
-
-class LoadIndexService{
     public async index ({cod_page_uuid}:IResponseDTO): Promise< Paginas | AppError > {
 
-        const Repository = getCustomRepository(PaginaRepository);
-
-        const result = await Repository.findById(cod_page_uuid);
+        const result = await this.paginaRepository.findById(cod_page_uuid);
 
         if(!result){
             throw new AppError("Não Existe esse projeto",409);

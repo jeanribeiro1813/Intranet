@@ -1,14 +1,13 @@
 import LoadProjects from '../../services/Projetos//ProjetosView/LoadProjectsServices';
 import { Request, Response } from 'express';
 import LoadProjetoSummaryService  from '../../services/Projetos/ProjetosView/LoadySummaryProjeServices';
-import Contrato from '../../../shared/infra/typeorm/entities/Contrato';
-
+import { container } from "tsyringe";
 
 
 export default class ProjetosControllers {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadProjetoSummaryService();
+    const loadFuncao = container.resolve(LoadProjetoSummaryService);
 
     const funcao = await loadFuncao.executeDes();
 

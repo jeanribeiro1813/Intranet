@@ -1,4 +1,4 @@
-import { getCustomRepository } from "typeorm";
+import { getRepository } from "typeorm";
 import FornecedoresRepository from '../../../../shared/infra/typeorm/repositories/FornecedoresRepository'
 import Fornecedores from '../../../../shared/infra/typeorm/entities/Fornecedores'
 import AppError from "../../../../shared/errors/AppErrors";
@@ -18,7 +18,7 @@ interface IResponseDTO {
 class FilterService{
     public async filter ({cargo,status}:IResponseDTO): Promise<Fornecedores[] | AppError> {
         
-        const Repository = getCustomRepository(FornecedoresRepository);
+        const Repository = getRepository(Fornecedores);
 
         const result = await Repository.createQueryBuilder().select()
         .where('cargo ILIKE :cargo OR status ILIKE :status ', {cargo: `%${cargo}%`,status: `%${status}%`}).getMany();

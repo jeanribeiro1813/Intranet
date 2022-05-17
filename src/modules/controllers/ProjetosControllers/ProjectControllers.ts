@@ -2,7 +2,7 @@ import CreateProjetosServices from '../../services/Projetos/Projetos/CreateProje
 import { Request, Response } from 'express';
 import UpdateProjetoServicets from '../../services/Projetos/Projetos/UpdateProjetoService'
 import LoadIndexProjeServices  from '../../services/Projetos/ProjetosView/LoadIndexProjeServices';
-
+import { container } from "tsyringe";
 
 
 
@@ -32,7 +32,7 @@ export default class ProjetosControllers {
 
 
 
-        const updateService = new UpdateProjetoServicets();
+        const updateService = container.resolve(  UpdateProjetoServicets );
 
         const result = await updateService.updateProj(
           
@@ -82,7 +82,7 @@ export default class ProjetosControllers {
           dt_fim,
           cod_proj} = request.body;
 
-        const indexProj = new CreateProjetosServices();
+        const indexProj = container.resolve(  CreateProjetosServices );
 
         const showPorIndex = await indexProj.execute({uuidprojeto,data,contrato,nprojeto,projeto,cliente, cliente2,
           numero,
@@ -109,7 +109,7 @@ export default class ProjetosControllers {
       
         const {uuidprojeto} = request.params;
 
-        const P = new LoadIndexProjeServices();
+        const P = container.resolve(  LoadIndexProjeServices ) ;
 
         const projetos = await P.index({uuidprojeto});
 

@@ -2,13 +2,18 @@ import { getCustomRepository } from "typeorm";
 import ProjetosViewRepository from '../../../../shared/infra/typeorm/repositories/ProjetosViewRepository';
 import ProjetosView from '../../../../shared/infra/typeorm/entities/ProjetosView';
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
+@injectable()
+class LoadProjetoSummaryService {
 
+    constructor(
+        @inject('ProjetosViewRepository')
+        private projetosRepository: ProjetosViewRepository){
+        
+      }
 
-class LoadProjetoSummaryService{
     public async executeDes (): Promise<ProjetosView[]> {
-
-        const repository = getCustomRepository(ProjetosViewRepository);
 
         const redisCache = new RedisCache();
   
@@ -17,7 +22,7 @@ class LoadProjetoSummaryService{
   
         if(!responseDTO){
   
-            responseDTO  = await repository.find();
+            responseDTO  = await this.projetosRepository.findAll();
             
             //Criando um save Redis
   

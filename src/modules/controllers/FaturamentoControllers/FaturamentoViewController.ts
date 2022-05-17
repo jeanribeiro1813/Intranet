@@ -2,14 +2,14 @@ import { Request, Response } from 'express';
 import LoadSummyService  from '../../services/Faturamento/FaturamentoView/LoadSummyService';
 import LoadPorUsersServices from '../../services/Faturamento/FaturamentoView/FilterService';
 import LoadIndexServices from '../../services/Faturamento/FaturamentoView/LoadIndexServices';
-
+import { container } from "tsyringe";
 
 
 export default class FaturamentoViewController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
 
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve( LoadSummyService)
 
     const funcao = await loadFuncao.summary();
 
@@ -21,7 +21,7 @@ export default class FaturamentoViewController {
 
     const {uuidfat} = request.params;
 
-    const indexFat = new LoadIndexServices();
+    const indexFat = container.resolve( LoadIndexServices ) 
 
     const showPerIndex = await indexFat.index({uuidfat});
 

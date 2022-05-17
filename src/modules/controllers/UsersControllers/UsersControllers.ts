@@ -3,12 +3,13 @@ import CreateUsersService  from '../../services/Users/Users/CreateUsersService';
 import LoadIndexService from '../../services/Users/User_View/LoadIndexService';
 import FilterEspecificoUsersServices from '../../services/Users/User_View/FilterEspecificoUsersServices'
 import UpdateUsersService from '../../services/Users/Users/UpdateUsersService'
+import { container } from "tsyringe";
 
 export default class UsersControllers {
 
   public async create(request: Request, response: Response): Promise<Response> {
 
-    const { login,   
+    const {uuidusuario, login,   
       senha,
       usuario,
       n_cnh,
@@ -37,9 +38,9 @@ export default class UsersControllers {
       tp_va_vr,
       va_vr} = request.body;
 
-    const createFuncao = new CreateUsersService();
+    const createFuncao = container.resolve(CreateUsersService);
 
-    const funcao = await createFuncao.execute({ login,   
+    const funcao = await createFuncao.execute({ uuidusuario,login,   
       senha,
       usuario,
       n_cnh,
@@ -82,7 +83,7 @@ export default class UsersControllers {
 
         const {uuidusuario} = request.params;
 
-        const loadingService = new LoadIndexService();
+        const loadingService = container.resolve(LoadIndexService);
 
         const result = await loadingService.load({uuidusuario});
 

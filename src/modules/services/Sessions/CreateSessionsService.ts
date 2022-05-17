@@ -1,9 +1,10 @@
-import { getCustomRepository } from 'typeorm'
 import AppError from '../../../shared/errors/AppErrors';
 import UsersRepository from '../../../shared/infra/typeorm/repositories/UsersRepository'
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import authConfig from "../../../config/auth";
+import {injectable, inject} from 'tsyringe'
+
 
 // Tela de Sessão e criando autenticação
 
@@ -20,16 +21,23 @@ interface IResponseDTO{
     token:string;
 }
 
-  class CreateSessionsService {
+
+@injectable()
+class CreateSessionsService {
+
+    constructor(
+        @inject('UsersRepository')
+        private usersRepository: UsersRepository){
+        
+      }
+
 
     public async execute({ 
         login,   
         senha
     }: IRequestDTO): Promise<IResponseDTO> {
 
-      const usersRepository = getCustomRepository(UsersRepository);
-
-      const user = await usersRepository.findByLogin(login);
+      const user = await this.usersRepository.findByLogin(login);
 
       if (!user) {
         throw new AppError('Login/Senha Incorreto.',401);

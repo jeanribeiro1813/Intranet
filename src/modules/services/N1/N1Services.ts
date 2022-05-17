@@ -3,6 +3,7 @@ import AppError from '../../../shared/errors/AppErrors';
 import Entitie from '../../../shared/infra/typeorm/entities/N1';
 import Repository from '../../../shared/infra/typeorm/repositories/N1Repository'
 import RedisCache from '../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 interface IRequestDTO {
@@ -14,23 +15,26 @@ interface IRequestDelete {
   uuidn1: string;
 }
 
+@injectable()
+class CreateServices {
 
-  class CreateServices {
-
+    constructor(
+        @inject('Repository')
+        private N1Repository: Repository){
+        
+      }
     public async create({uuidn1, codigo, descricao}: IRequestDTO): Promise<Entitie | Error> {
-
-      const repository = getCustomRepository(Repository);
 
       const redisCache = new RedisCache();
 
-      const checkUserExists = await repository.findById(uuidn1);
+      const checkUserExists = await this.N1Repository.findById(uuidn1);
 
       if (checkUserExists) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const result =  repository.create({
+      const result =  this.N1Repository.create({
 
         uuidn1, codigo, descricao
 
@@ -38,14 +42,10 @@ interface IRequestDelete {
 
       await redisCache.invalidation('API_REDIS_N1');
 
-      await repository.save(result);
-
       return result;
     }
 
     public async read (): Promise<Entitie[] | AppError> {
-
-      const repository = getCustomRepository(Repository);
 
       const redisCache = new RedisCache();
 
@@ -54,7 +54,7 @@ interface IRequestDelete {
 
       if(!responseDTO){
 
-          responseDTO  = await repository.find();
+          responseDTO  = await this.N1Repository.findAll();
           
           //Criando um save Redis
 
@@ -69,11 +69,9 @@ interface IRequestDelete {
 
     public async update({uuidn1, codigo, descricao}: IRequestDTO): Promise<Entitie | Error> {
 
-      const repository = getCustomRepository(Repository);
-
       const redisCache = new RedisCache();
 
-      const result = await repository.findOne(uuidn1);
+      const result = await this.N1Repository.findById(uuidn1);
 
       if (!result) {
         throw new AppError ('Dados não existe',404);
@@ -86,7 +84,7 @@ interface IRequestDelete {
       result.descricao = descricao ? descricao : result.descricao;
   
 
-      await repository.save(result);
+      await this.N1Repository.save(result);
 
       return result;
 
@@ -94,11 +92,9 @@ interface IRequestDelete {
 
     public async delete( {uuidn1}: IRequestDelete) : Promise<void> {
 
-      const repository = getCustomRepository(Repository);
-
       const redisCache = new RedisCache();
 
-      const result = await repository.findOne(uuidn1);
+      const result = await this.N1Repository.findById(uuidn1);
 
       if (!result) {
         throw new AppError('Não Existe ',402);
@@ -106,7 +102,7 @@ interface IRequestDelete {
 
       await redisCache.invalidation('API_REDIS_N1');
 
-      await repository.remove(result);
+      await this.N1Repository.remove(result);
     }
 
 

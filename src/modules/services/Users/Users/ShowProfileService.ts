@@ -18,7 +18,7 @@ class ShowProfileService {
 
         const loadService = getCustomRepository(UsersRepository);
 
-        const user = await loadService.findByCodUser(user_id);
+        const user = await loadService.findById(user_id);
 
         if(!user){
             throw new AppError ('Usuario não encontrado',409)

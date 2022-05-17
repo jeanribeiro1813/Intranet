@@ -3,11 +3,19 @@ import { getCustomRepository } from "typeorm";
 import Ramais from '../../../../shared/infra/typeorm/entities/Ramais';
 import RamaisRepository from '../../../../shared/infra/typeorm/repositories/RamaisRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
-class LoadRamaisSummary{
+@injectable()
+class LoadRamaisSummary {
+
+    constructor(
+        @inject('RamaisRepository')
+        private ramaisRepository: RamaisRepository){
+        
+      }
+
     public async executeDes (): Promise<Ramais[] | AppError> {
-        const projetosrRepository = getCustomRepository(RamaisRepository);
 
         const redisCache = new RedisCache();
   
@@ -16,7 +24,7 @@ class LoadRamaisSummary{
   
         if(!responseDTO){
   
-            responseDTO  = await projetosrRepository.find();
+            responseDTO  = await this.ramaisRepository.findAll();
             
             //Criando um save Redis
   

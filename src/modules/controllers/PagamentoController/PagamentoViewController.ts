@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import LoadSummyService  from '../../services/Pagamento/PagamentoView/LoadSummyService';
 import LoadFilterServices  from '../../services/Pagamento/PagamentoView/LoadFilterServices';
 import LoadIndexService  from '../../services/Pagamento/PagamentoView/LoadIndexService';
+import { container } from "tsyringe";
 
 
 
@@ -13,7 +14,7 @@ export default class CargoController {
 
     const {uuidpagamento} = request.params
 
-    const loadFuncao = new LoadIndexService();
+    const loadFuncao = container.resolve( LoadIndexService)
 
     const funcao = await loadFuncao.index({uuidpagamento});
 
@@ -23,7 +24,7 @@ export default class CargoController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
 
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve( LoadSummyService)
 
     const funcao = await loadFuncao.execute();
     
@@ -34,7 +35,7 @@ export default class CargoController {
 
     const {incidencia} = request.body
 
-    const loadFuncao = new LoadFilterServices();
+    const loadFuncao = container.resolve( LoadFilterServices)
 
     const funcao = await loadFuncao.filter({incidencia});
 

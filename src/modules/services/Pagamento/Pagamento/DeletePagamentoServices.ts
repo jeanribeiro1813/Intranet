@@ -3,21 +3,29 @@ import { getCustomRepository,getRepository } from 'typeorm'
 import Pagamento from '../../../../shared/infra/typeorm/entities/Pagamento';
 import PagamentoRepository from '../../../../shared/infra/typeorm/repositories/PagamentoRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 interface IRequestDTO{
 
   uuidpagamento: string;
 
 }
- class DeletePagamentoService {
+
+
+@injectable()
+class DeletePagamentoService {
+
+    constructor(
+        @inject('PagamentoRepository')
+        private PagamentoRepository: PagamentoRepository){
+        
+      }
 
      public async execute( {uuidpagamento}: IRequestDTO) : Promise<void> {
 
-      const usersRepository = getCustomRepository(PagamentoRepository);
-
       const redisCache = new RedisCache();
 
-      const service = await usersRepository.findOne(uuidpagamento);
+      const service = await this.PagamentoRepository.findById(uuidpagamento);
 
       if (!service) {
         throw new AppError('Não Existe ',402);
@@ -25,7 +33,7 @@ interface IRequestDTO{
 
       await redisCache.invalidation('API_REDIS_PAGAMENTO');
 
-      await usersRepository.remove(service);
+      await this.PagamentoRepository.remove(service);
       }
   }
 

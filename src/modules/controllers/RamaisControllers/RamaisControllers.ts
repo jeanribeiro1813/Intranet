@@ -3,7 +3,7 @@ import CreateRamaisServices from '../../services/Ramais/Ramais/CreateRamaisServi
 import UpdateRamaisServices from '../../services/Ramais/Ramais/UpdateRamaisServices';
 import DeleteRamaisServices from '../../services/Ramais/Ramais/DeleteRamaisServices';
 import LoadSummyService from '../../services/Ramais/Ramais_View/LoadSummyService';
-
+import { container } from "tsyringe";
 
 
 export default class N3Controller {
@@ -11,7 +11,7 @@ export default class N3Controller {
 
   public async read(request: Request, response: Response): Promise<Response> {
 
-    const services = new LoadSummyService();
+    const services = container.resolve(LoadSummyService);
       
     const funcao = await services.executeDes();
 
@@ -25,7 +25,7 @@ export default class N3Controller {
 
     const {uuidramal,ramal,cod_atv} = request.body;
 
-    const services = new CreateRamaisServices();
+    const services = container.resolve(CreateRamaisServices);
 
     const result = await services.create(
       {
@@ -48,7 +48,7 @@ export default class N3Controller {
 
     const {ramal,cod_atv } = request.body
 
-    const services = new UpdateRamaisServices();
+    const services = container.resolve(UpdateRamaisServices);
 
     const result = await services.update(
 
@@ -69,7 +69,7 @@ export default class N3Controller {
 
     const {uuidramal} = request.params;
 
-    const services = new DeleteRamaisServices();
+    const services = container.resolve(DeleteRamaisServices);
 
     await services.delete({uuidramal});
 

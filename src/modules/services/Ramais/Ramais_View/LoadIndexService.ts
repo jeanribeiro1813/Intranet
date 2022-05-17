@@ -2,6 +2,7 @@ import { getCustomRepository } from "typeorm";
 import Ramais from '../../../../shared/infra/typeorm/entities/Ramais';
 import RamaisRepository from '../../../../shared/infra/typeorm/repositories/RamaisRepository'
 import AppError from '../../../../shared/errors/AppErrors';
+import {injectable, inject} from 'tsyringe'
 
 
 interface IResponseDTO {
@@ -13,15 +14,18 @@ interface IResponseDTO {
 }
 
 
+@injectable()
+class LoadIndexService {
 
+    constructor(
+        @inject('RamaisRepository')
+        private ramaisRepository: RamaisRepository){
+        
+      }
 
+      public async index ({cuuidramal}:IResponseDTO): Promise< Ramais | AppError > {
 
-class LoadIndexService{
-    public async index ({cuuidramal}:IResponseDTO): Promise< Ramais | AppError > {
-
-        const Repository = getCustomRepository(RamaisRepository);
-
-        const result = await Repository.findById(cuuidramal);
+        const result = await this.ramaisRepository.findById(cuuidramal);
 
         if(!result){
             throw new AppError("Não Existe esse projeto",409);

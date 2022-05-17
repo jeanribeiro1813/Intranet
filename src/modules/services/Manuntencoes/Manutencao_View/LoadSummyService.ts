@@ -3,13 +3,18 @@ import Manutencoes from '../../../../shared/infra/typeorm/entities/Manutencoes';
 import ManuntencoesRepository from '../../../../shared/infra/typeorm/repositories/ManuntencoesRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
 import AppError from "../../../../shared/errors/AppErrors";
+import {injectable, inject} from 'tsyringe'
 
+@injectable()
+class LoadManuntencaoSummaryService {
 
-class LoadManuntencaoSummaryService{
+    constructor(
+        @inject('ManuntencoesRepository')
+        private manutencaoresRepository: ManuntencoesRepository){
+        
+      }
     public async executeDes (): Promise<Manutencoes[] | AppError> {
-        const projetosrRepository = getCustomRepository(ManuntencoesRepository);
-
-       
+      
         const redisCache = new RedisCache();
       
         let responseDTO = await redisCache.recover<Manutencoes[]>('API_REDIS_MANUTENCAO')
@@ -17,7 +22,7 @@ class LoadManuntencaoSummaryService{
   
         if(!responseDTO){
   
-            responseDTO  = await projetosrRepository.find();
+            responseDTO  = await this.manutencaoresRepository.findAll();
             
             //Criando um save Redis
   

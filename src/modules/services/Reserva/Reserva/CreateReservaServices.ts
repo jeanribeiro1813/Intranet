@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Reserva from '../../../../shared/infra/typeorm/entities/Reserva';
 import ReservaRepository from '../../../../shared/infra/typeorm/repositories/ReservaRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -27,34 +28,37 @@ interface IRequestDTO {
  
   }
 
-  class CreateReservaService {
+  @injectable()
+class CreateReservaService {
 
-    public async create({ cod_reserva_uuid,placa,usuario,dt_saida,
+    constructor(
+        @inject('ReservaRepository')
+        private reservaRepository: ReservaRepository){
+        
+      }
+
+    public async create({ cod_reserva_uuid,placa,usuario,dt_saida,dt_cancel,
       dt_chegada,hora_saida,hora_chegada,km_saida,
       km_chegada,projeto,cancelado,desc_cancel,dev_obs,cod_reserva}: IRequestDTO): Promise<Reserva | Error> {
 
-      const Repository = getCustomRepository(ReservaRepository);
-
       const redisCache = new RedisCache();
 
-      const result = await Repository.findById(cod_reserva_uuid);
+      const result = await this.reservaRepository.findById(cod_reserva_uuid);
 
       if (result) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const cliet =  Repository.create({
+      const cliet =  this.reservaRepository.create({
 
-        cod_reserva_uuid,placa,usuario,dt_saida,
+        cod_reserva_uuid,placa,usuario,dt_saida,dt_cancel,
         dt_chegada,hora_saida,hora_chegada,km_saida,
         km_chegada,projeto,cancelado,desc_cancel,dev_obs,cod_reserva
 
       });
 
       await redisCache.invalidation('API_REDIS_RESERVA');
-
-      await Repository.save(cliet);
 
       return cliet;
     }

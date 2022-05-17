@@ -29,7 +29,7 @@ class UpdateShowProfileService {
         const redisCache = new RedisCache();
 
         //buscando por id
-        const user = await userUpdate.findByCodUser(user_id);
+        const user = await userUpdate.findById(user_id);
 
         if(!user){
             throw new AppError ('Usuario não Existe',409)

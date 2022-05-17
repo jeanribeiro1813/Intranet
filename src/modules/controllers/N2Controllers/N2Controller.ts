@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Services from '../../services/N2/N2Services';
+import { container } from "tsyringe";
 
 
 export default class N3Controller {
@@ -7,8 +8,8 @@ export default class N3Controller {
 
   public async read(request: Request, response: Response): Promise<Response> {
 
-    const services = new Services();
-      
+    const services = container.resolve(Services);
+
     const funcao = await services.read();
 
     return response.json(funcao);
@@ -21,7 +22,7 @@ export default class N3Controller {
 
     const {uuidn2, codigo, descricao} = request.body;
 
-    const services = new Services();
+const services = container.resolve(Services);
 
     const result = await services.create(
       {
@@ -44,7 +45,7 @@ export default class N3Controller {
 
     const {codigo, descricao} = request.body
 
-    const services = new Services();
+    const services = container.resolve(Services);
 
     const result = await services.update(
 
@@ -65,7 +66,7 @@ export default class N3Controller {
 
     const {uuidn2} = request.params;
 
-    const services = new Services();
+    const services = container.resolve(Services);
 
     services.delete({uuidn2});
 

@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Projetos from '../../../../shared/infra/typeorm/entities/Projetos';
 import ProjetosRepository from '../../../../shared/infra/typeorm/repositories/ProjetosRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 interface IRequestDTO {
@@ -30,7 +31,14 @@ interface IRequestDTO {
 
   }
 
+  @injectable()
   class UpdateprojetosService {
+  
+      constructor(
+          @inject('ProjetosRepository')
+          private projetosRepository: ProjetosRepository){
+          
+        }
 
     public async updateProj({uuidprojeto,data,contrato,nprojeto,projeto,cliente, cliente2,
   numero,
@@ -47,11 +55,9 @@ interface IRequestDTO {
   dt_fim,
   cod_proj,}: IRequestDTO): Promise<Projetos | Error> {
 
-      const usersRepository = getCustomRepository(ProjetosRepository);
-
       const redisCache = new RedisCache();
 
-      const projetos = await usersRepository.findOne(uuidprojeto);
+      const projetos = await this.projetosRepository.findById(uuidprojeto);
 
       if (!projetos) {
         throw new AppError ('projetos não existe',404);
@@ -81,7 +87,7 @@ interface IRequestDTO {
 
 
 
-      await usersRepository.save(projetos);
+      await this.projetosRepository.save(projetos);
 
       return projetos;
     }

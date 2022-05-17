@@ -1,7 +1,6 @@
-import { getCustomRepository, getRepository } from "typeorm";
+import { getRepository } from "typeorm";
 import AppError from "../../../../shared/errors/AppErrors";
 import Entitie from "../../../../shared/infra/typeorm/entities/UsersView";
-import Repository from "../../../../shared/infra/typeorm/repositories/UsersViewRepository";
 
 
 interface IRequestDTO {
@@ -13,7 +12,7 @@ class FilterServices{
 
   public async filterService ({status}: IRequestDTO): Promise<Entitie[] | Error> {
 
-      const repository = getCustomRepository(Repository);
+      const repository = getRepository(Entitie);
 
       const result = await repository.createQueryBuilder().select()
       .where('status ilike :status', {status:`%${status}%`}).getMany();

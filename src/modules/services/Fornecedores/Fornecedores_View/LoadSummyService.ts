@@ -3,15 +3,22 @@ import { getCustomRepository } from "typeorm";
 import Fornecedores from '../../../../shared/infra/typeorm/entities/Fornecedores';
 import FornecedoresRepository from '../../../../shared/infra/typeorm/repositories/FornecedoresRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
 
 
+@injectable()
+class LoadFornecedoresSummaryService {
 
-class LoadFornecedoresSummaryService{
+    constructor(
+        @inject('FornecedoresRepository')
+        private fornecedoresRepository: FornecedoresRepository){
+        
+      }
+
     public async summary (): Promise<Fornecedores[] | AppError> {
-        const projetosrRepository = getCustomRepository(FornecedoresRepository);
 
         const redisCache = new RedisCache();
       
@@ -20,7 +27,7 @@ class LoadFornecedoresSummaryService{
   
         if(!responseDTO){
   
-            responseDTO  = await projetosrRepository.find();
+            responseDTO  = await this.fornecedoresRepository.findAll();
             
             //Criando um save Redis
   

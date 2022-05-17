@@ -1,4 +1,4 @@
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository, getRepository } from "typeorm";
 import Contrato from '../../../../shared/infra/typeorm/entities/Contrato';
 import ContratoRepository from '../../../../shared/infra/typeorm/repositories/ContratoRepository'
 import AppError from "../../../../shared/errors/AppErrors";
@@ -17,7 +17,7 @@ interface IResponseDTO {
 class FilterService{
     public async filter ({contrato}:IResponseDTO): Promise<Contrato[] | AppError> {
         
-        const Repository = getCustomRepository(ContratoRepository);
+        const Repository = getRepository(Contrato);
 
         const result = await Repository.createQueryBuilder().select()
         .where('contrato ILIKE :contrato ', {contrato: `%${contrato}%`}).getMany();

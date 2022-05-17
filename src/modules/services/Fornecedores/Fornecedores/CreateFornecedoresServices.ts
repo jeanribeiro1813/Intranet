@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Fornecedores from '../../../../shared/infra/typeorm/entities/Fornecedores';
 import FornecedoresRepository from '../../../../shared/infra/typeorm/repositories/FornecedoresRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -23,31 +24,34 @@ interface IRequestDTO {
 
   }
 
-  class CreateFornecedoresService {
+  @injectable()
+class CreateFornecedoresService {
+
+    constructor(
+        @inject('FornecedoresRepository')
+        private fornecedoresRepository: FornecedoresRepository){
+        
+      }
 
 
     public async create({ uuidusuario,usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar}: IRequestDTO): Promise<Fornecedores | AppError> {
 
-      const Repository = getCustomRepository(FornecedoresRepository);
-
       const redisCache = new RedisCache();
 
-      const result = await Repository.findById(uuidusuario);
+      const result = await this.fornecedoresRepository.findById(uuidusuario);
 
       if (result) {
         throw new AppError('Nome já existe.',404);
 
       }
 
-      const fornecedor =  Repository.create({
+      const fornecedor =  this.fornecedoresRepository.create({
 
         uuidusuario,usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar
 
       });
 
       await redisCache.invalidation('API_REDIS_FORNECEDORES');
-
-      await Repository.save(fornecedor);
 
       return fornecedor;
     }

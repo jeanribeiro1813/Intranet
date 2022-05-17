@@ -1,4 +1,4 @@
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository, getRepository } from "typeorm";
 import Carros from '../../../../shared/infra/typeorm/entities/Carros';
 import CarrosRepository from '../../../../shared/infra/typeorm/repositories/CarrosRepository'
 import AppError from "../../../../shared/errors/AppErrors";
@@ -17,7 +17,7 @@ interface IResponseDTO {
 class LoadClientesSummaryService{
     public async filter ({carro,ano}:IResponseDTO): Promise<Carros[] | AppError> {
         
-        const Repository = getCustomRepository(CarrosRepository);
+        const Repository = getRepository(Carros);
 
         const result = await Repository.createQueryBuilder().select()
         .where('carro ILIKE :carro and ano ILIKE :ano', {cod_atv: `%${carro}%`,ano:`%${ano}%`}).getMany();

@@ -3,6 +3,7 @@ import CreateClientesServices from '../../services/Clientes/Clientes/CreateClien
 import UpdateClientesServices from '../../services/Clientes/Clientes/UpdateClientesServices';
 import LoadSummyService  from '../../services/Clientes/Clientes_View/LoadSummyService';
 import DeleteClientesServices from '../../services/Clientes/Clientes/DeleteClientesServices';
+import { container } from "tsyringe";
 
 
 
@@ -10,7 +11,7 @@ import DeleteClientesServices from '../../services/Clientes/Clientes/DeleteClien
 export default class CargoController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve(LoadSummyService)
 
     const funcao = await loadFuncao.summary();
 
@@ -23,7 +24,7 @@ export default class CargoController {
 
         const { uuidcliente,projeto,cliente} = request.body;
 
-        const service = new CreateClientesServices();
+        const service = container.resolve(CreateClientesServices)
 
         const result = await service.create(
           {
@@ -47,7 +48,7 @@ export default class CargoController {
 
         const {projeto,cliente} = request.body
 
-        const updateFatu = new UpdateClientesServices();
+        const updateFatu = container.resolve(UpdateClientesServices)
 
         const fatura = await updateFatu.update(
 
@@ -68,7 +69,7 @@ export default class CargoController {
 
         const {uuidcliente} = request.params;
 
-        const deleteCargo = new DeleteClientesServices();
+        const deleteCargo = container.resolve(DeleteClientesServices)
 
        await deleteCargo.delete({uuidcliente});
 

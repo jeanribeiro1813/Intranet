@@ -1,7 +1,7 @@
-import { getCustomRepository } from "typeorm";
 import Pagamento from '../../../../shared/infra/typeorm/entities/Pagamento';
 import PagamentoRepository from '../../../../shared/infra/typeorm/repositories/PagamentoRepository'
 import AppError from '../../../../shared/errors/AppErrors';
+import {injectable, inject} from 'tsyringe'
 
 
 interface IResponseDTO {
@@ -10,12 +10,18 @@ interface IResponseDTO {
 
 }
 
-class LoadIndexService{
+@injectable()
+class LoadIndexService {
+
+    constructor(
+        @inject('PagamentoRepository')
+        private PagamentoRepository: PagamentoRepository){
+        
+      }
+      
     public async index ({uuidpagamento}:IResponseDTO): Promise< Pagamento | AppError > {
 
-        const projetosrRepository = getCustomRepository(PagamentoRepository);
-
-        const projetos = await projetosrRepository.findByCode(uuidpagamento);
+        const projetos = await this.PagamentoRepository.findById(uuidpagamento);
 
         if(!projetos){
             throw new AppError("Não Existe esse projeto",409);

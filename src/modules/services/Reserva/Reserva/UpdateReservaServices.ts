@@ -3,6 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Reserva from '../../../../shared/infra/typeorm/entities/Reserva';
 import ReservaRepository from '../../../../shared/infra/typeorm/repositories/ReservaRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
+import {injectable, inject} from 'tsyringe'
 
 
 
@@ -27,17 +28,22 @@ interface IRequestDTO {
 
   }
 
-  class UpdateReservaService {
+  @injectable()
+class UpdateReservaService {
+
+    constructor(
+        @inject('ReservaRepository')
+        private reservaRepository: ReservaRepository){
+        
+      }
 
     public async update({cod_reserva_uuid,placa,usuario,dt_saida,
       dt_chegada,hora_saida,hora_chegada,km_saida,
       km_chegada,projeto,cancelado,desc_cancel,dev_obs,cod_reserva}: IRequestDTO): Promise<Reserva | Error> {
 
-      const Repository = getCustomRepository(ReservaRepository);
-
       const redisCache = new RedisCache();
 
-      const result = await Repository.findOne(cod_reserva_uuid);
+      const result = await this.reservaRepository.findById(cod_reserva_uuid);
 
       if (!result) {
         throw new AppError ('reserva não existe',404);
@@ -61,7 +67,7 @@ interface IRequestDTO {
      
   
 
-      await Repository.save(result);
+      await this.reservaRepository.save(result);
 
       return result;
     }

@@ -3,7 +3,7 @@ import AppError from '../../../../shared/errors/AppErrors';
 import Fornecedores from '../../../../shared/infra/typeorm/entities/Fornecedores';
 import FornecedoresRepository from '../../../../shared/infra/typeorm/repositories/FornecedoresRepository'
 import RedisCache from '../../../../shared/cache/RedisCache';
-
+import {injectable, inject} from 'tsyringe'
 
 
 interface IRequestDTO {
@@ -21,15 +21,20 @@ interface IRequestDTO {
 
   }
 
-  class UpdateFornecedoresService {
+  @injectable()
+class UpdateFornecedoresService {
 
+    constructor(
+        @inject('FornecedoresRepository')
+        private fornecedoresRepository: FornecedoresRepository){
+        
+      }
+      
     public async update({uuidusuario,usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar}: IRequestDTO): Promise<Fornecedores | Error> {
-
-      const Repository = getCustomRepository(FornecedoresRepository);
 
       const redisCache = new RedisCache();
 
-      const result = await Repository.findOne(uuidusuario);
+      const result = await this.fornecedoresRepository.findById(uuidusuario);
 
       if (!result) {
         throw new AppError ('fornecedores não existe',404);
@@ -48,7 +53,7 @@ interface IRequestDTO {
       result.avatar= avatar ? avatar : result.avatar;
 
 
-      await Repository.save(result);
+      await this.fornecedoresRepository.save(result);
 
       return result;
     }

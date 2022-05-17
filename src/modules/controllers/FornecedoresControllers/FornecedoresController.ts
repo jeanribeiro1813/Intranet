@@ -3,14 +3,14 @@ import CreateFornecedoresServices from '../../services/Fornecedores/Fornecedores
 import UpdateFornecedoresServices from '../../services/Fornecedores/Fornecedores/UpdateFornecedoresServices';
 import LoadSummyService  from '../../services/Fornecedores/Fornecedores_View/LoadSummyService';
 import DeleteFornecedoresServices from '../../services/Fornecedores/Fornecedores/DeleteFornecedoresServices';
-
+import { container } from "tsyringe";
 
 
 
 export default class FornecedoresController {
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const loadFuncao = new LoadSummyService();
+    const loadFuncao = container.resolve(LoadSummyService)
 
     const funcao = await loadFuncao.summary();
 
@@ -23,7 +23,7 @@ export default class FornecedoresController {
 
         const {uuidusuario,usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar } = request.body;
 
-        const service = new CreateFornecedoresServices();
+        const service = container.resolve(CreateFornecedoresServices)
 
         const result = await service.create(
           {
@@ -46,7 +46,7 @@ export default class FornecedoresController {
 
         const {usuario,tp_doc,cpf_cnpj,email,contato,contato2,cargo,status,avatar} = request.body
 
-        const updateForne = new UpdateFornecedoresServices();
+        const updateForne = container.resolve(UpdateFornecedoresServices)
 
         const fornecedor = await updateForne.update(
 
@@ -67,7 +67,7 @@ export default class FornecedoresController {
 
         const {uuidusuario} = request.params;
 
-        const deleteFornecedores = new DeleteFornecedoresServices();
+        const deleteFornecedores = container.resolve(DeleteFornecedoresServices);
 
        await deleteFornecedores.delete({uuidusuario});
 

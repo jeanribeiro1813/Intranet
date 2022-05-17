@@ -39,6 +39,8 @@ interface ICreate{
 
 interface IRepository {
 findById(uuid: string): Promise<Entities | undefined>;
+findByLogin(login: string): Promise<Entities | undefined>;
+findByEmail(email: string): Promise<Entities | undefined>;
 create(data: ICreate): Promise<Entities>;
 save(obj: Entities): Promise<Entities>;
 remove(obj: Entities): Promise<Entities>;
@@ -55,9 +57,21 @@ class UsersRepository implements IRepository {
   
     public async findById(uuid: string): Promise<Entities | undefined> {
       this.ormRepository = getRepository(Entities);
-      const result = await this.ormRepository.findOne(uuid);
+      const result = await this.ormRepository.findOne({where:{uuid}});
       return result;
   }
+
+  public async findByEmail(email: string): Promise<Entities | undefined> {
+    this.ormRepository = getRepository(Entities);
+    const result = await this.ormRepository.findOne({where:{email}});
+    return result;
+}
+
+public async findByLogin(login: string): Promise<Entities | undefined> {
+  this.ormRepository = getRepository(Entities);
+  const result = await this.ormRepository.findOne({where:{login}});
+  return result;
+}
   public async create({
     
     uuidusuario,
