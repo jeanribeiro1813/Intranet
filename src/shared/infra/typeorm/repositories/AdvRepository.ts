@@ -30,7 +30,7 @@ interface IAdvRepository {
     
       public async findById(codadv: string): Promise<Adv | undefined> {
         this.ormRepository = getRepository(Adv);
-        const result = await this.ormRepository.findOne(codadv);
+        const result = await this.ormRepository.findOne({codadv});
         return result;
     }
     public async create({

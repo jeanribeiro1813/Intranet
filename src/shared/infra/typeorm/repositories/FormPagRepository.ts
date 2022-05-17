@@ -11,7 +11,7 @@ interface ICreateFormPag{
 }
 
 interface IFormPagVRepository {
-findById(uuidfat: string): Promise<Entitie | undefined>;
+findById(uuidformpag: string): Promise<Entitie | undefined>;
 create(data: ICreateFormPag): Promise<Entitie>;
 save(form: Entitie): Promise<Entitie>;
 remove(form: Entitie): Promise<Entitie>;
@@ -26,9 +26,9 @@ findAll(): Promise <Entitie[]>
 
     private ormRepository: Repository<Entitie>;
     
-      public async findById(id_uuid: string): Promise<Entitie | undefined> {
+      public async findById(uuidformpag: string): Promise<Entitie | undefined> {
         this.ormRepository = getRepository(Entitie);
-        const result = await this.ormRepository.findOne(id_uuid);
+        const result = await this.ormRepository.findOne({uuidformpag});
         return result;
     }
     public async create({

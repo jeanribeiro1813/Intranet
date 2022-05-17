@@ -7,7 +7,7 @@ import { container } from "tsyringe";
 
 
 
-export default class CargoController {
+export default class PagamentoController {
 
  
   public async execute(request: Request, response: Response): Promise<Response> {
@@ -15,6 +15,8 @@ export default class CargoController {
     const loadFuncao = container.resolve(LoadSummyService)
 
     const funcao = await loadFuncao.summary();
+
+    console.log(funcao)
     
     return response.json(funcao);
 

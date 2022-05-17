@@ -65,6 +65,14 @@ class FaturamentoView{
     @Column()
     obs!:string;
 
+    @Column()
+    gerente!:string;
+
+    @Column()
+    coordenador!:string;
+
+   
+
 }
 
 export default FaturamentoView;

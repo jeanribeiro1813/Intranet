@@ -24,7 +24,7 @@ celebrate({
     }),fatViewController.exibir);
 
 //Return Por Usuario
-fatViewRouter.post('/load',
+fatViewRouter.post('/filter',
 celebrate({
     [Segments.BODY]:{
         uuidusuario: Joi.string().required(),

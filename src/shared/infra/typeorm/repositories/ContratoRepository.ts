@@ -28,7 +28,7 @@ interface IContratosRepository {
       
         public async findById(uuidcontrato: string): Promise<Contrato | undefined> {
           this.ormRepository = getRepository(Contrato);
-          const result = await this.ormRepository.findOne(uuidcontrato);
+          const result = await this.ormRepository.findOne({uuidcontrato});
           return result;
       }
       public async create({

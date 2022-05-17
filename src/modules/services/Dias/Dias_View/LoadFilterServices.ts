@@ -1,6 +1,5 @@
-import { getCustomRepository } from "typeorm";
+import {getRepository } from "typeorm";
 import Dias from '../../../../shared/infra/typeorm/entities/Dias';
-import DiasRepository from '../../../../shared/infra/typeorm/repositories/DiasRepository'
 import AppError from '../../../../shared/errors/AppErrors';
 
 
@@ -16,7 +15,7 @@ interface IRequestDTO {
 class LoadFilterServices{
   public async filter ({ano,codigo}: IRequestDTO): Promise < Dias[] | AppError > {
 
-      const Repository = getCustomRepository(DiasRepository);
+      const Repository = getRepository(Dias);
 
       //Criando um Select personalizado como filtrando 2 colunas
       const result = await Repository.createQueryBuilder().select()

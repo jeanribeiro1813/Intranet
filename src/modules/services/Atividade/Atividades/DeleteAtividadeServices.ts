@@ -19,7 +19,7 @@ class DeleteClientesService {
     
   }
 
-     public async delete( {uuidatividade}: IRequestDTO) : Promise<void> {
+     public async delete( {uuidatividade}: IRequestDTO) : Promise<void | AppError> {
 
       const redisCache = new RedisCache();
 

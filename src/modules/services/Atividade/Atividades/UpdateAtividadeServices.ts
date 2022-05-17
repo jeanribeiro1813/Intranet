@@ -25,7 +25,7 @@ class UpdateClientService {
     
   }
 
-    public async update({uuidatividade,atividade,cod_atv}: IRequestDTO): Promise<Atividades | Error> {
+    public async update({uuidatividade,atividade,cod_atv}: IRequestDTO): Promise<Atividades | AppError> {
 
 
       const redisCache = new RedisCache();

@@ -10,7 +10,7 @@ interface IClientesClientes{
   }
   
   interface IClientesRepository {
-    findById(cod_chamado_uuid: string): Promise<Clientes | undefined>;
+    findById(uuidcliente: string): Promise<Clientes | undefined>;
     create(data: IClientesClientes): Promise<Clientes>;
     save(clientes: Clientes): Promise<Clientes>;
     remove(clientes: Clientes): Promise<Clientes>;
@@ -25,9 +25,9 @@ interface IClientesClientes{
     
         private ormRepository: Repository<Clientes>;
         
-          public async findById(cod_chamado_uuid: string): Promise<Clientes | undefined> {
+          public async findById(uuidcliente: string): Promise<Clientes | undefined> {
             this.ormRepository = getRepository(Clientes);
-            const result = await this.ormRepository.findOne(cod_chamado_uuid);
+            const result = await this.ormRepository.findOne({uuidcliente});
             return result;
         }
         public async create({

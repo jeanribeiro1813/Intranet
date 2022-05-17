@@ -26,7 +26,7 @@ interface IRequestDTO {
     }
 
 
-    public async create({ uuidatividade,atividade,cod_atv}: IRequestDTO): Promise<Atividades | Error> {
+    public async create({ uuidatividade,atividade,cod_atv}: IRequestDTO): Promise<Atividades | AppError> {
 
 
       const redisCache = new RedisCache();

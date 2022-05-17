@@ -13,7 +13,7 @@ interface IDiasCreate{
 }
 
 interface IDepartamentoRepository {
-  findById(cod_chamado_uuid: string): Promise<Dias | undefined>;
+  findById(uuiddiasuteis: string): Promise<Dias | undefined>;
   create(data: IDiasCreate): Promise<Dias>;
   save(dias: Dias): Promise<Dias>;
   remove(dias: Dias): Promise<Dias>;
@@ -30,7 +30,7 @@ interface IDepartamentoRepository {
       
         public async findById(uuiddiasuteis: string): Promise<Dias | undefined> {
           this.ormRepository = getRepository(Dias);
-          const result = await this.ormRepository.findOne(uuiddiasuteis);
+          const result = await this.ormRepository.findOne({uuiddiasuteis});
           return result;
       }
       public async create({

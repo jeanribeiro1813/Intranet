@@ -29,7 +29,7 @@ interface ICreate{
 }
 
 interface IRepository {
-findById(uuid: string): Promise<Entities | undefined>;
+findById(uuidpagamento: string): Promise<Entities | undefined>;
 create(data: ICreate): Promise<Entities>;
 save(obj: Entities): Promise<Entities>;
 remove(obj: Entities): Promise<Entities>;
@@ -44,9 +44,9 @@ findAll(): Promise <Entities[]>
 
     private ormRepository: Repository<Entities>;
     
-      public async findById(uuid: string): Promise<Entities | undefined> {
+      public async findById(uuidpagamento: string): Promise<Entities | undefined> {
         this.ormRepository = getRepository(Entities);
-        const result = await this.ormRepository.findOne(uuid);
+        const result = await this.ormRepository.findOne({uuidpagamento});
         return result;
     }
     public async create({

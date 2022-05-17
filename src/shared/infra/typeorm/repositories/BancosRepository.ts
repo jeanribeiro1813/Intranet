@@ -24,9 +24,9 @@ interface IBancoRepository {
   
       private ormRepository: Repository<Entitie>;
       
-        public async findById(uuidatividade: string): Promise<Entitie | undefined> {
+        public async findById(uuidbanco: string): Promise<Entitie | undefined> {
           this.ormRepository = getRepository(Entitie);
-          const result = await this.ormRepository.findOne(uuidatividade);
+          const result = await this.ormRepository.findOne({uuidbanco});
           return result;
       }
       public async create({

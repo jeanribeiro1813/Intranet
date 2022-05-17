@@ -39,9 +39,12 @@ interface IRequestDTO {
 
       const faturamento = await this.fatRepository.findById(uuidfat);
 
-      if (faturamento) {
-        throw new AppError('Nome já existe.',404);
+      if (!faturamento) {
 
+        if (faturamento) {
+          throw new AppError('Faturamento já existe.',404);
+        }
+  
       }
 
       const fat =  this.fatRepository.create({

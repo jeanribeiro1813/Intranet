@@ -1,4 +1,3 @@
-import { getCustomRepository } from "typeorm";
 import FaturamentoViewsRepository from '../../../../shared/infra/typeorm/repositories/FaturamentoViewsRepository';
 import RedisCache from '../../../../shared/cache/RedisCache';
 import FaturamentoView from '../../../../shared/infra/typeorm/entities/FaturamentoView';

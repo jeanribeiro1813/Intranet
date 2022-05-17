@@ -25,9 +25,9 @@ interface ICreateCargo{
     
         private ormRepository: Repository<Cargo>;
         
-          public async findById(uuidatividade: string): Promise<Cargo | undefined> {
+          public async findById(uuidcargo: string): Promise<Cargo | undefined> {
             this.ormRepository = getRepository(Cargo);
-            const result = await this.ormRepository.findOne(uuidatividade);
+            const result = await this.ormRepository.findOne({uuidcargo});
             return result;
         }
         public async create({

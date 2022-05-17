@@ -34,7 +34,7 @@ interface ICreateChamados{
         
           public async findById(cod_chamado_uuid: string): Promise<Chamados | undefined> {
             this.ormRepository = getRepository(Chamados);
-            const result = await this.ormRepository.findOne(cod_chamado_uuid);
+            const result = await this.ormRepository.findOne({cod_chamado_uuid});
             return result;
         }
         public async create({

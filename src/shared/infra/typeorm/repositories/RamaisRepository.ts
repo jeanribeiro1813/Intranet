@@ -27,9 +27,9 @@ class RamaisRepository implements IRepository {
 
   private ormRepository: Repository<Entities>;
   
-    public async findById(uuid: string): Promise<Entities | undefined> {
+    public async findById(uuidramal: string): Promise<Entities | undefined> {
       this.ormRepository = getRepository(Entities);
-      const result = await this.ormRepository.findOne(uuid);
+      const result = await this.ormRepository.findOne({uuidramal});
       return result;
   }
   public async create({

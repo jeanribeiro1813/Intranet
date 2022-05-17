@@ -41,9 +41,9 @@ interface IFaturamentoViewRepository {
   
       private ormRepository: Repository<FaturamentoView>;
       
-        public async findById(id_uuid: string): Promise<FaturamentoView | undefined> {
+        public async findById(uuidfat: string): Promise<FaturamentoView | undefined> {
           this.ormRepository = getRepository(FaturamentoView);
-          const result = await this.ormRepository.findOne(id_uuid);
+          const result = await this.ormRepository.findOne({uuidfat});
           return result;
       }
       public async create({

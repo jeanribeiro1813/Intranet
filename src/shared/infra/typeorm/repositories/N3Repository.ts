@@ -11,7 +11,7 @@ interface ICreate{
 }
 
 interface IRepository {
-findById(uuid: string): Promise<Entities | undefined>;
+findById(uuidn3v: string): Promise<Entities | undefined>;
 create(data: ICreate): Promise<Entities>;
 save(obj: Entities): Promise<Entities>;
 remove(obj: Entities): Promise<Entities>;
@@ -26,9 +26,9 @@ findAll(): Promise <Entities[]>
 
     private ormRepository: Repository<Entities>;
     
-      public async findById(uuid: string): Promise<Entities | undefined> {
+      public async findById(uuidn3: string): Promise<Entities | undefined> {
         this.ormRepository = getRepository(Entities);
-        const result = await this.ormRepository.findOne(uuid);
+        const result = await this.ormRepository.findOne({uuidn3});
         return result;
     }
     public async create({

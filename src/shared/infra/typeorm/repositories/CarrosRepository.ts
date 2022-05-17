@@ -35,7 +35,7 @@ interface ICarrosRepository {
       
         public async findById(id_uuid: string): Promise<Carros | undefined> {
           this.ormRepository = getRepository(Carros);
-          const result = await this.ormRepository.findOne(id_uuid);
+          const result = await this.ormRepository.findOne({id_uuid});
           return result;
       }
       public async create({

@@ -57,7 +57,7 @@ class UsersRepository implements IRepository {
   
     public async findById(uuid: string): Promise<Entities | undefined> {
       this.ormRepository = getRepository(Entities);
-      const result = await this.ormRepository.findOne({where:{uuid}});
+      const result = await this.ormRepository.findOne(uuid);
       return result;
   }
 

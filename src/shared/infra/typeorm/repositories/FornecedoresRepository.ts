@@ -19,7 +19,7 @@ interface ICreateFornecedores{
 }
 
 interface IFormPagVRepository {
-findById(uuid: string): Promise<Fornecedores | undefined>;
+findById(uuidusuario: string): Promise<Fornecedores | undefined>;
 create(data: ICreateFornecedores): Promise<Fornecedores>;
 save(obj: Fornecedores): Promise<Fornecedores>;
 remove(obj: Fornecedores): Promise<Fornecedores>;
@@ -34,9 +34,9 @@ findAll(): Promise <Fornecedores[]>
 
     private ormRepository: Repository<Fornecedores>;
     
-      public async findById(uuid: string): Promise<Fornecedores | undefined> {
+      public async findById(uuidusuario: string): Promise<Fornecedores | undefined> {
         this.ormRepository = getRepository(Fornecedores);
-        const result = await this.ormRepository.findOne(uuid);
+        const result = await this.ormRepository.findOne({uuidusuario});
         return result;
     }
     public async create({

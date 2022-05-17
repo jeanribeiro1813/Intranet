@@ -11,7 +11,7 @@ interface IDiasClientes{
 }
 
 interface IDepartamentoRepository {
-  findById(cod_chamado_uuid: string): Promise<Departamento | undefined>;
+  findById(uuiddeparta: string): Promise<Departamento | undefined>;
   create(data: IDiasClientes): Promise<Departamento>;
   save(departamento: Departamento): Promise<Departamento>;
   remove(departamento: Departamento): Promise<Departamento>;
@@ -28,7 +28,7 @@ interface IDepartamentoRepository {
       
         public async findById(uuiddeparta: string): Promise<Departamento | undefined> {
           this.ormRepository = getRepository(Departamento);
-          const result = await this.ormRepository.findOne(uuiddeparta);
+          const result = await this.ormRepository.findOne({uuiddeparta});
           return result;
       }
       public async create({
