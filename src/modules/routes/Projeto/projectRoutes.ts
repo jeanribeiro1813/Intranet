@@ -12,9 +12,9 @@ const projetoController = new ProjetoController();
 projectRouter.use(isAutenticacion);
 
 //update
-projectRouter.put('/update/:cod_proj_uuid',celebrate({
+projectRouter.put('/update/:uuidprojeto',celebrate({
     [Segments.PARAMS]:{
-        cod_proj_uuid:Joi.string().required()
+        uuidprojeto:Joi.string().required()
     }
 }),projetoController.update);
 
@@ -24,15 +24,13 @@ projectRouter.post(
     projetoController.create);
 
 
-    
 projectRouter.get('/index/:uuidprojeto',celebrate({
-    
+
     [Segments.PARAMS]:{
         
         uuidprojeto: Joi.string().uuid().required(),
-      
+        
     }
 }),projetoController.index);
-
 
 export default projectRouter;

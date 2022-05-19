@@ -9,23 +9,23 @@ interface IRequestDTO {
  
 
   uuidpagamento: string;
-  uuidcontrato:string;
-  empresa: string; 
   uuidprojeto:string;
-  n1: string;
-  n2:string;
-  n3: string;
+  empresa: string;
+  uuidn1: string;
+  uuidn2:string;
+  uuidn3: string;
   uuidcolab_forne: string;
-  valor_pago:string;
+  valor_pago:number;
   data_pagto: string;
   data_vecto: string;
   uuidbancos:string;
   incidencia: string;
   parcelas_n: string;
-  n_doc_pagto: string;  
+  n_doc_pagto: string;
   uuidformapagto:string;
-  status: string;
   obs: string;
+  sttpguuid: string;
+  linha: number;
 
   }
 
@@ -39,8 +39,22 @@ class CreatePagamentoService {
         
       }
 
-    public async execute({ uuidpagamento, empresa, uuidprojeto, n1, n2 , n3, uuidcolab_forne , valor_pago,uuidcontrato
-      ,data_pagto , data_vecto,uuidbancos ,incidencia ,parcelas_n ,n_doc_pagto , uuidformapagto ,status ,obs}: IRequestDTO): Promise<Pagamento | AppError> {
+    public async execute({uuidpagamento,uuidprojeto,empresa,
+      uuidn1,
+      uuidn2,
+      uuidn3,
+      uuidcolab_forne,
+      valor_pago,
+      data_pagto,
+      data_vecto,
+      uuidbancos,
+      incidencia,
+      parcelas_n,
+      n_doc_pagto,
+      uuidformapagto,
+      obs,
+      sttpguuid,
+      linha}: IRequestDTO): Promise<Pagamento | AppError> {
 
       const redisCache = new RedisCache();
 
@@ -53,8 +67,23 @@ class CreatePagamentoService {
 
       const cliet =  this.PagamentoRepository.create({
 
-        uuidpagamento, empresa, uuidprojeto, n1, n2 , n3, uuidcolab_forne , valor_pago,uuidcontrato
-        ,data_pagto , data_vecto,uuidbancos ,incidencia ,parcelas_n ,n_doc_pagto , uuidformapagto ,status ,obs
+        uuidpagamento,
+        empresa,
+        uuidprojeto,
+        uuidn1,
+        uuidn2,
+        uuidn3,
+        uuidcolab_forne,
+        valor_pago,
+        data_pagto,
+        data_vecto,
+        uuidbancos,
+        incidencia,
+        parcelas_n,
+        n_doc_pagto,
+        uuidformapagto,
+        sttpguuid,
+        obs,linha
       });
 
 

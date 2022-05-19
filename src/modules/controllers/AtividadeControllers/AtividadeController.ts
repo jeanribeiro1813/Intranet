@@ -73,7 +73,7 @@ export default class AtividadeController {
 
         const deleteAtividade = container.resolve(DeleteClientesServices);
 
-       deleteAtividade.delete({uuidatividade});
+       await deleteAtividade.delete({uuidatividade});
 
         return response.json('Delete realizado com sucesso');
       }

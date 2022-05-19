@@ -14,7 +14,7 @@ interface IRequestDTO {
   data:string;
   inicio:string;
   fim:string;
-  status:string;
+  sttpguuid:string;
   obs:string;
   empresa:string;
 
@@ -22,7 +22,7 @@ interface IRequestDTO {
 
   class CreatefaturaService {
 
-    public async update({uuidfat,uuidusuario, uuidprojeto, uuidatividade,data,inicio,fim,status,obs,empresa}: IRequestDTO): Promise<Faturamento | Error> {
+    public async update({uuidfat,uuidusuario, uuidprojeto, uuidatividade,data,inicio,fim,sttpguuid,obs,empresa}: IRequestDTO): Promise<Faturamento | Error> {
 
       const Repository = getRepository(Faturamento);
 
@@ -44,7 +44,7 @@ interface IRequestDTO {
       result.data = data ? data : result.data;
       result.inicio = inicio ? inicio : result.inicio;
       result.fim = fim ? fim : result.fim;
-      result.status = status ? status: result.status;
+      result.sttpguuid = sttpguuid ? sttpguuid: result.sttpguuid;
       result.obs = obs ? obs: result.obs;
       result.empresa = empresa ? empresa: result.empresa;
 

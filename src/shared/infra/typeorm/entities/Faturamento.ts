@@ -38,8 +38,8 @@ class Faturamento{
     @UpdateDateColumn()
     updated_at!: Date;
 
-    @Column()
-    status!:string;
+    @Column('uuid')
+    sttpguuid!:string;
 
     @Column()
     obs!:string;

@@ -21,7 +21,7 @@ departamentoRouter.post(
 departamentoRouter.get(
      '/index/:uuiddeparta',celebrate({
          [Segments.PARAMS]:{
-             uuiddeparta:Joi.string().uuid().required()
+            uuiddeparta:Joi.string().uuid().required()
          }
      }),isAutenticacion,
         departamentoController.index);

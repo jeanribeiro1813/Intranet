@@ -19,8 +19,6 @@ useRouter.get('/index/:uuidusuario',celebrate({
     }
 }),userControllers.loading);
 
-useRouter.put('/update/:uuidusuario',userControllers.update);
-
 
 useRouter.post('/filter'
 ,celebrate({
@@ -47,19 +45,19 @@ useRouter.post('/create',celebrate({
             usuario: Joi.string().required(),
             email : Joi.string().required(),
             dt_nasc:Joi.string().required(),
-            ramal:Joi.number().optional(),
+            ramal:Joi.string().optional(),
             contato:Joi.string().required(),
             contato2:Joi.string().optional(),
             cpf_cnpj:Joi.string().required(),
-            n_cnh:Joi.number().optional(),
+            n_cnh:Joi.string().optional(),
             dt_validade:Joi.string().optional(),
             enquadramento:Joi.string().required(),
-            banco:Joi.number().optional(),
-            carga_horaria:Joi.number().required(), 
+            banco:Joi.string().optional(),
+            carga_horaria:Joi.string().required(), 
             proventos:Joi.string().required(), 
-            va_vr:Joi.number().optional(), 
-            vt:Joi.number().optional(), 
-            seguro:Joi.number().optional(), 
+            va_vr:Joi.string().optional(), 
+            vt:Joi.string().optional(), 
+            seguro:Joi.string().optional(), 
             cv_medico:Joi.string().optional(), 
             login:Joi.string().required(), 
             senha:Joi.string().required(), 

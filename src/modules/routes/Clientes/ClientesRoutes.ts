@@ -21,20 +21,20 @@ clientesRouter.post(
     clientesController.create);
 
 //update
-clientesRouter.put('/update/:id'
+clientesRouter.put('/update/:uuidcliente'
 ,
 celebrate({
     [Segments.PARAMS]:{
-        id: Joi.string().uuid().required(),
+        uuidcliente: Joi.string().uuid().required(),
     }
 }),clientesController.update);
 
 
 //Delete
-clientesRouter.delete('/delete/:id',
+clientesRouter.delete('/delete/:uuidcliente',
 celebrate({
     [Segments.PARAMS]:{
-        id_uuid: Joi.string().uuid().required(),
+        uuidcliente: Joi.string().uuid().required(),
     }
 }), clientesController.delete);
 

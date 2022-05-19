@@ -16,20 +16,20 @@ atividadeRouter.post(
     atividadeController.create);
 
 //update
-atividadeRouter.put('/update/:codativida'
+atividadeRouter.put('/update/:uuidatividade'
 ,isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
-        codativida: Joi.string().uuid().required(),
+        uuidatividade: Joi.string().uuid().required(),
     }
 }),atividadeController.update);
 
 
 //Delete
-atividadeRouter.delete('/delete/:codativida',isAutenticacion,
+atividadeRouter.delete('/delete/:uuidatividade',isAutenticacion,
 celebrate({
     [Segments.PARAMS]:{
-        codativida: Joi.string().uuid().required(),
+        uuidatividade: Joi.string().uuid().required(),
     }
 }), atividadeController.delete);
 

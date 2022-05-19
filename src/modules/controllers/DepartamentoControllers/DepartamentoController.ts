@@ -72,7 +72,7 @@ export default class DepartamentoController {
 
         const deleteDepartamento = container.resolve(DeleteClientesServices)
 
-       deleteDepartamento.execute({uuiddeparta});
+        await deleteDepartamento.execute({uuiddeparta});
 
         return response.json('Delete realizado com sucesso');
       }

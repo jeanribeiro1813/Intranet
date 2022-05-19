@@ -4,7 +4,7 @@
     "port": 5432,
     "username": "root",
     "password": "R$UU3kgELH@Um7S",
-    "database": "intranet",
+    "database": "intranet-teste",
     "$schema" : "public",
     "entities": [
         "./src/shared/infra/typeorm/entities/*.ts"

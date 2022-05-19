@@ -25,13 +25,13 @@ export default class FaturamentoController {
       //Criação Faturamento
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const {uuidfat, uuidusuario, uuidprojeto, uuidatividade, data, inicio, fim, status, obs, empresa} = request.body;
+        const {uuidfat, uuidusuario, uuidprojeto, uuidatividade, data, inicio, fim, sttpguuid, obs, empresa} = request.body;
 
         const service = container.resolve(CreateFaturamentoServices)
 
         const result = await service.create(
           {
-            uuidfat, uuidusuario, uuidprojeto, uuidatividade, data, inicio, fim, status, obs, empresa
+            uuidfat, uuidusuario, uuidprojeto, uuidatividade, data, inicio, fim, sttpguuid, obs, empresa
 
           }
         );
@@ -49,14 +49,14 @@ export default class FaturamentoController {
 
         const {uuidfat} = request.params
 
-        const {uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa} = request.body
+        const {uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,sttpguuid,obs,empresa} = request.body
 
         const updateFatu = new UpdateFaturamentoServes();
 
         const fatura = await updateFatu.update(
 
           {
-            uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa
+            uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,sttpguuid,obs,empresa
           }
 
         )
@@ -73,7 +73,7 @@ export default class FaturamentoController {
 
         const deleteFaturamento = container.resolve( DeleteFaturamentoService)
 
-        const deletePorIndex = deleteFaturamento.delete({uuidfat});
+        await deleteFaturamento.delete({uuidfat});
 
         return response.json('Deletado com sucesso');
       }
@@ -81,11 +81,11 @@ export default class FaturamentoController {
 
       public async updateStatus(request: Request, response: Response): Promise< Response > {
 
-        const {uuidusuario, uuidprojeto, data, status} = request.body;
+        const {uuidusuario, uuidprojeto, data, sttpguuid} = request.body;
 
         const indexFat = new UpdateFaturamentoStatus();
 
-        const showPorIndex = await indexFat.updateStatus({uuidusuario, uuidprojeto, data, status});
+        const showPorIndex = await indexFat.updateStatus({uuidusuario, uuidprojeto, data, sttpguuid});
 
         
       

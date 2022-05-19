@@ -1,4 +1,3 @@
-import { getCustomRepository,getRepository } from 'typeorm'
 import AppError from '../../../../shared/errors/AppErrors';
 import Pagamento from '../../../../shared/infra/typeorm/entities/Pagamento';
 import PagamentoRepository from '../../../../shared/infra/typeorm/repositories/PagamentoRepository'
@@ -7,24 +6,24 @@ import {injectable, inject} from 'tsyringe'
 
 
 interface IRequestDTO {
-
   uuidpagamento: string;
-  empresa: string;
   uuidprojeto:string;
-  n1: string;
-  n2:string;
-  n3: string;
+  empresa: string;
+  uuidn1: string;
+  uuidn2:string;
+  uuidn3: string;
   uuidcolab_forne: string;
-  valor_pago:string;
+  valor_pago:number;
   data_pagto: string;
   data_vecto: string;
   uuidbancos:string;
   incidencia: string;
   parcelas_n: string;
-  n_doc_pagto: string;  
+  n_doc_pagto: string;
   uuidformapagto:string;
-  status: string;
   obs: string;
+  sttpguuid: string;
+  linha: number;
   }
 
 
@@ -37,8 +36,23 @@ class UpdatePagamentoService {
         
         }
 
-    public async update({ uuidpagamento, empresa, uuidprojeto, n1, n2, n3, uuidcolab_forne, valor_pago
-      ,data_pagto, data_vecto, uuidbancos, incidencia, parcelas_n, n_doc_pagto, uuidformapagto, status, obs}: IRequestDTO): Promise<Pagamento | Error> {
+    public async update({ uuidpagamento,uuidprojeto,
+      empresa,
+      uuidn1,
+      uuidn2,
+      uuidn3,
+      uuidcolab_forne,
+      valor_pago,
+      data_pagto,
+      data_vecto,
+      uuidbancos,
+      incidencia,
+      parcelas_n,
+      n_doc_pagto,
+      uuidformapagto,
+      obs,
+      sttpguuid,
+      linha}: IRequestDTO): Promise<Pagamento | Error> {
 
       const redisCache = new RedisCache();
 
@@ -51,10 +65,10 @@ class UpdatePagamentoService {
       await redisCache.invalidation('API_REDIS_PAGAMENTO');
 
       result.empresa = empresa ? empresa : result.empresa;
-      result.uuidprojeto = uuidprojeto ? uuidprojeto : result.uuidprojeto;
-      result.n1 = n1 ? n1 : result.n1;
-      result.n2 = n2 ? n2 : result.n2;
-      result.n3 = n3 ? n3 : result.n3;
+      result.uuidprojeto = uuidprojeto? uuidprojeto : result.uuidprojeto;
+      result.uuidn1 = uuidn1 ? uuidn1 : result.uuidn1;
+      result.uuidn2 = uuidn2 ? uuidn2 : result.uuidn2;
+      result.uuidn3 = uuidn3 ? uuidn3 : result.uuidn3;
       result.uuidcolab_forne = uuidcolab_forne ? uuidcolab_forne : result.uuidcolab_forne;
       result.valor_pago = valor_pago ? valor_pago : result.valor_pago;
       result.data_pagto = data_pagto ? data_pagto : result.data_pagto;
@@ -64,8 +78,10 @@ class UpdatePagamentoService {
       result.parcelas_n = parcelas_n ? parcelas_n : result.parcelas_n;
       result.n_doc_pagto = n_doc_pagto ? n_doc_pagto : result.n_doc_pagto;
       result.uuidformapagto = uuidformapagto ? uuidformapagto : result.uuidformapagto;
-      result.status = status ? status : result.status;
+      result.sttpguuid = sttpguuid ? sttpguuid : result.sttpguuid;
       result.obs = obs ? obs : result.obs;
+      result.linha = linha ? linha : result.linha;
+
 
 
       await this.PagamentoRepository.save(result);

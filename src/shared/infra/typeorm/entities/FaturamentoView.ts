@@ -71,7 +71,6 @@ class FaturamentoView{
     @Column()
     coordenador!:string;
 
-   
 
 }
 

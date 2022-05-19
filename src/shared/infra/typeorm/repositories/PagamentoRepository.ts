@@ -1,4 +1,3 @@
-import { add } from 'date-fns';
 import { Repository, EntityRepository,getRepository } from 'typeorm';
 
 import Entities from '../entities/Pagamento';
@@ -9,12 +8,11 @@ interface ICreate{
     uuidpagamento: string;
     empresa: string;
     uuidprojeto:string;
-    uuidcontrato:string;
-    n1: string;
-    n2:string;
-    n3: string;
+    uuidn1: string;
+    uuidn2:string;
+    uuidn3: string;
     uuidcolab_forne: string;
-    valor_pago:string;
+    valor_pago:number;
     data_pagto: string;
     data_vecto: string;
     uuidbancos:string;
@@ -22,8 +20,10 @@ interface ICreate{
     parcelas_n: string;
     n_doc_pagto: string;
     uuidformapagto:string;
-    status: string;
+    sttpguuid: string;
     obs: string;
+    linha: number;
+
 
 
 }
@@ -53,10 +53,9 @@ findAll(): Promise <Entities[]>
       uuidpagamento,
       empresa,
       uuidprojeto,
-      uuidcontrato,
-      n1,
-      n2,
-      n3,
+      uuidn1,
+      uuidn2,
+      uuidn3,
       uuidcolab_forne,
       valor_pago,
       data_pagto,
@@ -66,8 +65,8 @@ findAll(): Promise <Entities[]>
       parcelas_n,
       n_doc_pagto,
       uuidformapagto,
-      status,
-      obs
+      sttpguuid,
+      obs,linha
   }: ICreate): Promise<Entities> {
       this.ormRepository = getRepository(Entities);
 
@@ -75,10 +74,9 @@ findAll(): Promise <Entities[]>
         uuidpagamento,
         empresa,
         uuidprojeto,
-        uuidcontrato,
-        n1,
-        n2,
-        n3,
+        uuidn1,
+        uuidn2,
+        uuidn3,
         uuidcolab_forne,
         valor_pago,
         data_pagto,
@@ -88,9 +86,9 @@ findAll(): Promise <Entities[]>
         parcelas_n,
         n_doc_pagto,
         uuidformapagto,
-        status,
-        obs
-      });
+        sttpguuid,
+        obs,linha
+            });
 
       await this.ormRepository.save(result);
 

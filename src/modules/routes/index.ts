@@ -29,6 +29,7 @@ import bancosRouter from './Bancos/BancosRoutes';
 import formPagRouter from './FormPag/FormPagRoutes';
 import ramaisRoutes from './Ramais/RamaisRoutes';
 import diasRoutes from './Dias/DiasRoutes';
+import statusPagamento from './StatusPagamento/StatusPagamentoRoutes';
 
 
 
@@ -71,7 +72,7 @@ routes.use('/bancos',bancosRouter);
 routes.use('/formPag',formPagRouter);
 routes.use('/ramais',ramaisRoutes);
 routes.use('/dias',diasRoutes);
-
+routes.use('/status',statusPagamento);
 
 
 

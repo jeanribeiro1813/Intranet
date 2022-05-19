@@ -18,26 +18,23 @@ class Clientes{
     @Column()
     empresa!: string;
 
-    @Column('uuid')
+    @Column()
     uuidprojeto!:string;
+    
+    @Column('uuid')
+    uuidn1!: string;
 
     @Column('uuid')
-    uuidcontrato!:string;
+    uuidn2!:string;
 
-    @Column()
-    n1!: string;
-
-    @Column()
-    n2!:string;
-
-    @Column()
-    n3!: string;
+    @Column('uuid')
+    uuidn3!: string;
 
     @Column('uuid')
     uuidcolab_forne!: string;
 
-    @Column()
-    valor_pago!:string;
+    @Column('numeric')
+    valor_pago!:number;
 
     @Column('date')
     data_pagto!: string;
@@ -45,7 +42,7 @@ class Clientes{
     @Column('date')
     data_vecto!: string;
 
-    @Column()
+    @Column('uuid')
     uuidbancos!:string;
 
     @Column()
@@ -61,10 +58,10 @@ class Clientes{
     uuidformapagto!:string;
 
     @Column()
-    status!: string;
-
-    @Column()
     obs!: string;
+
+    @Column('uuid')
+    sttpguuid!: string;
 
     @CreateDateColumn()
     created_at!: Date;
@@ -72,7 +69,8 @@ class Clientes{
     @UpdateDateColumn()
     updated_at!: Date;
     
-
+    @Column('integer')
+    linha!: number;
 
     constructor(){
         if (!this.uuidpagamento){

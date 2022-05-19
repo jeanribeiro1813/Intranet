@@ -47,10 +47,10 @@ class PagamentoView{
     @Column()
     valor_pago!:string;
 
-    @Column()
+    @Column('date')
     data_pagto!: string;
 
-    @Column()
+    @Column('date')
     data_vecto!: string;
 
     @Column()

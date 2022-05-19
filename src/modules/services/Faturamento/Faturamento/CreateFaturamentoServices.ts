@@ -16,7 +16,7 @@ interface IRequestDTO {
   data:string;
   inicio:string;
   fim:string;
-  status:string;
+  sttpguuid:string;
   obs:string;
   empresa:string;
 
@@ -33,7 +33,7 @@ interface IRequestDTO {
     }
 
 
-    public async create({ uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,status,obs,empresa}: IRequestDTO): Promise<Faturamento | Error> {
+    public async create({ uuidfat,uuidusuario, uuidprojeto,uuidatividade,data,inicio,fim,sttpguuid,obs,empresa}: IRequestDTO): Promise<Faturamento | Error> {
 
       const redisCache = new RedisCache();
 
@@ -49,7 +49,7 @@ interface IRequestDTO {
 
       const fat =  this.fatRepository.create({
         
-        uuidfat,uuidusuario, uuidprojeto, uuidatividade,data,inicio,fim,status,obs,empresa
+        uuidfat,uuidusuario, uuidprojeto, uuidatividade,data,inicio,fim,sttpguuid,obs,empresa
 
       });
 

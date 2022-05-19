@@ -11,15 +11,49 @@ export default class CargoController {
       //Criação Cargo
       public async create(request: Request, response: Response): Promise<Response>{
 
-        const { uuidpagamento, empresa, uuidprojeto, n1, n2, n3, uuidcolab_forne, valor_pago,uuidcontrato
-          ,data_pagto, data_vecto, uuidbancos, incidencia, parcelas_n, n_doc_pagto, uuidformapagto, status, obs} = request.body;
+        const {
+
+          uuidpagamento,
+          empresa,
+          uuidprojeto,
+          uuidn1,
+          uuidn2,
+          uuidn3,
+          uuidcolab_forne,
+          valor_pago,
+          data_pagto,
+          data_vecto,
+          uuidbancos,
+          incidencia,
+          parcelas_n,
+          n_doc_pagto,
+          uuidformapagto,
+          sttpguuid,
+          obs,linha} = request.body;
 
         const service = container.resolve( CreatePagamentoServices);
 
         const result = await service.execute(
           {
-            uuidpagamento, empresa, uuidprojeto,n1, n2, n3, uuidcolab_forne, valor_pago,uuidcontrato
-            ,data_pagto, data_vecto, uuidbancos, incidencia, parcelas_n, n_doc_pagto, uuidformapagto, status, obs
+            
+
+        uuidpagamento,
+        empresa,
+        uuidprojeto,
+        uuidn1,
+        uuidn2,
+        uuidn3,
+        uuidcolab_forne,
+        valor_pago,
+        data_pagto,
+        data_vecto,
+        uuidbancos,
+        incidencia,
+        parcelas_n,
+        n_doc_pagto,
+        uuidformapagto,
+        sttpguuid,
+        obs,linha
           }
         );
 
@@ -36,16 +70,49 @@ export default class CargoController {
 
         const {uuidpagamento} = request.params
 
-        const {empresa, uuidprojeto,  n1, n2, n3, uuidcolab_forne, valor_pago
-          , data_pagto, data_vecto, uuidbancos, incidencia, parcelas_n, n_doc_pagto, uuidformapagto, status, obs} = request.body
+        const {
+
+          empresa,
+          uuidprojeto,
+          uuidn1,
+          uuidn2,
+          uuidn3,
+          uuidcolab_forne,
+          valor_pago,
+          data_pagto,
+          data_vecto,
+          uuidbancos,
+          incidencia,
+          parcelas_n,
+          n_doc_pagto,
+          uuidformapagto,
+          sttpguuid,
+          obs,linha} = request.body
 
         const updateFatu = container.resolve( UpdatePagamentoServices)
 
         const fatura = await updateFatu.update(
 
           {
-            uuidpagamento, empresa, uuidprojeto, n1, n2, n3, uuidcolab_forne, valor_pago
-            , data_pagto, data_vecto, uuidbancos, incidencia, parcelas_n, n_doc_pagto, uuidformapagto, status, obs          }
+            
+
+        uuidpagamento,
+        empresa,
+        uuidprojeto,
+        uuidn1,
+        uuidn2,
+        uuidn3,
+        uuidcolab_forne,
+        valor_pago,
+        data_pagto,
+        data_vecto,
+        uuidbancos,
+        incidencia,
+        parcelas_n,
+        n_doc_pagto,
+        uuidformapagto,
+        sttpguuid,
+        obs,linha}
 
         )
 
@@ -62,7 +129,7 @@ export default class CargoController {
 
         const deleteCargo = container.resolve( DeletePagamentoServices );
 
-       deleteCargo.execute({uuidpagamento});
+        await deleteCargo.execute({uuidpagamento});
 
         return response.json('Delete realizado com sucesso');
       }

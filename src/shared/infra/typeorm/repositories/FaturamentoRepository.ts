@@ -12,7 +12,7 @@ interface ICreateFaturamento{
   data:string ;
   inicio:string ;
   fim:string ;
-  status:string;
+  sttpguuid:string;
   obs:string;
   empresa:string;
 }
@@ -46,7 +46,7 @@ interface IFaturamentoRepository {
         data,
         inicio,
         fim,
-        status,
+        sttpguuid,
         obs,
         empresa,
     }: ICreateFaturamento): Promise<Faturamento> {
@@ -60,7 +60,7 @@ interface IFaturamentoRepository {
           data,
           inicio,
           fim,
-          status,
+          sttpguuid,
           obs,
           empresa,
         });

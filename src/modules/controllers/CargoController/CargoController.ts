@@ -73,7 +73,7 @@ export default class CargoController {
 
         const deleteCargo = container.resolve(DeleteCargoService)
 
-       await deleteCargo.delete({uuidcargo});
+        await deleteCargo.delete({uuidcargo});
 
         return response.json('Delete realizado com sucesso');
       }

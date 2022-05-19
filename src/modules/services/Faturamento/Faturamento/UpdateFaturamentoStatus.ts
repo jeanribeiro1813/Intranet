@@ -11,14 +11,14 @@ interface IRequestDTO {
   uuidusuario:string;
   uuidprojeto:string;
   data:string;
-  status:string;
+  sttpguuid:string;
 
 }
 
 
 class UpdateFaturamentoServices{
 
-  public async updateStatus ({uuidusuario, uuidprojeto, data, status}: IRequestDTO): Promise<Faturamento[]| Error> {
+  public async updateStatus ({uuidusuario, uuidprojeto, data, sttpguuid}: IRequestDTO): Promise<Faturamento[]| Error> {
 
       const Repository = getRepository(Faturamento);
 
@@ -44,7 +44,7 @@ class UpdateFaturamentoServices{
       await redisCache.invalidation('API_REDIS_FAT');
       
       result.forEach(async function(dados){
-        dados.status = status;
+        dados.sttpguuid = sttpguuid;
         await createfaturaService.update(dados);
       });
 

@@ -23,7 +23,7 @@ import {
     @Column()
     usuario!:string ;
   
-    @Column('integer')
+    @Column('int')
     n_cnh!:number ;
   
     @Column('date')
@@ -32,7 +32,7 @@ import {
     @Column()
     email!:string ;
   
-    @Column('integer')
+    @Column('int')
     ramal!:number ;
   
     @Column('char')

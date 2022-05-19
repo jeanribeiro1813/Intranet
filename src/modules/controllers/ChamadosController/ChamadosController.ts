@@ -74,7 +74,7 @@ export default class ChamadosController {
 
         const deleteCargo = container.resolve(DeleteChamadosServices)
 
-       await deleteCargo.delete({cod_chamado_uuid});
+        await deleteCargo.delete({cod_chamado_uuid});
 
         return response.json('Delete realizado com sucesso');
       }

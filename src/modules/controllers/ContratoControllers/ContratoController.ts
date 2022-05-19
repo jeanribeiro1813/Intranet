@@ -71,7 +71,7 @@ export default class ContratoController {
 
         const deleteAtividade = container.resolve(DeleteContratoServices)
 
-       await deleteAtividade.delete({uuidcontrato});
+        await deleteAtividade.delete({uuidcontrato});
 
         return response.json('Delete realizado com sucesso');
       }
